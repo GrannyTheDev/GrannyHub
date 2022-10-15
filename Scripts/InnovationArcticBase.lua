@@ -189,7 +189,6 @@ fireclickdetector(game:GetService("Workspace").ResizeMachine.HeadDown.ClickDetec
 end)
 
 LocalPlayer:Button("Bring back all energy cores", function()
-for i = 1,8 do
 for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
 if v.Name == "EnergyCore" then
 firetouchinterest(v.Center, game.Players.LocalPlayer.Character.Head, 1)
@@ -201,7 +200,6 @@ for i,v in pairs(game:GetService("Workspace").Bunker.Cores:GetChildren()) do
 firetouchinterest(v.Hitbox, game.Players.LocalPlayer.Character.Head, 1)
 wait()
 firetouchinterest(v.Hitbox, game.Players.LocalPlayer.Character.Head, 0)
-end
 end
 end)
 
