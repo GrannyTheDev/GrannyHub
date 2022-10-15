@@ -100,6 +100,18 @@ wait()
 firetouchinterest(game:GetService("Workspace").SuitRemover.Remover, game.Players.LocalPlayer.Character.Head, 0)
 end)
 
+LocalPlayer:Button("Open Quarantine Door", function()
+    fireclickdetector(game.Workspace.Flibble.KeyPad.Keys["1"].ClickDetector)
+    fireclickdetector(game.Workspace.Flibble.KeyPad.Keys["2"].ClickDetector)
+    fireclickdetector(game.Workspace.Flibble.KeyPad.Keys["3"].ClickDetector)
+    fireclickdetector(game.Workspace.Flibble.KeyPad.Keys["4"].ClickDetector)
+    fireclickdetector(game.Workspace.Flibble.KeyPad.Keys["5"].ClickDetector)
+    fireclickdetector(game.Workspace.Flibble.KeyPad.Keys["6"].ClickDetector)
+    fireclickdetector(game.Workspace.Flibble.KeyPad.Keys["7"].ClickDetector)
+    fireclickdetector(game.Workspace.Flibble.KeyPad.Keys["8"].ClickDetector)
+    fireclickdetector(game.Workspace.Flibble.KeyPad.Keys["9"].ClickDetector) 
+end)
+
 LocalPlayer:Toggle("Disable all cooling systems", function(v)
 getgenv().meltdown = v
 while true do
