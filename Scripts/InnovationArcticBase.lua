@@ -100,6 +100,18 @@ wait()
 firetouchinterest(game:GetService("Workspace").SuitRemover.Remover, game.Players.LocalPlayer.Character.Head, 0)
 end)
 
+LocalPlayer:Toggle("Click Zero Gravity Button", function(v)
+getgenv().click = v
+while true do
+if not getgenv().click then return end
+wait(0.1)
+fireclickdetector(game:GetService("Workspace").ZeroGravRoom.ControlPanel.Buttons["1"].Button.ClickDetector)
+fireclickdetector(game:GetService("Workspace").ZeroGravRoom.ControlPanel.Buttons["2"].Button.ClickDetector)
+fireclickdetector(game:GetService("Workspace").ZeroGravRoom.ControlPanel.Buttons["3"].Button.ClickDetector)
+fireclickdetector(game:GetService("Workspace").ZeroGravRoom.ControlPanel.Buttons["4"].Button.ClickDetector)
+end
+end)
+
 LocalPlayer:Button("Open Quarantine Door", function()
     fireclickdetector(game.Workspace.Flibble.KeyPad.Keys["1"].ClickDetector)
     fireclickdetector(game.Workspace.Flibble.KeyPad.Keys["2"].ClickDetector)
