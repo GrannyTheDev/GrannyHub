@@ -1,6 +1,6 @@
 local Library = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHub/Shit.lua"))()
 
-local Window = Library:CreateWindow("GrannyHub".." - Game not Supported")
+local Window = Library:CreateWindow("GrannyHub".." - Vehicle Legends")
 
 local LocalPlayer = Window:Page("LocalPlayer")
 
