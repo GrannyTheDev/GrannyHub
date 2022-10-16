@@ -12,12 +12,58 @@
             body {
                 background: #232323;
             }
-            h1#Script {
+            input#Script {
+                color: white;
+                position: relative;
+                display:block; margin: 0 auto;
+                height: 25px;
+                width: 500px;
+                border-radius: 50px;
+                background-color: #333333;
+            }
+            h1#Title {
                 color: white;
                 text-align: center;
             }
+            h1#ScriptInfo {
+                color: white;
+                text-align: center;
+            }
+            h1#DiscordInfo {
+                color: white;
+                text-align: center;
+            }
+            button#InviteLink {
+                color: white;
+                position: relative;
+                display:block; margin: 0 auto;
+                height: 25px;
+                border-radius: 50px;
+                background-color: #333333;
+            }
+            button#CopyScript {
+                color: white;
+                position: relative;
+                display:block; margin: 0 auto;
+                height: 25px;
+                border-radius: 50px;
+                background-color: #333333;
+            }
         </style>
+        <script>
+            function CopyScript() {
+                 var textToCopy = document.getElementById("Script");
+                 textToCopy.select();
+                 document.execCommand("copy");
+            }
+        </script>
 </html>
 <body>
-    <h1 id="Script">loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Hub/Script.lua"))()</h1>
+    <h1 id="Title">Welcome to GrannyHub</h1>
+    <h1 id="ScriptInfo">Script:</h1>
+    <input type="text" readonly="true" value='loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Script.lua"))()' id="Script">
+    <br>
+    <button id="CopyScript" onclick='CopyScript()'><strong>Copy Script</Script></strong></button>
+    <h1 id="DiscordInfo">Join our discord server:</h1>
+    <button id="InviteLink" onclick='window.open("https://discord.gg/esn6q3BbV2")'><strong>Join</strong></button>
 </body>
