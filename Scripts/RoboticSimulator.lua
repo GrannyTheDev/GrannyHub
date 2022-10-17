@@ -68,7 +68,11 @@ end
 function doAntiAfk()
 spawn(function()
 if getgenv().Settings.antiafk == true then
-loadstring(game:HttpGet('https://pastebin.com/raw/KHZ8pYx9'))()
+	local VirtualUser = game:GetService("VirtualUser")
+	game:GetService("Players").LocalPlayer.Idled:Connect(function()
+		VirtualUser:CaptureController()
+		VirtualUser:ClickButton2(Vector2.new())
+	end)
 end
 end)
 end
