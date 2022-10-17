@@ -1,4 +1,4 @@
-local lib = loadstring(game:HttpGet("https://speedster.glitch.me/Libs/DarkLib.lua", true))()
+local lib = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Shit.lua", true))()
 
 local Window = lib:CreateWindow("DevilHub".." - Robotic Simulator")
 
