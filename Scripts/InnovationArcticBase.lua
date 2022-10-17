@@ -21,6 +21,7 @@ speed = false;
 jump = false;
 infyield = false;
 antiafk = false;
+btnspam = false;
 }
 
 function Save()
@@ -88,6 +89,18 @@ end
 end)
 end
 
+function doBtnSpam()
+spawn(function()
+while getgenv().Settings.btnspam == true do
+fireclickdetector(game:GetService("Workspace").ZeroGravRoom.ControlPanel.Buttons["1"].Button.ClickDetector)
+fireclickdetector(game:GetService("Workspace").ZeroGravRoom.ControlPanel.Buttons["2"].Button.ClickDetector)
+fireclickdetector(game:GetService("Workspace").ZeroGravRoom.ControlPanel.Buttons["3"].Button.ClickDetector)
+fireclickdetector(game:GetService("Workspace").ZeroGravRoom.ControlPanel.Buttons["4"].Button.ClickDetector)
+wait(0.1)
+end
+end)
+end
+
 LocalPlayer:Button("Equip Hazmat Suit", function()
 firetouchinterest(game:GetService("Workspace").SuitGiver.Giver, game.Players.LocalPlayer.Character.Head, 1)
 wait()
@@ -100,15 +113,11 @@ wait()
 firetouchinterest(game:GetService("Workspace").SuitRemover.Remover, game.Players.LocalPlayer.Character.Head, 0)
 end)
 
-LocalPlayer:Toggle("Click Zero Gravity Button", function(v)
-getgenv().click = v
-while true do
-if not getgenv().click then return end
-wait(0.1)
-fireclickdetector(game:GetService("Workspace").ZeroGravRoom.ControlPanel.Buttons["1"].Button.ClickDetector)
-fireclickdetector(game:GetService("Workspace").ZeroGravRoom.ControlPanel.Buttons["2"].Button.ClickDetector)
-fireclickdetector(game:GetService("Workspace").ZeroGravRoom.ControlPanel.Buttons["3"].Button.ClickDetector)
-fireclickdetector(game:GetService("Workspace").ZeroGravRoom.ControlPanel.Buttons["4"].Button.ClickDetector)
+local btnspam = LocalPlayer:Toggle("Click Zero Gravity Button", function(v)
+getgenv().Settings.btnspam = v
+Save()
+if v then
+    doBtnSpam()
 end
 end)
 
@@ -360,6 +369,9 @@ infyield:ChangeState(true)
 end
 if getgenv().Settings.antiafk == true then
 antiafk:ChangeState(true)
+end
+if getgenv().Settings.btnspam == true then
+btnspam:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
