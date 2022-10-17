@@ -357,6 +357,8 @@ local CoreTemp = CoreStats:Label("Temp: "..game:GetService("Workspace").Core.Scr
 CoreStats:Label("--------System Components--------")
 local Pump1 = CoreStats:Label("Pump1 is ")
 local Pump2 = CoreStats:Label("Pump2 is ")
+CoreStats:Label("--------Funds--------")
+local Funds = CoreStats:Label("Funds: "..game.Players.LocalPlayer.leaderstats.Funds.Value)
 
 Load()
 if getgenv().Settings.speed == true then
@@ -391,4 +393,5 @@ Pump2:UpdateText("Pump2 is Off")
 else
 Pump2:UpdateText("Pump2 is On")
 end
+Funds:UpdateText("Funds: "..game.Players.LocalPlayer.leaderstats.Funds.Value)
 end
