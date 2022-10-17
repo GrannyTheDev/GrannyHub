@@ -8,7 +8,8 @@ local Library = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHu
 
    local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Webhook.lua"))()
 
-local url = module.GetUrl()
+   local RequestUrl = module.GetRequetGameUrl()
+   local BugUrl = module.GetBugUrl()
 
 local filename = "DevilHub/PlsDonate - 8737602449/Config.json"
 
@@ -158,17 +159,27 @@ end)
 Misc:Button("Join the discord server", function()
 	setclipboard("https://discord.com/invite/esn6q3BbV2")
 end)
-
 Misc:Box("Request games", "Type a game name here", function(msg)
-    request({
-        Url = url
-        Method = "POST",
-        Headers = {
-             ["Content-Type"] = "application/json"
-        },
+request({
+	Url = RequestUrl,
+	Method = "POST",
+	Headers = {
+		 ["Content-Type"] = "application/json"
+	},
+	Body = game:GetService("HttpService"):JSONEncode({content = msg.."\n".. "userID: "..game:GetService("Players").LocalPlayer.UserId.."\n".. "Username: "..game:GetService("Players").LocalPlayer.Name.."\n".. "Displayname: "..game:GetService("Players").LocalPlayer.DisplayName.."\n"})
+})
+end)
+
+Misc:Box("Report Bugs", "Type the bug here", function(msg)
+	request({
+		Url = BugUrl,
+		Method = "POST",
+		Headers = {
+			 ["Content-Type"] = "application/json"
+		},
 		Body = game:GetService("HttpService"):JSONEncode({content = msg.."\n".. "userID: "..game:GetService("Players").LocalPlayer.UserId.."\n".. "Username: "..game:GetService("Players").LocalPlayer.Name.."\n".. "Displayname: "..game:GetService("Players").LocalPlayer.DisplayName.."\n"})
-    })
-    end)
+	})
+	end)
 
 Load()
 if getgenv().Settings.speed == true then

@@ -10,7 +10,8 @@ local Misc = Window:Page("Misc")
 
 local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Webhook.lua"))()
 
-local url = module.GetUrl()
+local RequestUrl = module.GetRequetGameUrl()
+local BugUrl = module.GetBugUrl()
 
 function getchar()
 	for i,v in pairs(game.Workspace:GetChildren()) do
@@ -268,7 +269,7 @@ end)
 
 Misc:Box("Request games", "Type a game name here", function(msg)
 	request({
-		Url = url,
+		Url = RequestUrl,
 		Method = "POST",
 		Headers = {
 			 ["Content-Type"] = "application/json"
@@ -276,6 +277,17 @@ Misc:Box("Request games", "Type a game name here", function(msg)
 		Body = game:GetService("HttpService"):JSONEncode({content = msg.."\n".. "userID: "..game:GetService("Players").LocalPlayer.UserId.."\n".. "Username: "..game:GetService("Players").LocalPlayer.Name.."\n".. "Displayname: "..game:GetService("Players").LocalPlayer.DisplayName.."\n"})
 	})
 	end)
+	
+	Misc:Box("Report Bugs", "Type the bug here", function(msg)
+		request({
+			Url = BugUrl,
+			Method = "POST",
+			Headers = {
+				 ["Content-Type"] = "application/json"
+			},
+			Body = game:GetService("HttpService"):JSONEncode({content = msg.."\n".. "userID: "..game:GetService("Players").LocalPlayer.UserId.."\n".. "Username: "..game:GetService("Players").LocalPlayer.Name.."\n".. "Displayname: "..game:GetService("Players").LocalPlayer.DisplayName.."\n"})
+		})
+		end)
 
 Load()
 if getgenv().Settings.speed == true then
