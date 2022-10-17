@@ -12,4 +12,7 @@ function Deobfuscation(code)
     return code
 end
 
+Obfuscater.Obfuscate = Obfuscation()
+Obfuscater.Deobfuscate = Deobfuscation()
+
 return Obfuscater
