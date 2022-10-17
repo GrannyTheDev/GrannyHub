@@ -2,7 +2,7 @@ local Obfuscater = {}
 
 function Obfuscater:Obfuscation(code)
 local encode = code:gsub(".", function(bb) return "\\" .. bb:byte() end) or code .. "\""
-setclipboard(code)
+setclipboard(encode)
 end
 
 function Obfuscater:Deobfuscation(code)
