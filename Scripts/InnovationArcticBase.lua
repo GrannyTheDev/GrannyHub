@@ -117,7 +117,7 @@ local btnspam = LocalPlayer:Toggle("Click Zero Gravity Button", function(v)
 getgenv().Settings.btnspam = v
 Save()
 if v then
-    doBtnSpam()
+doBtnSpam()
 end
 end)
 
@@ -178,11 +178,8 @@ fireclickdetector(game:GetService("Workspace").Core.FanButtons["0"].ClickDetecto
 end
 end)
 
-LocalPlayer:Toggle("Open Manipulation Door", function(v)
-if v == true then
+LocalPlayer:Button("Open Manipulation Door", function()
 fireclickdetector(game:GetService("Workspace").ResizeMachine.PowerLever.Lever.ClickPart.ClickDetector)
-elseif v == false then
-fireclickdetector(game:GetService("Workspace").ResizeMachine.PowerLever.Lever.ClickPart.ClickDetector)end
 end)
 
 LocalPlayer:Button("Increase character Height", function()
