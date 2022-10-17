@@ -1,8 +1,7 @@
 local Obfuscater = {}
 
 function Obfuscation(code)
-local thing = code
-local encode = thing:gsub(".", function(bb) return "\\" .. bb:byte() end) or thing .. "\""
+local encode = code:gsub(".", function(bb) return "\\" .. bb:byte() end) or code .. "\""
 setclipboard(code)
 end
 
