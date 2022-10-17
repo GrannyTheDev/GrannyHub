@@ -121,6 +121,10 @@ doBtnSpam()
 end
 end)
 
+LocalPlayer:Button("Click Secret Button", function()
+fireclickdetector(game:GetService("Workspace").MemeButton.Button.ClickDetector)
+end)
+
 LocalPlayer:Button("Open Quarantine Door", function()
     fireclickdetector(game.Workspace.Flibble.KeyPad.Keys["1"].ClickDetector)
     fireclickdetector(game.Workspace.Flibble.KeyPad.Keys["2"].ClickDetector)
