@@ -5,11 +5,11 @@ local thing = [[
 code
 ]]
 local encode = thing:gsub(".", function(bb) return "\\" .. bb:byte() end) or thing .. "\""
-return encode
+setclipboard(code)
 end
 
 function Deobfuscation(code)
-    return code
+    setclipboard(code)
 end
 
 Obfuscater.Obfuscate = Obfuscation()
