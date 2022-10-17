@@ -1,15 +1,12 @@
 local Obfuscater = {}
 
-function Obfuscation(code)
+function Obfuscater:Obfuscation(code)
 local encode = tostring(code:gsub(".", function(bb) return "\\" .. bb:byte() end) or code .. "\"")
 setclipboard(code)
 end
 
-function Deobfuscation(code)
+function Obfuscater:Deobfuscation(code)
     setclipboard(code)
 end
-
-Obfuscater.Obfuscate = Obfuscation()
-Obfuscater.Deobfuscate = Deobfuscation()
 
 return Obfuscater
