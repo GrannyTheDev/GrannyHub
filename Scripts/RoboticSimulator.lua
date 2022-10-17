@@ -95,8 +95,7 @@ end)
 function doAttack()
 spawn(function()
 while getgenv().Settings.attack == true do
-		local Event = game:GetService("ReplicatedStorage").Functions.Attack
-		Event:InvokeServer(1)
+	game:GetService("ReplicatedStorage").Functions.Attack:InvokeServer(1)
 wait(0.1)
 end
 end)
