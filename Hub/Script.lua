@@ -66,6 +66,9 @@ local games = {
 	},
 	["4566572536"] = {
 	    ["Link"] = "https://GrannyTheDev.github.io/GrannyHub/Scripts/VehicleLegends.lua"
+	},
+	["1953438140"] = {
+	    ["Link"] = "https://GrannyTheDev.github.io/GrannyHub/Scripts/RoboticSimulator.lua"
 	}
 }
 local pages = game:GetService"AssetService":GetGamePlacesAsync()
