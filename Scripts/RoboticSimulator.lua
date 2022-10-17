@@ -105,9 +105,9 @@ function doCollect()
 spawn(function()
 while getgenv().Settings.collect == true do
         for i,v in pairs(game.Workspace.Crystals:GetChildren()) do
-        firetouchinterest(v, game.Players.LocalPlayer.Character.HumananoidRootPart, 1) 
+        firetouchinterest(v, game.Players.LocalPlayer.Character.Head, 1) 
         wait(0.1)
-        firetouchinterest(v, game.Players.LocalPlayer.Character.HumananoidRootPart, 0)
+        firetouchinterest(v, game.Players.LocalPlayer.Character.Head, 0)
         end
     wait(0.1)
 end
