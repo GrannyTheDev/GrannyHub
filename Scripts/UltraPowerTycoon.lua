@@ -110,6 +110,16 @@ doCollect()
 end
 end)
 
+local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/Teleport.lua"))()
+
+LocalPlayer:Button("Teleport to base", function()
+    for i,v in pairs(workspace.Tycoons:GetChildren()) do
+        if v.isim.Value == game.Players.LocalPlayer.Name then
+            module:Tween(TweenInfo.new(0.2), v.Camera2.CFrame)
+        end
+    end
+end)
+
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
 getgenv().Settings.speed = v
 Save()
