@@ -230,6 +230,7 @@ end
 			return ButtonFunction
 		end
 		function Elements:Slider(txt, min, max, callback)
+			local SliderFunction = {}
 			local SliderElement = Instance.new("Frame")
 			local Title = Instance.new("TextLabel")
 			local Val = Instance.new("TextLabel")
@@ -342,6 +343,46 @@ end
 				end)
 			end)	
 			Instance.new("UICorner", Slider)
+
+			function SliderFunction:ChangeText(txt)
+				Title.Text = txt
+			end
+
+			function SliderFunction:ChangeValue(a)
+				game.TweenService:Create(Val, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+					TextTransparency = 0
+				}):Play()
+				a = math.floor((((tonumber(max) - tonumber(min)) / 90) * Slider.AbsoluteSize.X) + tonumber(min)) or 0
+				pcall(function()
+					callback(a)
+				end)
+				Slider:TweenSize(UDim2.new(0, math.clamp(mouse.X - Slider.AbsolutePosition.X, 0, 90), 0, 11), "InOut", "Linear", 0.05, true)
+				moveconnection = mouse.Move:Connect(function()
+					Val.Text = a
+					a = math.floor((((tonumber(max) - tonumber(min)) / 90) * Slider.AbsoluteSize.X) + tonumber(min))
+					pcall(function()
+						callback(a)
+					end)
+					Slider:TweenSize(UDim2.new(0, math.clamp(mouse.X - Slider.AbsolutePosition.X, 0, 90), 0, 11), "InOut", "Linear", 0.05, true)
+				end)
+				releaseconnection = UIS.InputEnded:Connect(function(Mouse)
+					if Mouse.UserInputType == Enum.UserInputType.MouseButton1 then
+						a = math.floor((((tonumber(max) - tonumber(min)) / 90) * Slider.AbsoluteSize.X) + tonumber(min))
+						pcall(function()
+							callback(a)
+						end)
+						Val.Text = a
+						game.TweenService:Create(Val, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+							TextTransparency = 1
+						}):Play()
+						Slider:TweenSize(UDim2.new(0, math.clamp(mouse.X - Slider.AbsolutePosition.X, 0, 90), 0, 11), "InOut", "Linear", 0.05, true)
+						moveconnection:Disconnect()
+						releaseconnection:Disconnect()
+					end
+				end)
+			end
+
+			return SliderFunction
 		end
 		function Elements:Box(txt, hint, callback)
 			local boxFunction = {}
