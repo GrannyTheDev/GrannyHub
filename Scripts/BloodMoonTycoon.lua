@@ -27,6 +27,7 @@ rebirthyellow = false;
 gunmods = false;
 killzombies = false;
 godmode = false;
+buybuttons = false;
 }
 
 function Save()
@@ -138,6 +139,23 @@ end
 end)
 end
 
+function doBuyButtons()
+spawn(function()
+while getgenv().Settings.buybuttons == true do
+for i,v in pairs(game:GetService("Workspace").Tycoons:GetChildren()) do
+    if v.Name ~= "CoreScript" and v.Owner.Value == game.Players.LocalPlayer then
+        for i,k in pairs(v.Buttons:GetChildren()) do
+            firetouchinterest(k:WaitForChild("Head"), game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 1)
+            wait()
+            firetouchinterest(k:WaitForChild("Head"), game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 0)
+        end
+    end
+end
+wait(0.1)
+end
+end)
+end
+
 function doGunMods()
 spawn(function()
 if getgenv().Settings.gunmods == true then
@@ -186,6 +204,14 @@ wait(1)
 end
 end)
 end
+
+local buybuttons = AutoFarm:Toggle("Autobuy all buttons", function(v)
+getgenv().Settings.buybuttons = v
+Save()
+if v then
+doBuyButtons()
+end
+end)
 
 local rebirthgreen = AutoFarm:Toggle("Lime green", function(v)
 getgenv().Settings.rebirthgreen = v
@@ -362,6 +388,9 @@ killzombies:ChangeState(true)
 end
 if getgenv().Settings.godmode == true then
 godmode:ChangeState(true)
+end
+if getgenv().Settings.buybuttons == true then
+buybuttons:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
