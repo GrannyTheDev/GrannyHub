@@ -2,6 +2,8 @@ local Library = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHu
 
 local Window = Library:CreateWindow("GrannyHub".." - Ultra Power Tycoon")
 
+local AutoFarm = Window:Page("AutoFarm")
+
 local LocalPlayer = Window:Page("LocalPlayer")
 
 local Misc = Window:Page("Misc")
@@ -20,6 +22,7 @@ infyield = false;
 antiafk = false;
 collect = false;
 buybuttons = false;
+prompt = false;
 }
 
 function Save()
@@ -67,6 +70,15 @@ end
 end)
 end
 
+function doPrompt()
+spawn(function()
+while getgenv().Settings.prompt == true do
+game.CoreGui:WaitForChild("PurchasePrompt").Enabled = false
+wait(0.1)
+end
+end)
+end
+
 function doBuyButtons()
 spawn(function()
 if getgenv().Settings.buybuttons == true then
@@ -77,20 +89,24 @@ if debounce then
 end
 debounce = true
 wait(0.1)
-for i,v in pairs(game:GetService("Workspace").Tycoons.Tycoons:GetChildren()) do
-    if v.Owner.Value == game.Players.LocalPlayer then
-        for i,k in pairs(v.Buttons:GetChildren()) do
-            firetouchinterest(k:WaitForChild("Head"), game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 1)
-            wait()
-            firetouchinterest(k:WaitForChild("Head"), game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 0)
-        end
+for i,v in pairs(workspace.Tycoons:GetChildren()) do
+    if v:WaitForChild("isim").Value == game.Players.LocalPlayer.Name then
+    for i,k in pairs(v:GetDescendants()) do
+    if k.Name == "Touch" then
+    if k.Parent.Name ~= "ShopModel" then
+        firetouchinterest(k, game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 1)
+        wait()
+        firetouchinterest(k, game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 0)
     end
+end
+end
+end
 end
 debounce = false
 end)
-    end
-    end)
-    end
+end
+end)
+end
     
 
 function doCollect()
@@ -129,7 +145,15 @@ end
 end)
 end
 
-local collect = LocalPlayer:Toggle("Auto Collect Cash", function(v)
+local buybuttons = AutoFarm:Toggle("Autobuy all buttons", function(v)
+getgenv().Settings.buybuttons = v
+Save()
+if v then
+doBuyButtons()
+end
+end)
+
+local collect = AutoFarm:Toggle("Auto Collect Cash", function(v)
 getgenv().Settings.collect = v
 Save()
 if v then
@@ -140,15 +164,11 @@ end)
 local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/Teleport.lua"))()
 
 local tpbase = LocalPlayer:Button("Teleport to base", function()
-    for i,v in pairs(workspace.Tycoons:GetChildren()) do
-        if v.isim.Value == game.Players.LocalPlayer.Name then
-            module:Tween(TweenInfo.new(0.2), v.Camera2.CFrame)
-        else
-            tpbase:UpdateText("Claim a tycoon first")
-            wait(1)
-            tpbase:UpdateText("Teleport to base")
-        end
+for i,v in pairs(workspace.Tycoons:GetChildren()) do
+    if v.isim.Value == game.Players.LocalPlayer.Name then
+        module:Tween(TweenInfo.new(0.2), v.Camera2.CFrame)
     end
+end
 end)
 
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
@@ -205,6 +225,14 @@ doAntiAfk()
 end
 end)
 
+local prompt = Misc:Toggle("Disable Prompt", function(v)
+getgenv().Settings.prompt = v
+Save()
+if v then
+doPrompt()
+end
+end)
+
 Misc:Button("Join the discord server", function()
 	setclipboard("https://discord.com/invite/esn6q3BbV2")
 end)
@@ -246,6 +274,12 @@ antiafk:ChangeState(true)
 end
 if getgenv().Settings.collect == true then
 collect:ChangeState(true)
+end
+if getgenv().Settings.prompt == true then
+prompt:ChangeState(true)
+end
+if getgenv().Settings.buybuttons == true then
+buybuttons:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
