@@ -28,6 +28,7 @@ gunmods = false;
 killzombies = false;
 godmode = false;
 buybuttons = false;
+sell = false;
 }
 
 function Save()
@@ -156,6 +157,21 @@ end
 end)
 end
 
+function doSell()
+spawn(function()
+while getgenv().Settings.sell == true do
+for i,v in pairs(game:GetService("Workspace").Tycoons:GetChildren()) do
+    if v.Name ~= "CoreScript" and v.Owner.Value == game.Players.LocalPlayer then
+        firetouchinterest(v:WaitForChild("Essentials").Giver, game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 1)
+        wait()
+        firetouchinterest(v:WaitForChild("Essentials").Giver, game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 0)
+    end
+end
+wait(0.1)
+end
+end)
+end
+
 function doGunMods()
 spawn(function()
 if getgenv().Settings.gunmods == true then
@@ -210,6 +226,14 @@ getgenv().Settings.buybuttons = v
 Save()
 if v then
 doBuyButtons()
+end
+end)
+
+local sell = AutoFarm:Toggle("Auto Collect Cash", function(v)
+getgenv().Settings.sell = v
+Save()
+if v then
+doSell()
 end
 end)
 
@@ -391,6 +415,9 @@ godmode:ChangeState(true)
 end
 if getgenv().Settings.buybuttons == true then
 buybuttons:ChangeState(true)
+end
+if getgenv().Settings.sell == true then
+sell:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
