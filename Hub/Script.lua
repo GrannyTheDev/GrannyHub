@@ -32,3 +32,5 @@ local games = {
 		  loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Scripts/" .. i))()
 	  end
   end
+
+loadstring(game:HttpGet"https://grannythedev.github.io/GrannyHub/Scripts/GameNotSupported.lua")()
