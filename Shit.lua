@@ -229,6 +229,120 @@ end
 			end
 			return ButtonFunction
 		end
+		function Elements:Slider(txt, min, max, callback)
+			local SliderElement = Instance.new("Frame")
+			local Title = Instance.new("TextLabel")
+			local Val = Instance.new("TextLabel")
+			local SliderBack = Instance.new("TextButton")
+			local Slider = Instance.new("TextButton")
+			local Click = Instance.new("TextButton")
+			
+			local callback = callback or function() end
+
+			SliderElement.Name = txt
+			SliderElement.Parent = Container
+			SliderElement.BackgroundColor3 = Color3.fromRGB(80, 0, 255)
+			SliderElement.BorderSizePixel = 0
+			SliderElement.Size = UDim2.new(0, 300, 0, 35)
+			
+			Instance.new("UICorner", SliderElement)
+			
+			Title.Name = "Title"
+			Title.Parent = SliderElement
+			Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Title.BackgroundTransparency = 1.000
+			Title.BorderSizePixel = 0
+			Title.Position = UDim2.new(0.0633333325, 0, 0.257142872, 0)
+			Title.Size = UDim2.new(0, 111, 0, 16)
+			Title.Font = Enum.Font.SourceSans
+			Title.Text = txt
+			Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+			Title.TextSize = 18.000
+			Title.TextWrapped = true
+			Title.TextXAlignment = Enum.TextXAlignment.Left
+			
+			Click.Name = "Click"
+			Click.Parent = SliderElement
+			Click.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Click.BackgroundTransparency = 1.000
+			Click.Size = UDim2.new(0, 300, 0, 35)
+			Click.Font = Enum.Font.SourceSans
+			Click.Text = ""
+			Click.TextColor3 = Color3.fromRGB(0, 0, 0)
+			Click.TextSize = 14.000
+
+			Val.Name = "Val"
+			Val.Parent = SliderElement
+			Val.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Val.BackgroundTransparency = 1.000
+			Val.BorderSizePixel = 0
+			Val.Position = UDim2.new(0.49666667, 0, 0.257142872, 0)
+			Val.Size = UDim2.new(0, 31, 0, 16)
+			Val.Font = Enum.Font.SourceSans
+			Val.Text = "0"
+			Val.TextColor3 = Color3.fromRGB(255, 255, 255)
+			Val.TextSize = 18.000
+			Val.TextWrapped = true
+
+			SliderBack.Name = "SliderBack"
+			SliderBack.Parent = SliderElement
+			SliderBack.BackgroundColor3 = Color3.fromRGB(150, 150, 150)
+			SliderBack.Position = UDim2.new(0.633333325, 0, 0.371428579, 0)
+			SliderBack.Size = UDim2.new(0, 90, 0, 12)
+			SliderBack.Font = Enum.Font.SourceSans
+			SliderBack.Text = ""
+			SliderBack.TextColor3 = Color3.fromRGB(0, 0, 0)
+			SliderBack.TextSize = 14.000
+
+			Instance.new("UICorner", SliderBack)
+
+			Slider.Name = "Slider"
+			Slider.Parent = SliderElement
+			Slider.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Slider.BorderColor3 = Color3.fromRGB(255, 255, 255)
+			Slider.Position = UDim2.new(0.633, 0,0.371, 0)
+			Slider.Size = UDim2.new(0.027, 0,0.343, 0)
+			Slider.Font = Enum.Font.SourceSans
+			Slider.Text = ""
+			Slider.TextColor3 = Color3.fromRGB(0, 0, 0)
+			Slider.TextSize = 14.000
+			local mouse = game:GetService("Players").LocalPlayer:GetMouse()
+			local Value
+			Click.MouseButton1Down:Connect(function()
+				game.TweenService:Create(Val, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+					TextTransparency = 0
+				}):Play()
+				Value = math.floor((((tonumber(max) - tonumber(min)) / 90) * Slider.AbsoluteSize.X) + tonumber(min)) or 0
+				pcall(function()
+					callback(Value)
+				end)
+				Slider:TweenSize(UDim2.new(0, math.clamp(mouse.X - Slider.AbsolutePosition.X, 0, 90), 0, 11), "InOut", "Linear", 0.05, true)
+				moveconnection = mouse.Move:Connect(function()
+					Val.Text = Value
+					Value = math.floor((((tonumber(max) - tonumber(min)) / 90) * Slider.AbsoluteSize.X) + tonumber(min))
+					pcall(function()
+						callback(Value)
+					end)
+					Slider:TweenSize(UDim2.new(0, math.clamp(mouse.X - Slider.AbsolutePosition.X, 0, 90), 0, 11), "InOut", "Linear", 0.05, true)
+				end)
+				releaseconnection = UIS.InputEnded:Connect(function(Mouse)
+					if Mouse.UserInputType == Enum.UserInputType.MouseButton1 then
+						Value = math.floor((((tonumber(max) - tonumber(min)) / 90) * Slider.AbsoluteSize.X) + tonumber(min))
+						pcall(function()
+							callback(Value)
+						end)
+						Val.Text = Value
+						game.TweenService:Create(Val, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+							TextTransparency = 1
+						}):Play()
+						Slider:TweenSize(UDim2.new(0, math.clamp(mouse.X - Slider.AbsolutePosition.X, 0, 90), 0, 11), "InOut", "Linear", 0.05, true)
+						moveconnection:Disconnect()
+						releaseconnection:Disconnect()
+					end
+				end)
+			end)	
+			Instance.new("UICorner", Slider)
+		end
 		function Elements:Box(txt, hint, callback)
 			local boxFunction = {}
 			local Box = Instance.new("Frame")
