@@ -23,7 +23,8 @@ local games = {
 	["VehicleLegends.lua"] = 4566572536,
 	["RoboticSimulator.lua"] = 1953438140,
 	["LumberSimulator2.lua"] = 1351649689,
-	["NinjaLegends.lua"] = 3956818381
+	["NinjaLegends.lua"] = 3956818381,
+	["UltraPowerTycoon.lua"] = 8146731988
 }
 
 
