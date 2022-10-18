@@ -22,15 +22,21 @@ local games = {
 	["InnovationArcticBase.lua"] = 1033860623,
 	["VehicleLegends.lua"] = 4566572536,
 	["RoboticSimulator.lua"] = 1953438140
-  }
-  
-  for i,v in next, games do 
-	  if game.PlaceId == v then
-		  loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Scripts/" .. i))()
-	  end
-	  if game.CreatorId == v then
-		  loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Scripts/" .. i))()
-	  end
-  end
+}
+
+
+local pages = game:GetService"AssetService":GetGamePlacesAsync()
+while wait() do
+	for i, place in pairs(pages:GetCurrentPage()) do
+		for i,v in next, games do 
+			if game.PlaceId == v then
+				return loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Scripts/" .. i))()
+			end
+		end
+	end
+	if pages.IsFinished then break end
+	pages:AdvanceToNextPageAsync()
+end
 
 loadstring(game:HttpGet"https://grannythedev.github.io/GrannyHub/Scripts/GameNotSupported.lua")()
+return true
