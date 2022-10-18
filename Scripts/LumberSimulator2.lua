@@ -2,6 +2,8 @@ local Library = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHu
 
 local Window = Library:CreateWindow("GrannyHub".." - Lumber Simulator 2")
 
+local AutoFarm = Window:Page("AutoFarm")
+
 local Teleport = Window:Page("Teleport")
 
 local LocalPlayer = Window:Page("LocalPlayer")
@@ -20,6 +22,7 @@ speed = false;
 jump = false;
 infyield = false;
 antiafk = false;
+throw = false;
 }
 
 function Save()
@@ -75,6 +78,16 @@ end
 end)
 end
 
+function doThrow()
+spawn(function()
+while getgenv().Settings.throw == true do
+fireclickdetector(game:GetService("Workspace").RadioMountain.Factory.BarrelGiver.Button.ClickDetector)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(367, 34, -396)
+wait(0.1)
+end
+end)
+end
+
 function doAntiAfk()
 spawn(function()
 if getgenv().Settings.antiafk == true then
@@ -91,19 +104,35 @@ local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub
 
 Teleport:Button("Tool Shop", function()
 module:Tween(TweenInfo.new(0.2), CFrame.new(81, 9, -81))
-end
+end)
 
 Teleport:Button("Axe Skin", function()
 module:Tween(TweenInfo.new(0.2), CFrame.new(76, 9, 10))
-end
+end)
 
 Teleport:Button("Backpack Shop", function()
 module:Tween(TweenInfo.new(0.2), CFrame.new(158, 9, 8))
-end
+end)
 
 Teleport:Button("Pet Shop", function()
 module:Tween(TweenInfo.new(0.2), CFrame.new(239, 9, -88))
+end)
+
+local throw = AutoFarm:Toggle("Auto Throw Barrel", function(v)
+getgenv().Settings.throw = v
+Save()
+if v then
+doThrow()
 end
+end)
+
+local sell = AutoFarm:Button("Auto Sell", function()
+    firetouchinterest(game:GetService("Workspace").Outside.BigFootCave.DepositLumber, game.Players.LocalPlayer.Character.HumanoidRootPart, 1)
+    wait(0.1)
+    firetouchinterest(game:GetService("Workspace").Outside.BigFootCave.DepositLumber, game.Players.LocalPlayer.Character.HumanoidRootPart, 0)
+end)
+
+sell:Keybind(Enum.KeyCode.E)
 
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
 getgenv().Settings.speed = v
@@ -197,6 +226,9 @@ infyield:ChangeState(true)
 end
 if getgenv().Settings.antiafk == true then
 antiafk:ChangeState(true)
+end
+if getgenv().Settings.throw == true then
+throw:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
