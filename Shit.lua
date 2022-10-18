@@ -106,6 +106,11 @@ function Library:CreateWindow(title)
 	Title.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
 	Title.TextXAlignment = Enum.TextXAlignment.Left
 
+	for i = 1,#title do
+		game:GetService("CoreGui").DarkLib.Header.Title.Text = string.sub(title, 1, i)
+		wait(0.05)
+	end
+
 	Pages.Name = "Pages"
 	Pages.Parent = MainFrame
 
