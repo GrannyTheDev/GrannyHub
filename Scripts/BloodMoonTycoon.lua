@@ -92,7 +92,7 @@ function doRebirthGreen()
 spawn(function()
 while getgenv().Settings.rebirthgreen == true do
 local A_1 = 121
-local A_2 = game:GetService("Workspace").Tycoons["Lime green"]
+local A_2 = game:GetService("Workspace").Tycoon:WaitForChild("Lime green")
 local A_3 = 765329874
 local Event = game:GetService("ReplicatedStorage").PlayerRebirthEvent
 Event:FireServer(A_1, A_2, A_3)
@@ -105,7 +105,7 @@ function doRebirthRed()
 spawn(function()
 while getgenv().Settings.rebirthred == true do
 local A_1 = 121
-local A_2 = game:GetService("Workspace").Tycoons["Really red"]
+local A_2 = game:GetService("Workspace").Tycoons:WaitForChild("Really red")
 local A_3 = 765329874
 local Event = game:GetService("ReplicatedStorage").PlayerRebirthEvent
 Event:FireServer(A_1, A_2, A_3)
@@ -118,7 +118,7 @@ function doRebirthBlue()
 spawn(function()
 while getgenv().Settings.rebirthblue == true do
 local A_1 = 121
-local A_2 = game:GetService("Workspace").Tycoons["Really blue"]
+local A_2 = game:GetService("Workspace").Tycoons:WaitForChild("Really blue")
 local A_3 = 765329874
 local Event = game:GetService("ReplicatedStorage").PlayerRebirthEvent
 Event:FireServer(A_1, A_2, A_3)
@@ -131,7 +131,7 @@ function doRebirthYellow()
 spawn(function()
 while getgenv().Settings.rebirthyellow == true do
 local A_1 = 121
-local A_2 = game:GetService("Workspace").Tycoons["New Yeller"]
+local A_2 = game:GetService("Workspace").Tycoons:WaitForChild("New Yeller")
 local A_3 = 765329874
 local Event = game:GetService("ReplicatedStorage").PlayerRebirthEvent
 Event:FireServer(A_1, A_2, A_3)
