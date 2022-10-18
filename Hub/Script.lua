@@ -21,7 +21,8 @@ local games = {
 	["ShoutingSimulator.lua"] = 1304603528,
 	["InnovationArcticBase.lua"] = 1033860623,
 	["VehicleLegends.lua"] = 4566572536,
-	["RoboticSimulator.lua"] = 1953438140
+	["RoboticSimulator.lua"] = 1953438140,
+	["LumberSimulator2.lua"] = 1351649689
 }
 
 
@@ -30,6 +31,9 @@ while wait() do
 	for i, place in pairs(pages:GetCurrentPage()) do
 		for i,v in next, games do 
 			if game.PlaceId == v then
+				return loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Scripts/" .. i))()
+			end
+			if game.CreatorId == v then
 				return loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Scripts/" .. i))()
 			end
 		end
