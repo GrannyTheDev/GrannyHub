@@ -357,13 +357,13 @@ end
 					callback(a)
 				end)
 				Slider:TweenSize(UDim2.new(0, math.clamp(mouse.X - Slider.AbsolutePosition.X, 0, 90), 0, 11), "InOut", "Linear", 0.05, true)
-					Val.Text = a
+					Val.Text = tostring(a)
 					a = math.floor((((tonumber(max) - tonumber(min)) / 90) * Slider.AbsoluteSize.X) + tonumber(min))
 					pcall(function()
 						callback(a)
 					end)
 					Slider:TweenSize(UDim2.new(0, math.clamp(mouse.X - Slider.AbsolutePosition.X, 0, 90), 0, 11), "InOut", "Linear", 0.05, true)
-			end
+				end
 
 			return SliderFunction
 		end
