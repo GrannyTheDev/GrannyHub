@@ -73,7 +73,7 @@ end
 
 function doCollect()
 spawn(function()
-if getgenv().Settings.collect == true then
+while getgenv().Settings.collect == true do
 local debounce = false
 game:GetService("RunService").Heartbeat:Connect(function()
 if debounce then
@@ -90,6 +90,7 @@ for i,v in pairs(game:GetService("Workspace").Tycoons.Tycoons:GetChildren()) do
 end
 debounce = false
 end)
+wait(2)
 end
 end)
 end
