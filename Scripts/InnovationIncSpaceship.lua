@@ -184,20 +184,20 @@ if game:GetService("Workspace").DischargeControls.Light5.BrickColor == BrickColo
 fireclickdetector(game:GetService("Workspace").DischargeControls.Button5.ClickDetector)
 end
 wait(0.5)
-if game:GetService("Workspace").coolinglight.Button.BrickColor == BrickColor.new("Cool yellow") then
+if game:GetService("Workspace").coolinglight.Aan.Material == Enum.Material.SmoothPlastic then
 fireclickdetector(game:GetService("Workspace").coolinglight.Button.ClickDetector)
 end
+wait(0.5)
 if game:GetService("Workspace").Fancontrols.Fancontrol1.Pointer.HingeConstraint.TargetAngle == 1 then
 fireclickdetector(game:GetService("Workspace").Fancontrols.Fancontrol1.Clicker.ClickDetector)
 end
-if game:GetService("Workspace").Fancontrols.Fancontrol2.Pointer.HingeConstraint.TargetAngle == 1 then
+wait(0.5)
+if game:GetService("Workspace").Fancontrols.Fancontrol2.Pointer.HingeConstraint.TargetAngle == 0 then
 fireclickdetector(game:GetService("Workspace").Fancontrols.Fancontrol2.Clicker.ClickDetector)
 end
-if game:GetService("Workspace").Fancontrols.Fancontrol3.Pointer.HingeConstraint.TargetAngle == 1 then
+wait(0.5)
+if game:GetService("Workspace").Fancontrols.Fancontrol3.Pointer.HingeConstraint.TargetAngle == 0 then
 fireclickdetector(game:GetService("Workspace").Fancontrols.Fancontrol3.Clicker.ClickDetector)
-end
-if game:GetService("Workspace").Doorcontrol.Open2.CFrame == CFrame.new(-181.866699, 85.9102936, -1323.70435, 1, 0, 0, 0, -1, 0, 0, 0, -1) then
-fireclickdetector(game:GetService("Workspace").Doorcontrol.Open2.ClickDetector)
 end
 end)
 
@@ -209,40 +209,37 @@ end
 if game:GetService("Workspace").Coolant.Button.BrickColor == BrickColor.new("Moss") then
 fireclickdetector(game:GetService("Workspace").Coolant.Button.ClickDetector)
 end
-if game:GetService("Workspace").DischargeControls.Light1.BrickColor == BrickColor.new("Bright red") then
+if game:GetService("Workspace").DischargeControls.Light1.BrickColor == BrickColor.new("Shamrock") then
 fireclickdetector(game:GetService("Workspace").DischargeControls.Button1.ClickDetector)
 end
 wait(0.5)
-if game:GetService("Workspace").DischargeControls.Light2.BrickColor == BrickColor.new("Bright red") then
+if game:GetService("Workspace").DischargeControls.Light2.BrickColor == BrickColor.new("Shamrock") then
 fireclickdetector(game:GetService("Workspace").DischargeControls.Button2.ClickDetector)
 end
 wait(0.5)
-if game:GetService("Workspace").DischargeControls.Light3.BrickColor == BrickColor.new("Bright red") then
+if game:GetService("Workspace").DischargeControls.Light3.BrickColor == BrickColor.new("Shamrock") then
 fireclickdetector(game:GetService("Workspace").DischargeControls.Button3.ClickDetector)
 end
 wait(0.5)
-if game:GetService("Workspace").DischargeControls.Light4.BrickColor == BrickColor.new("Bright red") then
+if game:GetService("Workspace").DischargeControls.Light4.BrickColor == BrickColor.new("Shamrock") then
 fireclickdetector(game:GetService("Workspace").DischargeControls.Button4.ClickDetector)
 end
 wait(0.5)
-if game:GetService("Workspace").DischargeControls.Light5.BrickColor == BrickColor.new("Bright red") then
+if game:GetService("Workspace").DischargeControls.Light5.BrickColor == BrickColor.new("Shamrock") then
 fireclickdetector(game:GetService("Workspace").DischargeControls.Button5.ClickDetector)
 end
 wait(0.5)
-if game:GetService("Workspace").coolinglight.Button.BrickColor == BrickColor.new("Cool yellow") then
+if game:GetService("Workspace").coolinglight.Aan.Material == Material.new("Neon") then
 fireclickdetector(game:GetService("Workspace").coolinglight.Button.ClickDetector)
 end
-if game:GetService("Workspace").Fancontrols.Fancontrol1.Pointer.HingeConstraint.TargetAngle == 1 then
+if game:GetService("Workspace").Fancontrols.Fancontrol1.Pointer.HingeConstraint.TargetAngle >= 1 then
 fireclickdetector(game:GetService("Workspace").Fancontrols.Fancontrol1.Clicker.ClickDetector)
 end
-if game:GetService("Workspace").Fancontrols.Fancontrol2.Pointer.HingeConstraint.TargetAngle == 1 then
+if game:GetService("Workspace").Fancontrols.Fancontrol2.Pointer.HingeConstraint.TargetAngle >= 1 then
 fireclickdetector(game:GetService("Workspace").Fancontrols.Fancontrol2.Clicker.ClickDetector)
 end
-if game:GetService("Workspace").Fancontrols.Fancontrol3.Pointer.HingeConstraint.TargetAngle == 1 then
+if game:GetService("Workspace").Fancontrols.Fancontrol3.Pointer.HingeConstraint.TargetAngle >= 1 then
 fireclickdetector(game:GetService("Workspace").Fancontrols.Fancontrol3.Clicker.ClickDetector)
-end
-if game:GetService("Workspace").Doorcontrol.Open2.CFrame == CFrame.new(-181.866699, 85.9102936, -1323.70435, 1, 0, 0, 0, -1, 0, 0, 0, -1) then
-fireclickdetector(game:GetService("Workspace").Doorcontrol.Open2.ClickDetector)
 end
 end)
 
