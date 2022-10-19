@@ -199,6 +199,10 @@ wait(0.5)
 if game:GetService("Workspace").Fancontrols.Fancontrol3.Pointer.HingeConstraint.TargetAngle == 0 then
 fireclickdetector(game:GetService("Workspace").Fancontrols.Fancontrol3.Clicker.ClickDetector)
 end
+wait(0.5)
+if game:GetService("Workspace").Screen3.SurfaceGui.Frame.Door.ImageColor3 == Color3.fromRGB(79, 159, 0) then
+fireclickdetector(game:GetService("Workspace").Doorcontrol.Open2.ClickDetector)
+end
 end)
 
 LocalPlayer:Button("Disable All Cooling Systems", function()
@@ -240,6 +244,9 @@ fireclickdetector(game:GetService("Workspace").Fancontrols.Fancontrol2.Clicker.C
 end
 if game:GetService("Workspace").Fancontrols.Fancontrol3.Pointer.HingeConstraint.TargetAngle >= 1 then
 fireclickdetector(game:GetService("Workspace").Fancontrols.Fancontrol3.Clicker.ClickDetector)
+end
+if game:GetService("Workspace").Screen3.SurfaceGui.Frame.Door.ImageColor3 == Color3.fromRGB(255, 0, 0) then
+fireclickdetector(game:GetService("Workspace").Doorcontrol.Open2.ClickDetector)
 end
 end)
 
