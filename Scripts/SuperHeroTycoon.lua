@@ -96,7 +96,7 @@ end
 
 function doBuyButtons()
 spawn(function()
-if getgenv().Settings.buybuttons == true then
+while getgenv().Settings.buybuttons == true do
 local debounce = false
 game:GetService("RunService").Heartbeat:Connect(function()
 if debounce then
@@ -107,14 +107,15 @@ wait(0.1)
 for i,v in pairs(game:GetService("Workspace").Tycoons.Tycoons:GetChildren()) do
     if v.Owner.Value == game.Players.LocalPlayer then
         for i,k in pairs(v.Buttons:GetChildren()) do
-            firetouchinterest(k:WaitForChild("Head"), game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 1)
+            firetouchinterest(k.Head, game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 1)
             wait()
-            firetouchinterest(k:WaitForChild("Head"), game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 0)
+            firetouchinterest(k.Head, game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 0)
         end
     end
 end
 debounce = false
 end)
+wait(2)
 end
 end)
 end

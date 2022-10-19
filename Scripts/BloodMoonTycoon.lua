@@ -142,7 +142,7 @@ end
 
 function doBuyButtons()
 spawn(function()
-if getgenv().Settings.buybuttons == true then
+while getgenv().Settings.buybuttons == true do
 local debounce = false
 game:GetService("RunService").Heartbeat:Connect(function()
 if debounce then
@@ -164,6 +164,7 @@ for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui
 end
 debounce = false
 end)
+wait(2)
 end
 end)
 end

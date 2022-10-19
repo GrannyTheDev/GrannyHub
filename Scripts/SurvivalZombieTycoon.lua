@@ -130,6 +130,14 @@ end
 function doBuyButtons()
 spawn(function()
 while getgenv().Settings.buybuttons == true do
+game:GetService("Players").LocalPlayer.PlayerGui.UI:WaitForChild("Store"):Destroy()
+local debounce = false
+game:GetService("RunService").Heartbeat:Connect(function()
+if debounce then
+    return
+end
+debounce = true
+wait(0.1)
 for i,v in pairs(game:GetService("Workspace").Tycoons.Spawned:GetChildren()) do
     if v.Configuration.Owner.Value == game.Players.LocalPlayer then
         for i,k in pairs(v.Buttons:GetDescendants()) do
@@ -142,6 +150,9 @@ for i,v in pairs(game:GetService("Workspace").Tycoons.Spawned:GetChildren()) do
             end
         end
     end
+    debounce = false
+end)
+wait(2)
 end
 require(game:GetService("ReplicatedFirst").ClientModules.BlurFunctions).TweenOutBlur()
 wait(0.1)
