@@ -90,6 +90,14 @@ end
 
 local Module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/Teleport.lua"))()
 
+Teleport:Label("World")
+
+Teleport:Button("Tp to Spaceship", function()
+game:GetService("TeleportService"):Teleport(331811267)
+end)
+
+Teleport:Label("Locations")
+
 Teleport:Button("Front Control Panel", function()
     Module:Tp(game:GetService("Workspace").SteeringWheel.Clickparts1.CFrame - Vector3.new(0, 0, 5))
 end)
