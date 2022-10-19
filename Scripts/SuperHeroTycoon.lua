@@ -124,8 +124,8 @@ spawn(function()
 while getgenv().Settings.click == true do
 for i,v in pairs(game:GetService("Workspace").Tycoons.Tycoons:GetDescendants()) do
     if v.Name == "Owner" and v.Value == game.Players.LocalPlayer then
-        fireclickdetector(v.Parent:WaitForChild("clicker").ClickDetector)
         fireclickdetector(v.Parent.Essentials:WaitForChild("Drop0").Model.clicker.ClickDetector)
+        fireclickdetector(v:WaitForChild("clicker").ClickDetector)
     end
 end
 wait(0.1)
