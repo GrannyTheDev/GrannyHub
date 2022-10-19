@@ -156,7 +156,11 @@ LocalPlayer:Button("Electricity", function()
     firetouchinterest(game:GetService("Workspace").Loosewire, game.Players.LocalPlayer.Character:WaitForChild("Head"), 0)
 end)
 
-LocalPlayer:Button("Enable All Cooling Systems", function()
+LocalPlayer:Toggle("Enable All Cooling Systems", function(v)
+getgenv().enable = v
+while true do
+if not getgenv().enable then return end
+wait(0.1)
 if game:GetService("Workspace").Coolantcont1.Line.HingeConstraint.TargetAngle == 0 and game:GetService("Workspace").Coolantcont2.Line.HingeConstraint.TargetAngle == 0 then
 fireclickdetector(game:GetService("Workspace").Coolantcont1.Button.ClickDetector)
 fireclickdetector(game:GetService("Workspace").Coolantcont2.Button.ClickDetector)
@@ -188,25 +192,30 @@ if game:GetService("Workspace").coolinglight.Aan.Material == Enum.Material.Smoot
 fireclickdetector(game:GetService("Workspace").coolinglight.Button.ClickDetector)
 end
 wait(0.5)
-if game:GetService("Workspace").Fancontrols.Fancontrol1.Pointer.HingeConstraint.TargetAngle == 1 then
+if game:GetService("Workspace").Fancontrols.Fancontrol1.Onoff.Value == false then
 fireclickdetector(game:GetService("Workspace").Fancontrols.Fancontrol1.Clicker.ClickDetector)
 end
 wait(0.5)
-if game:GetService("Workspace").Fancontrols.Fancontrol2.Pointer.HingeConstraint.TargetAngle == 0 then
+if game:GetService("Workspace").Fancontrols.Fancontrol2.Onoff.Value == false then
 fireclickdetector(game:GetService("Workspace").Fancontrols.Fancontrol2.Clicker.ClickDetector)
 end
 wait(0.5)
-if game:GetService("Workspace").Fancontrols.Fancontrol3.Pointer.HingeConstraint.TargetAngle == 0 then
+if game:GetService("Workspace").Fancontrols.Fancontrol3.Onoff.Value == false then
 fireclickdetector(game:GetService("Workspace").Fancontrols.Fancontrol3.Clicker.ClickDetector)
 end
 wait(0.5)
 if game:GetService("Workspace").Screen3.SurfaceGui.Frame.Door.ImageColor3 == Color3.fromRGB(79, 159, 0) then
 fireclickdetector(game:GetService("Workspace").Doorcontrol.Open2.ClickDetector)
 end
+end
 end)
 
-LocalPlayer:Button("Disable All Cooling Systems", function()
-if game:GetService("Workspace").Coolantcont1.Line.HingeConstraint.TargetAngle == 89 and game:GetService("Workspace").Coolantcont2.Line.HingeConstraint.TargetAngle == 89 then
+LocalPlayer:Toggle("Disable All Cooling Systems", function(v)
+getgenv().disable = v
+while true do
+if not getgenv().disable then return end
+wait(0.1)
+if game:GetService("Workspace").Coolantcont1.Line.HingeConstraint.TargetAngle >= 1 and game:GetService("Workspace").Coolantcont2.Line.HingeConstraint.TargetAngle >= 1 then
 fireclickdetector(game:GetService("Workspace").Coolantcont1.Button.ClickDetector)
 fireclickdetector(game:GetService("Workspace").Coolantcont2.Button.ClickDetector)
 end
@@ -233,20 +242,25 @@ if game:GetService("Workspace").DischargeControls.Light5.BrickColor == BrickColo
 fireclickdetector(game:GetService("Workspace").DischargeControls.Button5.ClickDetector)
 end
 wait(0.5)
-if game:GetService("Workspace").coolinglight.Aan.Material == Material.new("Neon") then
+if game:GetService("Workspace").coolinglight.Aan.Material == Enum.Material.Neon then
 fireclickdetector(game:GetService("Workspace").coolinglight.Button.ClickDetector)
 end
-if game:GetService("Workspace").Fancontrols.Fancontrol1.Pointer.HingeConstraint.TargetAngle >= 1 then
+wait(0.5)
+if game:GetService("Workspace").Fancontrols.Fancontrol1.Onoff.Value == true then
 fireclickdetector(game:GetService("Workspace").Fancontrols.Fancontrol1.Clicker.ClickDetector)
 end
-if game:GetService("Workspace").Fancontrols.Fancontrol2.Pointer.HingeConstraint.TargetAngle >= 1 then
+wait(0.5)
+if game:GetService("Workspace").Fancontrols.Fancontrol2.Onoff.Value == true then
 fireclickdetector(game:GetService("Workspace").Fancontrols.Fancontrol2.Clicker.ClickDetector)
 end
-if game:GetService("Workspace").Fancontrols.Fancontrol3.Pointer.HingeConstraint.TargetAngle >= 1 then
+wait(0.5)
+if game:GetService("Workspace").Fancontrols.Fancontrol3.Onoff.Value == true then
 fireclickdetector(game:GetService("Workspace").Fancontrols.Fancontrol3.Clicker.ClickDetector)
 end
+wait(0.5)
 if game:GetService("Workspace").Screen3.SurfaceGui.Frame.Door.ImageColor3 == Color3.fromRGB(255, 0, 0) then
 fireclickdetector(game:GetService("Workspace").Doorcontrol.Open2.ClickDetector)
+end
 end
 end)
 
