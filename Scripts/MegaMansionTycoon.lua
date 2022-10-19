@@ -2,6 +2,8 @@ local Library = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHu
 
 local Window = Library:CreateWindow("GrannyHub".." - Mega Mansion Tycoon")
 
+local AutoFarm = Window:Page("AutoFarm")
+
 local LocalPlayer = Window:Page("LocalPlayer")
 
 local Misc = Window:Page("Misc")
@@ -19,6 +21,7 @@ jump = false;
 infyield = false;
 antiafk = false;
 autocollect = false;
+buybuttons = false;
 }
 
 function Save()
@@ -39,18 +42,19 @@ getgenv().Settings = HttpService:JSONDecode(readfile(filename));
 end
 end
 
+function plr()
+for i,v in pairs(game.Workspace["Zednov's Tycoon Kit"].Tycoons:GetChildren()) do
+    if v.Owner.Value == game.Players.LocalPlayer then
+        return v
+    end
+end
+return nil
+end
+
 
 function doAutoCollect()
 spawn(function()
 while getgenv().Settings.autocollect == true do
-function plr()
-for i,v in pairs(game.Workspace["Zednov's Tycoon Kit"].Tycoons:GetChildren()) do
-if v.Owner.Value == game.Players.LocalPlayer then
-return v
-end
-end
-return nil
-end
 firetouchinterest(plr().Essentials.Giver, game.Players.LocalPlayer.Character:WaitForChild("Head"), 1)
 wait()
 firetouchinterest(plr().Essentials.Giver, game.Players.LocalPlayer.Character:WaitForChild("Head"), 0)
@@ -98,6 +102,30 @@ end
 end)
 end
 
+function doBuyButtons()
+spawn(function()
+if getgenv().Settings.buybuttons == true then
+game:GetService("Players").LocalPlayer.PlayerGui.UI:WaitForChild("Store"):Destroy()
+local debounce = false
+game:GetService("RunService").Heartbeat:Connect(function()
+if debounce then
+    return
+end
+debounce = true
+wait(0.1)
+for i,v in pairs(plr().Buttons:GetDescendants()) do
+    if v.Name == "TouchInterest" then
+        firetouchinterest(v.Parent, game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 1)
+        wait()
+        firetouchinterest(v.Parent, game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 0)
+    end
+end
+debounce = false
+end)
+end
+end)
+end
+
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
 getgenv().Settings.speed = v
 Save()
@@ -114,7 +142,15 @@ doJump()
 end
 end)
 
-local autocollect = LocalPlayer:Toggle("Auto Collect Cash", function(v)
+local buybuttons = AutoFarm:Toggle("Autobuy all buttons", function(v)
+getgenv().Settings.buybuttons = v
+Save()
+if v then
+doBuyButtons()
+end
+end)
+
+local autocollect = AutoFarm:Toggle("Auto Collect Cash", function(v)
 getgenv().Settings.autocollect = v
 Save()
 if v then
@@ -201,6 +237,9 @@ antiafk:ChangeState(true)
 end
 if getgenv().Settings.autocollect == true then
 autocollect:ChangeState(true)
+end
+if getgenv().Settings.buybuttons == true then
+buybuttons:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
