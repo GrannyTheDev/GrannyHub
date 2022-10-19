@@ -141,9 +141,11 @@ for i,v in pairs(game:GetService("Workspace").Tycoons.Spawned:GetChildren()) do
     if v.Configuration.Owner.Value == game.Players.LocalPlayer then
         for i,k in pairs(v.Buttons:GetDescendants()) do
             if k.Name == "TouchPart" then
-                firetouchinterest(k, game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 1)
-                wait()
-                firetouchinterest(k, game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 0)
+                if k.Name ~= "Robux" then
+                    firetouchinterest(k, game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 1)
+                    wait()
+                    firetouchinterest(k, game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 0)
+                end
             end
         end
     end
