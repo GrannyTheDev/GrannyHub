@@ -105,7 +105,6 @@ end
 function doBuyButtons()
 spawn(function()
 while getgenv().Settings.buybuttons == true do
-game:GetService("Players").LocalPlayer.PlayerGui.UI:WaitForChild("Store"):Destroy()
 local debounce = false
 game:GetService("RunService").Heartbeat:Connect(function()
 if debounce then
@@ -124,8 +123,17 @@ debounce = false
 end)
 wait(2)
 end
+if getgenv().Settings.buybuttons == true then
+game:GetService("Players").LocalPlayer.PlayerGui.UI:WaitForChild("Store"):Destroy()
+end
 end)
 end
+
+local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/Teleport.lua"))()
+
+LocalPlayer:Button("Teleport to base", function()
+    module:Tween(TweenInfo.new(0.2), plr().Essentials.Spawn.CFrame)
+end)
 
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
 getgenv().Settings.speed = v
