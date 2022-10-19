@@ -129,19 +129,12 @@ end
 
 function doBuyButtons()
 spawn(function()
-if getgenv().Settings.buybuttons == true then
-local debounce = false
-game:GetService("RunService").Heartbeat:Connect(function()
-if debounce then
-    return
-end
-debounce = true
-wait(0.1)
+while getgenv().Settings.buybuttons == true do
 for i,v in pairs(game:GetService("Workspace").Tycoons.Spawned:GetChildren()) do
     if v.Configuration.Owner.Value == game.Players.LocalPlayer then
         for i,k in pairs(v.Buttons:GetDescendants()) do
-            if k.Name == "TouchPart" then
                 if k.Name ~= "Robux" then
+                    if k.Name == "TouchPart" then
                     firetouchinterest(k, game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 1)
                     wait()
                     firetouchinterest(k, game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 0)
@@ -150,8 +143,12 @@ for i,v in pairs(game:GetService("Workspace").Tycoons.Spawned:GetChildren()) do
         end
     end
 end
-debounce = false
-end)
+require(game:GetService("ReplicatedFirst").ClientModules.BlurFunctions).TweenOutBlur()
+wait(0.1)
+end
+if getgenv().Settings.buybuttons == true then
+    game:GetService("Players").LocalPlayer.PlayerGui.MainGui.WindowHolderFrame:WaitForChild("Rebirth"):Destroy()
+    game:GetService("Players").LocalPlayer.PlayerGui.MainGui.WindowHolderFrame:WaitForChild("PromptFrame"):Destroy()
 end
 end)
 end
