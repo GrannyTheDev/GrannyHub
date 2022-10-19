@@ -6,6 +6,8 @@ local LocalPlayer = Window:Page("LocalPlayer")
 
 local Teleport = Window:Page("Teleport")
 
+local CoreStats = Window:Page("CoreStats")
+
 local Misc = Window:Page("Misc")
 
 local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Webhook.lua"))()
@@ -87,6 +89,9 @@ if getgenv().Settings.antiafk == true then
 end
 end)
 end
+
+CoreStats:Label("--------Core Temp--------")
+local CoreTemp = CoreStats:Label("Temp: "..game:GetService("Workspace").Screen3.SurfaceGui.Frame.Deco.TempLabel.Text)
 
 local Module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/Teleport.lua"))()
 
@@ -371,4 +376,8 @@ end
 
 for i,v in pairs(getgenv().Settings) do
 print(i,v)
+end
+
+while wait() do
+CoreTemp:UpdateText("Temp: "..game:GetService("Workspace").Screen3.SurfaceGui.Frame.Deco.TempLabel.Text)
 end
