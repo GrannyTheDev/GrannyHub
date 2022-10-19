@@ -142,9 +142,16 @@ end
 
 function doBuyButtons()
 spawn(function()
-while getgenv().Settings.buybuttons == true do
+if getgenv().Settings.buybuttons == true then
+local debounce = false
+game:GetService("RunService").Heartbeat:Connect(function()
+if debounce then
+    return
+end
+debounce = true
+wait(0.1)
 for i,v in pairs(game:GetService("Workspace").Tycoons:GetChildren()) do
-    if v.Name ~= "CoreScript" and v.Owner.Value == game.Players.LocalPlayer then
+    if v.Name ~= "CoreScript" and v:WaitForChild("Owner").Value == game.Players.LocalPlayer then
         for i,k in pairs(v.Buttons:GetChildren()) do
             firetouchinterest(k:WaitForChild("Head"), game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 1)
             wait()
@@ -152,7 +159,11 @@ for i,v in pairs(game:GetService("Workspace").Tycoons:GetChildren()) do
         end
     end
 end
-wait(0.1)
+for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.RebirthGui.Frame.YesButton.MouseButton1Down)) do
+    v.Function()
+end
+debounce = false
+end)
 end
 end)
 end
@@ -161,7 +172,7 @@ function doSell()
 spawn(function()
 while getgenv().Settings.sell == true do
 for i,v in pairs(game:GetService("Workspace").Tycoons:GetChildren()) do
-    if v.Name ~= "CoreScript" and v.Owner.Value == game.Players.LocalPlayer then
+    if v.Name ~= "CoreScript" and v:WaitForChild("Owner").Value == game.Players.LocalPlayer then
         firetouchinterest(v:WaitForChild("Essentials").Giver, game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 1)
         wait()
         firetouchinterest(v:WaitForChild("Essentials").Giver, game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 0)
