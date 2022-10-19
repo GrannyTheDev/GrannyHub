@@ -126,6 +126,7 @@ end
 if getgenv().Settings.buybuttons == true then
 game:GetService("Players").LocalPlayer.PlayerGui.UI:WaitForChild("Store"):Destroy()
 end
+end
 end)
 end
 
