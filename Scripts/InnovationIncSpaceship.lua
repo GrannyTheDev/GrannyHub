@@ -156,8 +156,97 @@ LocalPlayer:Button("Electricity", function()
     firetouchinterest(game:GetService("Workspace").Loosewire, game.Players.LocalPlayer.Character:WaitForChild("Head"), 0)
 end)
 
+LocalPlayer:Button("Enable All Cooling Systems", function()
+if game:GetService("Workspace").Coolantcont1.Line.HingeConstraint.TargetAngle == 0 and game:GetService("Workspace").Coolantcont2.Line.HingeConstraint.TargetAngle == 0 then
+fireclickdetector(game:GetService("Workspace").Coolantcont1.Button.ClickDetector)
+fireclickdetector(game:GetService("Workspace").Coolantcont2.Button.ClickDetector)
+end
+if game:GetService("Workspace").Coolant.Button.BrickColor == BrickColor.new("Tr. Red") then
+fireclickdetector(game:GetService("Workspace").Coolant.Button.ClickDetector)
+end
+if game:GetService("Workspace").DischargeControls.Light1.BrickColor == BrickColor.new("Bright red") then
+fireclickdetector(game:GetService("Workspace").DischargeControls.Button1.ClickDetector)
+end
+wait(0.5)
+if game:GetService("Workspace").DischargeControls.Light2.BrickColor == BrickColor.new("Bright red") then
+fireclickdetector(game:GetService("Workspace").DischargeControls.Button2.ClickDetector)
+end
+wait(0.5)
+if game:GetService("Workspace").DischargeControls.Light3.BrickColor == BrickColor.new("Bright red") then
+fireclickdetector(game:GetService("Workspace").DischargeControls.Button3.ClickDetector)
+end
+wait(0.5)
+if game:GetService("Workspace").DischargeControls.Light4.BrickColor == BrickColor.new("Bright red") then
+fireclickdetector(game:GetService("Workspace").DischargeControls.Button4.ClickDetector)
+end
+wait(0.5)
+if game:GetService("Workspace").DischargeControls.Light5.BrickColor == BrickColor.new("Bright red") then
+fireclickdetector(game:GetService("Workspace").DischargeControls.Button5.ClickDetector)
+end
+wait(0.5)
+if game:GetService("Workspace").coolinglight.Button.BrickColor == BrickColor.new("Cool yellow") then
+fireclickdetector(game:GetService("Workspace").coolinglight.Button.ClickDetector)
+end
+if game:GetService("Workspace").Fancontrols.Fancontrol1.Pointer.HingeConstraint.TargetAngle == 1 then
+fireclickdetector(game:GetService("Workspace").Fancontrols.Fancontrol1.Clicker.ClickDetector)
+end
+if game:GetService("Workspace").Fancontrols.Fancontrol2.Pointer.HingeConstraint.TargetAngle == 1 then
+fireclickdetector(game:GetService("Workspace").Fancontrols.Fancontrol2.Clicker.ClickDetector)
+end
+if game:GetService("Workspace").Fancontrols.Fancontrol3.Pointer.HingeConstraint.TargetAngle == 1 then
+fireclickdetector(game:GetService("Workspace").Fancontrols.Fancontrol3.Clicker.ClickDetector)
+end
+if game:GetService("Workspace").Doorcontrol.Open2.CFrame == CFrame.new(-181.866699, 85.9102936, -1323.70435, 1, 0, 0, 0, -1, 0, 0, 0, -1) then
+fireclickdetector(game:GetService("Workspace").Doorcontrol.Open2.ClickDetector)
+end
+end)
+
+LocalPlayer:Button("Disable All Cooling Systems", function()
+if game:GetService("Workspace").Coolantcont1.Line.HingeConstraint.TargetAngle == 89 and game:GetService("Workspace").Coolantcont2.Line.HingeConstraint.TargetAngle == 89 then
+fireclickdetector(game:GetService("Workspace").Coolantcont1.Button.ClickDetector)
+fireclickdetector(game:GetService("Workspace").Coolantcont2.Button.ClickDetector)
+end
+if game:GetService("Workspace").Coolant.Button.BrickColor == BrickColor.new("Moss") then
+fireclickdetector(game:GetService("Workspace").Coolant.Button.ClickDetector)
+end
+if game:GetService("Workspace").DischargeControls.Light1.BrickColor == BrickColor.new("Bright red") then
+fireclickdetector(game:GetService("Workspace").DischargeControls.Button1.ClickDetector)
+end
+wait(0.5)
+if game:GetService("Workspace").DischargeControls.Light2.BrickColor == BrickColor.new("Bright red") then
+fireclickdetector(game:GetService("Workspace").DischargeControls.Button2.ClickDetector)
+end
+wait(0.5)
+if game:GetService("Workspace").DischargeControls.Light3.BrickColor == BrickColor.new("Bright red") then
+fireclickdetector(game:GetService("Workspace").DischargeControls.Button3.ClickDetector)
+end
+wait(0.5)
+if game:GetService("Workspace").DischargeControls.Light4.BrickColor == BrickColor.new("Bright red") then
+fireclickdetector(game:GetService("Workspace").DischargeControls.Button4.ClickDetector)
+end
+wait(0.5)
+if game:GetService("Workspace").DischargeControls.Light5.BrickColor == BrickColor.new("Bright red") then
+fireclickdetector(game:GetService("Workspace").DischargeControls.Button5.ClickDetector)
+end
+wait(0.5)
+if game:GetService("Workspace").coolinglight.Button.BrickColor == BrickColor.new("Cool yellow") then
+fireclickdetector(game:GetService("Workspace").coolinglight.Button.ClickDetector)
+end
+if game:GetService("Workspace").Fancontrols.Fancontrol1.Pointer.HingeConstraint.TargetAngle == 1 then
+fireclickdetector(game:GetService("Workspace").Fancontrols.Fancontrol1.Clicker.ClickDetector)
+end
+if game:GetService("Workspace").Fancontrols.Fancontrol2.Pointer.HingeConstraint.TargetAngle == 1 then
+fireclickdetector(game:GetService("Workspace").Fancontrols.Fancontrol2.Clicker.ClickDetector)
+end
+if game:GetService("Workspace").Fancontrols.Fancontrol3.Pointer.HingeConstraint.TargetAngle == 1 then
+fireclickdetector(game:GetService("Workspace").Fancontrols.Fancontrol3.Clicker.ClickDetector)
+end
+if game:GetService("Workspace").Doorcontrol.Open2.CFrame == CFrame.new(-181.866699, 85.9102936, -1323.70435, 1, 0, 0, 0, -1, 0, 0, 0, -1) then
+fireclickdetector(game:GetService("Workspace").Doorcontrol.Open2.ClickDetector)
+end
+end)
+
 LocalPlayer:Button("Fix Engines", function()
-    for i = 1,10 do
     fireclickdetector(game:GetService("Workspace").Engine.Engines1.Part.Part.ClickDetector)
     fireclickdetector(game:GetService("Workspace").Engines2.Part.Part.ClickDetector)
     fireclickdetector(game:GetService("Workspace").Engines7.Part.Part.ClickDetector)
@@ -165,7 +254,6 @@ LocalPlayer:Button("Fix Engines", function()
     fireclickdetector(game:GetService("Workspace").Engines3.Part.Part.ClickDetector)
     fireclickdetector(game:GetService("Workspace").Engines4.Part.Part.ClickDetector)
     fireclickdetector(game:GetService("Workspace").Engines6.Part.Part.ClickDetector)
-    end
 end)
 
 LocalPlayer:Button("Refuel Tank", function()
