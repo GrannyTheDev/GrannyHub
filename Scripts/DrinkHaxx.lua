@@ -696,7 +696,7 @@ Teleport:Button("Fav Spot", function()
 end)
 
 Teleport:Button("Safe Zone", function()
-    Tween(TweenInfo.new(0.2), CFrame.new(-46, 48, -15))
+    Tween(TweenInfo.new(0.2), game:GetService("Workspace").SpawnLocation.CFrame)
 end)
 
 Teleport:Button("Pet Shop", function()
