@@ -20,6 +20,7 @@ speed = false;
 jump = false;
 antiafk = false;
 infyield = false;
+infstamina = false;
 }
 
 function Save()
@@ -70,6 +71,23 @@ end
 end)
 end
 
+function doInfStamina()
+spawn(function()
+if getgenv().Settings.infstamina == true then
+local mt = getrawmetatable(game);
+setreadonly(mt, false);
+local old_index = mt.__index;
+    
+mt.__index = function(a, b)
+if tostring(a) == "MaxStamina" and tostring(b) == "Value" then
+    return math.huge;
+end
+return old_index(a, b);
+end
+end
+end)
+end
+
 function doJump()
 spawn(function()
 if getgenv().Settings.jump == true then
@@ -99,6 +117,15 @@ if getgenv().Settings.antiafk == true then
 end
 end)
 end
+
+
+local infstamina = LocalPlayer:Toggle("Infinite Stamina", function(v)
+getgenv().Settings.infstamina = v
+Save()
+if v then
+doInfStamina()
+end
+end)
 
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
 getgenv().Settings.speed = v
@@ -174,6 +201,9 @@ infyield:ChangeState(true)
 end
 if getgenv().Settings.antiafk == true then
 antiafk:ChangeState(true)
+end
+if getgenv().Settings.infstamina == true then
+infstamina:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
