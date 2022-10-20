@@ -90,9 +90,6 @@ end
 end)
 end
 
-CoreStats:Label("--------Core Temp--------")
-local CoreTemp = CoreStats:Label(game:GetService("Workspace").Screen3.SurfaceGui.Frame.Deco.TempLabel.Text)
-
 local Module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/Teleport.lua"))()
 
 Teleport:Label("World")
@@ -166,7 +163,7 @@ getgenv().enable = v
 while true do
 if not getgenv().enable then return end
 wait(0.1)
-if game:GetService("Workspace").Coolantcont1.Line.HingeConstraint.TargetAngle == 0 and game:GetService("Workspace").Coolantcont2.Line.HingeConstraint.TargetAngle == 0 then
+if game:GetService("Workspace").Coolantcont1.Line.HingeConstraint.TargetAngle <= 65 and game:GetService("Workspace").Coolantcont2.Line.HingeConstraint.TargetAngle <= 65master then
 fireclickdetector(game:GetService("Workspace").Coolantcont1.Button.ClickDetector)
 fireclickdetector(game:GetService("Workspace").Coolantcont2.Button.ClickDetector)
 end
@@ -220,7 +217,7 @@ getgenv().disable = v
 while true do
 if not getgenv().disable then return end
 wait(0.1)
-if game:GetService("Workspace").Coolantcont1.Line.HingeConstraint.TargetAngle >= 1 and game:GetService("Workspace").Coolantcont2.Line.HingeConstraint.TargetAngle >= 1 then
+if game:GetService("Workspace").Coolantcont1.Line.HingeConstraint.TargetAngle == 89 and game:GetService("Workspace").Coolantcont2.Line.HingeConstraint.TargetAngle == 89 then
 fireclickdetector(game:GetService("Workspace").Coolantcont1.Button.ClickDetector)
 fireclickdetector(game:GetService("Workspace").Coolantcont2.Button.ClickDetector)
 end
@@ -378,6 +375,17 @@ for i,v in pairs(getgenv().Settings) do
 print(i,v)
 end
 
+function GetObject()
+    for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
+        if v.Name == "Screen3" then
+            return v
+        end
+    end
+end
+
+CoreStats:Label("--------Core Temp--------")
+local CoreTemp = CoreStats:Label(GetObject().SurfaceGui.Frame.Deco.TempLabel.Text)
+
 while wait() do
-CoreTemp:UpdateText(game:GetService("Workspace").Screen3.SurfaceGui.Frame.Deco.TempLabel.Text)
+    CoreTemp:UpdateText(GetObject().SurfaceGui.Frame.Deco.TempLabel.Text)
 end
