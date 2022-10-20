@@ -1,5 +1,5 @@
 if gethui then
-	for i,v in pairs(gethui:GetChildren()) do
+	for i,v in pairs(gethui():GetChildren()) do
 		if v:IsA("ScreenGui") and v.Name == "DarkLib" or v.Name == "Gui" or v.Name == "ScreenGui" or v.Name == "GamesGui" then
 			v:Destroy()
 		end
