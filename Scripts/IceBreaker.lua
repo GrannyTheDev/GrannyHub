@@ -64,9 +64,9 @@ if getgenv().Settings.speed == true then
         return oldnewindex(a, b, c)
     end)
          
-    while wait() do
-    game.Players.LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 100
-    end
+    game:GetService("RunService").Stepped:Connect(function()
+        game.Players.LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 100
+    end)
 end
 end)
 end
