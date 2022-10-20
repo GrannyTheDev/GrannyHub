@@ -101,7 +101,7 @@ end)
 Teleport:Label("Locations")
 
 Teleport:Button("Front Control Panel", function()
-    Module:Tp(game:GetService("Workspace").SteeringWheel.Clickparts1.CFrame - Vector3.new(0, 0, 5))
+    Module:Tp(game:GetService("Workspace").SteeringWheel.Clickparts1.CFrame - Vector3.new(0, 0, 5) + Vector3.new(0, 3, 0))
 end)
 
 Teleport:Button("Cloning Lab", function()
@@ -163,7 +163,7 @@ getgenv().enable = v
 while true do
 if not getgenv().enable then return end
 wait(0.1)
-if game:GetService("Workspace").Coolantcont1.Line.HingeConstraint.TargetAngle <= 65 and game:GetService("Workspace").Coolantcont2.Line.HingeConstraint.TargetAngle <= 65master then
+if game:GetService("Workspace").Coolantcont1.Line.HingeConstraint.TargetAngle <= 65 and game:GetService("Workspace").Coolantcont2.Line.HingeConstraint.TargetAngle <= 65 then
 fireclickdetector(game:GetService("Workspace").Coolantcont1.Button.ClickDetector)
 fireclickdetector(game:GetService("Workspace").Coolantcont2.Button.ClickDetector)
 end
