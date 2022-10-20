@@ -61,7 +61,7 @@ function Library:CreateWindow(title)
 	end)
 
 	Header.Name = "Header"
-	Header.Parent = DarkLib
+	Header.Parent = gethui().DarkLib
 	Header.BackgroundColor3 = Color3.fromRGB(80, 0, 255)
 	Header.BorderSizePixel = 0
 	Header.Position = UDim2.new(0, 552, 0, 159)
@@ -136,7 +136,7 @@ function Library:CreateWindow(title)
 	Title.TextXAlignment = Enum.TextXAlignment.Left
 
 	for i = 1,#title do
-		game:GetService("CoreGui").DarkLib.Header.Title.Text = string.sub(title, 1, i)
+		gethui().DarkLib.Header.Title.Text = string.sub(title, 1, i)
 		wait(0.05)
 	end
 
@@ -144,7 +144,7 @@ function Library:CreateWindow(title)
 	Pages.Parent = MainFrame
 
 function Library:Edit(txt)
-game.CoreGui.DarkLib.Header.Title.Text = txt
+gethui().DarkLib.Header.Title.Text = txt
 end
 
 	local Page = {}
