@@ -43,17 +43,29 @@ end
 function doSpeed()
 spawn(function()
 if getgenv().Settings.speed == true then
-local oldnewindex
-oldnewindex = hookmetamethod(game, "__newindex", function(a, b, c)
-    if tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
-        return oldnewindex(a, b, 100)
+    local gmt = getrawmetatable(game)
+    local oldIndex = gmt.__namecall
+    setreadonly(gmt, false)
+    
+    gmt.__namecall = newcclosure(function(Self, ...)
+    local method = getnamecallmethod()
+    if Self == game.Players.LocalPlayer and tostring(method) == "Kick" then
+       return
     end
-    return oldnewindex(a, b, c)
-end)
-     
-while wait() do
-game.Players.LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 100
-end
+    return oldIndex(Self, ...)
+    end)
+    
+    local oldnewindex
+    oldnewindex = hookmetamethod(game, "__newindex", function(a, b, c)
+        if tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
+            return oldnewindex(a, b, 100)
+        end
+        return oldnewindex(a, b, c)
+    end)
+         
+    game:GetService("RunService").Stepped:Connect(function()
+        game.Players.LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 100
+    end)
 end
 end)
 end

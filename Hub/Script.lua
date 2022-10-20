@@ -26,7 +26,8 @@ local games = {
 	["NinjaLegends.lua"] = 3956818381,
 	["UltraPowerTycoon.lua"] = 8146731988,
 	["SuperHeroTycoon.lua"] = 574407221,
-	["IceBreaker.lua"] = 139613645
+	["IceBreaker.lua"] = 139613645,
+	["DragonBladeRPG.lua"] = 7279999673
 }
 
 
