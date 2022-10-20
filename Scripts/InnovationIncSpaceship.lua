@@ -91,7 +91,7 @@ end)
 end
 
 CoreStats:Label("--------Core Temp--------")
-local CoreTemp = CoreStats:Label("Temp: "..game:GetService("Workspace").Screen3.SurfaceGui.Frame.Deco.TempLabel.Text)
+local CoreTemp = CoreStats:Label(game:GetService("Workspace").Screen3.SurfaceGui.Frame.Deco.TempLabel.Text)
 
 local Module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/Teleport.lua"))()
 
@@ -379,5 +379,5 @@ print(i,v)
 end
 
 while wait() do
-CoreTemp:UpdateText("Temp: "..game:GetService("Workspace").Screen3.SurfaceGui.Frame.Deco.TempLabel.Text)
+CoreTemp:UpdateText(game:GetService("Workspace").Screen3.SurfaceGui.Frame.Deco.TempLabel.Text)
 end
