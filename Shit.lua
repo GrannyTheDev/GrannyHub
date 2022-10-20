@@ -22,8 +22,16 @@ function Library:CreateWindow(title)
 	local Pages = Instance.new("Folder")
 
 	DarkLib.Name = "DarkLib"
-	DarkLib.Parent = game.CoreGui
 	DarkLib.ResetOnSpawn = false
+
+	if gethui then
+		DarkLib.Parent = gethui();
+	elseif syn and syn.protect_gui then
+		syn.protect_gui(DarkLib);
+		DarkLib.Parent = cloneref(game:GetService("CoreGui"))
+	else
+		DarkLib.Parent = cloneref(game:GetService("CoreGui"))
+	end
 
 	game:GetService("UserInputService").InputBegan:connect(function(current, ok) 
 		if not ok then 
