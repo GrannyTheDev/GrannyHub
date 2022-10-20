@@ -20,6 +20,7 @@ speed = false;
 jump = false;
 antiafk = false;
 infyield = false;
+kill = false;
 }
 
 function Save()
@@ -80,6 +81,17 @@ end
 end)
 end
 
+function doKill()
+spawn(function()
+while getgenv().Settings.kill == true do
+for i,v in pairs(game.Players:GetPlayers()) do
+    game.ReplicatedStorage.Hit:FireServer(v)
+end
+wait(0.1)
+end
+end)
+end
+
 function doInfYield()
 spawn(function()
 if getgenv().Settings.infyield == true then
@@ -100,6 +112,14 @@ end
 end)
 end
 
+local kill = LocalPlayer:Toggle("Auto kill all", function(v)
+getgenv().Settings.kill = v
+Save()
+if v then
+doKill()
+end
+end)
+
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
 getgenv().Settings.speed = v
 Save()
@@ -115,6 +135,25 @@ if v then
 doJump()
 end
 end)
+
+local NoclipBtn = LocalPlayer:Toggle("Noclip", function(v)
+    local Workspace = game:GetService("Workspace")
+    local CoreGui = game:GetService("CoreGui")
+    local Players = game:GetService("Players")
+    local Plr = Players.LocalPlayer
+    
+                if v == true then
+    Stepped = game:GetService("RunService").Stepped:Connect(function()
+                    for i, v in pairs(Workspace[Plr.Name]:GetChildren()) do
+                    if v:IsA("BasePart") then
+                    v.CanCollide = false
+                    end end end)
+                elseif v == false then
+                    Stepped:Disconnect()
+    end
+    end)
+
+    NoclipBtn:Keybind(Enum.KeyCode.LeftAlt)
 
 Misc:Button("Rejoin", function()
 game:GetService("TeleportService"):Teleport(game.PlaceId)
@@ -174,6 +213,9 @@ infyield:ChangeState(true)
 end
 if getgenv().Settings.antiafk == true then
 antiafk:ChangeState(true)
+end
+if getgenv().Settings.kill == true then
+kill:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
