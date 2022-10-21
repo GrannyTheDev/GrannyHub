@@ -88,30 +88,27 @@
             }
         </style>
         <script>
-            function CopyScript(id) {
+            function CopyScript(id, script) {
                  var textToCopy = document.getElementById(id);
+                 textToCopy.Value = script;
                  textToCopy.select();
                  document.execCommand("copy");
-            }
-            function SetText(id, txt) {
-                 var ID = document.getElementById(id);
-                 ID.Value = txt;
             }
         </script>
 </html>
 <body>
     <h1 id="Title">Welcome to GrannyHub</h1>
     <h1 id="ScriptInfo">GrannyHub:</h1>
-    <input type="text" readonly="true" value='loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Script.lua"))()' id="Script">
+    <input type="text" readonly="true" value="loadstring(game:HttpGet('https://grannythedev.github.io/GrannyHub/Script.lua'))()" id="Script">
     <br>
-    <button id="CopyScript" onclick='SetText("Script", "loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Script.lua"))()) CopyScript("Script")'><strong>Copy Script</Script></strong></button>
-    <button id="CopyDScript" onclick='SetText("Script", "```loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Script.lua"))()```) CopyScript("Script")'><strong>Copy Script for discord</Script></strong></button>
+    <button id="CopyScript" onclick='CopyScript("Script", "loadstring(game:HttpGet('https://grannythedev.github.io/GrannyHub/Script.lua'))()")'><strong>Copy Script</Script></strong></button>
+    <button id="CopyDScript" onclick='CopyScript("Script", "loadstring(game:HttpGet('https://grannythedev.github.io/GrannyHub/Script.lua'))()")'><strong>Copy Script for discord</Script></strong></button>
     <br>
     <h1 id="DexInfo">DarkDex:</h1>
     <br>
-    <input type="text" readonly="true" value='loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Shit/GrannyDex.lua"))()' id="DexScript">
+    <input type="text" readonly="true" value="loadstring(game:HttpGet('https://grannythedev.github.io/GrannyHub/Shit/GrannyDex.lua'))()" id="DexScript">
     <br>
-    <button id="CopyDex" onclick='SetText("Script", "loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Shit/GrannyDex.lua"))()) CopyScript("DexScript")'><strong>Copy DarkDex</Script></strong></button>
+    <button id="CopyDex" onclick='SetText("Script", "loadstring(game:HttpGet('https://grannythedev.github.io/GrannyHub/Shit/GrannyDex.lua'))()) CopyScript("DexScript")'><strong>Copy DarkDex</Script></strong></button>
     <button id="CopyDDex" onclick='SetText("Script", "```loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Shit/GrannyDex.lua"))()```) CopyScript("DexScript")'><strong>Copy DarkDex for discord</Script></strong></button>
     <br>
     <h1 id="DiscordInfo">Join our discord server:</h1>
