@@ -21,6 +21,15 @@
                 border-radius: 50px;
                 background-color: #333333;
             }
+            input#DScript {
+                color: white;
+                position: relative;
+                display:block; margin: 0 auto;
+                height: 25px;
+                width: 550px;
+                border-radius: 50px;
+                background-color: #333333;
+            }
             input#DexScript {
                 color: white;
                 position: relative;
@@ -88,8 +97,10 @@
     <h1 id="ScriptInfo">GrannyHub:</h1>
     <input type="text" readonly="true" value='loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Script.lua"))()' id="Script">
     <br>
+    <input type="text" readonly="true" value='loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Script.lua"))()' id="Script">
+    <br>
     <button id="CopyScript" onclick='CopyScript("Script") SetText("Script", "loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Script.lua"))())'><strong>Copy Script</Script></strong></button>
-    <button id="CopyDScript" onclick='CopyScript("ScriptDscript") SetText("Script", "```loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Script.lua"))()```)'><strong>Copy Script for discord</Script></strong></button>
+    <button id="CopyDScript" onclick='CopyScript("DScript") SetText("Script", "```loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Script.lua"))()```)'><strong>Copy Script for discord</Script></strong></button>
     <br>
     <h1 id="DexInfo">DarkDex:</h1>
     <br>
