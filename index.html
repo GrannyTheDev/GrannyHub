@@ -93,6 +93,8 @@
                  textToCopy.select();
                  document.execCommand("copy");
             }
+            function GetGrannyHub() {
+                 return 'loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Script.lua"))()'
         </script>
 </html>
 <body>
@@ -100,8 +102,7 @@
     <h1 id="ScriptInfo">GrannyHub:</h1>
     <input type="text" readonly="true" value="loadstring(game:HttpGet('https://grannythedev.github.io/GrannyHub/Script.lua'))()" id="Script">
     <br>
-    var hub = "loadstring(game:HttpGet('https://grannythedev.github.io/GrannyHub/Script.lua'))()"
-    <button id="CopyScript" onclick='CopyScript("Script", hub)'><strong>Copy Script</Script></strong></button>
+    <button id="CopyScript" onclick='CopyScript("Script", GetGrannyHub())'><strong>Copy Script</Script></strong></button>
     <button id="CopyDScript" onclick='CopyScript("Script", "loadstring(game:HttpGet('https://grannythedev.github.io/GrannyHub/Script.lua'))()")'><strong>Copy Script for discord</Script></strong></button>
     <br>
     <h1 id="DexInfo">DarkDex:</h1>
