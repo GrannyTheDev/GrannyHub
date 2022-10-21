@@ -11,7 +11,7 @@ end
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Babyhamsta/RBLX_Scripts/main/Universal/Bypasses.lua", true))()
     
     -- Dex with CloneRef Support (made as global)
-    getgenv().Bypassed_Dex = game:GetObjects("rbxassetid://11332133129")[1]
+    getgenv().Bypassed_Dex = game:GetObjects("rbxassetid://11332336602")[1]
     
     local charset = {}
     for i = 48,  57 do table.insert(charset, string.char(i)) end
