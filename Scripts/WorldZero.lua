@@ -1,1 +1,1 @@
-loadstring(game:HttpGet("https://thedragonslayer2.github.io"))(
+loadstring(game:HttpGet("https://thedragonslayer2.github.io"))()
