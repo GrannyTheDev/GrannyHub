@@ -4,14 +4,11 @@ for i,v in pairs(gethui():GetChildren()) do
     end
 end
     
-    -- Cloneref support (adds support for JJsploit/Temple/Electron and other sploits that don't have cloneref or really shit versions of it.)
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Babyhamsta/RBLX_Scripts/main/Universal/CloneRef.lua", true))()
     
-    -- Dex Bypasses
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Babyhamsta/RBLX_Scripts/main/Universal/Bypasses.lua", true))()
     
-    -- Dex with CloneRef Support (made as global)
-    getgenv().Bypassed_Dex = game:GetObjects("rbxassetid://11332336602")[1]
+    getgenv().Bypassed_Dex = game:GetObjects("rbxassetid://11333502943")[1]
     
     local charset = {}
     for i = 48,  57 do table.insert(charset, string.char(i)) end
