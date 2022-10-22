@@ -26,6 +26,15 @@
                 border-radius: 50px;
                 background-color: #333333;
             }
+            input#CmdScript {
+                color: #CCCCCC;
+                position: relative;
+                display:block; margin: 0 auto;
+                height: 25px;
+                width: 600px;
+                border-radius: 50px;
+                background-color: #333333;
+            }
             h1#Title {
                 color: #CCCCCC;
                 text-align: center;
@@ -35,6 +44,10 @@
                 text-align: center;
             }
             h1#DexInfo {
+                color: #CCCCCC;
+                text-align: center;
+            }
+            h1#CmdInfo {
                 color: #CCCCCC;
                 text-align: center;
             }
@@ -82,6 +95,22 @@
                 border-radius: 50px;
                 background-color: #333333;
             }
+            button#CopyCmd {
+                color: #CCCCCC;
+                position: relative;
+                display:block; margin: 0 auto;
+                height: 25px;
+                border-radius: 50px;
+                background-color: #333333;
+            }
+            button#CopyDCmd {
+                color: #CCCCCC;
+                position: relative;
+                display:block; margin: 0 auto;
+                height: 25px;
+                border-radius: 50px;
+                background-color: #333333;
+            }
         </style>
         <script>
             function CopyScript(id, script) {
@@ -102,6 +131,12 @@
                  function GetDGrannyDex() {
                  return '```loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Shit/GrannyDex.lua"))()```'
                  }
+                 function GetGrannyCmd() {
+                 return 'loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Shit/GrannyCmd.lua"))()'
+                 }
+                 function GetDGrannyCmd() {
+                 return '```loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Shit/GrannyCmd.lua"))()```'
+                 }
                  function GetInvite() {
                  return 'https://discord.gg/esn6q3BbV2'
                  }
@@ -121,6 +156,13 @@
     <br>
     <button id="CopyDex" onclick='CopyScript("DexScript", GetGrannyDex())'><strong>Copy GrannyDex</Script></strong></button>
     <button id="CopyDDex" onclick='CopyScript("DexScript", GetDGrannyDex())'><strong>Copy GrannyDex for discord</Script></strong></button>
+    <br>
+    <h1 id="CmdInfo">GrannyCmd - Coming Soon:</h1>
+    <br>
+    <input type="text" readonly="true" value="loadstring(game:HttpGet('https://grannythedev.github.io/GrannyHub/Shit/GrannyCmd.lua'))()" id="CmdScript">
+    <br>
+    <button id="CopyCmd" onclick='CopyScript("CmdScript", GetGrannyCmd())'><strong>Copy GrannyCmd</Script></strong></button>
+    <button id="CopyDCmd" onclick='CopyScript("CmdScript", GetDGrannyCmd())'><strong>Copy GrannyCmd for discord</Script></strong></button>
     <br>
     <h1 id="DiscordInfo">Join our discord server:</h1>
     <button id="InviteLink" onclick='window.open(GetInvite())'><strong>Join</strong></button>
