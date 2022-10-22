@@ -1,1 +1,0 @@
-loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Hub/Script.lua"))()
