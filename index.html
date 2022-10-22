@@ -35,6 +35,15 @@
                 border-radius: 50px;
                 background-color: #333333;
             }
+            input#GamesList {
+                color: #CCCCCC;
+                position: relative;
+                display:block; margin: 0 auto;
+                height: 25px;
+                width: 600px;
+                border-radius: 50px;
+                background-color: #333333;
+            }
             h1#Title {
                 color: #CCCCCC;
                 text-align: center;
@@ -52,6 +61,10 @@
                 text-align: center;
             }
             h1#DiscordInfo {
+                color: #CCCCCC;
+                text-align: center;
+            }
+            h1#List {
                 color: #CCCCCC;
                 text-align: center;
             }
@@ -111,19 +124,27 @@
                 border-radius: 50px;
                 background-color: #333333;
             }
+            button#ShowList {
+                color: #CCCCCC;
+                position: relative;
+                display:block; margin: 0 auto;
+                height: 25px;
+                border-radius: 50px;
+                background-color: #333333;
+            }
         </style>
         <script>
-            function CopyScript(id, script) {
+                 function CopyScript(id, script) {
                  var textToCopy = document.getElementById(id);
                  textToCopy.value = script;
                  textToCopy.select();
                  document.execCommand("copy");
-            }
-            function GetGrannyHub() {
-                 return 'loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Script.lua"))()'
+                 }
+                 function GetGrannyHub() {
+                 return 'loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/GrannyHub.lua"))()'
                  }
                  function GetDGrannyHub() {
-                 return '```loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Script.lua"))()```'
+                 return '```loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/GrannyHub.lua"))()```'
                  }
                  function GetGrannyDex() {
                  return 'loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Shit/GrannyDex.lua"))()'
@@ -143,26 +164,26 @@
         </script>
 </html>
 <body>
-    <h1 id="Title">Welcome to GrannyHub</h1>
+    <h1 id="Title">Welcome to Granny</h1>
     <h1 id="ScriptInfo">GrannyHub:</h1>
-    <input type="text" readonly="true" value="loadstring(game:HttpGet('https://grannythedev.github.io/GrannyHub/Script.lua'))()" id="Script">
+    <input type="text" readonly="true" value="loadstring(game:HttpGet('https://grannythedev.github.io/GrannyHub/GrannyHub.lua'))()" id="Script">
     <br>
-    <button id="CopyScript" onclick='CopyScript("Script", GetGrannyHub())'><strong>Copy Script</Script></strong></button>
-    <button id="CopyDScript" onclick='CopyScript("Script", GetDGrannyHub())'><strong>Copy Script for discord</Script></strong></button>
+    <button id="CopyScript" onclick='CopyScript("Script", GetGrannyHub())'><strong>Copy Script</strong></button>
+    <button id="CopyDScript" onclick='CopyScript("Script", GetDGrannyHub())'><strong>Copy Script for discord</strong></button>
     <br>
     <h1 id="DexInfo">GrannyDex:</h1>
     <br>
     <input type="text" readonly="true" value="loadstring(game:HttpGet('https://grannythedev.github.io/GrannyHub/Shit/GrannyDex.lua'))()" id="DexScript">
     <br>
-    <button id="CopyDex" onclick='CopyScript("DexScript", GetGrannyDex())'><strong>Copy GrannyDex</Script></strong></button>
-    <button id="CopyDDex" onclick='CopyScript("DexScript", GetDGrannyDex())'><strong>Copy GrannyDex for discord</Script></strong></button>
+    <button id="CopyDex" onclick='CopyScript("DexScript", GetGrannyDex())'><strong>Copy GrannyDex</strong></button>
+    <button id="CopyDDex" onclick='CopyScript("DexScript", GetDGrannyDex())'><strong>Copy GrannyDex for discord</strong></button>
     <br>
     <h1 id="CmdInfo">GrannyCmd - Coming Soon:</h1>
     <br>
     <input type="text" readonly="true" value="loadstring(game:HttpGet('https://grannythedev.github.io/GrannyHub/Shit/GrannyCmd.lua'))()" id="CmdScript">
     <br>
-    <button id="CopyCmd" onclick='CopyScript("CmdScript", GetGrannyCmd())'><strong>Copy GrannyCmd</Script></strong></button>
-    <button id="CopyDCmd" onclick='CopyScript("CmdScript", GetDGrannyCmd())'><strong>Copy GrannyCmd for discord</Script></strong></button>
+    <button id="CopyCmd" onclick='CopyScript("CmdScript", GetGrannyCmd())'><strong>Copy GrannyCmd</strong></button>
+    <button id="CopyDCmd" onclick='CopyScript("CmdScript", GetDGrannyCmd())'><strong>Copy GrannyCmd for discord</strong></button>
     <br>
     <h1 id="DiscordInfo">Join our discord server:</h1>
     <button id="InviteLink" onclick='window.open(GetInvite())'><strong>Join</strong></button>
