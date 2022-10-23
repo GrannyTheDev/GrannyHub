@@ -6,8 +6,16 @@ local Dragger = Instance.new("Frame")
 local Gui = Instance.new("ScreenGui")
 
 Gui.Name = "Gui"
-Gui.Parent = game.CoreGui
 Gui.ResetOnSpawn = false
+
+if gethui then
+     Gui.Parent = gethui()
+elseif syn and syn.protect_gui then
+     syn.protect_gui(Gui)
+     Gui.Parent = cloneref(game:GetService("CoreGui"))
+else
+     Gui.Parent = cloneref(game:GetService("CoreGui"))
+end
 
 Dragger.Name = "Dragger"
 Dragger.Active = true
