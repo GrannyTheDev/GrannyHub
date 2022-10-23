@@ -1,3 +1,26 @@
+if gethui then
+	for i,v in pairs(gethui():GetChildren()) do
+	     if v:IsA("ScreenGui") and v.Name == "Gui" then
+		 v:Destroy()
+	     end
+	end
+elseif syn and syn.unprotect_gui then
+	for i,v in pairs(game.CoreGui:GetChildren()) do
+	     if v:IsA("ScreenGui") and v.Name == "Gui" then
+                 syn.unprotect_gui(v)
+             end
+             if v:IsA("ScreenGui") and v.Name == "Gui" then
+                 v:Destroy()
+	     end
+	end
+else
+	for i,v in pairs(game.CoreGui:GetChildren()) do
+	     if v:IsA("ScreenGui") and v.Name == "Gui" then
+		 v:Destroy()
+	     end
+        end
+end
+
 local Library = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHub/Shit.lua"))()
 
 local Gui = Library:CreateWindow("GrannyHub".." - Vehicle Weight Lifting")
@@ -251,10 +274,12 @@ while getgenv().Settings.equipvehicle == true do
 if game.Players.LocalPlayer.mode.Value == "normal" and getgenv().Settings.killzombies == false then
     wait(0.1)
     if not game.Players.LocalPlayer.Backpack:FindFirstChild("Vehicle") then
+        if not game.Players.LocalPlayer.Character:FindFirstChild("Vehicle") then
 				if not game.Players.LocalPlayer.Character:FindFirstChild("Vehicle") then
 					game.Players.LocalPlayer.Character:BreakJoints()
 				end
 			end
+                end
     local Players = game:GetService("Players")
 		local player = Players:FindFirstChildOfClass("Player")
 		if player and player.Character then
@@ -587,9 +612,18 @@ end
 local Counter = Instance.new("TextLabel")
 local Dragger = Instance.new("Frame")
 local Gui = Instance.new("ScreenGui")
-Gui.Parent = game.CoreGui
+
 Gui.Name = "Gui"
 Gui.ResetOnSpawn = false
+
+if gethui then
+     Gui.Parent = gethui()
+elseif syn and syn.protect_gui then
+     syn.protect_gui(Gui)
+     Gui.Parent = cloneref(game:GetService("CoreGui"))
+else
+     Gui.Parent = cloneref(game:GetService("CoreGui"))
+end
 
 Dragger.Name = "Dragger"
 Dragger.Parent = Gui
