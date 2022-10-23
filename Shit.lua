@@ -63,7 +63,7 @@ function Library:CreateWindow(title)
 	end)
 
 	Header.Name = "Header"
-	Header.Parent = gethui().DarkLib
+        Header.Parent = DarkLib
 	Header.BackgroundColor3 = Color3.fromRGB(80, 0, 255)
 	Header.BorderSizePixel = 0
 	Header.Position = UDim2.new(0, 552, 0, 159)
