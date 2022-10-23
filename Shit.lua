@@ -5,7 +5,7 @@ if gethui then
 		end
 	end
 elseif syn and syn.protect_gui then
-	syn.protect_gui(DarkLib);
+	syn.unprotect_gui(DarkLib);
 	for i,v in pairs(game.CoreGui:GetChildren()) do
 		if v:IsA("ScreenGui") and v.Name == "DarkLib" or v.Name == "Gui" or v.Name == "ScreenGui" or v.Name == "GamesGui" then
 			v:Destroy()
