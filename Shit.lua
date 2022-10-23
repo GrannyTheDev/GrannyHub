@@ -4,11 +4,13 @@ if gethui then
 			v:Destroy()
 		end
 	end
-elseif syn and syn.protect_gui then
-	syn.unprotect_gui(DarkLib);
+elseif syn and syn.unprotect_gui then
 	for i,v in pairs(game.CoreGui:GetChildren()) do
-		if v:IsA("ScreenGui") and v.Name == "DarkLib" or v.Name == "Gui" or v.Name == "ScreenGui" or v.Name == "GamesGui" then
-			v:Destroy()
+		if v:IsA("ScreenGui") and v.Name == "DarkLib" then
+                        syn.unprotect_gui(v)
+                end
+                if v:IsA("ScreenGui") and v.Name == "DarkLib" or v.Name == "Gui" or v.Name == "ScreenGui" or v.Name == "GamesGui" then
+                        v:Destroy()
 		end
 	end
 else
@@ -40,9 +42,9 @@ function Library:CreateWindow(title)
 	DarkLib.ResetOnSpawn = false
 
 	if gethui then
-		DarkLib.Parent = gethui();
+		DarkLib.Parent = gethui()
 	elseif syn and syn.protect_gui then
-		syn.protect_gui(DarkLib);
+		syn.protect_gui(DarkLib)
 		DarkLib.Parent = cloneref(game:GetService("CoreGui"))
 	else
 		DarkLib.Parent = cloneref(game:GetService("CoreGui"))
