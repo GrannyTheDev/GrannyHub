@@ -1,3 +1,23 @@
+if gethui then
+     for i,v in pairs(gethui():GetChildren()) do
+	if v:IsA("ScreenGui") and v.Name == "DarkLib" or v.Name == "Gui" or v.Name == "ScreenGui" then
+	     v:Destroy()
+	end
+     end
+elseif syn and syn.unprotect_gui then
+     for i,v in pairs(game.CoreGui:GetChildren()) do
+	if v:IsA("ScreenGui") and v.Name == "Gui" then
+             syn.unprotect_gui(v)
+        end
+     end
+else
+     for i,v in pairs(game.CoreGui:GetChildren()) do
+	if v:IsA("ScreenGui") and v.Name == "DarkLib" or v.Name == "Gui" or v.Name == "ScreenGui" then
+             v:Destroy()
+	end
+     end
+end
+
 local PrestigeInfo = Instance.new("TextLabel")
 local PrestigeCounter = Instance.new("TextLabel")
 local GainInfo = Instance.new("TextLabel")
