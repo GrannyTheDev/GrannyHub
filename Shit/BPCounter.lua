@@ -1,6 +1,6 @@
 if gethui then
      for i,v in pairs(gethui():GetChildren()) do
-	if v:IsA("ScreenGui") and v.Name == "DarkLib" or v.Name == "Gui" or v.Name == "ScreenGui" then
+	if v:IsA("ScreenGui") and v.Name == "Gui" then
 	     v:Destroy()
 	end
      end
@@ -12,7 +12,7 @@ elseif syn and syn.unprotect_gui then
      end
 else
      for i,v in pairs(game.CoreGui:GetChildren()) do
-	if v:IsA("ScreenGui") and v.Name == "DarkLib" or v.Name == "Gui" or v.Name == "ScreenGui" then
+	if v:IsA("ScreenGui") and v.Name == "Gui" then
              v:Destroy()
 	end
      end
