@@ -25,6 +25,7 @@ local Title = Instance.new("TextLabel")
 local close = Instance.new("TextButton")
 local MainFrame = Instance.new("ScrollingFrame")
 local UIListLayout = Instance.new("UIListLayout")
+local HoverGui = Instance.new("Frame")
 
 GrannyCmd.Name = "GrannyCmd"
 GrannyCmd.ResetOnSpawn = false
@@ -104,9 +105,25 @@ MainFrame.Name = "MainFrame"
 MainFrame.Parent = Header
 MainFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 MainFrame.Position = UDim2.new(0, 0, 0.815, 0)
-MainFrame.Size = UDim2.new(0, 166, 0, 98)
+MainFrame.Size = UDim2.new(0, 166, 0, 0)
 MainFrame.ScrollBarThickness = 5
 MainFrame.BorderSizePixel = 0
+MainFrame.ClipsDescendants = true
+
+HoverGui.Name = "HoverGui"
+HoverGui.Parent = Header
+HoverGui.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+HoverGui.Position = UDim2.new(0, 0, 0, 0)
+HoverGui.Size = UDim2.new(0, 166, 0, 128)
+HoverGui.BackgroundTransparency = 1
+
+HoverGui.MouseEnter:Connect(function()
+	game:GetService("TweenService"):Create(MainFrame, TweenInfo.new(0.5), {Size = UDim2.new(0, 166, 0, 98)}):Play()
+end)
+
+HoverGui.MouseLeave:Connect(function()
+	game:GetService("TweenService"):Create(MainFrame, TweenInfo.new(0.5), {Size = UDim2.new(0, 166, 0, 0)}):Play()
+end)
 
 Instance.new("UICorner", MainFrame)
 
@@ -115,7 +132,7 @@ UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 UIListLayout.Padding = UDim.new(0, 4)
 UIListLayout.Changed:Connect(function()
-	MainFrame.CanvasSize = UDim2.new(0, 0, 0, UIListLayout.AbsoluteContentSize.Y)
+	MainFrame.CanvasSize = UDim2.new(0, 0, 0, UIListLayout.AbsoluteContentSize.Y + 10)
 end)
 
 function CreateButton(txt, callback)
@@ -140,35 +157,91 @@ function CreateButton(txt, callback)
 end
 
 CreateButton("GrannyHub", function()
-loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/GrannyHub.lua"))()
+	loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/GrannyHub.lua"))()
 end)
 
 CreateButton("GrannyDex", function()
-loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Shit/GrannyDex.lua"))()
+	loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Shit/GrannyDex.lua"))()
 end)
 
 CreateButton("WalkSpeed", function()
-    local gmt = getrawmetatable(game)
-    local oldIndex = gmt.__namecall
-    setreadonly(gmt, false)
-    
-    gmt.__namecall = newcclosure(function(Self, ...)
-    local method = getnamecallmethod()
-    if Self == game.Players.LocalPlayer and tostring(method) == "Kick" then
-       return
-    end
-    return oldIndex(Self, ...)
-    end)
-    
-    local oldnewindex
-    oldnewindex = hookmetamethod(game, "__newindex", function(a, b, c)
-        if tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
-            return oldnewindex(a, b, 100)
-        end
-        return oldnewindex(a, b, c)
-    end)
-         
-    game:GetService("RunService").Stepped:Connect(function()
-        game.Players.LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 100
-    end)
+	local gmt = getrawmetatable(game)
+	local oldIndex = gmt.__namecall
+	setreadonly(gmt, false)
+
+	gmt.__namecall = newcclosure(function(Self, ...)
+		local method = getnamecallmethod()
+		if Self == game.Players.LocalPlayer and tostring(method) == "Kick" then
+			return
+		end
+		return oldIndex(Self, ...)
+	end)
+
+	local oldnewindex
+	oldnewindex = hookmetamethod(game, "__newindex", function(a, b, c)
+		if tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
+			return oldnewindex(a, b, 100)
+		end
+		return oldnewindex(a, b, c)
+	end)
+
+	game:GetService("RunService").Stepped:Connect(function()
+		game.Players.LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 100
+	end)
+end)
+
+CreateButton("Disable all purchase prompts", function()
+	game.CoreGui:WaitForChild("PurchasePrompt").Enabled = false
+end)
+
+CreateButton("Enable all purchase prompts", function()
+	game.CoreGui:WaitForChild("PurchasePrompt").Enabled = true
+end)
+
+getgenv().Noclip = false
+
+CreateButton("Noclip", function()
+	local Workspace = game:GetService("Workspace")
+	local CoreGui = game:GetService("CoreGui")
+	local Players = game:GetService("Players")
+	local Plr = Players.LocalPlayer
+	getgenv().Noclip = true
+	Stepped = game:GetService("RunService").Stepped:Connect(function()
+		if getgenv().Noclip == true then
+			for i, v in pairs(Workspace[Plr.Name]:GetChildren()) do
+				if v:IsA("BasePart") then
+					v.CanCollide = false
+				end
+			end
+		end
+	end)
+end)
+
+CreateButton("Clip", function()
+	local Workspace = game:GetService("Workspace")
+	local CoreGui = game:GetService("CoreGui")
+	local Players = game:GetService("Players")
+	local Plr = Players.LocalPlayer
+	getgenv().Noclip = false
+	Stepped = game:GetService("RunService").Stepped:Connect(function()
+		if getgenv().Noclip == true then
+			for i, v in pairs(Workspace[Plr.Name]:GetChildren()) do
+				if v:IsA("BasePart") then
+					v.CanCollide = false
+				end
+			end
+		end
+	end)
+end)
+
+CreateButton("Rejoin", function()
+	game:GetService("TeleportService"):Teleport(game.PlaceId)
+end)
+
+CreateButton("Anti Afk", function()
+	local VirtualUser = game:GetService("VirtualUser")
+	game:GetService("Players").LocalPlayer.Idled:Connect(function()
+		VirtualUser:CaptureController()
+		VirtualUser:ClickButton2(Vector2.new())
+	end)
 end)
