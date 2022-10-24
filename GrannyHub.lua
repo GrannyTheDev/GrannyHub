@@ -33,7 +33,7 @@ local games = {
 
 local pages = game:GetService"AssetService":GetGamePlacesAsync()
 while wait() do
-	for i, place in pairs(pages:GetCurrentPage()) do
+	for j,k in pairs(pages:GetCurrentPage()) do
 		for i,v in next, games do 
 			if game.PlaceId == v then
 				return loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Scripts/" .. i))()
