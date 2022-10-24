@@ -8,8 +8,6 @@ elseif syn and syn.unprotect_gui then
 	for i,v in pairs(game.CoreGui:GetChildren()) do
 	     if v:IsA("ScreenGui") and v.Name == "Gui" then
                  syn.unprotect_gui(v)
-             end
-             if v:IsA("ScreenGui") and v.Name == "Gui" then
                  v:Destroy()
 	     end
 	end
