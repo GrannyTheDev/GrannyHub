@@ -42,7 +42,7 @@ end
 Header.Name = "Header"
 Header.Parent = GrannyCmd
 Header.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-Header.Position = UDim2.new(0.825119257, 0, 0.778156996, 0)
+Header.Position = UDim2.new(0.843, 0, 0.597, 0)
 Header.Size = UDim2.new(0, 166, 0, 30)
 
 local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/DragModule.lua"))()
@@ -114,11 +114,11 @@ HoverGui.Name = "HoverGui"
 HoverGui.Parent = Header
 HoverGui.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 HoverGui.Position = UDim2.new(0, 0, 0, 0)
-HoverGui.Size = UDim2.new(0, 166, 0, 128)
+HoverGui.Size = UDim2.new(0, 166, 0, 180)
 HoverGui.BackgroundTransparency = 1
 
 HoverGui.MouseEnter:Connect(function()
-	game:GetService("TweenService"):Create(MainFrame, TweenInfo.new(0.5), {Size = UDim2.new(0, 166, 0, 98)}):Play()
+	game:GetService("TweenService"):Create(MainFrame, TweenInfo.new(0.5), {Size = UDim2.new(0, 166, 0, 150)}):Play()
 end)
 
 HoverGui.MouseLeave:Connect(function()
@@ -126,6 +126,20 @@ HoverGui.MouseLeave:Connect(function()
 end)
 
 Instance.new("UICorner", MainFrame)
+
+if MainFrame.Size == UDim2.new(0, 166, 0, 0) then
+	MainFrame.ScrollBarImageTransparency = 1
+else
+	MainFrame.ScrollBarImageTransparency = 0
+end
+
+MainFrame:GetPropertyChangedSignal("Size"):Connect(function()
+	if MainFrame.Size == UDim2.new(0, 166, 0, 0) then
+		MainFrame.ScrollBarImageTransparency = 1
+	else
+		MainFrame.ScrollBarImageTransparency = 0
+	end
+end)
 
 UIListLayout.Parent = MainFrame
 UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
@@ -155,6 +169,19 @@ function CreateButton(txt, callback)
 
 	Instance.new("UICorner", Button)
 end
+
+CreateButton("Join discord server", function()
+	if setclipboard then
+		setclipboard("https://discord.gg/esn6q3BbV2")
+		MainFrame["Join discord server"].Text = "Copied"
+		wait(1)
+		MainFrame["Join discord server"].Text = "Join discord server"
+	else
+		MainFrame["Join discord server"].Text = "Your exploit has missing functions"
+		wait(1)
+		MainFrame["Join discord server"].Text = "Join discord server"
+	end
+end)
 
 CreateButton("GrannyHub", function()
 	loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/GrannyHub.lua"))()
@@ -190,12 +217,10 @@ CreateButton("WalkSpeed", function()
 	end)
 end)
 
-CreateButton("Disable all purchase prompts", function()
-	game.CoreGui:WaitForChild("PurchasePrompt").Enabled = false
-end)
-
-CreateButton("Enable all purchase prompts", function()
-	game.CoreGui:WaitForChild("PurchasePrompt").Enabled = true
+CreateButton("Inf Jump", function()
+	game:GetService("UserInputService").JumpRequest:Connect(function()
+		game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")		
+	end)
 end)
 
 getgenv().Noclip = false
@@ -232,6 +257,14 @@ CreateButton("Clip", function()
 			end
 		end
 	end)
+end)
+
+CreateButton("Disable all purchase prompts", function()
+	game.CoreGui:WaitForChild("PurchasePrompt").Enabled = false
+end)
+
+CreateButton("Enable all purchase prompts", function()
+	game.CoreGui:WaitForChild("PurchasePrompt").Enabled = true
 end)
 
 CreateButton("Rejoin", function()
