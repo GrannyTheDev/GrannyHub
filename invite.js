@@ -1,1 +1,1 @@
-window.open("https://discord.gg/esn6q3BbV2")
+window.open("https://discord.gg/esn6q3BbV2", "_blank",);
