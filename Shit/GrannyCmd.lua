@@ -1,10 +1,10 @@
-if gethui then
+if get_hidden_gui or gethui  then
 	for i,v in pairs(gethui():GetChildren()) do
 		if v:IsA("ScreenGui") and v.Name == "GrannyCmd" then
 			v:Destroy()
 		end
 	end
-elseif syn and syn.unprotect_gui then
+elseif (not is_sirhurt_closure) and (syn and syn.protect_gui)then
 	for i,v in pairs(game.CoreGui:GetChildren()) do
 		if v:IsA("ScreenGui") and v.Name == "GrannyCmd" then
 			syn.unprotect_gui(v)
@@ -166,10 +166,10 @@ end
 GrannyCmd.Name = "GrannyCmd"
 GrannyCmd.ResetOnSpawn = false
 
-if gethui then
-	GrannyCmd.Parent = gethui();
-elseif syn and syn.protect_gui then
-	syn.protect_gui(GrannyCmd);
+if get_hidden_gui or gethui then
+	GrannyCmd.Parent = gethui()
+elseif (not is_sirhurt_closure) and (syn and syn.protect_gui) then
+	syn.protect_gui(GrannyCmd)
 	GrannyCmd.Parent = cloneref(game:GetService("CoreGui"))
 else
 	GrannyCmd.Parent = cloneref(game:GetService("CoreGui"))
