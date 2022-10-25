@@ -26,6 +26,8 @@ local close = Instance.new("TextButton")
 local MainFrame = Instance.new("ScrollingFrame")
 local UIListLayout = Instance.new("UIListLayout")
 local HoverGui = Instance.new("Frame")
+local SearchBar = Instance.new("TextBox")
+local UICorner = Instance.new("UICorner")
 
 GrannyCmd.Name = "GrannyCmd"
 GrannyCmd.ResetOnSpawn = false
@@ -104,11 +106,27 @@ end)
 MainFrame.Name = "MainFrame"
 MainFrame.Parent = Header
 MainFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-MainFrame.Position = UDim2.new(0, 0, 0.815, 0)
+MainFrame.Position = UDim2.new(0, 0, 1.815, 0)
 MainFrame.Size = UDim2.new(0, 166, 0, 0)
 MainFrame.ScrollBarThickness = 5
 MainFrame.BorderSizePixel = 0
 MainFrame.ClipsDescendants = true
+
+SearchBar.Name = "SearchBar"
+SearchBar.Parent = Header
+SearchBar.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+SearchBar.Position = UDim2.new(0, 0, 0.981667101, 0)
+SearchBar.Size = UDim2.new(0, 165, 0, 25)
+SearchBar.Font = Enum.Font.SourceSansBold
+SearchBar.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
+SearchBar.Text = "Search"
+SearchBar.PlaceholderText = "Search"
+SearchBar.TextColor3 = Color3.fromRGB(255, 255, 255)
+SearchBar.TextScaled = true
+SearchBar.TextSize = 14.000
+SearchBar.TextWrapped = true
+
+Instance.new("UICorner", SearchBar)
 
 HoverGui.Name = "HoverGui"
 HoverGui.Parent = Header
@@ -166,8 +184,27 @@ function CreateButton(txt, callback)
 	Button.MouseButton1Click:Connect(function()
 		pcall(callback)
 	end)
-
-	Instance.new("UICorner", Button)
+	
+	local function Update()
+		local search = string.lower(SearchBar.Text)
+		for i, v in	pairs(MainFrame:GetChildren()) do
+			if v:IsA("TextButton") then
+				if search ~= "" then
+					local item = string.lower(v.Text)
+					if string.find(item, search) then
+						v.Visible = true
+					else
+						v.Visible = false
+					end
+				else
+					v.Visible = true
+				end
+			end
+		end
+	end
+	SearchBar.Focused:Connect(function()
+		SearchBar.Changed:Connect(Update)
+	end)
 end
 
 CreateButton("Join discord server", function()
@@ -269,6 +306,23 @@ end)
 
 CreateButton("Rejoin", function()
 	game:GetService("TeleportService"):Teleport(game.PlaceId)
+end)
+
+CreateButton("ServerHop", function()
+	loadstring(game:HttpGet("https://pastebin.com/raw/T6gN29gv"))()
+end)
+
+CreateButton("Auto Rejoin", function()
+	game:WaitForChild("CoreGui")
+	game:WaitForChild("Players")
+
+	while true do wait()
+		getgenv().rejoin = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
+			if child.Name == 'ErrorPrompt' and child:FindFirstChild('MessageArea') and child.MessageArea:FindFirstChild("ErrorFrame") then
+				pcall(game:GetService("TeleportService"):Teleport(game.PlaceId))
+			end
+		end)
+	end
 end)
 
 CreateButton("Anti Afk", function()
