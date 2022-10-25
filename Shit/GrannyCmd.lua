@@ -271,6 +271,23 @@ CreateButton("Rejoin", function()
 	game:GetService("TeleportService"):Teleport(game.PlaceId)
 end)
 
+CreateButton("ServerHop", function()
+	loadstring(game:HttpGet("https://pastebin.com/raw/T6gN29gv"))()
+end)
+
+CreateButton("Auto Rejoin", function()
+	game:WaitForChild("CoreGui")
+	game:WaitForChild("Players")
+
+	while true do wait()
+		getgenv().rejoin = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
+			if child.Name == 'ErrorPrompt' and child:FindFirstChild('MessageArea') and child.MessageArea:FindFirstChild("ErrorFrame") then
+				pcall(game:GetService("TeleportService"):Teleport(game.PlaceId))
+			end
+		end)
+	end
+end)
+
 CreateButton("Anti Afk", function()
 	local VirtualUser = game:GetService("VirtualUser")
 	game:GetService("Players").LocalPlayer.Idled:Connect(function()
