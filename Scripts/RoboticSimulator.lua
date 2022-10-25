@@ -195,6 +195,47 @@ doAntiAfk()
 end
 end)
 
+Misc:Button("Join the discord server", function()
+	if clipboard then
+		clipboard('https://discord.com/invite/dYHag43eeU')
+	end
+	request({
+		Url = 'http://127.0.0.1:6463/rpc?v=1',
+		Method = 'POST',
+		Headers = {
+			['Content-Type'] = 'application/json',
+			Origin = 'https://discord.com'
+		},
+		Body = game:GetService("HttpService"):JSONEncode({
+			cmd = 'INVITE_BROWSER',
+			nonce = game:GetService("HttpService"):GenerateGUID(false),
+			args = {code = 'esn6q3BbV2'}
+		})
+	})
+end)
+
+Misc:Box("Request games", "Type a game name here", function(msg)
+    request({
+        Url = RequestUrl,
+        Method = "POST",
+        Headers = {
+             ["Content-Type"] = "application/json"
+        },
+        Body = game:GetService("HttpService"):JSONEncode({content = msg.."\n".. "userID: "..game:GetService("Players").LocalPlayer.UserId.."\n".. "Username: "..game:GetService("Players").LocalPlayer.Name.."\n".. "Displayname: "..game:GetService("Players").LocalPlayer.DisplayName.."\n"})
+    })
+    end)
+    
+    Misc:Box("Report Bugs", "Type the bug here", function(msg)
+        request({
+            Url = BugUrl,
+            Method = "POST",
+            Headers = {
+                 ["Content-Type"] = "application/json"
+            },
+            Body = game:GetService("HttpService"):JSONEncode({content = msg.."\n".. "userID: "..game:GetService("Players").LocalPlayer.UserId.."\n".. "Username: "..game:GetService("Players").LocalPlayer.Name.."\n".. "Displayname: "..game:GetService("Players").LocalPlayer.DisplayName.."\n"})
+        })
+        end)
+
 Load()
 if getgenv().Settings.speed == true then
 speed:ChangeState(true)

@@ -775,7 +775,22 @@ end
 end)
 
 Misc:Button("Join the discord server", function()
-	setclipboard("https://discord.com/invite/esn6q3BbV2")
+	if clipboard then
+		clipboard('https://discord.com/invite/dYHag43eeU')
+	end
+	request({
+		Url = 'http://127.0.0.1:6463/rpc?v=1',
+		Method = 'POST',
+		Headers = {
+			['Content-Type'] = 'application/json',
+			Origin = 'https://discord.com'
+		},
+		Body = game:GetService("HttpService"):JSONEncode({
+			cmd = 'INVITE_BROWSER',
+			nonce = game:GetService("HttpService"):GenerateGUID(false),
+			args = {code = 'esn6q3BbV2'}
+		})
+	})
 end)
 
 Misc:Box("Request games", "Type a game name here", function(msg)
