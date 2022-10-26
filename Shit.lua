@@ -136,7 +136,7 @@ function Library:CreateWindow(title)
 	Title.TextXAlignment = Enum.TextXAlignment.Left
 
 	for i = 1,#title do
-		gethui().DarkLib.Header.Title.Text = string.sub(title, 1, i)
+                Title.Text = string.sub(title, 1, i)
 		wait(0.05)
 	end
 
@@ -144,7 +144,7 @@ function Library:CreateWindow(title)
 	Pages.Parent = MainFrame
 
 function Library:Edit(txt)
-gethui().DarkLib.Header.Title.Text = txt
+Title.Text = txt
 end
 
 	local Page = {}
