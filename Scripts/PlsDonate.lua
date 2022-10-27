@@ -57,7 +57,7 @@ end
 function doInfYield()
 spawn(function()
 if getgenv().Settings.infyield == true then
-    loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Shit/GrannyCmd.lua"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
 end
 end)
 end
