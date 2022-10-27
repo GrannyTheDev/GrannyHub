@@ -10,11 +10,6 @@ local CoreStats = Window:Page("Core Stats")
 
 local Misc = Window:Page("Misc")
 
-local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Webhook.lua"))()
-
-local RequestUrl = module.GetRequetGameUrl()
-local BugUrl = module.GetBugUrl()
-
 local filename = "DevilHub/InnovationArcticBase - 1033860623/Config.json"
 
 getgenv().Settings = {
@@ -356,28 +351,6 @@ Misc:Button("Join the discord server", function()
 		})
 	})
 end)
-
-Misc:Box("Request games", "Type a game name here", function(msg)
-    request({
-        Url = RequestUrl,
-        Method = "POST",
-        Headers = {
-             ["Content-Type"] = "application/json"
-        },
-        Body = game:GetService("HttpService"):JSONEncode({content = msg.."\n".. "userID: "..game:GetService("Players").LocalPlayer.UserId.."\n".. "Username: "..game:GetService("Players").LocalPlayer.Name.."\n".. "Displayname: "..game:GetService("Players").LocalPlayer.DisplayName.."\n"})
-    })
-    end)
-    
-    Misc:Box("Report Bugs", "Type the bug here", function(msg)
-        request({
-            Url = BugUrl,
-            Method = "POST",
-            Headers = {
-                 ["Content-Type"] = "application/json"
-            },
-            Body = game:GetService("HttpService"):JSONEncode({content = msg.."\n".. "userID: "..game:GetService("Players").LocalPlayer.UserId.."\n".. "Username: "..game:GetService("Players").LocalPlayer.Name.."\n".. "Displayname: "..game:GetService("Players").LocalPlayer.DisplayName.."\n"})
-        })
-        end)
 
 CoreStats:Label("--------Core Temp--------")
 local CoreTemp = CoreStats:Label("Temp: "..game:GetService("Workspace").Core.Screen1.SurfaceGui.TempReadout.Text)
