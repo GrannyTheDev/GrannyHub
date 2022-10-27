@@ -1,10 +1,11 @@
-if gethui then
-	for i,v in pairs(gethui():GetChildren()) do
+if get_hidden_gui or gethui then
+	local hiddenUI = get_hidden_gui or gethui
+	for i,v in pairs(hiddenUI():GetChildren()) do
 	     if v:IsA("ScreenGui") and v.Name == "Gui" then
 		 v:Destroy()
 	     end
 	end
-elseif syn and syn.unprotect_gui then
+elseif (not is_sirhurt_closure) and (syn and syn.protect_gui) then
 	for i,v in pairs(game.CoreGui:GetChildren()) do
 	     if v:IsA("ScreenGui") and v.Name == "Gui" then
                  syn.unprotect_gui(v)
@@ -16,7 +17,7 @@ else
 	     if v:IsA("ScreenGui") and v.Name == "Gui" then
 		 v:Destroy()
 	     end
-        end
+    end
 end
 
 local Library = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHub/Shit.lua"))()
@@ -32,11 +33,6 @@ local LocalPlayer = Gui:Page("LocalPlayer")
 local Pets = Gui:Page("Pets")
 
 local Misc = Gui:Page("Misc")
-
-local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Webhook.lua"))()
-
-local RequestUrl = module.GetRequetGameUrl()
-local BugUrl = module.GetBugUrl()
 
 local Module = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHub/Modules/Teleport.lua"))()
 
@@ -553,28 +549,6 @@ Misc:Button("Join the discord server", function()
 		})
 	})
 end)
-
-Misc:Box("Request games", "Type a game name here", function(msg)
-	request({
-		Url = RequestUrl,
-		Method = "POST",
-		Headers = {
-			 ["Content-Type"] = "application/json"
-		},
-		Body = game:GetService("HttpService"):JSONEncode({content = msg.."\n".. "userID: "..game:GetService("Players").LocalPlayer.UserId.."\n".. "Username: "..game:GetService("Players").LocalPlayer.Name.."\n".. "Displayname: "..game:GetService("Players").LocalPlayer.DisplayName.."\n"})
-	})
-	end)
-	
-	Misc:Box("Report Bugs", "Type the bug here", function(msg)
-		request({
-			Url = BugUrl,
-			Method = "POST",
-			Headers = {
-				 ["Content-Type"] = "application/json"
-			},
-			Body = game:GetService("HttpService"):JSONEncode({content = msg.."\n".. "userID: "..game:GetService("Players").LocalPlayer.UserId.."\n".. "Username: "..game:GetService("Players").LocalPlayer.Name.."\n".. "Displayname: "..game:GetService("Players").LocalPlayer.DisplayName.."\n"})
-		})
-		end)
 
 Load()
 if getgenv().Settings.speed == true then
