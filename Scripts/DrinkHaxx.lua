@@ -19,11 +19,6 @@ local Teleport = DrinkHaxx:Page("Teleport")
 
 local Misc = DrinkHaxx:Page("Misc")
 
-local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Webhook.lua"))()
-
-local RequestUrl = module.GetRequetGameUrl()
-local BugUrl = module.GetBugUrl()
-
 local filename = "DevilHub/DrinkHaxx - 1747207098/Config.json"
 
 getgenv().Settings = {
@@ -792,28 +787,6 @@ Misc:Button("Join the discord server", function()
 		})
 	})
 end)
-
-Misc:Box("Request games", "Type a game name here", function(msg)
-	request({
-		Url = RequestUrl,
-		Method = "POST",
-		Headers = {
-			 ["Content-Type"] = "application/json"
-		},
-		Body = game:GetService("HttpService"):JSONEncode({content = msg.."\n".. "userID: "..game:GetService("Players").LocalPlayer.UserId.."\n".. "Username: "..game:GetService("Players").LocalPlayer.Name.."\n".. "Displayname: "..game:GetService("Players").LocalPlayer.DisplayName.."\n"})
-	})
-	end)
-	
-	Misc:Box("Report Bugs", "Type the bug here", function(msg)
-		request({
-			Url = BugUrl,
-			Method = "POST",
-			Headers = {
-				 ["Content-Type"] = "application/json"
-			},
-			Body = game:GetService("HttpService"):JSONEncode({content = msg.."\n".. "userID: "..game:GetService("Players").LocalPlayer.UserId.."\n".. "Username: "..game:GetService("Players").LocalPlayer.Name.."\n".. "Displayname: "..game:GetService("Players").LocalPlayer.DisplayName.."\n"})
-		})
-		end)
 
 Load()
 if getgenv().Settings.antiafk == true then
