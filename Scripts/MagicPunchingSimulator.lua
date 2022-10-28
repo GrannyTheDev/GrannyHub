@@ -72,7 +72,7 @@ end
 function doStrength()
 spawn(function()
 while getgenv().Settings.strength == true do
-				
+game:GetService("ReplicatedStorage").Events.RemoteFunctions.UpgradeMultiplier:InvokeServer("Power")
 wait(0.1)
 end
 end)
@@ -81,7 +81,7 @@ end
 function doDamage()
 spawn(function()
 while getgenv().Settings.damage == true do
-				
+game:GetService("ReplicatedStorage").Events.RemoteFunctions.UpgradeMultiplier:InvokeServer("Damage")
 wait(0.1)
 end
 end)
@@ -90,7 +90,7 @@ end
 function doHealth()
 spawn(function()
 while getgenv().Settings.health == true do
-				
+game:GetService("ReplicatedStorage").Events.RemoteFunctions.UpgradeMultiplier:InvokeServer("Health")
 wait(0.1)
 end
 end)
@@ -99,7 +99,7 @@ end
 function _doSpeed()
 spawn(function()
 while getgenv().Settings._speed == true do
-				
+game:GetService("ReplicatedStorage").Events.RemoteFunctions.UpgradeMultiplier:InvokeServer("WalkSpeed")
 wait(0.1)
 end
 end)
@@ -145,7 +145,77 @@ wait(0.1)
 for i,v in pairs(game:GetService("Workspace").EnemiesAndSpawns.Bandits:GetChildren()) do
     if v.Name == "Humanoid" or v:WaitForChild("HumanoidRootPart", 0.1) and v:WaitForChild("Humanoid", 0.1).Health ~= 0 then
         module:Tween(TweenInfo.new(0.1), v:WaitForChild("HumanoidRootPart").CFrame)
-        game:GetService("Workspace").givemedrinka.Punch:Activate()
+        game.Players.LocalPlayer.Character:WaitForChild("Punch"):Activate()
+    end
+end
+end
+end)
+
+AutoFarm:Toggle("Autokill banditking", function(v)
+getgenv().kill = v
+while true do
+if not getgenv().kill then return end
+wait(0.1)
+for i,v in pairs(game:GetService("Workspace").EnemiesAndSpawns.BanditKings:GetChildren()) do
+    if v.Name == "Humanoid" or v:WaitForChild("HumanoidRootPart", 0.1) and v:WaitForChild("Humanoid", 0.1).Health ~= 0 then
+        module:Tween(TweenInfo.new(0.1), v:WaitForChild("HumanoidRootPart").CFrame)
+        game.Players.LocalPlayer.Character:WaitForChild("Punch"):Activate()
+    end
+end
+end
+end)
+
+AutoFarm:Toggle("Autokill eliteglobin", function(v)
+getgenv().kill = v
+while true do
+if not getgenv().kill then return end
+wait(0.1)
+for i,v in pairs(game:GetService("Workspace").EnemiesAndSpawns.EliteGoblins:GetChildren()) do
+    if v.Name == "Humanoid" or v:WaitForChild("HumanoidRootPart", 0.1) and v:WaitForChild("Humanoid", 0.1).Health ~= 0 then
+        module:Tween(TweenInfo.new(0.1), v:WaitForChild("HumanoidRootPart").CFrame)
+        game.Players.LocalPlayer.Character:WaitForChild("Punch"):Activate()
+    end
+end
+end
+end)
+
+AutoFarm:Toggle("Autokill castleguard", function(v)
+getgenv().kill = v
+while true do
+if not getgenv().kill then return end
+wait(0.1)
+for i,v in pairs(game:GetService("Workspace").EnemiesAndSpawns.CastleGuards:GetChildren()) do
+    if v.Name == "Humanoid" or v:WaitForChild("HumanoidRootPart", 0.1) and v:WaitForChild("Humanoid", 0.1).Health ~= 0 then
+        module:Tween(TweenInfo.new(0.1), v:WaitForChild("HumanoidRootPart").CFrame)
+        game.Players.LocalPlayer.Character:WaitForChild("Punch"):Activate()
+    end
+end
+end
+end)
+
+AutoFarm:Toggle("Autokill knight", function(v)
+getgenv().kill = v
+while true do
+if not getgenv().kill then return end
+wait(0.1)
+for i,v in pairs(game:GetService("Workspace").EnemiesAndSpawns.Knights:GetChildren()) do
+    if v.Name == "Humanoid" or v:WaitForChild("HumanoidRootPart", 0.1) and v:WaitForChild("Humanoid", 0.1).Health ~= 0 then
+        module:Tween(TweenInfo.new(0.1), v:WaitForChild("HumanoidRootPart").CFrame)
+        game.Players.LocalPlayer.Character:WaitForChild("Punch"):Activate()
+    end
+end
+end
+end)
+
+AutoFarm:Toggle("Autokill enchantedknight", function(v)
+getgenv().kill = v
+while true do
+if not getgenv().kill then return end
+wait(0.1)
+for i,v in pairs(game:GetService("Workspace").EnemiesAndSpawns.EnchantedKnights:GetChildren()) do
+    if v.Name == "Humanoid" or v:WaitForChild("HumanoidRootPart", 0.1) and v:WaitForChild("Humanoid", 0.1).Health ~= 0 then
+        module:Tween(TweenInfo.new(0.1), v:WaitForChild("HumanoidRootPart").CFrame)
+        game.Players.LocalPlayer.Character:WaitForChild("Punch"):Activate()
     end
 end
 end
@@ -181,6 +251,10 @@ Save()
 if v then
 _doSpeed()
 end
+end)
+
+LocalPlayer:Button("Teleport to SafeZone", function()
+    module:Tween(TweenInfo.new(0.2), CFrame.new(-11, 3, 4))
 end)
 
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
