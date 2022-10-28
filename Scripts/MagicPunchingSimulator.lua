@@ -145,6 +145,7 @@ wait(0.1)
 for i,v in pairs(game:GetService("Workspace").EnemiesAndSpawns.Bandits:GetChildren()) do
     if v.Name == "Humanoid" or v:WaitForChild("HumanoidRootPart", 0.1) and v:WaitForChild("Humanoid", 0.1).Health ~= 0 then
         module:Tween(TweenInfo.new(0.1), v:WaitForChild("HumanoidRootPart").CFrame)
+        game:GetService("Workspace").givemedrinka.Punch:Activate()
     end
 end
 end

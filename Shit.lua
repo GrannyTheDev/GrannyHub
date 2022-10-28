@@ -69,7 +69,6 @@ function Library:CreateWindow(title)
 	Header.Position = UDim2.new(0, 552, 0, 159)
 	Header.Size = UDim2.new(0, 470, 0, 30)
 	Header.Active = true
-	Header.BackgroundTransparency = 1
 	
 	local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/DragModule.lua"))()
 	module:Drag(Header)
@@ -82,7 +81,6 @@ function Library:CreateWindow(title)
 	MainFrame.BorderSizePixel = 0
 	MainFrame.Position = UDim2.new(0, 0, 0, 30)
 	MainFrame.Size = UDim2.new(0, 470, 0, 280)
-	MainFrame.BackgroundTransparency = 1
 
 	Instance.new("UICorner", MainFrame)
 
