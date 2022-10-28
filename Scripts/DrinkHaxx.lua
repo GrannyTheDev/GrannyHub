@@ -128,7 +128,7 @@ end
 
 function doAutoRejoin()
 	spawn(function()
-	while getgenv().Settings.autorejoin == true do
+	if getgenv().Settings.autorejoin == true then
 		game:WaitForChild("CoreGui")
         game:WaitForChild("Players")
 
@@ -143,7 +143,6 @@ while game.Players.LocalPlayer.leaderstats.Prestige.Value == 0 do
 loadstring(game:HttpGet("https://pastebin.com/raw/T6gN29gv"))()
 wait(0.5)
 end
-wait(0.5)
 	end
 	end)
 	end

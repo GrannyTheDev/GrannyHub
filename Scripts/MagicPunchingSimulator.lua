@@ -25,6 +25,7 @@ killeliteglobin = false;
 killcastleguard = false;
 killknight = false;
 killenchantedknight = false;
+autorejoin = false;
 }
 
 function Save()
@@ -44,6 +45,23 @@ if (readfile and isfile and isfile(filename)) then
 getgenv().Settings = HttpService:JSONDecode(readfile(filename));
 end
 end
+
+function doAutoRejoin()
+spawn(function()
+if getgenv().Settings.autorejoin == true then
+	game:WaitForChild("CoreGui")
+    game:WaitForChild("Players")
+
+    while true do wait()
+        getgenv().rejoin = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
+            if child.Name == 'ErrorPrompt' and child:FindFirstChild('MessageArea') and child.MessageArea:FindFirstChild("ErrorFrame") then
+                pcall(game:GetService("TeleportService"):Teleport(game.PlaceId))
+            end
+        end)
+    end
+	end
+	end)
+	end
 
 function doSpeed()
 spawn(function()
@@ -365,6 +383,14 @@ doAntiAfk()
 end
 end)
 
+local autorejoin = Misc:Toggle("Auto Rejoin", function(v)
+getgenv().Settings.autorejoin = v
+Save()
+if v then
+doAutoRejoin()
+end
+end)
+
 Misc:Button("Join the discord server", function()
 	if clipboard then
 		clipboard('https://discord.com/invite/dYHag43eeU')
@@ -426,6 +452,9 @@ killknight:ChangeState(true)
 end
 if getgenv().Settings.killenchantedknight == true then
 killenchantedknight:ChangeState(true)
+end
+if getgenv().Settings.autorejoin == true then
+autorejoin:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
