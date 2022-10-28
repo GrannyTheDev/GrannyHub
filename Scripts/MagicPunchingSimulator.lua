@@ -135,6 +135,38 @@ end
 end)
 end
 
+local strength = AutoFarm:Toggle("Auto Upgrade Strength", function(v)
+getgenv().Settings.strength = v
+Save()
+if v then
+doStrength()
+end
+end)
+
+local damage = AutoFarm:Toggle("Auto Upgrade Damage", function(v)
+getgenv().Settings.damage = v
+Save()
+if v then
+doDamage()
+end
+end)
+
+local health = AutoFarm:Toggle("Auto Upgrade Health", function(v)
+getgenv().Settings.health = v
+Save()
+if v then
+doHealth()
+end
+end)
+
+local speed = AutoFarm:Toggle("Auto Upgrade Speed", function(v)
+getgenv().Settings.speed = v
+Save()
+if v then
+doSpeed()
+end
+end)
+
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
 getgenv().Settings.speed = v
 Save()
