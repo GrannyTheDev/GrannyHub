@@ -19,6 +19,12 @@ strength = false;
 damage = false;
 health = false;
 _speed = false;
+killbandit = false;
+killbanditking = false;
+killeliteglobin = false;
+killcastleguard = false;
+killknight = false;
+killenchantedknight = false;
 }
 
 function Save()
@@ -123,6 +129,92 @@ end
 end)
 end
 
+local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/Teleport.lua"))()
+
+function doKillBandit()
+spawn(function()
+while getgenv().Settings.killbandit == true do
+    for i,v in pairs(game:GetService("Workspace").EnemiesAndSpawns.Bandits:GetChildren()) do
+        if v.Name == "Humanoid" or v:WaitForChild("HumanoidRootPart", 0.1) and v:WaitForChild("Humanoid", 0.1).Health ~= 0 then
+            module:Tween(TweenInfo.new(0.1), v:WaitForChild("HumanoidRootPart").CFrame)
+            game.Players.LocalPlayer.Character:WaitForChild("Punch"):Activate()
+        end
+    end
+wait(0.1)
+end
+end)
+end
+
+function doKillBanditKing()
+spawn(function()
+while getgenv().Settings.killbanditking == true do
+    for i,v in pairs(game:GetService("Workspace").EnemiesAndSpawns.BanditKings:GetChildren()) do
+        if v.Name == "Humanoid" or v:WaitForChild("HumanoidRootPart", 0.1) and v:WaitForChild("Humanoid", 0.1).Health ~= 0 then
+            module:Tween(TweenInfo.new(0.1), v:WaitForChild("HumanoidRootPart").CFrame)
+            game.Players.LocalPlayer.Character:WaitForChild("Punch"):Activate()
+        end
+    end
+wait(0.1)
+end
+end)
+end
+
+function doKillEliteGlobin()
+spawn(function()
+while getgenv().Settings.killeliteglobin == true do
+    for i,v in pairs(game:GetService("Workspace").EnemiesAndSpawns.EliteGoblins:GetChildren()) do
+        if v.Name == "Humanoid" or v:WaitForChild("HumanoidRootPart", 0.1) and v:WaitForChild("Humanoid", 0.1).Health ~= 0 then
+            module:Tween(TweenInfo.new(0.1), v:WaitForChild("HumanoidRootPart").CFrame)
+            game.Players.LocalPlayer.Character:WaitForChild("Punch"):Activate()
+        end
+    end
+wait(0.1)
+end
+end)
+end
+
+function doKillCastleGuard()
+spawn(function()
+while getgenv().Settings.killcastleguard == true do
+    for i,v in pairs(game:GetService("Workspace").EnemiesAndSpawns.CastleGuards:GetChildren()) do
+        if v.Name == "Humanoid" or v:WaitForChild("HumanoidRootPart", 0.1) and v:WaitForChild("Humanoid", 0.1).Health ~= 0 then
+            module:Tween(TweenInfo.new(0.1), v:WaitForChild("HumanoidRootPart").CFrame)
+            game.Players.LocalPlayer.Character:WaitForChild("Punch"):Activate()
+        end
+    end
+wait(0.1)
+end
+end)
+end
+
+function doKillKnight()
+spawn(function()
+while getgenv().Settings.killknight == true do
+    for i,v in pairs(game:GetService("Workspace").EnemiesAndSpawns.Knights:GetChildren()) do
+        if v.Name == "Humanoid" or v:WaitForChild("HumanoidRootPart", 0.1) and v:WaitForChild("Humanoid", 0.1).Health ~= 0 then
+            module:Tween(TweenInfo.new(0.1), v:WaitForChild("HumanoidRootPart").CFrame)
+            game.Players.LocalPlayer.Character:WaitForChild("Punch"):Activate()
+        end
+    end
+wait(0.1)
+end
+end)
+end
+
+function doKillEnchantedKnight()
+spawn(function()
+while getgenv().Settings.killenchantedknight == true do
+    for i,v in pairs(game:GetService("Workspace").EnemiesAndSpawns.EnchantedKnights:GetChildren()) do
+        if v.Name == "Humanoid" or v:WaitForChild("HumanoidRootPart", 0.1) and v:WaitForChild("Humanoid", 0.1).Health ~= 0 then
+            module:Tween(TweenInfo.new(0.1), v:WaitForChild("HumanoidRootPart").CFrame)
+            game.Players.LocalPlayer.Character:WaitForChild("Punch"):Activate()
+        end
+    end
+wait(0.1)
+end
+end)
+end
+
 function doAntiAfk()
 spawn(function()
 if getgenv().Settings.antiafk == true then
@@ -135,89 +227,51 @@ end
 end)
 end
 
-local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/Teleport.lua"))()
-
-AutoFarm:Toggle("Autokill bandits", function(v)
-getgenv().kill = v
-while true do
-if not getgenv().kill then return end
-wait(0.1)
-for i,v in pairs(game:GetService("Workspace").EnemiesAndSpawns.Bandits:GetChildren()) do
-    if v.Name == "Humanoid" or v:WaitForChild("HumanoidRootPart", 0.1) and v:WaitForChild("Humanoid", 0.1).Health ~= 0 then
-        module:Tween(TweenInfo.new(0.1), v:WaitForChild("HumanoidRootPart").CFrame)
-        game.Players.LocalPlayer.Character:WaitForChild("Punch"):Activate()
-    end
-end
+local killbandit = AutoFarm:Toggle("Autokill bandits", function(v)
+getgenv().Settings.killbandit = v
+Save()
+if v then
+    doKillBandit()
 end
 end)
 
-AutoFarm:Toggle("Autokill banditking", function(v)
-getgenv().kill = v
-while true do
-if not getgenv().kill then return end
-wait(0.1)
-for i,v in pairs(game:GetService("Workspace").EnemiesAndSpawns.BanditKings:GetChildren()) do
-    if v.Name == "Humanoid" or v:WaitForChild("HumanoidRootPart", 0.1) and v:WaitForChild("Humanoid", 0.1).Health ~= 0 then
-        module:Tween(TweenInfo.new(0.1), v:WaitForChild("HumanoidRootPart").CFrame)
-        game.Players.LocalPlayer.Character:WaitForChild("Punch"):Activate()
-    end
-end
+local killbanditking = AutoFarm:Toggle("Autokill banditking", function(v)
+getgenv().Settings.killbanditking = v
+Save()
+if v then
+    doKillBanditKing()
 end
 end)
 
-AutoFarm:Toggle("Autokill eliteglobin", function(v)
-getgenv().kill = v
-while true do
-if not getgenv().kill then return end
-wait(0.1)
-for i,v in pairs(game:GetService("Workspace").EnemiesAndSpawns.EliteGoblins:GetChildren()) do
-    if v.Name == "Humanoid" or v:WaitForChild("HumanoidRootPart", 0.1) and v:WaitForChild("Humanoid", 0.1).Health ~= 0 then
-        module:Tween(TweenInfo.new(0.1), v:WaitForChild("HumanoidRootPart").CFrame)
-        game.Players.LocalPlayer.Character:WaitForChild("Punch"):Activate()
-    end
-end
+local killeliteglobin = AutoFarm:Toggle("Autokill eliteglobin", function(v)
+getgenv().Settings.killeliteglobin = v
+Save()
+if v then
+    doKillEliteGlobin()
 end
 end)
 
-AutoFarm:Toggle("Autokill castleguard", function(v)
-getgenv().kill = v
-while true do
-if not getgenv().kill then return end
-wait(0.1)
-for i,v in pairs(game:GetService("Workspace").EnemiesAndSpawns.CastleGuards:GetChildren()) do
-    if v.Name == "Humanoid" or v:WaitForChild("HumanoidRootPart", 0.1) and v:WaitForChild("Humanoid", 0.1).Health ~= 0 then
-        module:Tween(TweenInfo.new(0.1), v:WaitForChild("HumanoidRootPart").CFrame)
-        game.Players.LocalPlayer.Character:WaitForChild("Punch"):Activate()
-    end
-end
+local killcastleguard = AutoFarm:Toggle("Autokill castleguard", function(v)
+getgenv().Settings.killcastleguard = v
+Save()
+if v then
+    doKillCastleGuard()
 end
 end)
 
-AutoFarm:Toggle("Autokill knight", function(v)
-getgenv().kill = v
-while true do
-if not getgenv().kill then return end
-wait(0.1)
-for i,v in pairs(game:GetService("Workspace").EnemiesAndSpawns.Knights:GetChildren()) do
-    if v.Name == "Humanoid" or v:WaitForChild("HumanoidRootPart", 0.1) and v:WaitForChild("Humanoid", 0.1).Health ~= 0 then
-        module:Tween(TweenInfo.new(0.1), v:WaitForChild("HumanoidRootPart").CFrame)
-        game.Players.LocalPlayer.Character:WaitForChild("Punch"):Activate()
-    end
-end
+local killknight = AutoFarm:Toggle("Autokill knight", function(v)
+getgenv().Settings.killknight = v
+Save()
+if v then
+    doKillKnight()
 end
 end)
 
-AutoFarm:Toggle("Autokill enchantedknight", function(v)
-getgenv().kill = v
-while true do
-if not getgenv().kill then return end
-wait(0.1)
-for i,v in pairs(game:GetService("Workspace").EnemiesAndSpawns.EnchantedKnights:GetChildren()) do
-    if v.Name == "Humanoid" or v:WaitForChild("HumanoidRootPart", 0.1) and v:WaitForChild("Humanoid", 0.1).Health ~= 0 then
-        module:Tween(TweenInfo.new(0.1), v:WaitForChild("HumanoidRootPart").CFrame)
-        game.Players.LocalPlayer.Character:WaitForChild("Punch"):Activate()
-    end
-end
+local killenchantedknight = AutoFarm:Toggle("Autokill enchantedknight", function(v)
+getgenv().Settings.killenchantedknight = v
+Save()
+if v then
+    doKillEnchantedKnight()
 end
 end)
 
@@ -354,6 +408,24 @@ health:ChangeState(true)
 end
 if getgenv().Settings._speed == true then
 _speed:ChangeState(true)
+end
+if getgenv().Settings.killbandit == true then
+killbandit:ChangeState(true)
+end
+if getgenv().Settings.killbanditking == true then
+killbanditking:ChangeState(true)
+end
+if getgenv().Settings.killeliteglobin == true then
+killeliteglobin:ChangeState(true)
+end
+if getgenv().Settings.killcastleguard == true then
+killcastleguard:ChangeState(true)
+end
+if getgenv().Settings.killknight == true then
+killknight:ChangeState(true)
+end
+if getgenv().Settings.killenchantedknight == true then
+killenchantedknight:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
