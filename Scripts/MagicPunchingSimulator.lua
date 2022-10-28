@@ -2,6 +2,8 @@ local Library = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHu
 
 local Window = Library:CreateWindow("GrannyHub".." - Magic Punching Simulator")
 
+local AutoFarm = Window:Page("AutoFarm")
+
 local LocalPlayer = Window:Page("LocalPlayer")
 
 local Misc = Window:Page("Misc")
@@ -13,6 +15,10 @@ speed = false;
 jump = false;
 infyield = false;
 antiafk = false;
+strength = false;
+damage = false;
+health = false;
+speed = false;
 }
 
 function Save()
@@ -59,6 +65,42 @@ if getgenv().Settings.speed == true then
     game:GetService("RunService").Stepped:Connect(function()
         game.Players.LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 100
     end)
+end
+end)
+end
+
+function doStrength()
+spawn(function()
+while getgenv().Settings.strength == true do
+				
+wait(0.1)
+end
+end)
+end
+
+function doDamage()
+spawn(function()
+while getgenv().Settings.damage == true do
+				
+wait(0.1)
+end
+end)
+end
+
+function doHealth()
+spawn(function()
+while getgenv().Settings.health == true do
+				
+wait(0.1)
+end
+end)
+end
+
+function doSpeed()
+spawn(function()
+while getgenv().Settings.speed == true do
+				
+wait(0.1)
 end
 end)
 end
