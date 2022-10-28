@@ -18,7 +18,7 @@ antiafk = false;
 strength = false;
 damage = false;
 health = false;
-speed = false;
+_speed = false;
 }
 
 function Save()
@@ -96,9 +96,9 @@ end
 end)
 end
 
-function doSpeed()
+function _doSpeed()
 spawn(function()
-while getgenv().Settings.speed == true do
+while getgenv().Settings._speed == true do
 				
 wait(0.1)
 end
@@ -135,6 +135,21 @@ end
 end)
 end
 
+local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/Teleport.lua"))()
+
+AutoFarm:Toggle("Autokill bandits", function(v)
+getgenv().kill = v
+while true do
+if not getgenv().kill then return end
+wait(0.1)
+for i,v in pairs(game:GetService("Workspace").EnemiesAndSpawns.Bandits:GetChildren()) do
+    if v.Name == "Humanoid" or v:WaitForChild("HumanoidRootPart", 0.1) and v:WaitForChild("Humanoid", 0.1).Health ~= 0 then
+        module:Tween(TweenInfo.new(0.1), v:WaitForChild("HumanoidRootPart").CFrame)
+    end
+end
+end
+end)
+
 local strength = AutoFarm:Toggle("Auto Upgrade Strength", function(v)
 getgenv().Settings.strength = v
 Save()
@@ -159,11 +174,11 @@ doHealth()
 end
 end)
 
-local speed = AutoFarm:Toggle("Auto Upgrade Speed", function(v)
-getgenv().Settings.speed = v
+local _speed = AutoFarm:Toggle("Auto Upgrade Speed", function(v)
+getgenv().Settings._speed = v
 Save()
 if v then
-doSpeed()
+_doSpeed()
 end
 end)
 
@@ -262,8 +277,8 @@ end
 if getgenv().Settings.health == true then
 health:ChangeState(true)
 end
-if getgenv().Settings.speed == true then
-speed:ChangeState(true)
+if getgenv().Settings._speed == true then
+_speed:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do

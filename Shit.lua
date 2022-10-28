@@ -63,15 +63,13 @@ function Library:CreateWindow(title)
 	end)
 
 	Header.Name = "Header"
-        Header.Parent = DarkLib
+    Header.Parent = DarkLib
 	Header.BackgroundColor3 = Color3.fromRGB(80, 0, 255)
 	Header.BorderSizePixel = 0
 	Header.Position = UDim2.new(0, 552, 0, 159)
 	Header.Size = UDim2.new(0, 470, 0, 30)
 	Header.Active = true
 	Header.BackgroundTransparency = 1
-
-	game:GetService("TweenService"):Create(Header, TweenInfo.new(0.5), {BackgroundTransparency = 0}):Play()
 	
 	local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/DragModule.lua"))()
 	module:Drag(Header)
@@ -85,8 +83,6 @@ function Library:CreateWindow(title)
 	MainFrame.Position = UDim2.new(0, 0, 0, 30)
 	MainFrame.Size = UDim2.new(0, 470, 0, 280)
 	MainFrame.BackgroundTransparency = 1
-
-	game:GetService("TweenService"):Create(MainFrame, TweenInfo.new(0.5), {BackgroundTransparency = 0}):Play()
 
 	Instance.new("UICorner", MainFrame)
 
@@ -136,11 +132,6 @@ function Library:CreateWindow(title)
 	Title.TextSize = 28.000
 	Title.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
 	Title.TextXAlignment = Enum.TextXAlignment.Left
-
-	for i = 1,#title do
-                Title.Text = string.sub(title, 1, i)
-		wait(0.05)
-	end
 
 	Pages.Name = "Pages"
 	Pages.Parent = MainFrame
