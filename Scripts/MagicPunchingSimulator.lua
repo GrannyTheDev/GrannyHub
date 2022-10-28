@@ -181,11 +181,13 @@ function doKillEliteGlobin()
 spawn(function()
 while getgenv().Settings.killeliteglobin == true do
     for i,v in pairs(game:GetService("Workspace").EnemiesAndSpawns.EliteGoblins:GetChildren()) do
-        if v.Name == "Humanoid" or v:WaitForChild("HumanoidRootPart", 0.1) and v:WaitForChild("Humanoid", 0.1).Health ~= 0 then
-            module:Tween(TweenInfo.new(0.1), v:WaitForChild("HumanoidRootPart").CFrame)
-            game.Players.LocalPlayer.Character:WaitForChild("Punch"):Activate()
+        if v.Name == "Humanoid" or v:WaitForChild("HumanoidRootPart", 0.1) then
+            if v:WaitForChild("Humanoid").Health ~= 0 then
+                module:Tween(TweenInfo.new(0.1), v:WaitForChild("HumanoidRootPart").CFrame)
+                game.Players.LocalPlayer.Character:WaitForChild("Punch"):Activate()
         end
     end
+end
 wait(0.1)
 end
 end)
