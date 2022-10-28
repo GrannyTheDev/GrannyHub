@@ -253,6 +253,18 @@ end
 if getgenv().Settings.antiafk == true then
 antiafk:ChangeState(true)
 end
+if getgenv().Settings.strength == true then
+strength:ChangeState(true)
+end
+if getgenv().Settings.damage == true then
+damage:ChangeState(true)
+end
+if getgenv().Settings.health == true then
+health:ChangeState(true)
+end
+if getgenv().Settings.speed == true then
+speed:ChangeState(true)
+end
 
 for i,v in pairs(getgenv().Settings) do
 print(i,v)
