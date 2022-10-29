@@ -226,7 +226,6 @@ while getgenv().Settings.killknight == true do
             end
         end
     end
-end
 wait(0.1)
 end
 end)
