@@ -156,8 +156,10 @@ spawn(function()
             for i, Bp in pairs(Plr:GetChildren()) do
                 if Bp.Name == "Backpack" then
                     if Bp:FindFirstChild("Knife") ~= nil then
-                        Bp.Parent.Character.UpperTorso:FindFirstChild("MurderBox"):Destroy()
-                        game.Players.LocalPlayer.Character:FindFirstChild("MurderBeam"):Destroy()
+                        if Bp.Parent.Character.UpperTorso:FindFirstChild("MurderBox") ~= nil and game.Players.LocalPlayer.Character:FindFirstChild("MurderBeam") ~= nil then
+                            Bp.Parent.Character.UpperTorso:FindFirstChild("MurderBox"):Destroy()
+                            game.Players.LocalPlayer.Character:FindFirstChild("MurderBeam"):Destroy()
+                        end
                     end
                 end
             end
@@ -239,8 +241,10 @@ spawn(function()
             for i, Bp in pairs(Plr:GetChildren()) do
                 if Bp.Name == "Backpack" then
                     if Bp:FindFirstChild("Gun") ~= nil then
-                        Bp.Parent.Character.UpperTorso:FindFirstChild("SherifBox"):Destroy()
-                        game.Players.LocalPlayer.Character:FindFirstChild("SherifBeam"):Destroy()
+                        if Bp.Parent.Character.UpperTorso:FindFirstChild("SherifBox") ~= nil and game.Players.LocalPlayer.Character:FindFirstChild("SherifBeam") ~= nil then
+                            Bp.Parent.Character.UpperTorso:FindFirstChild("SherifBox"):Destroy()
+                            game.Players.LocalPlayer.Character:FindFirstChild("SherifBeam"):Destroy()
+                        end
                     end
                 end
             end
