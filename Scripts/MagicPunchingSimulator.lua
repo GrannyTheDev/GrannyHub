@@ -371,6 +371,12 @@ local NoclipBtn = LocalPlayer:Toggle("Noclip", function(v)
      game:GetService("TeleportService"):Teleport(game.PlaceId)
 end)
 
+Misc:Button("Show Upgrade UI", function()
+    firetouchinterest(game:GetService("Workspace").SpawnObjects.UpgradeButton.UpgradeBox, game.Players.LocalPlayer.Character.HumanoidRootPart, 1)
+    wait()
+    firetouchinterest(game:GetService("Workspace").SpawnObjects.UpgradeButton.UpgradeBox, game.Players.LocalPlayer.Character.HumanoidRootPart, 0)
+end)
+
 local infyield = Misc:Toggle("Infinite Yield", function(v)
 getgenv().Settings.infyield = v
 Save()
