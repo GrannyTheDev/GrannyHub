@@ -6,6 +6,8 @@ local AutoFarm = Window:Page("AutoFarm")
 
 local LocalPlayer = Window:Page("LocalPlayer")
 
+local _Stats = Window:Page("Stats")
+
 local Misc = Window:Page("Misc")
 
 local filename = "DevilHub/MagicPunchingSimulator - 10182167049/Config.json"
@@ -412,6 +414,10 @@ Misc:Button("Join the discord server", function()
 	})
 end)
 
+_Stats:Label("--------Player Stats--------")
+local PlayerKills = _Stats:Label("Player Kills: "..game:GetService("Players").LocalPlayer.PlayerKills.Value)
+local NPCKills = _Stats:Label("NPC Kills: "..game:GetService("Players").LocalPlayer.NPCKills.Value)
+
 Load()
 if getgenv().Settings.speed == true then
 speed:ChangeState(true)
@@ -462,3 +468,8 @@ end
 for i,v in pairs(getgenv().Settings) do
 print(i,v)
 end
+
+while wait() do
+    PlayerKills:UpdateText("Player Kills: "..game:GetService("Players").LocalPlayer.PlayerKills.Value)
+    NPCKills:UpdateText("NPC Kills: "..game:GetService("Players").LocalPlayer.NPCKills.Value)
+end    
