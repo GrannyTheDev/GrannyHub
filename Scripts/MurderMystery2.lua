@@ -201,6 +201,32 @@ end
 end)
 end
 
+local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/Teleport.lua"))()
+
+LocalPlayer:Button("Teleport to Serif", function()
+for i, Plr in pairs(Players:GetPlayers()) do
+    for i, Bp in pairs(Plr:GetChildren()) do
+        if Bp.Name == "Backpack" then
+            if Bp:FindFirstChild("Gun") ~= nil then
+                module:Tween(TweenInfo.new(0.2), Bp.Parent.Character.HumanoidRootPart.CFrame)
+            end
+        end
+    end
+end
+end)
+
+LocalPlayer:Button("Teleport to Murder", function()
+for i, Plr in pairs(Players:GetPlayers()) do
+    for i, Bp in pairs(Plr:GetChildren()) do
+        if Bp.Name == "Backpack" then
+            if Bp:FindFirstChild("Knife") ~= nil then
+                module:Tween(TweenInfo.new(0.2), Bp.Parent.Character.HumanoidRootPart.CFrame)
+            end
+        end
+    end
+end
+end)
+
 local espmurder = LocalPlayer:Toggle("Esp Murder", function(v)
 getgenv().Settings.espmurder = v
 Save()
