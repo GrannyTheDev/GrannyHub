@@ -116,6 +116,36 @@ spawn(function()
                 end
             end
         end
+        for i, Plr in pairs(Players:GetPlayers()) do
+            Plr.CharacterAdded:Connect(function()
+            for i, Bp in pairs(Plr:GetChildren()) do
+                if Bp.Name == "Backpack" then
+                    if Bp:FindFirstChild("Knife") ~= nil then
+                        if Bp.Parent.Character.UpperTorso:FindFirstChild("MurderBox") == nil then
+                            local box = Instance.new("BoxHandleAdornment", Bp.Parent.Character.UpperTorso)
+                            box.Name = "MurderBox"
+                            box.Size = Bp.Parent.Character.UpperTorso.Size
+                            box.Adornee = Bp.Parent.Character.UpperTorso
+                            box.ZIndex = 5
+                            box.AlwaysOnTop = true
+                            box.Color3 = Color3.fromRGB(255, 0, 25)
+                            
+                            local at0 = Instance.new("Attachment", game.Players.LocalPlayer.Character.UpperTorso)
+                            local at1 = Instance.new("Attachment", Bp.Parent.Character.UpperTorso)
+                            local beam = Instance.new("Beam", game.Players.LocalPlayer.Character)
+                            beam.Name = "MurderBeam"
+                            beam.Color = ColorSequence.new(Color3.fromRGB(255, 0, 25), Color3.fromRGB(255, 0, 25))
+                            beam.FaceCamera = true
+                            beam.Width0 = 0.2
+                            beam.Width1 = 0.2
+                            beam.Attachment0 = at0
+                            beam.Attachment1 = at1
+                        end
+                    end
+                end
+            end
+        end)
+    end
     end
     
     
@@ -140,7 +170,7 @@ function doEspSherif()
 spawn(function()
     while getgenv().Settings.espsherif == true do wait(.1)	
         local Players = game:GetService("Players")
-            
+        
         for i, Plr in pairs(Players:GetPlayers()) do
             for i, Bp in pairs(Plr:GetChildren()) do
                 if Bp.Name == "Backpack" then
@@ -168,6 +198,36 @@ spawn(function()
                     end
                 end
             end
+        end
+        for i, Plr in pairs(Players:GetPlayers()) do
+            Plr.CharacterAdded:Connect(function()
+            for i, Bp in pairs(Plr:GetChildren()) do
+                if Bp.Name == "Backpack" then
+                    if Bp:FindFirstChild("Gun") ~= nil then
+                        if Bp.Parent.Character.UpperTorso:FindFirstChild("SherifBox") == nil then
+                            local box = Instance.new("BoxHandleAdornment", Bp.Parent.Character.UpperTorso)
+                            box.Name = "SherifBox"
+                            box.Size = Bp.Parent.Character.UpperTorso.Size
+                            box.Adornee = Bp.Parent.Character.UpperTorso
+                            box.ZIndex = 5
+                            box.AlwaysOnTop = true
+                            box.Color3 = Color3.fromRGB(0, 50, 255)
+                                
+                            local at0 = Instance.new("Attachment", game.Players.LocalPlayer.Character.UpperTorso)
+                            local at1 = Instance.new("Attachment", Bp.Parent.Character.UpperTorso)
+                            local beam = Instance.new("Beam", game.Players.LocalPlayer.Character)
+                            beam.Name = "SherifBeam"
+                            beam.Color = ColorSequence.new(Color3.fromRGB(0, 50, 255), Color3.fromRGB(0, 50, 255))
+                            beam.FaceCamera = true
+                            beam.Width0 = 0.2
+                            beam.Width1 = 0.2
+                            beam.Attachment0 = at0
+                            beam.Attachment1 = at1
+                        end
+                    end
+                end
+            end
+        end)
         end
     end
         
@@ -204,9 +264,9 @@ end
 local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/Teleport.lua"))()
 
 LocalPlayer:Button("Teleport to Serif", function()
-for i, Plr in pairs(Players:GetPlayers()) do
+for i, Plr in pairs(game.Players:GetPlayers()) do
     for i, Bp in pairs(Plr:GetChildren()) do
-        if Bp.Name == "Backpack" then
+        if Bp.Name == "Backpack" or Bp.Name == "Character" then
             if Bp:FindFirstChild("Gun") ~= nil then
                 module:Tween(TweenInfo.new(0.2), Bp.Parent.Character.HumanoidRootPart.CFrame)
             end
@@ -216,9 +276,9 @@ end
 end)
 
 LocalPlayer:Button("Teleport to Murder", function()
-for i, Plr in pairs(Players:GetPlayers()) do
+for i, Plr in pairs(game.Players:GetPlayers()) do
     for i, Bp in pairs(Plr:GetChildren()) do
-        if Bp.Name == "Backpack" then
+        if Bp.Name == "Backpack" or Bp.Name == "Character" then
             if Bp:FindFirstChild("Knife") ~= nil then
                 module:Tween(TweenInfo.new(0.2), Bp.Parent.Character.HumanoidRootPart.CFrame)
             end
