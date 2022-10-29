@@ -2,6 +2,8 @@ local Library = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHu
 
 local Window = Library:CreateWindow("GrannyHub".." - Reaper Simulator 2")
 
+local AutoFarm = Window:Page("AutoFarm")
+
 local LocalPlayer = Window:Page("LocalPlayer")
 
 local Misc = Window:Page("Misc")
@@ -13,6 +15,11 @@ speed = false;
 jump = false;
 infyield = false;
 antiafk = false;
+swing = false;
+sell = false;
+buyscythe = false;
+buybackpack = false;
+buyrank = false;
 }
 
 function Save()
@@ -92,6 +99,100 @@ if getgenv().Settings.antiafk == true then
 end
 end)
 end
+
+function doSwing()
+spawn(function()
+while getgenv().Settings.swing == true do
+    game:GetService("ReplicatedStorage").Remotes.Sheathe:FireServer("Scythe", true)    
+    game:GetService("ReplicatedStorage").Remotes.ItemUsed:FireServer("Attack")
+wait(0.1)
+end
+end)
+end
+
+function doSell()
+spawn(function()
+while getgenv().Settings.sell == true do
+    firetouchinterest(game:GetService("Workspace").TouchParts.Sell.SellPart, game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 1)
+    wait()
+    firetouchinterest(game:GetService("Workspace").TouchParts.Sell.SellPart, game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 0)
+wait(0.1)
+end
+end)
+end
+
+function doBuyScythe()
+spawn(function()
+while getgenv().Settings.buyscythe == true do
+for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.CenterHolder.Shop.InfoHolder.Main.ScytheInfo.BuyAllButton.MouseButton1Down)) do
+v.Function()
+end
+wait(0.1)
+end
+end)
+end
+
+function doBuyBackpack()
+spawn(function()
+while getgenv().Settings.buybackpack == true do
+for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.CenterHolder.Shop.InfoHolder.Main.SatchelsInfo.BuyAllButton.MouseButton1Down)) do
+v.Function()
+end
+wait(0.1)
+end
+end)
+end
+
+function doBuyRank()
+spawn(function()
+while getgenv().Settings.buyrank == true do
+for i,v in pairs(getconnections(game:GetService("Players").givemedrinka.PlayerGui.Main.CenterHolder.Shop.MainHolder.Main.Ranks.UpgradeButton.MouseButton1Down)) do
+v.Function()
+end
+wait(0.1)
+end
+end)
+end
+
+local swing = AutoFarm:Toggle("Auto Swing", function(v)
+getgenv().Settings.swing = v
+Save()
+if v then
+doSwing()
+end
+end)
+
+local sell = AutoFarm:Toggle("Auto Sell", function(v)
+getgenv().Settings.sell = v
+Save()
+if v then
+doSell()
+end
+end)
+
+local buyscythe = AutoFarm:Toggle("Autobuy Scythe", function(v)
+getgenv().Settings.buyscythe = v
+Save()
+if v then
+doBuyScythe()
+end
+end)
+
+local buybackpack = AutoFarm:Toggle("Autobuy Satchel", function(v)
+getgenv().Settings.buybackpack = v
+Save()
+if v then
+doBuyBackpack()
+end
+end)
+
+local buyrank = AutoFarm:Toggle("Autobuy Rank", function(v)
+getgenv().Settings.buyrank = v
+Save()
+if v then
+doBuyRank()
+end
+end)
 
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
 getgenv().Settings.speed = v
@@ -178,6 +279,21 @@ infyield:ChangeState(true)
 end
 if getgenv().Settings.antiafk == true then
 antiafk:ChangeState(true)
+end
+if getgenv().Settings.swing == true then
+swing:ChangeState(true)
+end
+if getgenv().Settings.sell == true then
+sell:ChangeState(true)
+end
+if getgenv().Settings.buyscythe == true then
+buyscythe:ChangeState(true)
+end
+if getgenv().Settings.buybackpack == true then
+buybackpack:ChangeState(true)
+end
+if getgenv().Settings.buyrank == true then
+buyrank:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
