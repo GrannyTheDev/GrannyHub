@@ -159,24 +159,24 @@ function doCollect()
 spawn(function()
 while getgenv().Settings.collect == true do
 for i,v in pairs(game:GetService("Workspace").AllCoin:GetDescendants()) do
-if v.Name == "TouchInterest" then
-firetouchinterest(v.Parent, game.Players.LocalPlayer.Character.HumanoidRootPart, 1)
+if v.Name == "Bubble" and v:WaitForChild("TouchInterest", 0.1) then
+firetouchinterest(v:WaitForChild("TouchInterest").Parent, game.Players.LocalPlayer.Character.HumanoidRootPart, 1)
 wait()
-firetouchinterest(v.Parent, game.Players.LocalPlayer.Character.HumanoidRootPart, 0)
+firetouchinterest(v:WaitForChild("TouchInterest").Parent, game.Players.LocalPlayer.Character.HumanoidRootPart, 0)
 end
 end
-for i,v in pairs(game:GetService("Workspace").AllSoul:GetDescendants()) do
-if v.Name == "TouchInterest" then
-firetouchinterest(v.Parent, game.Players.LocalPlayer.Character.HumanoidRootPart, 1)
+for i,v in pairs(game:GetService("Workspace").AllCoin:GetDescendants()) do
+if v.Name == "Bubble" and v:WaitForChild("TouchInterest", 0.1) then
+firetouchinterest(v:WaitForChild("TouchInterest").Parent, game.Players.LocalPlayer.Character.HumanoidRootPart, 1)
 wait()
-firetouchinterest(v.Parent, game.Players.LocalPlayer.Character.HumanoidRootPart, 0)
+firetouchinterest(v:WaitForChild("TouchInterest").Parent, game.Players.LocalPlayer.Character.HumanoidRootPart, 0)
 end
 end
-for i,v in pairs(game:GetService("Workspace").AllBlueEssence:GetDescendants()) do
-if v.Name == "TouchInterest" then
-firetouchinterest(v.Parent, game.Players.LocalPlayer.Character.HumanoidRootPart, 1)
+for i,v in pairs(game:GetService("Workspace").AllCoin:GetDescendants()) do
+if v.Name == "Bubble" and v:WaitForChild("TouchInterest", 0.1) then
+firetouchinterest(v:WaitForChild("TouchInterest").Parent, game.Players.LocalPlayer.Character.HumanoidRootPart, 1)
 wait()
-firetouchinterest(v.Parent, game.Players.LocalPlayer.Character.HumanoidRootPart, 0)
+firetouchinterest(v:WaitForChild("TouchInterest").Parent, game.Players.LocalPlayer.Character.HumanoidRootPart, 0)
 end
 end
 wait(0.1)
