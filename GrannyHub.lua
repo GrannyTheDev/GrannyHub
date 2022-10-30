@@ -30,7 +30,8 @@ local games = {
 	["DragonBladeRPG.lua"] = 7279999673,
 	["MagicPunchingSimulator.lua"] = 10182167049,
 	["MurderMystery2.lua"] = 142823291,
-	["ReaperSimulator2.lua"] = 4828705676
+	["ReaperSimulator2.lua"] = 4828705676,
+	["BoxingLeague.lua"] = 3738091713
 }
 
 
