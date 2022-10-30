@@ -4,6 +4,12 @@ local Window = Library:CreateWindow("GrannyHub".." - Boxing League")
 
 local LocalPlayer = Window:Page("LocalPlayer")
 
+local Teleport
+
+if game.PlaceId == 3738115442 then
+    Teleport = Window:Page("Teleport")
+end
+
 local Misc = Window:Page("Misc")
 
 local filename = "DevilHub/BoxingLeague - 3738091713/Config.json"
@@ -14,6 +20,8 @@ jump = false;
 infyield = false;
 antiafk = false;
 }
+
+local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/Teleport.lua"))()
 
 function Save()
 local json;
@@ -182,4 +190,13 @@ end
 
 for i,v in pairs(getgenv().Settings) do
 print(i,v)
+end
+
+if game.PlaceId == 3738115442 then
+    Teleport:Button("Teleport to Spawn", function()
+        module:Tween(TweenInfo.new(0.2), CFrame.new(343, 132, -304))
+    end)
+    Teleport:Button("Teleport to Gym", function()
+        module:Tween(TweenInfo.new(0.2), CFrame.new(357, 103, 330))
+    end)
 end
