@@ -104,7 +104,7 @@ end
 LocalPlayer:Toggle("Auto Box", function(v)
 if v then
 module:Tween(TweenInfo.new(0.2), CFrame.new(354, 103, 341))
-wait(0.2)
+wait(0.3)
 for i,v in pairs(getconnections(game:GetService("Players").givemedrinka.PlayerGui.MainGui.TriggerFrame.InfoFrame.Mobile.MouseButton1Click)) do
     v.Function()
 end
