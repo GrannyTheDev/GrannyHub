@@ -98,7 +98,7 @@ end
 function doStrength()
 spawn(function()
 while getgenv().Settings.strength == true do
-    for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.UpgradeShop.UpgradeShop.MainBackground.UpgradesFrame.PowerUpgrade.UpgradeButton.MouseButton1Down)) do
+    for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.UpgradeShop.UpgradeShop.MainBackground.UpgradesFrame.PowerUpgrade.UpgradeButton.MouseButton1Click)) do
         v.Function()
     end
 wait(0.1)
@@ -109,7 +109,7 @@ end
 function doDamage()
 spawn(function()
 while getgenv().Settings.damage == true do
-    for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.UpgradeShop.UpgradeShop.MainBackground.UpgradesFrame.DamageUpgrade.UpgradeButton.MouseButton1Down)) do
+    for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.UpgradeShop.UpgradeShop.MainBackground.UpgradesFrame.DamageUpgrade.UpgradeButton.MouseButton1Click)) do
         v.Function()
     end
 wait(0.1)
@@ -120,7 +120,7 @@ end
 function doHealth()
 spawn(function()
 while getgenv().Settings.health == true do
-    for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.UpgradeShop.UpgradeShop.MainBackground.UpgradesFrame.HealthUpgrade.UpgradeButton.MouseButton1Down)) do
+    for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.UpgradeShop.UpgradeShop.MainBackground.UpgradesFrame.HealthUpgrade.UpgradeButton.MouseButton1Click)) do
         v.Function()
     end
 wait(0.1)
@@ -131,7 +131,7 @@ end
 function _doSpeed()
 spawn(function()
 while getgenv().Settings._speed == true do
-    for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.UpgradeShop.UpgradeShop.MainBackground.UpgradesFrame.HealthUpgrade.SpeedButton.MouseButton1Down)) do
+    for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.UpgradeShop.UpgradeShop.MainBackground.UpgradesFrame.HealthUpgrade.SpeedButton.MouseButton1Click)) do
         v.Function()
     end
 wait(0.1)
