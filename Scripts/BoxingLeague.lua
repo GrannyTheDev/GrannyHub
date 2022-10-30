@@ -101,6 +101,22 @@ end
 end)
 end
 
+LocalPlayer:Toggle("Auto Box", function(v)
+if v then
+module:Tween(TweenInfo.new(0.2), CFrame.new(354, 103, 341))
+wait(0.2)
+for i,v in pairs(getconnections(game:GetService("Players").givemedrinka.PlayerGui.MainGui.TriggerFrame.InfoFrame.Mobile.MouseButton1Click)) do
+    v.Function()
+end
+end
+getgenv().box = v
+while true do
+if not getgenv().box then return end
+wait(0.1)
+game:GetService("ReplicatedStorage").Action.GymUse:FireServer("CL")
+end
+end)
+
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
 getgenv().Settings.speed = v
 Save()
