@@ -98,7 +98,9 @@ end
 function doStrength()
 spawn(function()
 while getgenv().Settings.strength == true do
-game:GetService("ReplicatedStorage").Events.RemoteFunctions.UpgradeMultiplier:InvokeServer("Power")
+    for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.UpgradeShop.UpgradeShop.MainBackground.UpgradesFrame.PowerUpgrade.UpgradeButton.MouseButton1Down)) do
+        v.Function()
+    end
 wait(0.1)
 end
 end)
@@ -107,7 +109,9 @@ end
 function doDamage()
 spawn(function()
 while getgenv().Settings.damage == true do
-game:GetService("ReplicatedStorage").Events.RemoteFunctions.UpgradeMultiplier:InvokeServer("Damage")
+    for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.UpgradeShop.UpgradeShop.MainBackground.UpgradesFrame.DamageUpgrade.UpgradeButton.MouseButton1Down)) do
+        v.Function()
+    end
 wait(0.1)
 end
 end)
@@ -116,7 +120,9 @@ end
 function doHealth()
 spawn(function()
 while getgenv().Settings.health == true do
-game:GetService("ReplicatedStorage").Events.RemoteFunctions.UpgradeMultiplier:InvokeServer("Health")
+    for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.UpgradeShop.UpgradeShop.MainBackground.UpgradesFrame.HealthUpgrade.UpgradeButton.MouseButton1Down)) do
+        v.Function()
+    end
 wait(0.1)
 end
 end)
@@ -125,7 +131,9 @@ end
 function _doSpeed()
 spawn(function()
 while getgenv().Settings._speed == true do
-game:GetService("ReplicatedStorage").Events.RemoteFunctions.UpgradeMultiplier:InvokeServer("WalkSpeed")
+    for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.UpgradeShop.UpgradeShop.MainBackground.UpgradesFrame.HealthUpgrade.SpeedButton.MouseButton1Down)) do
+        v.Function()
+    end
 wait(0.1)
 end
 end)
