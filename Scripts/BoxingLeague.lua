@@ -101,14 +101,6 @@ end
 end)
 end
 
-LocalPlayer:Button("Auto Pushup", function()
-module:Tween(TweenInfo.new(0.2), CFrame.new(372, 103, 336))
-wait(0.5)
-for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.MainGui.TriggerFrame.InfoFrame.Mobile.MouseButton1Click)) do
-    v.Function()
-end
-end)
-
 LocalPlayer:Toggle("Auto Box", function(v)
     getgenv().box = v
     while true do
