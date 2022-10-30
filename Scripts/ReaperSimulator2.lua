@@ -20,7 +20,6 @@ sell = false;
 buyscythe = false;
 buybackpack = false;
 buyrank = false;
-collect = false;
 }
 
 function Save()
@@ -154,43 +153,6 @@ wait(0.1)
 end
 end)
 end
-
-function doCollect()
-spawn(function()
-while getgenv().Settings.collect == true do
-for i,v in pairs(game:GetService("Workspace").AllCoin:GetDescendants()) do
-if v.Name == "Bubble" and v:WaitForChild("TouchInterest", 0.1) then
-firetouchinterest(v:WaitForChild("TouchInterest").Parent, game.Players.LocalPlayer.Character.HumanoidRootPart, 1)
-wait()
-firetouchinterest(v:WaitForChild("TouchInterest").Parent, game.Players.LocalPlayer.Character.HumanoidRootPart, 0)
-end
-end
-for i,v in pairs(game:GetService("Workspace").AllCoin:GetDescendants()) do
-if v.Name == "Bubble" and v:WaitForChild("TouchInterest", 0.1) then
-firetouchinterest(v:WaitForChild("TouchInterest").Parent, game.Players.LocalPlayer.Character.HumanoidRootPart, 1)
-wait()
-firetouchinterest(v:WaitForChild("TouchInterest").Parent, game.Players.LocalPlayer.Character.HumanoidRootPart, 0)
-end
-end
-for i,v in pairs(game:GetService("Workspace").AllCoin:GetDescendants()) do
-if v.Name == "Bubble" and v:WaitForChild("TouchInterest", 0.1) then
-firetouchinterest(v:WaitForChild("TouchInterest").Parent, game.Players.LocalPlayer.Character.HumanoidRootPart, 1)
-wait()
-firetouchinterest(v:WaitForChild("TouchInterest").Parent, game.Players.LocalPlayer.Character.HumanoidRootPart, 0)
-end
-end
-wait(0.1)
-end
-end)
-end
-
-local collect = AutoFarm:Toggle("Auto Collect Orbs", function(v)
-getgenv().Settings.collect = v
-Save()
-if v then
-doCollect()
-end
-end)
 
 local swing = AutoFarm:Toggle("Auto Swing", function(v)
 getgenv().Settings.swing = v
@@ -332,9 +294,6 @@ buybackpack:ChangeState(true)
 end
 if getgenv().Settings.buyrank == true then
 buyrank:ChangeState(true)
-end
-if getgenv().Settings.collect == true then
-collect:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
