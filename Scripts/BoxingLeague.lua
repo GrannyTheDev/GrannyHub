@@ -97,6 +97,15 @@ end
 end)
 end
 
+LocalPlayer:Toggle("Auto Lift Weights", function(v)
+    getgenv().lift = v
+    while true do
+    if not getgenv().lift then return end
+    wait(0.1)
+    game:GetService("ReplicatedStorage").UseItem:FireServer("Use")
+    end
+end)
+
 LocalPlayer:Toggle("Auto Box", function(v)
     getgenv().box = v
     while true do
