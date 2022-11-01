@@ -15,6 +15,8 @@ speed = false;
 jump = false;
 infyield = false;
 antiafk = false;
+autolift = false;
+autopunch = false;
 }
 
 local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/Teleport.lua"))()
@@ -85,6 +87,24 @@ end
 end)
 end
 
+function doAutoLift()
+spawn(function()
+while getgenv().Settings.autolift == true do
+game:GetService("ReplicatedStorage").UseItem:FireServer("Use")
+wait(0.1)
+end
+end)
+end
+
+function doAutoPunch()
+spawn(function()
+while getgenv().Settings.autopunch == true do
+game:GetService("ReplicatedStorage").Action.GymUse:FireServer("CL")
+wait(0.1)
+end
+end)
+end
+
 function doAntiAfk()
 spawn(function()
 if getgenv().Settings.antiafk == true then
@@ -97,22 +117,20 @@ end
 end)
 end
 
-LocalPlayer:Toggle("Auto Lift Weights", function(v)
-    getgenv().lift = v
-    while true do
-    if not getgenv().lift then return end
-    wait(0.1)
-    game:GetService("ReplicatedStorage").UseItem:FireServer("Use")
-    end
+local autolift = LocalPlayer:Toggle("Auto Lift Weights", function(v)
+getgenv().Settings.autolift = v
+Save()
+if v then
+doAutoLift()
+end
 end)
 
-LocalPlayer:Toggle("Auto Box", function(v)
-    getgenv().box = v
-    while true do
-    if not getgenv().box then return end
-    wait(0.1)
-    game:GetService("ReplicatedStorage").Action.GymUse:FireServer("CL")
-    end
+local autopunch = LocalPlayer:Toggle("Auto Punch PunchingBag", function(v)
+getgenv().Settings.autopunch = v
+Save()
+if v then
+doAutoPunch()
+end
 end)
 
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
@@ -200,6 +218,12 @@ infyield:ChangeState(true)
 end
 if getgenv().Settings.antiafk == true then
 antiafk:ChangeState(true)
+end
+if getgenv().Settings.autolift == true then
+autolift:ChangeState(true)
+end
+if getgenv().Settings.autopunch == true then
+autopunch:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
