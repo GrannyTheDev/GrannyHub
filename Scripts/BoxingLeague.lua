@@ -4,11 +4,7 @@ local Window = Library:CreateWindow("GrannyHub".." - Boxing League")
 
 local LocalPlayer = Window:Page("LocalPlayer")
 
-local Teleport
-
-if game.PlaceId == 3738115442 then
-    Teleport = Window:Page("Teleport")
-end
+local Teleport = Window:Page("Teleport")
 
 local Misc = Window:Page("Misc")
 
@@ -202,6 +198,7 @@ print(i,v)
 end
 
 if game.PlaceId == 3738115442 then
+    Teleport:Label("Locations")
     Teleport:Button("Teleport to Spawn", function()
         module:Tween(TweenInfo.new(0.2), CFrame.new(343, 132, -304))
     end)
@@ -209,3 +206,22 @@ if game.PlaceId == 3738115442 then
         module:Tween(TweenInfo.new(0.2), CFrame.new(357, 103, 330))
     end)
 end
+
+local Table = {
+Worlds = {
+MainMenu = 3738091713,
+League = 3738115442,
+Practice = 9044551174
+}
+}
+
+Teleport:Label("Worlds")
+Teleport:Button("Teleport to MainMenu", function()
+game:GetService("TeleportService"):Teleport(Table.Worlds.MainMenu)
+end)
+Teleport:Button("Teleport to League", function()
+game:GetService("TeleportService"):Teleport(Table.Worlds.League)
+end)
+Teleport:Button("Teleport to Practice", function()
+game:GetService("TeleportService"):Teleport(Table.Worlds.Practice)
+end)
