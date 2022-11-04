@@ -1,5 +1,5 @@
+local hiddenUI = get_hidden_gui or gethui
 if get_hidden_gui or gethui then
-	local hiddenUI = get_hidden_gui or gethui
 	for i,v in pairs(hiddenUI():GetChildren()) do
 	     if v:IsA("ScreenGui") and v.Name == "Gui" then
 		 v:Destroy()
@@ -31,7 +31,7 @@ Gui.Name = "Gui"
 Gui.ResetOnSpawn = false
 
 if gethui then
-     Gui.Parent = gethui()
+     Gui.Parent = hiddenUI()
 elseif syn and syn.protect_gui then
      syn.protect_gui(Gui)
      Gui.Parent = cloneref(game:GetService("CoreGui"))
