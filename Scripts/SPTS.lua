@@ -101,7 +101,7 @@ AutoFarm:Toggle("Auto Train BT", function(v)
     if not getgenv().bt then return end
     wait(0.1)
     for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-        if v:IsA("Tool") and v:WaitForChild("BTTool", 0.1) then
+        if v:WaitForChild("BTTool", 0.1) then
             v:Activate()
             end
         end
@@ -114,7 +114,7 @@ while true do
 if not getgenv().fs then return end
 wait(0.1)
 for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-    if v:IsA("Tool") and v:WaitForChild("FSTool", 0.1) then
+    if v:WaitForChild("FSTool", 0.1) then
         v:Activate()
         end
     end
