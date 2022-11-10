@@ -1,12 +1,12 @@
 local Library = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHub/Shit.lua"))()
 
-local Window = Library:CreateWindow("GrannyHub".." - Game not Supported")
+local Window = Library:CreateWindow("GrannyHub".." - Knockout")
 
 local LocalPlayer = Window:Page("LocalPlayer")
 
 local Misc = Window:Page("Misc")
 
-local filename = "DevilHub/GameNotSupported/Config.json"
+local filename = "DevilHub/Knockout - 5984992258/Config.json"
 
 getgenv().Settings = {
 speed = false;
@@ -23,7 +23,7 @@ local HttpService = game:GetService("HttpService");
 if (writefile) then
 json = HttpService:JSONEncode(getgenv().Settings);
 makefolder("DevilHub");
-makefolder("DevilHub/GameNotSupported");
+makefolder("DevilHub/Knockout - 5984992258");
 writefile(filename, json);
 end
 end
@@ -97,12 +97,13 @@ end
 
 function doSwing()
 spawn(function()
-if getgenv().Settings.swing == true then
+while getgenv().Settings.swing == true do
 for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetChildren()) do
     if v:IsA("Tool") and v:WaitForChild("ExpRemote", 0.1) then
         v:WaitForChild("ExpRemote"):FireServer()
     end
 end
+wait(0.1)
 end
 end)
 end
@@ -124,7 +125,6 @@ function doEquip()
             end
         end
     end
-end
 end
 wait(0.1)
 end
