@@ -32,7 +32,8 @@ local games = {
 	["MurderMystery2.lua"] = 142823291,
 	["ReaperSimulator2.lua"] = 4828705676,
 	["BoxingLeague.lua"] = 5134082,
-	["SPTS.lua"] = 11312500614
+	["SPTS.lua"] = 11312500614,
+	["Knockout.lua"] = 5984992258
 }
 
 
