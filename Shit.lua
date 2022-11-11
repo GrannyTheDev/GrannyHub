@@ -125,6 +125,7 @@ function Library:CreateWindow(title)
 	dragui.Text = "Open"
 	dragui.TextScaled = true
 	dragui.TextSize = 40
+	dragui.TextColor3 = Color3.fromRGB(255, 255, 255)
 	dragui.Visible = false
 	dragui.MouseButton1Click:Connect(function()
 		Header.Visible = true
