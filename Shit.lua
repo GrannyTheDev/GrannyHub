@@ -616,5 +616,4 @@ end
 	end
 	return Page
 end
-Library:CreateWindow("hi")
 return Library
