@@ -38,10 +38,10 @@ function getNear()
     local near;
     local nearr = math.huge
 
-    for i, v in pairs(game:GetService("Workspace").Fight.ClientChests:GetChildren()) do
-        if (game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position - v.Root.Position).Magnitude < nearr then
+    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+        if (game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position - v:WaitForChild("HumanoidRootPart").Position).Magnitude < nearr then
             near = v
-            nearr = (game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position - v.Root.Position).Magnitude
+            nearr = (game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position - v:WaitForChild("HumanoidRootPart").Position).Magnitude
         end
     end
 
@@ -98,18 +98,17 @@ end
 
 function doKill()
 spawn(function()
-while getgenv().Settings.kill == do then
+while getgenv().Settings.kill == true do
 local nearest = getNear()
         
-game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = nearest.Root.CFrame * CFrame.new(0,0,10)
+game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = nearest:WaitForChild("HumanoidRootPart").CFrame * CFrame.new(0,0,10)
 wait(.2)
-    
-workspace.Fight.Events.FightAttack:InvokeServer(0,nearest.Name)   
-            
+
+game.Players.LocalPlayer.Character:WaitForChild("Combat"):Activate()
+
 repeat task.wait()
     game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = nearest.Root.CFrame * CFrame.new(0,0,10)
 until nearest.Root == nil or not getgenv().Settings.farm
-end
 wait(0.1)
 end
 end)
@@ -126,6 +125,14 @@ if getgenv().Settings.antiafk == true then
 end
 end)
 end
+
+local kill = LocalPlayer:Toggle("Auto kill", function(v)
+getgenv().Settings.kill = v
+Save()
+if v then
+doKill()
+end
+end)
 
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
 getgenv().Settings.speed = v
@@ -212,6 +219,9 @@ infyield:ChangeState(true)
 end
 if getgenv().Settings.antiafk == true then
 antiafk:ChangeState(true)
+end
+if getgenv().Settings.kill == true then
+kill:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
