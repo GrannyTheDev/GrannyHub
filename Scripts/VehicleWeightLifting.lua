@@ -603,13 +603,15 @@ local Gui = Instance.new("ScreenGui")
 Gui.Name = "Gui"
 Gui.ResetOnSpawn = false
 
-if gethui then
-     Gui.Parent = gethui()
-elseif syn and syn.protect_gui then
-     syn.protect_gui(Gui)
-     Gui.Parent = cloneref(game:GetService("CoreGui"))
+
+if get_hidden_gui or gethui then
+	local hiddenUI = get_hidden_gui or gethui
+	Gui.Parent = hiddenUI()
+elseif (not is_sirhurt_closure) and (syn and syn.protect_gui) then
+	syn.protect_gui(Gui)
+	Gui.Parent = cloneref(game:GetService("CoreGui"))
 else
-     Gui.Parent = cloneref(game:GetService("CoreGui"))
+	Gui.Parent = cloneref(game:GetService("CoreGui"))
 end
 
 Dragger.Name = "Dragger"
