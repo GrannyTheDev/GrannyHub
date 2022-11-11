@@ -13,6 +13,7 @@ speed = false;
 jump = false;
 infyield = false;
 antiafk = false;
+farm = false;
 }
 
 function Save()
@@ -31,6 +32,20 @@ local HttpService = game:GetService("HttpService")
 if (readfile and isfile and isfile(filename)) then
 getgenv().Settings = HttpService:JSONDecode(readfile(filename));
 end
+end
+
+function getNear()
+    local near;
+    local nearr = math.huge
+
+    for i, v in pairs(game:GetService("Workspace").Fight.ClientChests:GetChildren()) do
+        if (game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position - v.Root.Position).Magnitude < nearr then
+            near = v
+            nearr = (game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position - v.Root.Position).Magnitude
+        end
+    end
+
+    return near
 end
 
 function doSpeed()
@@ -92,6 +107,32 @@ if getgenv().Settings.antiafk == true then
 end
 end)
 end
+
+function doFarm()
+spawn(function()
+while getgenv().Settings.farm == true do
+wait(0.1)
+local nearest = getNear()
+        
+game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = nearest.Root.CFrame * CFrame.new(0,0,10)
+wait(.2)
+
+workspace.Fight.Events.FightAttack:InvokeServer(0,nearest.Name)   
+        
+repeat task.wait()
+    game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = nearest.Root.CFrame * CFrame.new(0,0,10)
+until nearest.Root == nil or not getgenv().Settings.farm
+end
+end)
+end
+
+local farm = LocalPlayer:Toggle("AutoFarm", function(v)
+getgenv().Settings.farm = v
+Save()
+if v then
+doFarm()
+end
+end)
 
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
 getgenv().Settings.speed = v
@@ -178,6 +219,9 @@ infyield:ChangeState(true)
 end
 if getgenv().Settings.antiafk == true then
 antiafk:ChangeState(true)
+end
+if getgenv().Settings.farm == true then
+farm:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
