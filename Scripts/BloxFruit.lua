@@ -13,6 +13,7 @@ speed = false;
 jump = false;
 infyield = false;
 antiafk = false;
+kill = false;
 }
 
 function Save()
@@ -31,6 +32,20 @@ local HttpService = game:GetService("HttpService")
 if (readfile and isfile and isfile(filename)) then
 getgenv().Settings = HttpService:JSONDecode(readfile(filename));
 end
+end
+
+function getNear()
+    local near;
+    local nearr = math.huge
+
+    for i, v in pairs(game:GetService("Workspace").Fight.ClientChests:GetChildren()) do
+        if (game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position - v.Root.Position).Magnitude < nearr then
+            near = v
+            nearr = (game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position - v.Root.Position).Magnitude
+        end
+    end
+
+    return near
 end
 
 function doSpeed()
@@ -77,6 +92,25 @@ function doInfYield()
 spawn(function()
 if getgenv().Settings.infyield == true then
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+end
+end)
+end
+
+function doKill()
+spawn(function()
+while getgenv().Settings.kill == do then
+local nearest = getNear()
+        
+game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = nearest.Root.CFrame * CFrame.new(0,0,10)
+wait(.2)
+    
+workspace.Fight.Events.FightAttack:InvokeServer(0,nearest.Name)   
+            
+repeat task.wait()
+    game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = nearest.Root.CFrame * CFrame.new(0,0,10)
+until nearest.Root == nil or not getgenv().Settings.farm
+end
+wait(0.1)
 end
 end)
 end
