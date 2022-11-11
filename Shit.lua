@@ -121,7 +121,7 @@ function Library:CreateWindow(title)
 	dragui.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 	dragui.BorderSizePixel = 0
 	dragui.Position = UDim2.new(0, 0, 0, 0)
-	dragui.Size = UDim2.new(0, 25, 0, 25)
+	dragui.Size = UDim2.new(0, 50, 0, 50)
 	dragui.Text = "Open"
 	dragui.TextScaled = true
 	dragui.TextSize = 40
