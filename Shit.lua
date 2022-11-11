@@ -34,8 +34,10 @@ function Library:CreateWindow(title)
 	local TabHolder = Instance.new("ScrollingFrame")
 	local TabListen = Instance.new("UIListLayout")
 	local CloseButton = Instance.new("TextButton")
+	local MinButton = Instance.new("TextButton")
 	local Title = Instance.new("TextLabel")
 	local Pages = Instance.new("Folder")
+	local dragui = Instance.new("TextButton")
 
 	DarkLib.Name = "DarkLib"
 	DarkLib.ResetOnSpawn = false
@@ -69,9 +71,6 @@ function Library:CreateWindow(title)
 	Header.Position = UDim2.new(0, 552, 0, 159)
 	Header.Size = UDim2.new(0, 470, 0, 30)
 	Header.Active = true
-	
-	local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/DragModule.lua"))()
-	module:Drag(Header)
 
 	Instance.new("UICorner", Header)
 
@@ -110,11 +109,47 @@ function Library:CreateWindow(title)
 	CloseButton.BorderSizePixel = 0
 	CloseButton.Position = UDim2.new(0.94, 0, 0, 2)
 	CloseButton.Size = UDim2.new(0, 25, 0, 25)
-	CloseButton.Text = utf8.char(10060)
+	CloseButton.Text = utf8.char(120)
 	CloseButton.TextScaled = true
-	CloseButton.TextWrapped = true
+	CloseButton.TextSize = 40
 	CloseButton.MouseButton1Click:Connect(function()
 		DarkLib:Destroy()
+	end)
+	
+	dragui.Name = "dragui"
+	dragui.Parent = DarkLib
+	dragui.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+	dragui.BorderSizePixel = 0
+	dragui.Position = UDim2.new(0, 0, 0, 0)
+	dragui.Size = UDim2.new(0, 25, 0, 25)
+	dragui.Text = "Open"
+	dragui.TextScaled = true
+	dragui.TextSize = 40
+	dragui.Visible = false
+	dragui.MouseButton1Click:Connect(function()
+		Header.Visible = true
+		dragui.Visible = false
+	end)
+	
+	Instance.new("UICorner", dragui).CornerRadius = UDim.new(1, 0)
+	
+	local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/DragModule.lua"))()
+	module:Drag(Header)
+	module:Drag(dragui)
+
+	MinButton.Name = "MinButton"
+	MinButton.Parent = Header
+	MinButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	MinButton.BackgroundTransparency = 1.000
+	MinButton.BorderSizePixel = 0
+	MinButton.Position = UDim2.new(0, 410, 0, 0)
+	MinButton.Size = UDim2.new(0, 25, 0, 25)
+	MinButton.Text = utf8.char(45)
+	MinButton.TextSize = 40
+	MinButton.TextWrapped = true
+	MinButton.MouseButton1Click:Connect(function()
+		Header.Visible = false
+		dragui.Visible = true
 	end)
 
 	Title.Name = "Title"
@@ -581,5 +616,5 @@ end
 	end
 	return Page
 end
-
+Library:CreateWindow("hi")
 return Library
