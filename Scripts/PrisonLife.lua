@@ -124,6 +124,46 @@ LocalPlayer:Button("Get Guns", function()
     end
 end)
 
+local autokill = LocalPlayer:Toggle("Auto Kill", function(v)
+    mainRemotes = game.ReplicatedStorage
+    meleeRemote = mainRemotes['meleeEvent']
+    local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/Teleport.lua"))()
+    
+    function getRoot(char)
+        local rootPart = char:WaitForChild('HumanoidRootPart', 0.1) or char:WaitForChild('Torso', 0.1) or char:WaitForChild('UpperTorso', 0.1)
+        return rootPart
+    end
+    
+    function getHum(hum)
+        local humItem = hum:WaitForChild('Humanoid', 0.1)
+        return humItem
+    end
+    
+    repeat wait() until getRoot(game.Players.LocalPlayer.Character)
+	if getHum(game.Players.LocalPlayer.Character).MoveDirection.X = 0 or getHum(game.Players.LocalPlayer.Character).MoveDirection.Y = 0 or getHum(game.Players.LocalPlayer.Character).MoveDirection.Z = 0 then
+    getgenv().kill = v
+    while true do
+    if not getgenv().kill then return end
+    wait(0.1)
+    for i,v in pairs (game:GetService('Players'):GetChildren()) do
+    if v.Name ~= game.Players.LocalPlayer.Name then
+    if getRoot(v.Character) and getHum(v.Character) then
+    if getHum(v.Character).Health ~= 0 then
+    if getHum(game.Players.LocalPlayer.Character).Sit == true then
+    getHum(game.Players.LocalPlayer.Character):ChangeState("Jumping")
+    end
+    module:Tween(TweenInfo.new(0.1), getRoot(v.Character).CFrame)
+    meleeRemote:FireServer(v)
+    end
+    end
+    end
+    end
+    end
+    end
+end)
+
+autokill:Keybind(Enum.KeyCode.K)
+
 local gunmods = LocalPlayer:Toggle("GunMods", function(v)
 getgenv().Settings.gunmods = v
 Save()
