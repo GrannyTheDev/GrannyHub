@@ -39,31 +39,45 @@ end
 function doSpeed()
 spawn(function()
 if getgenv().Settings.speed == true then
-	if hydrogen then
-		local gmt = getrawmetatable(game)
-		local oldindex = gmt.__index
-		setreadonly(gmt, false)
-		gmt.__index = newcclosure(function(a,b)
-			if tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
-				return
-			end
-			return oldindex(self,b)
-		end)
-		
-		while wait() do
-			game.Players.LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 100
+	local mt = getrawmetatable(game)
+	local old = mt.__namecall
+	local protect = newcclosure or protect_function
+
+	setreadonly(mt, false)
+	mt.__namecall = protect(function(self, ...)
+		local method = getnamecallmethod()
+		if method == "Kick" then
+			wait(9e9)
+			return
 		end
-		else
-        local oldnewindex
-oldnewindex = hookmetamethod(game, "__newindex", function(a, b, c)
-    if tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
-        return oldnewindex(a, b, 100)
-    end
-    return oldnewindex(a, b, c)
-end)
-while wait() do
-	game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 100
-end
+		return old(self, ...)
+	end)
+	hookfunction(game.Players.LocalPlayer.Kick,protect(function() wait(9e9) end))
+	
+	local gmt = getrawmetatable(game)
+	local oldindex = gmt.__index
+	setreadonly(gmt, false)
+	gmt.__index = newcclosure(function(a,b)
+		if tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
+			return
+		end
+		return oldindex(self,b)
+	end)
+
+	while wait() do
+		game.Players.LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 100
+	end
+	else
+    local oldnewindex
+	oldnewindex = hookmetamethod(game, "__newindex", function(a, b, c)
+		if tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
+			return oldnewindex(a, b, 100)
+		end
+		return oldnewindex(a, b, c)
+	end)
+	while wait() do
+		game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 100
+	end
 end
 end
 end)
