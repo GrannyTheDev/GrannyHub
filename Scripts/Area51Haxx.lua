@@ -68,11 +68,11 @@ function doSpeed()
 spawn(function()
 if getgenv().Settings.speed == true then
 	local gmt = getrawmetatable(game)
-	setreadonly(gmt, false)
 	local oldindex = gmt.__index
-	gmt.__index = newcclosure(function(self,b)
-		if b == "WalkSpeed" then
-			return 16
+	setreadonly(gmt, false)
+	gmt.__index = newcclosure(function(a,b)
+		if tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
+			return
 		end
 		return oldindex(self,b)
 	end)
