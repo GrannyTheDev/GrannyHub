@@ -14,6 +14,7 @@ jump = false;
 infyield = false;
 antiafk = false;
 kill = false;
+energy = false;
 }
 
 function Save()
@@ -92,6 +93,23 @@ end
 end)
 end
 
+function doEnergy()
+spawn(function()
+if getgenv().Settings.energy == true then
+    local mt = getrawmetatable(game)
+    local oldindex = mt.__index
+    setreadonly(mt, false)
+    mt.__index = newcclosure(function(a, b, c)
+        if tostring(a) == "Energy" and tostring(b) == "Value" then
+            return oldindex(a, b, math.huge)
+        end
+        return oldindex(a, b, c)
+    end)
+    game.Players.LocalPlayer.Character.Energy.Value = math.huge
+end
+end)
+end
+
 function doInfYield()
 spawn(function()
 if getgenv().Settings.infyield == true then
@@ -133,6 +151,14 @@ getgenv().Settings.kill = v
 Save()
 if v then
 doKill()
+end
+end)
+
+local energy = LocalPlayer:Toggle("Inf Energy", function(v)
+getgenv().Settings.energy = v
+Save()
+if v then
+doEnergy()
 end
 end)
 
@@ -224,6 +250,9 @@ antiafk:ChangeState(true)
 end
 if getgenv().Settings.kill == true then
 kill:ChangeState(true)
+end
+if getgenv().Settings.energy == true then
+energy:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
