@@ -52,8 +52,8 @@ if getgenv().Settings.speed == true then
 		end
 		return old(self, ...)
 	end)
-	hookfunction(game.Players.LocalPlayer.Kick,protect(function() wait(9e9) end))
-	
+	hookfunction(game:GetService("Players").LocalPlayer.Kick,protect(function() wait(9e9) end))
+
 	local gmt = getrawmetatable(game)
 	local oldindex = gmt.__index
 	setreadonly(gmt, false)
@@ -65,7 +65,7 @@ if getgenv().Settings.speed == true then
 	end)
 
 	while wait() do
-		game.Players.LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 100
+		game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 100
 	end
 	else
     local oldnewindex
