@@ -47,7 +47,7 @@ oldnewindex = hookmetamethod(game, "__newindex", function(a, b, c)
     return oldnewindex(a, b, c)
 end)
 while wait() do
-	game.Players.LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 60
+	game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 60
 end
 end
 end)
