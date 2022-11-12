@@ -39,6 +39,15 @@ end
 function doSpeed()
 spawn(function()
 if getgenv().Settings.speed == true then
+	if hydrogen then
+		coroutine.wrap(function()
+			while wait() do
+				if game:GetService("Players").LocalPlayer.Character.Humanoid.MoveDirection.X > 0 or game:GetService("Players").LocalPlayer.Character.Humanoid.MoveDirection.X < 0 or game:GetService("Players").LocalPlayer.Character.Humanoid.MoveDirection.Z > 0 or game:GetService("Players").LocalPlayer.Character.Humanoid.MoveDirection.Z < 0 or game:GetService("Players").LocalPlayer.Character.Humanoid.MoveDirection.Y > 0 or game:GetService("Players").LocalPlayer.Character.Humanoid.MoveDirection.Y < 0 then
+				game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame + game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * 5
+			end		
+			end
+			end)()
+		else
         local oldnewindex
 oldnewindex = hookmetamethod(game, "__newindex", function(a, b, c)
     if tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
@@ -48,6 +57,7 @@ oldnewindex = hookmetamethod(game, "__newindex", function(a, b, c)
 end)
 while wait() do
 	game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 100
+end
 end
 end
 end)
