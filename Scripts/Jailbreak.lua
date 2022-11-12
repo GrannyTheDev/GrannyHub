@@ -43,7 +43,7 @@ if getgenv().Settings.speed == true then
 		coroutine.wrap(function()
 			while wait() do
 				if game:GetService("Players").LocalPlayer.Character.Humanoid.MoveDirection.X > 0 or game:GetService("Players").LocalPlayer.Character.Humanoid.MoveDirection.X < 0 or game:GetService("Players").LocalPlayer.Character.Humanoid.MoveDirection.Z > 0 or game:GetService("Players").LocalPlayer.Character.Humanoid.MoveDirection.Z < 0 or game:GetService("Players").LocalPlayer.Character.Humanoid.MoveDirection.Y > 0 or game:GetService("Players").LocalPlayer.Character.Humanoid.MoveDirection.Y < 0 then
-				game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame + game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * 5
+				game:GetService("TweenService"):Create(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(0.01), game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame + game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * 5):Play()
 			end		
 			end
 			end)()
