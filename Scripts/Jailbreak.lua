@@ -39,26 +39,6 @@ end
 function doSpeed()
 spawn(function()
 if getgenv().Settings.speed == true then
-	local gmt = getrawmetatable(game)
-	setreadonly(gmt, false)
-	local oldindex = gmt.__index
-	gmt.__index = newcclosure(function(self,b)
-		if b == "WalkSpeed" then
-			return 16
-		end
-		return oldindex(self,b)
-	end)
-	local gmt = getrawmetatable(game)
-    local oldIndex = gmt.__namecall
-    setreadonly(gmt, false)
-    
-    gmt.__namecall = newcclosure(function(Self, ...)
-    local method = getnamecallmethod()
-    if Self == game.Players.LocalPlayer and tostring(method) == "Kick" then
-       return
-    end
-    return oldIndex(Self, ...)
-    end)
         local oldnewindex
 oldnewindex = hookmetamethod(game, "__newindex", function(a, b, c)
     if tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
