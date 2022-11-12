@@ -42,12 +42,12 @@ if getgenv().Settings.speed == true then
         local oldnewindex
 oldnewindex = hookmetamethod(game, "__newindex", function(a, b, c)
     if tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
-        return oldnewindex(a, b, 60)
+        return oldnewindex(a, b, 100)
     end
     return oldnewindex(a, b, c)
 end)
 while wait() do
-	game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 60
+	game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 100
 end
 end
 end)
