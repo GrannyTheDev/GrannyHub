@@ -38,11 +38,13 @@ function getNear()
     local near;
     local nearr = math.huge
 
-    for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
         if v:WaitForChild("HumanoidRootPart", 0.1) and v:WaitForChild("Humanoid", 0.1) then
-            if (game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position - v:WaitForChild("HumanoidRootPart").Position).Magnitude < nearr then
-                near = v
-                nearr = (game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position - v:WaitForChild("HumanoidRootPart").Position).Magnitude
+            if v:WaitForChild("Humanoid").Health ~= 0 then
+                if (game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position - v:WaitForChild("HumanoidRootPart").Position).Magnitude < nearr then
+                    near = v
+                    nearr = (game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position - v:WaitForChild("HumanoidRootPart").Position).Magnitude
+                end
             end
         end
     end
@@ -102,10 +104,13 @@ function doKill()
 spawn(function()
 while getgenv().Settings.kill == true do
 local nearest = getNear()
-
-repeat task.wait()
-    game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = nearest:WaitForChild("HumanoidRootPart").CFrame + Vector3.new(0,0,-5)
-until nearest:WaitForChild("HumanoidRootPart") == nil or not getgenv().Settings.farm
+for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+    if v:WaitForChild("HumanoidRootPart", 0.1) and v:WaitForChild("Humanoid", 0.1) then
+        if v:WaitForChild("Humanoid").Health ~= 0 then
+            game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = nearest:WaitForChild("HumanoidRootPart").CFrame + Vector3.new(0,0,-5)
+        end
+    end
+end
 wait(0.1)
 end
 end)
