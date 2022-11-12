@@ -1,21 +1,18 @@
 local Library = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHub/Shit.lua"))()
 
-   local Gui = Library:CreateWindow("GrannyHub".." - Jailbreak")
-    
-   local LocalPlayer = Gui:Page("Player")
+local Window = Library:CreateWindow("GrannyHub".." - Prison Life")
 
-   local Misc = Gui:Page("Misc")
+local LocalPlayer = Window:Page("LocalPlayer")
 
-local filename = "DevilHub/Jailbreak - 606849621/Config.json"
+local Misc = Window:Page("Misc")
+
+local filename = "DevilHub/PrisonLife - 155615604/Config.json"
 
 getgenv().Settings = {
 speed = false;
 jump = false;
 infyield = false;
 antiafk = false;
-vehiclespeed = false;
-shiftlock = false;
-ragroll = false;
 }
 
 function Save()
@@ -24,7 +21,7 @@ local HttpService = game:GetService("HttpService");
 if (writefile) then
 json = HttpService:JSONEncode(getgenv().Settings);
 makefolder("DevilHub");
-makefolder("DevilHub/Jailbreak - 606849621");
+makefolder("DevilHub/PrisonLife - 155615604");
 writefile(filename, json);
 end
 end
@@ -39,42 +36,29 @@ end
 function doSpeed()
 spawn(function()
 if getgenv().Settings.speed == true then
-	if hydrogen then
-	local mt = getrawmetatable(game)
-	local old = mt.__namecall
-	local protect = newcclosure or protect_function
-
-	setreadonly(mt, false)
-	mt.__namecall = protect(function(self, ...)
-		local method = getnamecallmethod()
-		if method == "Kick" then
-			wait(9e9)
-			return
-		end
-		return old(self, ...)
-	end)
-	hookfunction(game:GetService("Players").LocalPlayer.Kick,protect(function() wait(9e9) end))
-
-	local oldnewindex
-	oldnewindex = hookmetamethod(game, "__newindex", function(a, b, c)
-		if tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
-			return oldnewindex(a, b, 100)
-		end
-		return oldnewindex(a, b, c)
-	end)
-else
-
+    local gmt = getrawmetatable(game)
+    local oldIndex = gmt.__namecall
+    setreadonly(gmt, false)
+    
+    gmt.__namecall = newcclosure(function(Self, ...)
+    local method = getnamecallmethod()
+    if Self == game.Players.LocalPlayer and tostring(method) == "Kick" then
+       return
+    end
+    return oldIndex(Self, ...)
+    end)
+    
     local oldnewindex
-	oldnewindex = hookmetamethod(game, "__newindex", function(a, b, c)
-		if tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
-			return oldnewindex(a, b, 100)
-		end
-		return oldnewindex(a, b, c)
-	end)
-	while wait() do
-		game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 100
-	end
-end
+    oldnewindex = hookmetamethod(game, "__newindex", function(a, b, c)
+        if tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
+            return oldnewindex(a, b, 100)
+        end
+        return oldnewindex(a, b, c)
+    end)
+         
+    game:GetService("RunService").Stepped:Connect(function()
+        game.Players.LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 100
+    end)
 end
 end)
 end
@@ -109,30 +93,6 @@ end
 end)
 end
 
-function doVehicleSpeed()
-spawn(function()
-if getgenv().Settings.vehiclespeed == true then
-loadstring(game:HttpGet("https://pastebin.com/raw/CVfDBveC"))()
-end
-end)
-end
-
-function doShiftLock()
-spawn(function()
-if getgenv().Settings.shiftlock == true then
-game:GetService('Players').LocalPlayer.DevEnableMouseLock = true
-end
-end)
-end
-
-function doRagroll()
-spawn(function()
-if getgenv().Settings.ragroll == true then
-require(game:GetService("ReplicatedStorage").Module.AlexRagdoll).Ragdoll = function() return wait(9e9) end
-end
-end)
-end
-
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
 getgenv().Settings.speed = v
 Save()
@@ -149,47 +109,25 @@ doJump()
 end
 end)
 
-local vehiclespeed = LocalPlayer:Toggle("Vehicle Speed", function(v)
-getgenv().Settings.vehiclespeed = v
-Save()
-if v then
-doVehicleSpeed()
-end
-end)
+local NoclipBtn = LocalPlayer:Toggle("Noclip", function(v)
+    local Workspace = game:GetService("Workspace")
+    local CoreGui = game:GetService("CoreGui")
+    local Players = game:GetService("Players")
+    local Plr = Players.LocalPlayer
+    
+                if v == true then
+    Stepped = game:GetService("RunService").Stepped:Connect(function()
+                    for i, v in pairs(Workspace[Plr.Name]:GetChildren()) do
+                    if v:IsA("BasePart") then
+                    v.CanCollide = false
+                    end end end)
+                elseif v == false then
+                    Stepped:Disconnect()
+    end
+    end)
 
-local shiftlock = LocalPlayer:Toggle("Enable ShiftLock", function(v)
-getgenv().Settings.shiftlock = v
-Save()
-if v then
-doShiftLock()
-end
-end)
-
-local ragroll = LocalPlayer:Toggle("No Ragroll", function(v)
-getgenv().Settings.ragroll = v
-Save()
-if v then
-doRagroll()
-end
-end)
-
-LocalPlayer:Button("Get Guns", function()
-for i,v in pairs(workspace.Givers:GetDescendants()) do
-if v:IsA("ClickDetector") then
-if v.Parent.Item.Value == "Pistol" then
-fireclickdetector(v)
-end
-if v.Parent.Item.Value == "Shotgun" then
-fireclickdetector(v)
-end
-if v.Parent.Item.Value == "RifleSWAT" then
-fireclickdetector(v)
-end
-end
-end
-end)
-
-Misc:Button("Rejoin", function()
+    NoclipBtn:Keybind(Enum.KeyCode.LeftAlt)
+ Misc:Button("Rejoin", function()
      game:GetService("TeleportService"):Teleport(game.PlaceId)
 end)
 
@@ -240,15 +178,6 @@ infyield:ChangeState(true)
 end
 if getgenv().Settings.antiafk == true then
 antiafk:ChangeState(true)
-end
-if getgenv().Settings.vehiclespeed == true then
-vehiclespeed:ChangeState(true)
-end
-if getgenv().Settings.shiftlock == true then
-shiftlock:ChangeState(true)
-end
-if getgenv().Settings.ragroll == true then
-ragroll:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
