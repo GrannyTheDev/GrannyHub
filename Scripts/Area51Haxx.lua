@@ -74,7 +74,7 @@ if getgenv().Settings.speed == true then
 		if tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
 			return
 		end
-		return oldindex(self,b)
+		return oldindex(a,b)
 	end)
 
 	while wait() do

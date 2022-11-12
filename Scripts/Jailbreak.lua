@@ -58,10 +58,10 @@ if getgenv().Settings.speed == true then
 	local oldindex = gmt.__index
 	setreadonly(gmt, false)
 	gmt.__index = newcclosure(function(a,b)
-		if not checkcaller() and tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
+		if tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
 			return
 		end
-		return oldindex(self,b)
+		return oldindex(a,b)
 	end)
 
     local oldnewindex
