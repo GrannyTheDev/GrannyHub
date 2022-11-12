@@ -39,9 +39,11 @@ function getNear()
     local nearr = math.huge
 
     for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-        if (game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position - v:WaitForChild("HumanoidRootPart").Position).Magnitude < nearr then
-            near = v
-            nearr = (game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position - v:WaitForChild("HumanoidRootPart").Position).Magnitude
+        if v:WaitForChild("Root", 0.1) and v:WaitForChild("Humanoid", 0.1) then
+            if (game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position - v:WaitForChild("HumanoidRootPart").Position).Magnitude < nearr then
+                near = v
+                nearr = (game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position - v:WaitForChild("HumanoidRootPart").Position).Magnitude
+            end
         end
     end
 
@@ -104,11 +106,9 @@ local nearest = getNear()
 game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = nearest:WaitForChild("HumanoidRootPart").CFrame * CFrame.new(0,0,10)
 wait(.2)
 
-game.Players.LocalPlayer.Character:WaitForChild("Combat"):Activate()
-
 repeat task.wait()
-    game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = nearest.Root.CFrame * CFrame.new(0,0,10)
-until nearest.Root == nil or not getgenv().Settings.farm
+    game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame = nearest:WaitForChild("Root").CFrame * CFrame.new(0,0,10)
+until nearest:WaitForChild("Root") == nil or not getgenv().Settings.farm
 wait(0.1)
 end
 end)
