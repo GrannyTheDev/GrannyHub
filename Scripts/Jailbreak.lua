@@ -68,7 +68,7 @@ else
 
     local oldnewindex
 	oldnewindex = hookmetamethod(game, "__newindex", function(a, b, c)
-		if not checkcaller() and tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
+		if tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
 			return oldnewindex(a, b, 100)
 		end
 		return oldnewindex(a, b, c)
