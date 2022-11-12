@@ -13,6 +13,7 @@ speed = false;
 jump = false;
 infyield = false;
 antiafk = false;
+gunmods = false;
 }
 
 function Save()
@@ -32,6 +33,8 @@ if (readfile and isfile and isfile(filename)) then
 getgenv().Settings = HttpService:JSONDecode(readfile(filename));
 end
 end
+
+workspace.Remote.TeamEvent:FireServer("Medium stone grey")
 
 function doSpeed()
 spawn(function()
@@ -92,6 +95,42 @@ if getgenv().Settings.antiafk == true then
 end
 end)
 end
+
+function doGunMods()
+spawn(function()
+while getgenv().Settings.gunmods == true do
+    for i,v in pairs(getgc(true)) do
+		if type(v) == 'table' then
+			if rawget(v, 'MaxAmmo') then
+				v.AutoFire = true
+				v.FireRate = 0.1
+				v.MaxAmmo = math.huge
+				v.CurrentAmmo = math.huge
+				v.StoredAmmo = math.huge
+                v.Damage = 100
+            end
+        end
+    end
+    wait(1)
+end
+end)
+end
+
+LocalPlayer:Button("Get Guns", function()
+    for i,v in pairs(game:GetService("Workspace")["Prison_ITEMS"].giver:GetChildren()) do
+        if v.Name == "Remington 870" or v.Name == "AK-47" or v.Name == "M9" then
+            game:GetService("Workspace").Remote.ItemHandler:InvokeServer(v["ITEMPICKUP"])
+        end
+    end
+end)
+
+local gunmods = LocalPlayer:Toggle("GunMods", function(v)
+getgenv().Settings.gunmods = v
+Save()
+if v then
+doGunMods()
+end
+end)
 
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
 getgenv().Settings.speed = v
@@ -178,6 +217,9 @@ infyield:ChangeState(true)
 end
 if getgenv().Settings.antiafk == true then
 antiafk:ChangeState(true)
+end
+if getgenv().Settings.gunmods == true then
+gunmods:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
