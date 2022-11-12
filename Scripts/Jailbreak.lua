@@ -58,18 +58,15 @@ if getgenv().Settings.speed == true then
 	local oldindex = gmt.__index
 	setreadonly(gmt, false)
 	gmt.__index = newcclosure(function(a,b)
-		if tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
+		if not checkcaller() and tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
 			return
 		end
 		return oldindex(self,b)
 	end)
 
-	while wait() do
-		game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 100
-	end
     local oldnewindex
 	oldnewindex = hookmetamethod(game, "__newindex", function(a, b, c)
-		if tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
+		if not checkcaller() and tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
 			return oldnewindex(a, b, 100)
 		end
 		return oldnewindex(a, b, c)
