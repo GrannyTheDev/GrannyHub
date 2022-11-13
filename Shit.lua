@@ -609,6 +609,7 @@ end
 			TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 			TextButton.TextSize = 18.000
 			TextButton.Text = txt or "Text"
+			TextButton.TextXAlignment = Enum.TextXAlignment.Left
 
 			Instance.new("UICorner", TextButton)
 

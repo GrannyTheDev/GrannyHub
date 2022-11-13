@@ -4,6 +4,8 @@ local Window = Library:CreateWindow("GrannyHub".." - Prison Life")
 
 local LocalPlayer = Window:Page("LocalPlayer")
 
+local Admin = Window:Page("Admin")
+
 local Misc = Window:Page("Misc")
 
 local filename = "DevilHub/PrisonLife - 155615604/Config.json"
@@ -34,7 +36,16 @@ getgenv().Settings = HttpService:JSONDecode(readfile(filename));
 end
 end
 
-workspace.Remote.TeamEvent:FireServer("Medium stone grey")
+local location = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+wait(0.1)
+local A_1 = game.Players.LocalPlayer
+local A_2 = "Really Black"
+local Event = game:GetService("Workspace").Remote.loadchar
+Event:InvokeServer(A_1, A_2)
+wait(0.1)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = location
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/XTheMasterX/Scripts/Main/PrisonLife"))()
 
 function doSpeed()
 spawn(function()
@@ -116,6 +127,32 @@ end
 end)
 end
 
+Admin:Label("Admin Commands")
+Admin:Label(":rank player — gives player commands")
+Admin:Label(":kill player — kills player")
+Admin:Label(":sa player — spam arrest player")
+Admin:Label(":crim player — makes player criminal")
+Admin:Label(":bring player — brings player")
+Admin:Label(":goto player — makes you go to player")
+Admin:Label(":void player — voids player")
+Admin:Label(":key player — gives player keycard")
+Admin:Label(":cuffs player — gives player handcuffs")
+Admin:Label(":trap player — traps player")
+Admin:Label(":yard player — brings player to yard")
+Admin:Label(":base player — brings player to criminal base")
+Admin:Label(":prison player — brings player to prison")
+Admin:Label(":lk — loopkills player")
+Admin:Label(":aura — gives player kill aura")
+Admin:Label(":virus — makes anyone who touch player dies")
+Admin:Label(":oof — kills everyone")
+Admin:Label(":spike — lag spike")
+Admin:Label(":bspike — big lag spike")
+Admin:Label(":lag — lags the server")
+Admin:Label(":crash — crashes the server")
+Admin:Label(":tk player — teleport you to player and kills them")
+Admin:Label(":ltk player — loops tpkill")
+Admin:Label(":logs — prints all used cmds")
+
 local getguns = LocalPlayer:Button("Get Guns (Keybind: E)", function()
     for i,v in pairs(game:GetService("Workspace")["Prison_ITEMS"].giver:GetChildren()) do
         if v.Name == "Remington 870" or v.Name == "AK-47" or v.Name == "M9" then
@@ -130,6 +167,84 @@ local getguns = LocalPlayer:Button("Get Guns (Keybind: E)", function()
 end)
 
 getguns:Keybind(Enum.KeyCode.E)
+
+local mod = LocalPlayer:Button("Mod Knife and Hammer", function()
+mainRemotes = game.ReplicatedStorage
+meleeRemote = mainRemotes['meleeEvent']
+mouse = game.Players.LocalPlayer:GetMouse()
+punching = false
+cooldown = false
+ 
+function punch()
+cooldown = true
+local part = Instance.new("Part", game.Players.LocalPlayer.Character)
+part.Transparency = 1
+part.Size = Vector3.new(5, 2, 3)
+part.CanCollide = false
+local w1 = Instance.new("Weld", part)
+w1.Part0 = game.Players.LocalPlayer.Character.Torso
+w1.Part1 = part
+w1.C1 = CFrame.new(0,0,2)
+part.Touched:connect(function(hit)
+if game.Players:FindFirstChild(hit.Parent.Name) then
+local plr = game.Players:FindFirstChild(hit.Parent.Name) 
+if plr.Name ~= game.Players.LocalPlayer.Name then
+part:Destroy()
+ 
+for i = 1,100 do
+meleeRemote:FireServer(plr)
+end
+end
+end
+end)
+ 
+wait(1)
+cooldown = false
+part:Destroy()
+end
+
+mouse.KeyDown:connect(function(key)
+if cooldown == false then
+if key:lower() == "f" then
+punch()
+end
+end
+end)
+
+mainRemotes = game.ReplicatedStorage
+meleeRemote = mainRemotes['meleeEvent']
+
+    for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetChildren()) do
+        if v:IsA("Tool") or v.Name == "Hammer" then
+            for i,k in pairs(game:GetService('Players'):GetChildren()) do
+                if k.Name ~= game.Players.LocalPlayer.Name then
+                    v.Activated:Connect(function()
+                        for i = 1,100 do
+                            meleeRemote:FireServer(k)
+                        end
+                    end)
+                end
+            end
+        end
+    end
+
+    mainRemotes = game.ReplicatedStorage
+    meleeRemote = mainRemotes['meleeEvent']
+
+    for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetChildren()) do
+        if v:IsA("Tool") or v.Name == "Crude Knife" then
+            for i,k in pairs(game:GetService('Players'):GetChildren()) do
+                if k.Name ~= game.Players.LocalPlayer.Name then
+                    v.Activated:Connect(function()
+                        for i = 1,100 do
+                            meleeRemote:FireServer(k)
+                        end
+                    end)
+                end
+            end
+        end
+    end
+end)
 
 getgenv().plr = ""
 
@@ -342,84 +457,15 @@ print(i,v)
 end
 
 while wait() do
-if game.Players.LocalPlayer.Character.Humanoid.Health <= 15 or game.Players.LocalPlayer.Character.Humanoid.Health == 0 then
-    local location = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
-    local A_1 = "\66\114\111\121\111\117\98\97\100\100"
-    local Event = game:GetService("Workspace").Remote.loadchar
-    Event:InvokeServer(A_1)
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = location
-end
-end
-
-mainRemotes = game.ReplicatedStorage
-meleeRemote = mainRemotes['meleeEvent']
-mouse = game.Players.LocalPlayer:GetMouse()
-punching = false
-cooldown = false
- 
-function punch()
-cooldown = true
-local part = Instance.new("Part", game.Players.LocalPlayer.Character)
-part.Transparency = 1
-part.Size = Vector3.new(5, 2, 3)
-part.CanCollide = false
-local w1 = Instance.new("Weld", part)
-w1.Part0 = game.Players.LocalPlayer.Character.Torso
-w1.Part1 = part
-w1.C1 = CFrame.new(0,0,2)
-part.Touched:connect(function(hit)
-if game.Players:FindFirstChild(hit.Parent.Name) then
-local plr = game.Players:FindFirstChild(hit.Parent.Name) 
-if plr.Name ~= game.Players.LocalPlayer.Name then
-part:Destroy()
- 
-for i = 1,100 do
-meleeRemote:FireServer(plr)
-end
-end
-end
-end)
- 
-wait(1)
-cooldown = false
-part:Destroy()
-end
-
-mouse.KeyDown:connect(function(key)
-if cooldown == false then
-if key:lower() == "f" then
-punch()
-end
-end
-end)
-
-mainRemotes = game.ReplicatedStorage
-meleeRemote = mainRemotes['meleeEvent']
-
-    for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetChildren()) do
-        if v:IsA("Tool") or v.Name == "Hammer" then
-            for i,k in pairs(game:GetService('Players'):GetChildren()) do
-                if k.Name ~= game.Players.LocalPlayer.Name then
-                    v.Activated:Connect(function()
-                        for i = 1,100 do
-                            meleeRemote:FireServer(k)
-                        end
-                    end)
-                end
-            end
-        end
+    if game.Players.LocalPlayer.Character.Humanoid.Health <= 15 or game.Players.LocalPlayer.Status.isArrested.Value == true then
+        local location = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+        wait(0.1)
+        local A_1 = game.Players.LocalPlayer.Name
+        local Event = game:GetService("Workspace").Remote.loadchar
+        Event:InvokeServer(A_1)
+        wait(0.1)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = location
     end
+end
 
-    for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetChildren()) do
-        if v:IsA("Tool") or v.Name == "Crude Knife" then
-            for i,k in pairs(game:GetService('Players'):GetChildren()) do
-                if k.Name ~= game.Players.LocalPlayer.Name then
-                    v.Activated:Connect(function()
-                        for i = 1,100 do
-                            meleeRemote:FireServer(k)
-                        end
-                    end)
-                end
-            end
-        end
-    end
+mod:Activate()
