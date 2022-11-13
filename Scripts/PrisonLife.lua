@@ -398,7 +398,9 @@ end)
             for i,v in pairs (game:GetService('Players'):GetChildren()) do
                 if v.Name ~= game.Players.LocalPlayer.Name then
                     v.Activated:Connect(function()
-                        meleeRemote:FireServer(v)
+                        for i = 1,100 do
+                            meleeRemote:FireServer(v)
+                        end
                     end)
                 end
             end
@@ -410,7 +412,9 @@ end)
             for i,v in pairs (game:GetService('Players'):GetChildren()) do
                 if v.Name ~= game.Players.LocalPlayer.Name then
                     v.Activated:Connect(function()
-                        meleeRemote:FireServer(v)
+                        for i = 1 1,100 do
+                            meleeRemote:FireServer(v)
+                        end
                     end)
                 end
             end
