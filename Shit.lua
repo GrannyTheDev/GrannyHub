@@ -570,22 +570,23 @@ end
 				pcall(callback, toggled)
 			end
 			function ToggleFunction:Keybind(Bind)
-				UIS.InputBegan:Connect(function(key, gameProcessedEvent)
-					if key.KeyCode == Bind then
-						if toggled == false then
-							TS:Create(Background, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(47, 203, 85)}):Play()
-					        TS:Create(Toggle, TweenInfo.new(0.25), {Position = UDim2.new(0, 231, 0, 10)}):Play()
-				        elseif toggled == true then
-					        TS:Create(Background, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(210, 210, 210)}):Play()
-					        TS:Create(Toggle, TweenInfo.new(0.25), {Position = UDim2.new(0, 260, 0, 10)}):Play()
+				game:GetService("UserInputService").InputBegan:connect(function(current, ok) 
+					if not ok then 
+						if current.KeyCode == Bind then
+							if toggled == false then
+								TS:Create(Background, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(47, 203, 85)}):Play()
+								TS:Create(Toggle, TweenInfo.new(0.25), {Position = UDim2.new(0, 231, 0, 10)}):Play()
+							elseif toggled == true then
+								TS:Create(Background, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(210, 210, 210)}):Play()
+								TS:Create(Toggle, TweenInfo.new(0.25), {Position = UDim2.new(0, 260, 0, 10)}):Play()
+							end
+							toggled = not toggled
+							pcall(callback, toggled)
 						end
-						toggled = not toggled
-						pcall(callback, toggled)
-					end
-				end)
+					end)
+				end
+				return ToggleFunction
 			end
-			return ToggleFunction
-		end
 		function Elements:Label(txt)
 			local LabelFunction = {}
 			local Button = Instance.new("Frame")
