@@ -116,13 +116,15 @@ end
 end)
 end
 
-LocalPlayer:Button("Get Guns", function()
+local getguns = LocalPlayer:Button("Get Guns", function()
     for i,v in pairs(game:GetService("Workspace")["Prison_ITEMS"].giver:GetChildren()) do
         if v.Name == "Remington 870" or v.Name == "AK-47" or v.Name == "M9" then
             game:GetService("Workspace").Remote.ItemHandler:InvokeServer(v["ITEMPICKUP"])
         end
     end
 end)
+
+getguns:Keybind(Enum.KeyCode.E)
 
 getgenv().plr = ""
 
@@ -256,6 +258,7 @@ local NoclipBtn = LocalPlayer:Toggle("Noclip", function(v)
     end)
 
     NoclipBtn:Keybind(Enum.KeyCode.LeftAlt)
+
  Misc:Button("Rejoin", function()
      game:GetService("TeleportService"):Teleport(game.PlaceId)
 end)
