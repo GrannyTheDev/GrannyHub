@@ -39,7 +39,6 @@ end
 function doSpeed()
 spawn(function()
 if getgenv().Settings.speed == true then
-	if hydrogen then
 	local mt = getrawmetatable(game)
 	local old = mt.__namecall
 	local protect = newcclosure or protect_function
@@ -62,19 +61,10 @@ if getgenv().Settings.speed == true then
 		end
 		return oldnewindex(a, b, c)
 	end)
-else
 
-    local oldnewindex
-	oldnewindex = hookmetamethod(game, "__newindex", function(a, b, c)
-		if tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
-			return oldnewindex(a, b, 100)
-		end
-		return oldnewindex(a, b, c)
-	end)
-	while wait() do
+    game:GetService("RunService").Stepped:Connect(function()
 		game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 100
-	end
-end
+	end)
 end
 end)
 end

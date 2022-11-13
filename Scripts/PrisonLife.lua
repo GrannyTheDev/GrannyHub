@@ -494,8 +494,9 @@ while wait() do
         local location = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
         wait(0.1)
         local A_1 = game.Players.LocalPlayer.Name
+        local A_2 = "Really Black"
         local Event = game:GetService("Workspace").Remote.loadchar
-        Event:InvokeServer(A_1)
+        Event:InvokeServer(A_1, A_2)
         wait(0.1)
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = location
     end
