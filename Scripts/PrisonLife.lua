@@ -490,7 +490,7 @@ print(i,v)
 end
 
 while wait() do
-    if game.Players.LocalPlayer.Character.Humanoid.Health <= 15 or game.Players.LocalPlayer.Status.isArrested.Value == true then
+    if game.Players.LocalPlayer.Character.Humanoid.Health <= 15 then
         local location = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
         wait(0.1)
         local A_1 = game.Players.LocalPlayer.Name
