@@ -279,9 +279,9 @@ end
 				Click.Text = txt or "NewText"
 			end
 			function ButtonFunction:Keybind(Bind)
-				UIS.InputBegan:Connect(function(key, ok)
-					if not ok then
-						if key.KeyCode == Bind then
+				game:GetService("UserInputService").InputBegan:connect(function(current, ok) 
+					if not ok then 
+						if current.KeyCode == Bind then
 							pcall(callback)
 						end
 					end
