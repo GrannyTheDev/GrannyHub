@@ -47,8 +47,6 @@ Event:InvokeServer(A_1, A_2)
 wait(0.1)
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = location
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/XTheMasterX/Scripts/Main/PrisonLife"))()
-
 function doSpeed()
 spawn(function()
 if getgenv().Settings.speed == true then
@@ -161,45 +159,30 @@ Teleport:Button("Criminal Base Inside", function()
 end)
 
 Admin:Label("Admin Commands")
-Admin:Label(":rank player — gives player commands")
-Admin:Label(":kill player — kills player")
-Admin:Label(":sa player — spam arrest player")
-Admin:Label(":crim player — makes player criminal")
-Admin:Label(":bring player — brings player")
-Admin:Label(":goto player — makes you go to player")
-Admin:Label(":void player — voids player")
-Admin:Label(":key player — gives player keycard")
-Admin:Label(":cuffs player — gives player handcuffs")
-Admin:Label(":trap player — traps player")
-Admin:Label(":yard player — brings player to yard")
-Admin:Label(":base player — brings player to criminal base")
-Admin:Label(":prison player — brings player to prison")
-Admin:Label(":lk — loopkills player")
-Admin:Label(":aura — gives player kill aura")
-Admin:Label(":virus — makes anyone who touch player dies")
-Admin:Label(":oof — kills everyone")
-Admin:Label(":spike — lag spike")
-Admin:Label(":bspike — big lag spike")
-Admin:Label(":lag — lags the server")
-Admin:Label(":crash — crashes the server")
-Admin:Label(":tk player — teleport you to player and kills them")
-Admin:Label(":ltk player — loops tpkill")
-Admin:Label(":logs — prints all used cmds")
-
-local getguns = LocalPlayer:Button("Get Guns (Keybind: E)", function()
-    for i,v in pairs(game:GetService("Workspace")["Prison_ITEMS"].giver:GetChildren()) do
-        if v.Name == "Remington 870" or v.Name == "AK-47" or v.Name == "M9" then
-            game:GetService("Workspace").Remote.ItemHandler:InvokeServer(v["ITEMPICKUP"])
-        end
-    end
-    for i,v in pairs(game.Workspace["Prison_ITEMS"].single:GetChildren()) do
-        if v.Name == "Hammer" or v.Name == "Crude Knife" then
-            game:GetService("Workspace").Remote.ItemHandler:InvokeServer(v["ITEMPICKUP"])
-        end
-    end
-end)
-
-getguns:Keybind(Enum.KeyCode.E)
+Admin:Label(":rank player - gives player commands")
+Admin:Label(":kill player - kills player")
+Admin:Label(":sa player - spam arrest player")
+Admin:Label(":crim player - makes player criminal")
+Admin:Label(":bring player - brings player")
+Admin:Label(":goto player - makes you go to player")
+Admin:Label(":void player - voids player")
+Admin:Label(":key player - gives player keycard")
+Admin:Label(":cuffs player - gives player handcuffs")
+Admin:Label(":trap player - traps player")
+Admin:Label(":yard player - brings player to yard")
+Admin:Label(":base player - brings player to criminal base")
+Admin:Label(":prison player - brings player to prison")
+Admin:Label(":lk - loopkills player")
+Admin:Label(":aura - gives player kill aura")
+Admin:Label(":virus - makes anyone who touch player dies")
+Admin:Label(":oof - kills everyone")
+Admin:Label(":spike - lag spike")
+Admin:Label(":bspike - big lag spike")
+Admin:Label(":lag - lags the server")
+Admin:Label(":crash - crashes the server")
+Admin:Label(":tk player - teleport you to player and kills them")
+Admin:Label(":ltk player - loops tpkill")
+Admin:Label(":logs - prints all used cmds")
 
 local mod = LocalPlayer:Button("Mod Knife and Hammer", function()
 mainRemotes = game.ReplicatedStorage
@@ -278,96 +261,6 @@ meleeRemote = mainRemotes['meleeEvent']
         end
     end
 end)
-
-getgenv().plr = ""
-
-LocalPlayer:Box("Player Name", "Input Player Name", function(v)
-   getgenv().plr = v
-end)
-
-local killplr = LocalPlayer:Toggle("Auto Kill Player", function(v)
-    mainRemotes = game.ReplicatedStorage
-    meleeRemote = mainRemotes['meleeEvent']
-    local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/Teleport.lua"))()
-    
-    function getRoot(char)
-        local rootPart = char:WaitForChild('HumanoidRootPart', 0.1) or char:WaitForChild('Torso', 0.1) or char:WaitForChild('UpperTorso', 0.1)
-        return rootPart
-    end
-    
-    function getHum(hum)
-        local humItem = hum:WaitForChild('Humanoid', 0.1)
-        return humItem
-    end
-    
-    repeat wait() until getRoot(game.Players.LocalPlayer.Character)
-    getgenv().kill = v
-    while true do
-    if not getgenv().kill then return end
-    wait(0.1)
-    for i,v in pairs(game.Teams:GetChildren()) do
-    if v.Name ~= "Neutral" then
-    for i,v in pairs (game:GetService('Players'):GetChildren()) do
-    if v.Name ~= game.Players.LocalPlayer.Name then
-    if v.Name == getgenv().plr then
-    if getRoot(v.Character) and getHum(v.Character) then
-    if getHum(v.Character).Health ~= 0 then
-    if getHum(game.Players.LocalPlayer.Character).Sit == true then
-    getHum(game.Players.LocalPlayer.Character):ChangeState("Jumping")
-    end
-    module:Tween(TweenInfo.new(0.1), getRoot(v.Character).CFrame)
-    meleeRemote:FireServer(v)
-    end
-    end
-    end
-    end
-    end
-end
-end
-end
-end)
-
-local autokill = LocalPlayer:Toggle("Auto Kill (Keybind: K)", function(v)
-    mainRemotes = game.ReplicatedStorage
-    meleeRemote = mainRemotes['meleeEvent']
-    local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/Teleport.lua"))()
-    
-    function getRoot(char)
-        local rootPart = char:WaitForChild('HumanoidRootPart', 0.1) or char:WaitForChild('Torso', 0.1) or char:WaitForChild('UpperTorso', 0.1)
-        return rootPart
-    end
-    
-    function getHum(hum)
-        local humItem = hum:WaitForChild('Humanoid', 0.1)
-        return humItem
-    end
-    
-    repeat wait() until getRoot(game.Players.LocalPlayer.Character)
-    getgenv().kill = v
-    while true do
-    if not getgenv().kill then return end
-    wait(0.1)
-    for i,v in pairs(game.Teams:GetChildren()) do
-    if v.Name ~= "Neutral" then
-    for i,v in pairs (game:GetService('Players'):GetChildren()) do
-    if v.Name ~= game.Players.LocalPlayer.Name then
-    if getRoot(v.Character) and getHum(v.Character) then
-    if getHum(v.Character).Health ~= 0 then
-    if getHum(game.Players.LocalPlayer.Character).Sit == true then
-    getHum(game.Players.LocalPlayer.Character):ChangeState("Jumping")
-    end
-    module:Tween(TweenInfo.new(0.1), getRoot(v.Character).CFrame)
-    meleeRemote:FireServer(v)
-    end
-    end
-    end
-    end
-    end
-    end
-    end
-end)
-
-autokill:Keybind(Enum.KeyCode.K)
 
 local KillAura = LocalPlayer:Toggle("Kill Aura (Keybind: Q)", function(v)
     getgenv().killaura = v
@@ -503,3 +396,5 @@ while wait() do
 end
 
 mod:Activate()
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/XTheMasterX/Scripts/Main/PrisonLife"))()
