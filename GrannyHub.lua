@@ -36,7 +36,8 @@ local games = {
 	["Knockout.lua"] = 5984992258,
 	["WeaponFightingSimulator.lua"] = 8554378337,
 	["BloxFruit.lua"] = 2753915549,
-	["PrisonLife.lua"] = 155615604
+	["PrisonLife.lua"] = 155615604,
+	["UltimateLiftingSimulator.lua"] = 2472820296
 }
 
 
