@@ -382,7 +382,7 @@ for i,v in pairs(getgenv().Settings) do
 print(i,v)
 end
 
-while wait() do
+while wait(0.1) do
     if game.Players.LocalPlayer.Character.Humanoid.Health <= 15 then
         local location = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
         wait(0.1)
