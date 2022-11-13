@@ -119,9 +119,14 @@ end
 local getguns = LocalPlayer:Button("Get Guns (Keybind: E)", function()
     for i,v in pairs(game:GetService("Workspace")["Prison_ITEMS"].giver:GetChildren()) do
         if v.Name == "Remington 870" or v.Name == "AK-47" or v.Name == "M9" then
-        game:GetService("Workspace").Remote.ItemHandler:InvokeServer(v["ITEMPICKUP"])
+            game:GetService("Workspace").Remote.ItemHandler:InvokeServer(v["ITEMPICKUP"])
         end
+    end
+    for i,v in pairs(game.Workspace["Prison_ITEMS"].single:GetChildren()) do
+        if v.Name == "Hammer" or v.Name == "Crude Knife" then
+            game:GetService("Workspace").Remote.ItemHandler:InvokeServer(v["ITEMPICKUP"])
         end
+    end
 end)
 
 getguns:Keybind(Enum.KeyCode.E)
@@ -233,78 +238,6 @@ end)
 
 KillAura:Keybind(Enum.KeyCode.Q)
 
-LocalPlayer:Button("Super Punch", function()
-mainRemotes = game.ReplicatedStorage
-meleeRemote = mainRemotes['meleeEvent']
-mouse = game.Players.LocalPlayer:GetMouse()
-punching = false
-cooldown = false
- 
-function punch()
-cooldown = true
-local part = Instance.new("Part", game.Players.LocalPlayer.Character)
-part.Transparency = 1
-part.Size = Vector3.new(5, 2, 3)
-part.CanCollide = false
-local w1 = Instance.new("Weld", part)
-w1.Part0 = game.Players.LocalPlayer.Character.Torso
-w1.Part1 = part
-w1.C1 = CFrame.new(0,0,2)
-part.Touched:connect(function(hit)
-if game.Players:FindFirstChild(hit.Parent.Name) then
-local plr = game.Players:FindFirstChild(hit.Parent.Name) 
-if plr.Name ~= game.Players.LocalPlayer.Name then
-part:Destroy()
- 
-for i = 1,100 do
-meleeRemote:FireServer(plr)
-end
-end
-end
-end)
- 
-wait(1)
-cooldown = false
-part:Destroy()
-end
-
-mouse.KeyDown:connect(function(key)
-if cooldown == false then
-if key:lower() == "f" then
-punch()
-end
-end
-end)
-end)
-
-LocalPlayer:Button("Super Hammer", function()
-    for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetChildren()) do
-        if v:IsA("Tool") or v.Name == "Hammer" then
-            for i,v in pairs (game:GetService('Players'):GetChildren()) do
-                if v.Name ~= game.Players.LocalPlayer.Name then
-                    v.Activated:Connect(function()
-                        meleeRemote:FireServer(v)
-                    end)
-                end
-            end
-        end
-    end
-end)
-
-LocalPlayer:Button("Super Knife", function()
-    for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetChildren()) do
-        if v:IsA("Tool") or v.Name == "Crude Knife" then
-            for i,v in pairs (game:GetService('Players'):GetChildren()) do
-                if v.Name ~= game.Players.LocalPlayer.Name then
-                    v.Activated:Connect(function()
-                        meleeRemote:FireServer(v)
-                    end)
-                end
-            end
-        end
-    end
-end)
-
 local gunmods = LocalPlayer:Toggle("GunMods", function(v)
 getgenv().Settings.gunmods = v
 Save()
@@ -409,7 +342,7 @@ print(i,v)
 end
 
 while wait() do
-if game.Players.LocalPlayer.Character.Humanoid.Health <= 15 and game.Players.LocalPlayer.Character.Humanoid.Health == 0 then
+if game.Players.LocalPlayer.Character.Humanoid.Health <= 15 or game.Players.LocalPlayer.Character.Humanoid.Health == 0 then
     local location = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
     local A_1 = "\66\114\111\121\111\117\98\97\100\100"
     local Event = game:GetService("Workspace").Remote.loadchar
@@ -417,3 +350,69 @@ if game.Players.LocalPlayer.Character.Humanoid.Health <= 15 and game.Players.Loc
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = location
 end
 end
+
+mainRemotes = game.ReplicatedStorage
+meleeRemote = mainRemotes['meleeEvent']
+mouse = game.Players.LocalPlayer:GetMouse()
+punching = false
+cooldown = false
+ 
+function punch()
+cooldown = true
+local part = Instance.new("Part", game.Players.LocalPlayer.Character)
+part.Transparency = 1
+part.Size = Vector3.new(5, 2, 3)
+part.CanCollide = false
+local w1 = Instance.new("Weld", part)
+w1.Part0 = game.Players.LocalPlayer.Character.Torso
+w1.Part1 = part
+w1.C1 = CFrame.new(0,0,2)
+part.Touched:connect(function(hit)
+if game.Players:FindFirstChild(hit.Parent.Name) then
+local plr = game.Players:FindFirstChild(hit.Parent.Name) 
+if plr.Name ~= game.Players.LocalPlayer.Name then
+part:Destroy()
+ 
+for i = 1,100 do
+meleeRemote:FireServer(plr)
+end
+end
+end
+end)
+ 
+wait(1)
+cooldown = false
+part:Destroy()
+end
+
+mouse.KeyDown:connect(function(key)
+if cooldown == false then
+if key:lower() == "f" then
+punch()
+end
+end
+end)
+
+    for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetChildren()) do
+        if v:IsA("Tool") or v.Name == "Hammer" then
+            for i,v in pairs (game:GetService('Players'):GetChildren()) do
+                if v.Name ~= game.Players.LocalPlayer.Name then
+                    v.Activated:Connect(function()
+                        meleeRemote:FireServer(v)
+                    end)
+                end
+            end
+        end
+    end
+
+    for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetChildren()) do
+        if v:IsA("Tool") or v.Name == "Crude Knife" then
+            for i,v in pairs (game:GetService('Players'):GetChildren()) do
+                if v.Name ~= game.Players.LocalPlayer.Name then
+                    v.Activated:Connect(function()
+                        meleeRemote:FireServer(v)
+                    end)
+                end
+            end
+        end
+    end

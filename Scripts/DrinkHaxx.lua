@@ -7,7 +7,7 @@ end
 
 local library = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Shit.lua"))()
 
-local DrinkHaxx = library:CreateWindow("DrinkHaxx")
+local DrinkHaxx = library:CreateWindow("GrannyHub - ".. "DrinkHaxx")
 
 local AutoFarm = DrinkHaxx:Page("AutoFarm")
 
