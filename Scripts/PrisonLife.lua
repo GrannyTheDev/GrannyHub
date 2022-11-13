@@ -158,6 +158,10 @@ Teleport:Button("Criminal Base Inside", function()
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-975.8451538085938, 109.32379150390625, 2053.11376953125)
 end)
 
+Admin:Button("Admin", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/XTheMasterX/Scripts/Main/PrisonLife"))()
+end)
+
 Admin:Label("Admin Commands")
 Admin:Label(":rank player - gives player commands")
 Admin:Label(":kill player - kills player")
@@ -396,6 +400,3 @@ while wait(0.1) do
 end
 
 mod:Activate()
-
-repeat wait() until game:IsLoaded()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/XTheMasterX/Scripts/Main/PrisonLife"))()
