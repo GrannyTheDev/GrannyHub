@@ -393,13 +393,16 @@ end
 end
 end)
 
+mainRemotes = game.ReplicatedStorage
+meleeRemote = mainRemotes['meleeEvent']
+
     for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetChildren()) do
         if v:IsA("Tool") or v.Name == "Hammer" then
-            for i,v in pairs (game:GetService('Players'):GetChildren()) do
-                if v.Name ~= game.Players.LocalPlayer.Name then
+            for i,k in pairs(game:GetService('Players'):GetChildren()) do
+                if k.Name ~= game.Players.LocalPlayer.Name then
                     v.Activated:Connect(function()
                         for i = 1,100 do
-                            meleeRemote:FireServer(v)
+                            meleeRemote:FireServer(k)
                         end
                     end)
                 end
@@ -409,11 +412,11 @@ end)
 
     for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetChildren()) do
         if v:IsA("Tool") or v.Name == "Crude Knife" then
-            for i,v in pairs (game:GetService('Players'):GetChildren()) do
-                if v.Name ~= game.Players.LocalPlayer.Name then
+            for i,k in pairs(game:GetService('Players'):GetChildren()) do
+                if k.Name ~= game.Players.LocalPlayer.Name then
                     v.Activated:Connect(function()
                         for i = 1,100 do
-                            meleeRemote:FireServer(v)
+                            meleeRemote:FireServer(k)
                         end
                     end)
                 end
