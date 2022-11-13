@@ -68,7 +68,7 @@ function Library:CreateWindow(title)
     Header.Parent = DarkLib
 	Header.BackgroundColor3 = Color3.fromRGB(80, 0, 255)
 	Header.BorderSizePixel = 0
-	Header.Position = UDim2.new(0, 150, 0, 400)
+	Header.Position = UDim2.new(0, 150, 0, 300)
 	Header.Size = UDim2.new(0, 470, 0, 30)
 	Header.Active = true
 
