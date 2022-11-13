@@ -583,10 +583,11 @@ end
 							toggled = not toggled
 							pcall(callback, toggled)
 						end
-					end)
-				end
-				return ToggleFunction
+					end
+				end)
 			end
+			return ToggleFunction
+		end
 		function Elements:Label(txt)
 			local LabelFunction = {}
 			local Button = Instance.new("Frame")
