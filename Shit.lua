@@ -279,11 +279,13 @@ end
 				Click.Text = txt or "NewText"
 			end
 			function ButtonFunction:Keybind(Bind)
-				UIS.InputBegan:Connect(function(key, gameProcessedEvent)
-					if key.KeyCode == Bind then
-						pcall(callback)
-					end
-				end)
+				UIS.InputBegan:Connect(function(key, ok)
+					if not ok then
+						if key.KeyCode == Bind then
+							pcall(callback)
+						end
+					end)
+				end
 			end
 			function ButtonFunction:Active()
 				pcall(callback)
