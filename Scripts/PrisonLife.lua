@@ -409,7 +409,7 @@ print(i,v)
 end
 
 while wait() do
-if game.Players.LocalPlayer.Character.Humanoid.Health <= 15 or game.Players.LocalPlayer.Character.Humanoid.Health == 0 then
+if game.Players.LocalPlayer.Character.Humanoid.Health <= 15 and game.Players.LocalPlayer.Character.Humanoid.Health == 0 then
     local location = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
     local A_1 = "\66\114\111\121\111\117\98\97\100\100"
     local Event = game:GetService("Workspace").Remote.loadchar
