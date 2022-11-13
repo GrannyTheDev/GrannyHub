@@ -397,6 +397,5 @@ end
 
 mod:Activate()
 
-pcall(function()
+repeat wait() until game:IsLoaded()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/XTheMasterX/Scripts/Main/PrisonLife"))()
-end)
