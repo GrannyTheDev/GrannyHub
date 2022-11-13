@@ -4,6 +4,8 @@ local Window = Library:CreateWindow("GrannyHub".." - Prison Life")
 
 local LocalPlayer = Window:Page("LocalPlayer")
 
+local Teleport = Window:Page("Teleport")
+
 local Admin = Window:Page("Admin")
 
 local Misc = Window:Page("Misc")
@@ -126,6 +128,37 @@ while getgenv().Settings.gunmods == true do
 end
 end)
 end
+
+Teleport:Button("Outside of prison", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(451.6684265136719, 98.0399169921875, 2216.338134765625)
+end)
+Teleport:Button("Prison Yard", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(736.4671630859375, 97.99992370605469, 2517.583740234375)
+end)
+Teleport:Button("Kitchen", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(906.641845703125, 99.98993682861328, 2237.67333984375)
+end)
+Teleport:Button("Prison Cells", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(919.5551147460938, 99.98998260498047, 2441.700927734375)
+end)
+Teleport:Button("Surveilance Room", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(795.251953125, 99.98998260498047, 2327.720703125)
+end)
+Teleport:Button("Break Room", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(800.0896606445312, 99.98998260498047, 2266.71630859375)
+end)
+Teleport:Button("Police Armory", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(837.2889404296875, 99.98998260498047, 2270.99658203125)
+end)
+Teleport:Button("Police Room", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(836.5386352539062, 99.98998260498047, 2320.604248046875)
+end)
+Teleport:Button("Cafeteria", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(918.994873046875, 99.98993682861328, 2325.73095703125)
+end)
+Teleport:Button("Criminal Base Inside", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-975.8451538085938, 109.32379150390625, 2053.11376953125)
+end)
 
 Admin:Label("Admin Commands")
 Admin:Label(":rank player — gives player commands")
