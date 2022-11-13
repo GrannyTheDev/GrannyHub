@@ -284,8 +284,8 @@ end
 						if key.KeyCode == Bind then
 							pcall(callback)
 						end
-					end)
-				end
+					end
+				end)
 			end
 			function ButtonFunction:Active()
 				pcall(callback)
