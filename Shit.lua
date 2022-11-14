@@ -150,7 +150,7 @@ function Library:CreateWindow(txt)
 		PageList.Parent = Page
 		PageList.HorizontalAlignment = Enum.HorizontalAlignment.Center
 		PageList.SortOrder = Enum.SortOrder.LayoutOrder
-		PageList.Padding = UDim.new(0, 10)
+		PageList.Padding = UDim.new(0, 5)
 		PageList.Changed:Connect(function()
 			Page.CanvasSize = UDim2.new(0, 264, 0, PageList.AbsoluteContentSize.Y + 10)
 		end)
