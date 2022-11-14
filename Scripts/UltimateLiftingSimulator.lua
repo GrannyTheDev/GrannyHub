@@ -117,7 +117,9 @@ end
 function doOPLift()
 spawn(function()
 while getgenv().Settings.OPLift == true do
+for i = 1,#5 do
     game:GetService("ReplicatedStorage").Events.bar:InvokeServer()
+end
 wait(0.1)
 end
 end)
@@ -126,8 +128,12 @@ end
 function doRebirth()
 spawn(function()
 while getgenv().Settings.rebirth == true do
+    if hydrogen then
+        game:GetService("ReplicatedStorage").Events.Rebirth:InvokeServer()
+    else
 for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.Frames.Rebirth.Roll.MouseButton1Down)) do
     v.Function()
+end
 end
 wait(0.1)
 end
