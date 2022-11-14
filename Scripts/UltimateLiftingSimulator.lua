@@ -20,7 +20,6 @@ rebirth = false;
 equipweight = false;
 equipsquat = false;
 equipmedit = false;
-OPLift = false;
 }
 
 function Save()
@@ -114,17 +113,6 @@ end
 end)
 end
 
-function doOPLift()
-spawn(function()
-while getgenv().Settings.OPLift == true do
-for i = 1,20 do
-    game:GetService("ReplicatedStorage").Events.bar:InvokeServer()
-end
-wait(0.1)
-end
-end)
-end
-
 function doRebirth()
 spawn(function()
 while getgenv().Settings.rebirth == true do
@@ -187,11 +175,9 @@ doRebirth()
 end
 end)
 
-local OPLift = AutoFarm:Toggle("Auto OP Lift", function(v)
-getgenv().Settings.OPLift = v
-Save()
-if v then
-doOPLift()
+AutoFarm:Button("Auto OP Lift", function(v)
+while wait(0.1) do
+    game:GetService("ReplicatedStorage").Events.bar:InvokeServer()
 end
 end)
 
@@ -327,9 +313,6 @@ equipsquat:ChangeState(true)
 end
 if getgenv().Settings.equipmedit == true then
 equipmedit:ChangeState(true)
-end
-if getgenv().Settings.OPLift == true then
-OPLift:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
