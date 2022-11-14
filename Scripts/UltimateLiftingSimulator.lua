@@ -116,13 +116,7 @@ end
 function doRebirth()
 spawn(function()
 while getgenv().Settings.rebirth == true do
-    if hydrogen then
-        game:GetService("ReplicatedStorage").Events.Rebirth:InvokeServer()
-    else
-for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.Frames.Rebirth.Roll.MouseButton1Down)) do
-    v.Function()
-end
-end
+    game:GetService("ReplicatedStorage").Events.Rebirth:InvokeServer()
 wait(0.1)
 end
 end)
