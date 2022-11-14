@@ -128,7 +128,7 @@ function doEquipWeight()
 spawn(function()
 while getgenv().Settings.equipweight == true do
 for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
-    if v.TextureId == "" then
+    if v:IsA("Tool") and v:FindFirstChild("Handle") then
         game:GetService("Players").LocalPlayer.Character.Humanoid:EquipTool(v)
     end
 end
@@ -179,13 +179,13 @@ doTrain()
 end
 end)
 
---local equipweight = AutoFarm:Toggle("Auto Equip Weight", function(v)
---getgenv().Settings.equipweight = v
---Save()
---if v then
---doEquipWeight()
---end
---end)
+local equipweight = AutoFarm:Toggle("Auto Equip Weight", function(v)
+getgenv().Settings.equipweight = v
+Save()
+if v then
+doEquipWeight()
+end
+end)
 
 local equipsquat = AutoFarm:Toggle("Auto Equip Squat", function(v)
 getgenv().Settings.equipsquat = v
@@ -295,9 +295,9 @@ end
 if getgenv().Settings.rebirth == true then
 rebirth:ChangeState(true)
 end
---if getgenv().Settings.equipweight == true then
---equipweight:ChangeState(true)
---end
+if getgenv().Settings.equipweight == true then
+equipweight:ChangeState(true)
+end
 if getgenv().Settings.equipsquat == true then
 equipsquat:ChangeState(true)
 end
