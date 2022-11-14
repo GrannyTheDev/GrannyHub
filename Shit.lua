@@ -86,7 +86,6 @@ function Library:CreateWindow(txt)
 	Title.Font = Enum.Font.SourceSansBold
 	Title.Text = txt
 	Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-	Title.TextScaled = true
 	Title.TextSize = 14.000
 	Title.TextWrapped = true
 
