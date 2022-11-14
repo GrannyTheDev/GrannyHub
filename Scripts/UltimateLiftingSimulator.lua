@@ -117,7 +117,7 @@ end
 function doOPLift()
 spawn(function()
 while getgenv().Settings.OPLift == true do
-for i = 1,#5 do
+for i = 1,5 do
     game:GetService("ReplicatedStorage").Events.bar:InvokeServer()
 end
 wait(0.1)
