@@ -28,6 +28,7 @@ function Library:CreateWindow(txt)
 	local MainFrame = Instance.new("Frame")
 	local Title = Instance.new("TextLabel")
 	local Close = Instance.new("TextButton")
+	local Min = Instance.new("TextButton")
 	local Container = Instance.new("Frame")
 	local TabList = Instance.new("UIListLayout")
 	local TabFrame = Instance.new("ScrollingFrame")
@@ -94,7 +95,7 @@ function Library:CreateWindow(txt)
 	Close.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	Close.BackgroundTransparency = 1.000
 	Close.BorderSizePixel = 0
-	Close.Position = UDim2.new(0.902578771, 0, 0, 0)
+	Close.Position = UDim2.new(0.903, 0, 0, 0)
 	Close.Size = UDim2.new(0, 34, 0, 33)
 	Close.Font = Enum.Font.SourceSansBold
 	Close.Text = "X"
@@ -103,7 +104,24 @@ function Library:CreateWindow(txt)
 	Close.TextSize = 14.000
 	Close.TextWrapped = true
 	Close.MouseButton1Click:Connect(function()
-	     GrannyHub:Destroy()
+		GrannyHub:Destroy()
+	end)
+
+	Min.Name = "Min"
+	Min.Parent = Header
+	Min.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Min.BackgroundTransparency = 1.000
+	Min.BorderSizePixel = 0
+	Min.Position = UDim2.new(0.805, 0, -0.029, 0)
+	Min.Size = UDim2.new(0, 34, 0, 33)
+	Min.Font = Enum.Font.SourceSansBold
+	Min.Text = "-"
+	Min.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Min.TextScaled = true
+	Min.TextSize = 14.000
+	Min.TextWrapped = true
+	Min.MouseButton1Click:Connect(function()
+		GrannyHub:Destroy()
 	end)
 
 	Container.Name = "Container"
@@ -120,8 +138,8 @@ function Library:CreateWindow(txt)
 	TabList.SortOrder = Enum.SortOrder.LayoutOrder
 	TabList.Padding = UDim.new(0, 5)
 	TabList.Changed:Connect(function()
-	     TabFrame.CanvasSize = UDim2.new(0, 0, 0, TabList.AbsoluteContentSize.Y + 10)
-        end)
+		TabFrame.CanvasSize = UDim2.new(0, 0, 0, TabList.AbsoluteContentSize.Y + 10)
+	end)
 
 	TabFrame.Name = "TabFrame"
 	TabFrame.Parent = MainFrame
@@ -129,9 +147,9 @@ function Library:CreateWindow(txt)
 	TabFrame.Position = UDim2.new(-0.00078803557, 0, -0.00257873535, 0)
 	TabFrame.Size = UDim2.new(0, 73, 0, 141)
 	TabFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
-        TabFrame.ScrollBarThickness = 5
+	TabFrame.ScrollBarThickness = 5
 	TabFrame.ScrollingDirection = Enum.ScrollingDirection.Y
-        TabFrame.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 255)
+	TabFrame.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 255)
 
 	Instance.new("UICorner", TabFrame)
 
