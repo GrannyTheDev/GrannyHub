@@ -260,7 +260,7 @@ function Library:CreateWindow(txt)
 			callback = callback or function() end
 
 			Title.Name = "Title"
-			Title.Parent = ToggleElement
+			Title.Parent = Page
 			Title.BackgroundColor3 = Color3.fromRGB(85, 170, 127)
 			Title.BorderSizePixel = 0
 			Title.BackgroundTransparency = 1.000
