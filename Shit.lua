@@ -32,6 +32,8 @@ function Library:CreateWindow(txt)
 	local Container = Instance.new("Frame")
 	local TabList = Instance.new("UIListLayout")
 	local TabFrame = Instance.new("ScrollingFrame")
+	local Dragui = Instance.new("TextButton")
+	local UICorner = Instance.new("UICorner")
 
 	GrannyHub.Name = "GrannyHub"
 	GrannyHub.ResetOnSpawn = false
@@ -65,9 +67,30 @@ function Library:CreateWindow(txt)
 	Header.Size = UDim2.new(0, 349, 0, 34)
 
 	Instance.new("UICorner", Header)
+	
+
+	Dragui.Name = "Dragui"
+	Dragui.Parent = GrannyHub
+	Dragui.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+	Dragui.Position = UDim2.new(0.496744126, 0, 0.512048185, 0)
+	Dragui.Size = UDim2.new(0, 64, 0, 51)
+	Dragui.Font = Enum.Font.SourceSansBold
+	Dragui.Text = "Open"
+	Dragui.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Dragui.TextScaled = true
+	Dragui.TextSize = 14.000
+	Dragui.TextWrapped = true
+	Dragui.MouseButton1Click:Connect(function()
+		Header.Visible = true
+		Dragui.Visible = false
+	end)
+
+	UICorner.CornerRadius = UDim.new(1, 0)
+	UICorner.Parent = Dragui
 
 	local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/DragModule.lua"))()
 	module:Drag(Header)
+	module:Drag(Dragui)
 
 	MainFrame.Name = "MainFrame"
 	MainFrame.Parent = Header
@@ -121,7 +144,8 @@ function Library:CreateWindow(txt)
 	Min.TextSize = 14.000
 	Min.TextWrapped = true
 	Min.MouseButton1Click:Connect(function()
-		GrannyHub:Destroy()
+		Header.Visible = false
+		Dragui.Visible = true
 	end)
 
 	Container.Name = "Container"
