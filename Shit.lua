@@ -255,13 +255,23 @@ function Library:CreateWindow(txt)
 
 		function Elements:Button(txt, callback)
 			local ButtonFunction = {}
-			local TextButton = Instance.new("TextButton")
+			local ButtonElement = Instance.new("Frame")
+			local Click = Instance.new("TextButton")
 			local Title = Instance.new("TextLabel")
 			callback = callback or function() end
 
+			ButtonElement.Name = txt
+			ButtonElement.Parent = Page
+			ButtonElement.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+			ButtonElement.BorderSizePixel = 0
+			ButtonElement.Position = UDim2.new(0.0430107526, 0, 0, 0)
+			ButtonElement.Size = UDim2.new(0, 224, 0, 35)
+
+			Instance.new("UICorner", ButtonElement)
+
 			Title.Name = "Title"
-			Title.Parent = Page
-			Title.BackgroundColor3 = Color3.fromRGB(85, 170, 127)
+			Title.Parent = ButtonElement
+			Title.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 			Title.BorderSizePixel = 0
 			Title.BackgroundTransparency = 1.000
 			Title.Position = UDim2.new(0.0430107526, 0, 0, 0)
@@ -272,29 +282,30 @@ function Library:CreateWindow(txt)
 			Title.TextSize = 18.000
 			Title.TextXAlignment = Enum.TextXAlignment.Left
 
-			TextButton.Name = txt
-			TextButton.Parent = Page
-			TextButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-			TextButton.Position = UDim2.new(-0.0227272734, 0, 0, 0)
-			TextButton.Size = UDim2.new(0, 224, 0, 26)
-			TextButton.Font = Enum.Font.SourceSans
-			TextButton.Text = ""
-			TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-			TextButton.TextScaled = true
-			TextButton.TextSize = 14.000
-			TextButton.TextWrapped = true
-			TextButton.MouseButton1Click:Connect(function()
+			Click.Name = "Click"
+			Click.Parent = ButtonElement
+			Click.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+			Click.BackgroundTransparency = 1.000
+			Click.Position = UDim2.new(-0.0227272734, 0, 0, 0)
+			Click.Size = UDim2.new(0, 224, 0, 26)
+			Click.Font = Enum.Font.SourceSans
+			Click.Text = ""
+			Click.TextColor3 = Color3.fromRGB(255, 255, 255)
+			Click.TextScaled = true
+			Click.TextSize = 14.000
+			Click.TextWrapped = true
+			Click.MouseButton1Click:Connect(function()
 				pcall(callback)
 			end)
 
-			TextButton.MouseMoved:Connect(function()
+			ButtonElement.MouseMoved:Connect(function()
 				TS:Create(Title, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(250, 0, 0)}):Play()
 			end)
-			TextButton.MouseLeave:Connect(function()
+			ButtonElement.MouseLeave:Connect(function()
 				TS:Create(Title, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(250, 0, 0)}):Play()
 			end)
 
-			Instance.new("UICorner", TextButton)
+			Instance.new("UICorner", ButtonElement)
 
 			function ButtonFunction:Active()
 				pcall(callback)
@@ -464,7 +475,7 @@ function Library:CreateWindow(txt)
 				local Title = Instance.new("TextLabel")
 				local Box = Instance.new("TextBox")
 				callback = callback or function() end
-				
+
 				BoxElement.Name = txt
 				BoxElement.Parent = Page
 				BoxElement.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
@@ -511,7 +522,7 @@ function Library:CreateWindow(txt)
 				end)
 
 				Instance.new("UICorner", Box)
-				
+
 				function BoxFunction:ChangeText(txt)
 					Box.Text = txt
 				end
