@@ -169,13 +169,13 @@ doRebirth()
 end
 end)
 
-AutoFarm:Button("Auto OP Speed Train", function(v)
+AutoFarm:Button("Auto OP Speed Train", function()
 while wait(1) do
     game:GetService("ReplicatedStorage").Events.train:InvokeServer()
 end
 end)
 
-AutoFarm:Button("Auto OP Lift", function(v)
+AutoFarm:Button("Auto OP Lift", function()
 while wait(1) do
     game:GetService("ReplicatedStorage").Events.bar:InvokeServer()
 end
