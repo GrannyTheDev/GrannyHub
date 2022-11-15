@@ -258,7 +258,7 @@ function Library:CreateWindow(txt)
 			local TextButton = Instance.new("TextButton")
 			local Title = Instance.new("TextLabel")
 			callback = callback or function() end
-			
+
 			Title.Name = "Title"
 			Title.Parent = ToggleElement
 			Title.BackgroundColor3 = Color3.fromRGB(85, 170, 127)
@@ -267,7 +267,7 @@ function Library:CreateWindow(txt)
 			Title.Position = UDim2.new(0.0430107526, 0, 0, 0)
 			Title.Size = UDim2.new(0, 100, 0, 35)
 			Title.Font = Enum.Font.SourceSans
-			Title.Text = txt or "Label"
+			Title.Text = txt
 			Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 			Title.TextSize = 18.000
 			Title.TextXAlignment = Enum.TextXAlignment.Left
@@ -278,7 +278,7 @@ function Library:CreateWindow(txt)
 			TextButton.Position = UDim2.new(-0.0227272734, 0, 0, 0)
 			TextButton.Size = UDim2.new(0, 224, 0, 26)
 			TextButton.Font = Enum.Font.SourceSans
-			TextButton.Text = txt
+			TextButton.Text = ""
 			TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 			TextButton.TextScaled = true
 			TextButton.TextSize = 14.000
