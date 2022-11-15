@@ -34,6 +34,7 @@ function Library:CreateWindow(txt)
 	local TabFrame = Instance.new("ScrollingFrame")
 	local Dragui = Instance.new("TextButton")
 	local UICorner = Instance.new("UICorner")
+	local TS = game:GetService("TweenService")
 
 	GrannyHub.Name = "GrannyHub"
 	GrannyHub.ResetOnSpawn = false
@@ -48,7 +49,7 @@ function Library:CreateWindow(txt)
 		GrannyHub.Parent = cloneref(game:GetService("CoreGui"))
 	end
 
-	game:GetService("UserInputService").InputBegan:connect(function(current, ok) 
+	game:GetService("UserInputService").InputBegan:Connect(function(current, ok) 
 		if not ok then 
 			if current.KeyCode == Enum.KeyCode.RightAlt then 
 				if GrannyHub.Enabled == true then
@@ -65,9 +66,9 @@ function Library:CreateWindow(txt)
 	Header.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 	Header.Position = UDim2.new(0.368839413, 0, 0.336177468, 0)
 	Header.Size = UDim2.new(0, 349, 0, 34)
+	Header.Active = true
 
 	Instance.new("UICorner", Header)
-	
 
 	Dragui.Name = "Dragui"
 	Dragui.Parent = GrannyHub
@@ -80,6 +81,7 @@ function Library:CreateWindow(txt)
 	Dragui.TextScaled = true
 	Dragui.TextSize = 14.000
 	Dragui.TextWrapped = true
+	Dragui.Visible = false
 	Dragui.MouseButton1Click:Connect(function()
 		Header.Visible = true
 		Dragui.Visible = false
@@ -143,7 +145,7 @@ function Library:CreateWindow(txt)
 	Min.TextScaled = true
 	Min.TextSize = 14.000
 	Min.TextWrapped = true
-	Min.MouseButton1Click:Connect(function()
+	Min.MouseButton1Down:Connect(function()
 		Header.Visible = false
 		Dragui.Visible = true
 	end)
@@ -168,12 +170,13 @@ function Library:CreateWindow(txt)
 	TabFrame.Name = "TabFrame"
 	TabFrame.Parent = MainFrame
 	TabFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
-	TabFrame.Position = UDim2.new(-0.00078803557, 0, -0.00257873535, 0)
-	TabFrame.Size = UDim2.new(0, 73, 0, 141)
+	TabFrame.Position = UDim2.new(0.021, 0, 0.05, 0)
+	TabFrame.Size = UDim2.new(0, 65, 0, 128)
 	TabFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 	TabFrame.ScrollBarThickness = 5
 	TabFrame.ScrollingDirection = Enum.ScrollingDirection.Y
 	TabFrame.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 255)
+	TabFrame.BorderSizePixel = 0
 
 	Instance.new("UICorner", TabFrame)
 
@@ -189,12 +192,13 @@ function Library:CreateWindow(txt)
 		Page.Active = true
 		Page.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 		Page.BorderSizePixel = 0
-		Page.Position = UDim2.new(0.0217391308, 0, 0.0496453904, 0)
-		Page.Size = UDim2.new(0, 264, 0, 119)
+		Page.Position = UDim2.new(0.022, 0, 0.05, 0)
+		Page.Size = UDim2.new(0, 264, 0, 128)
 		Page.CanvasSize = UDim2.new(0, 0, 0, 0)
 		Page.ScrollBarThickness = 5
 		Page.ScrollingDirection = Enum.ScrollingDirection.Y
 		Page.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 255)
+		Page.BorderSizePixel = 0
 
 		PageList.Name = "PageList"
 		PageList.Parent = Page
@@ -249,15 +253,16 @@ function Library:CreateWindow(txt)
 
 		local Elements = {}
 
-		function Elements:Button(txt, callback)			
+		function Elements:Button(txt, callback)
+			local ButtonFunction = {}
 			local TextButton = Instance.new("TextButton")
 			callback = callback or function() end
 			TextButton.Name = txt
 			TextButton.Parent = Page
 			TextButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 			TextButton.Position = UDim2.new(-0.0227272734, 0, 0, 0)
-			TextButton.Size = UDim2.new(0, 260, 0, 26)
-			TextButton.Font = Enum.Font.SourceSansBold
+			TextButton.Size = UDim2.new(0, 224, 0, 26)
+			TextButton.Font = Enum.Font.SourceSans
 			TextButton.Text = txt
 			TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 			TextButton.TextScaled = true
@@ -267,23 +272,57 @@ function Library:CreateWindow(txt)
 				pcall(callback)
 			end)
 
+			TextButton.MouseMoved:Connect(function()
+				TS:Create(Title, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+			end)
+			TextButton.MouseLeave:Connect(function()
+				TS:Create(Title, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+			end)
+
 			Instance.new("UICorner", TextButton)
+
+			function ButtonFunction:Active()
+				pcall(callback)
+			end
+			function ButtonFunction:Keybind(bind)
+				game:GetService("UserInputService").InputBegan:Connect(function(current, ok) 
+					if not ok then 
+						if current.KeyCode == bind then
+							pcall(callback)
+						end
+					end
+				end)
+			end
 		end
 
-		function Elements:Label(txt)			
+		function Elements:Label(txt)	
+			local LabelFunction = {}
 			local TextButton = Instance.new("TextLabel")
 			TextButton.Name = txt
 			TextButton.Parent = Page
 			TextButton.BackgroundTransparency = 1
 			TextButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 			TextButton.Position = UDim2.new(-0.0227272734, 0, 0, 0)
-			TextButton.Size = UDim2.new(0, 260, 0, 26)
-			TextButton.Font = Enum.Font.SourceSansBold
+			TextButton.Size = UDim2.new(0, 224, 0, 26)
+			TextButton.Font = Enum.Font.SourceSans
 			TextButton.Text = txt
 			TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 			TextButton.TextScaled = true
 			TextButton.TextSize = 14.000
 			TextButton.TextWrapped = true
+			TextButton.TextXAlignment = Enum.TextXAlignment.Left
+
+			TextButton.MouseMoved:Connect(function()
+				TS:Create(Title, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+			end)
+			TextButton.MouseLeave:Connect(function()
+				TS:Create(Title, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+			end)
+
+			function LabelFunction:UpdateText(txt)
+				TextButton.Text = txt
+			end
+			return LabelFunction
 		end
 		function Elements:Toggle(txt, callback)
 			local ToggleFunction = {}
@@ -300,13 +339,13 @@ function Library:CreateWindow(txt)
 			ToggleElement.Parent = Page
 			ToggleElement.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 			ToggleElement.BorderSizePixel = 0
-			ToggleElement.Size = UDim2.new(0, 260, 0, 35)
+			ToggleElement.Size = UDim2.new(0, 224, 0, 35)
 
 			Click.Name = "Click"
 			Click.Parent = ToggleElement
 			Click.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 			Click.BorderSizePixel = 0
-			Click.Size = UDim2.new(0, 300, 0, 35)
+			Click.Size = UDim2.new(0, 224, 0, 35)
 			Click.BackgroundTransparency = 1
 			Click.Text = ""
 
@@ -329,7 +368,7 @@ function Library:CreateWindow(txt)
 			Background.Parent = ToggleElement
 			Background.BackgroundColor3 = Color3.fromRGB(210, 210, 210)
 			Background.BorderSizePixel = 0
-			Background.Position = UDim2.new(0, 180, 0, 10)
+			Background.Position = UDim2.new(0, 170, 0, 10)
 			Background.Size = UDim2.new(0, 50, 0, 20)
 			Background.Font = Enum.Font.SourceSans
 			Background.Text = ""
@@ -344,7 +383,7 @@ function Library:CreateWindow(txt)
 			Toggle.Parent = ToggleElement
 			Toggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			Toggle.BorderSizePixel = 0
-			Toggle.Position = UDim2.new(0, 210, 0, 10)
+			Toggle.Position = UDim2.new(0, 200, 0, 10)
 			Toggle.Size = UDim2.new(0, 20, 0, 20)
 			Toggle.Font = Enum.Font.SourceSans
 			Toggle.Text = ""
@@ -354,15 +393,20 @@ function Library:CreateWindow(txt)
 			Toggle.TextWrapped = true
 
 			Instance.new("UICorner", Toggle).CornerRadius = UDim.new(1, 0)
-			local TS = game:GetService("TweenService")
 			local toggled = false
+			Title.MouseMoved:Connect(function()
+				TS:Create(Title, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+			end)
+			Title.MouseLeave:Connect(function()
+				TS:Create(Title, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+			end)
 			Click.MouseButton1Down:Connect(function()
 				if toggled == false then
 					TS:Create(Background, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(47, 203, 85)}):Play()
-					TS:Create(Toggle, TweenInfo.new(0.25), {Position = UDim2.new(0, 181, 0, 10)}):Play()
+					TS:Create(Toggle, TweenInfo.new(0.25), {Position = UDim2.new(0, 170, 0, 10)}):Play()
 				elseif toggled == true then
 					TS:Create(Background, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(210, 210, 210)}):Play()
-					TS:Create(Toggle, TweenInfo.new(0.25), {Position = UDim2.new(0, 210, 0, 10)}):Play()
+					TS:Create(Toggle, TweenInfo.new(0.25), {Position = UDim2.new(0, 200, 0, 10)}):Play()
 				end
 				toggled = not toggled
 				pcall(callback, toggled)
@@ -373,16 +417,16 @@ function Library:CreateWindow(txt)
 			function ToggleFunction:ChangeState(state)
 				if state == true then
 					TS:Create(Background, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(47, 203, 85)}):Play()
-					TS:Create(Toggle, TweenInfo.new(0.25), {Position = UDim2.new(0, 181, 0, 10)}):Play()
+					TS:Create(Toggle, TweenInfo.new(0.25), {Position = UDim2.new(0, 170, 0, 10)}):Play()
 				elseif state == false then
 					TS:Create(Background, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(210, 210, 210)}):Play()
-					TS:Create(Toggle, TweenInfo.new(0.25), {Position = UDim2.new(0, 210, 0, 10)}):Play()
+					TS:Create(Toggle, TweenInfo.new(0.25), {Position = UDim2.new(0, 200, 0, 10)}):Play()
 				end
 				toggled = not toggled
 				pcall(callback, toggled)
 			end
 			function ToggleFunction:Keybind(Bind)
-				game:GetService("UserInputService").InputBegan:connect(function(current, ok) 
+				game:GetService("UserInputService").InputBegan:Connect(function(current, ok) 
 					if not ok then 
 						if current.KeyCode == Bind then
 							if toggled == false then
@@ -397,6 +441,69 @@ function Library:CreateWindow(txt)
 						end
 					end
 				end)
+			end
+			function Elements:Box(txt, hint, callback)
+				local BoxFunction = {}
+				local BoxElement = Instance.new("Frame")
+				local UICorner = Instance.new("UICorner")
+				local Title = Instance.new("TextLabel")
+				local Box = Instance.new("TextBox")
+				callback = callback or function() end
+				
+				BoxElement.Name = txt
+				BoxElement.Parent = Page
+				BoxElement.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+				BoxElement.BorderSizePixel = 0
+				BoxElement.Position = UDim2.new(0.0909090936, 0, 0, 0)
+				BoxElement.Size = UDim2.new(0, 224, 0, 26)
+
+				UICorner.Parent = BoxElement
+
+				Title.Name = "Title"
+				Title.Parent = BoxElement
+				Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				Title.BackgroundTransparency = 1.000
+				Title.Position = UDim2.new(0.0430107117, 0, 0, 0)
+				Title.Size = UDim2.new(0, 100, 0, 26)
+				Title.Font = Enum.Font.SourceSans
+				Title.Text = txt
+				Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+				Title.TextScaled = true
+				Title.TextSize = 14.000
+				Title.TextWrapped = true
+				Title.TextXAlignment = Enum.TextXAlignment.Left
+
+				Box.Name = "Box"
+				Box.Parent = BoxElement
+				Box.BackgroundColor3 = Color3.fromRGB(150, 150, 150)
+				Box.Position = UDim2.new(0.651785731, 0, 0, 0)
+				Box.Size = UDim2.new(0, 80, 0, 26)
+				Box.Font = Enum.Font.SourceSans
+				Box.Text = ""
+				Box.PlaceholderText = hint
+				Box.PlaceholderColor3 = Color3.fromRGB(0, 0, 0)
+				Box.TextColor3 = Color3.fromRGB(0, 0, 0)
+				Box.TextSize = 14.000
+				Box.FocusLost:Connect(function(enterPressed)
+					if not enterPressed then
+						return
+					else
+						callback(Box.Text)
+						wait(0.18)
+						Box.Text = txt
+						Box.PlaceholderText = txt
+					end
+				end)
+
+				Instance.new("UICorner", Box)
+				
+				function BoxFunction:ChangeText(txt)
+					Box.Text = txt
+				end
+				function BoxFunction:ChangeTitle(txt)
+					Title.Text = txt
+				end
+				return BoxFunction
 			end
 			return ToggleFunction
 		end
