@@ -256,7 +256,22 @@ function Library:CreateWindow(txt)
 		function Elements:Button(txt, callback)
 			local ButtonFunction = {}
 			local TextButton = Instance.new("TextButton")
+			local Title = Instance.new("TextLabel")
 			callback = callback or function() end
+			
+			Title.Name = "Title"
+			Title.Parent = ToggleElement
+			Title.BackgroundColor3 = Color3.fromRGB(85, 170, 127)
+			Title.BorderSizePixel = 0
+			Title.BackgroundTransparency = 1.000
+			Title.Position = UDim2.new(0.0430107526, 0, 0, 0)
+			Title.Size = UDim2.new(0, 100, 0, 35)
+			Title.Font = Enum.Font.SourceSans
+			Title.Text = txt or "Label"
+			Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+			Title.TextSize = 18.000
+			Title.TextXAlignment = Enum.TextXAlignment.Left
+
 			TextButton.Name = txt
 			TextButton.Parent = Page
 			TextButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
@@ -268,7 +283,6 @@ function Library:CreateWindow(txt)
 			TextButton.TextScaled = true
 			TextButton.TextSize = 14.000
 			TextButton.TextWrapped = true
-			TextButton.TextXAlignment = Enum.TextXAlignment.Left
 			TextButton.MouseButton1Click:Connect(function()
 				pcall(callback)
 			end)
