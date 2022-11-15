@@ -268,6 +268,7 @@ function Library:CreateWindow(txt)
 			TextButton.TextScaled = true
 			TextButton.TextSize = 14.000
 			TextButton.TextWrapped = true
+			TextButton.TextXAlignment = Enum.TextXAlignment.Left
 			TextButton.MouseButton1Click:Connect(function()
 				pcall(callback)
 			end)
