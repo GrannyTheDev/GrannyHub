@@ -30,7 +30,7 @@ function Library:CreateWindow(txt)
 	local Close = Instance.new("TextButton")
 	local Container = Instance.new("Frame")
 	local TabList = Instance.new("UIListLayout")
-	local TabFrame = Instance.new("Frame")
+	local TabFrame = Instance.new("ScrollingFrame")
 
 	GrannyHub.Name = "GrannyHub"
 	GrannyHub.ResetOnSpawn = false
@@ -103,7 +103,7 @@ function Library:CreateWindow(txt)
 	Close.TextSize = 14.000
 	Close.TextWrapped = true
 	Close.MouseButton1Click:Connect(function()
-		GrannyHub:Destroy()
+	     GrannyHub:Destroy()
 	end)
 
 	Container.Name = "Container"
@@ -118,13 +118,20 @@ function Library:CreateWindow(txt)
 	TabList.Parent = TabFrame
 	TabList.HorizontalAlignment = Enum.HorizontalAlignment.Center
 	TabList.SortOrder = Enum.SortOrder.LayoutOrder
-	TabList.Padding = UDim.new(0, 10)
+	TabList.Padding = UDim.new(0, 5)
+	TabList.Changed:Connect(function()
+	     TabFrame.CanvasSize = UDim2.new(0, 0, 0, TabList.AbsoluteContentSize.Y + 10)
+        end)
 
 	TabFrame.Name = "TabFrame"
 	TabFrame.Parent = MainFrame
 	TabFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 	TabFrame.Position = UDim2.new(-0.00078803557, 0, -0.00257873535, 0)
 	TabFrame.Size = UDim2.new(0, 73, 0, 141)
+	TabFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+        TabFrame.ScrollBarThickness = 5
+	TabFrame.ScrollingDirection = Enum.ScrollingDirection.Y
+        TabFrame.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 255)
 
 	Instance.new("UICorner", TabFrame)
 
@@ -145,6 +152,7 @@ function Library:CreateWindow(txt)
 		Page.CanvasSize = UDim2.new(0, 0, 0, 0)
 		Page.ScrollBarThickness = 5
 		Page.ScrollingDirection = Enum.ScrollingDirection.Y
+		Page.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 255)
 
 		PageList.Name = "PageList"
 		PageList.Parent = Page
