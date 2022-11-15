@@ -94,30 +94,6 @@ function Library:CreateWindow(txt)
 	module:Drag(Header)
 	module:Drag(Dragui)
 
-	Dragui.Name = "Dragui"
-	Dragui.Parent = GrannyHub
-	Dragui.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-	Dragui.Position = UDim2.new(0.496744126, 0, 0.512048185, 0)
-	Dragui.Size = UDim2.new(0, 64, 0, 51)
-	Dragui.Font = Enum.Font.SourceSansBold
-	Dragui.Text = "Open"
-	Dragui.TextColor3 = Color3.fromRGB(255, 255, 255)
-	Dragui.TextScaled = true
-	Dragui.TextSize = 14.000
-	Dragui.TextWrapped = true
-	Dragui.Visible = false
-	Dragui.MouseButton1Click:Connect(function()
-		Header.Visible = true
-		Dragui.Visible = false
-	end)
-
-	UICorner.CornerRadius = UDim.new(1, 0)
-	UICorner.Parent = Dragui
-
-	local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/DragModule.lua"))()
-	module:Drag(Header)
-	module:Drag(Dragui)
-
 	MainFrame.Name = "MainFrame"
 	MainFrame.Parent = Header
 	MainFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
