@@ -69,7 +69,6 @@ function Library:CreateWindow(txt)
 	Header.Active = true
 
 	Instance.new("UICorner", Header)
-	
 
 	Dragui.Name = "Dragui"
 	Dragui.Parent = GrannyHub
@@ -82,6 +81,7 @@ function Library:CreateWindow(txt)
 	Dragui.TextScaled = true
 	Dragui.TextSize = 14.000
 	Dragui.TextWrapped = true
+	Dragui.Visible = false
 	Dragui.MouseButton1Click:Connect(function()
 		Header.Visible = true
 		Dragui.Visible = false
