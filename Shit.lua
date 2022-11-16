@@ -323,30 +323,40 @@ function Library:CreateWindow(txt)
 
 		function Elements:Label(txt)	
 			local LabelFunction = {}
-			local TextButton = Instance.new("TextLabel")
-			TextButton.Name = txt
-			TextButton.Parent = Page
-			TextButton.BackgroundTransparency = 1
-			TextButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-			TextButton.Position = UDim2.new(-0.0227272734, 0, 0, 0)
-			TextButton.Size = UDim2.new(0, 224, 0, 26)
-			TextButton.Font = Enum.Font.SourceSans
-			TextButton.Text = txt
-			TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-			TextButton.TextScaled = true
-			TextButton.TextSize = 14.000
-			TextButton.TextWrapped = true
-			TextButton.TextXAlignment = Enum.TextXAlignment.Left
+			local LabelElement = Instance.new("Frame")
+			local Title = Instance.new("TextLabel")
 
-			TextButton.MouseMoved:Connect(function()
+			LabelElement.Name = txt
+			LabelElement.Parent = Page
+			LabelElement.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+			LabelElement.BorderSizePixel = 0
+			LabelElement.Position = UDim2.new(0.0430107526, 0, 0, 0)
+			LabelElement.Size = UDim2.new(0, 224, 0, 35)
+
+			Instance.new("UICorner", LabelElement)
+
+			Title.Name = "Title"
+			Title.Parent = LabelElement
+			Title.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+			Title.BorderSizePixel = 0
+			Title.BackgroundTransparency = 1.000
+			Title.Position = UDim2.new(0.0430107526, 0, 0, 0)
+			Title.Size = UDim2.new(0, 100, 0, 35)
+			Title.Font = Enum.Font.SourceSans
+			Title.Text = txt
+			Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+			Title.TextSize = 18.000
+			Title.TextXAlignment = Enum.TextXAlignment.Left
+
+			LabelElement.MouseMoved:Connect(function()
 				TS:Create(Title, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(250, 0, 0)}):Play()
 			end)
-			TextButton.MouseLeave:Connect(function()
+			LabelElement.MouseLeave:Connect(function()
 				TS:Create(Title, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(250, 0, 0)}):Play()
 			end)
 
 			function LabelFunction:UpdateText(txt)
-				TextButton.Text = txt
+				Title.Text = txt
 			end
 			return LabelFunction
 		end
