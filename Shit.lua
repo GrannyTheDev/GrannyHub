@@ -97,7 +97,7 @@ function Library:CreateWindow(txt)
 	MainFrame.Name = "MainFrame"
 	MainFrame.Parent = Header
 	MainFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-	MainFrame.Position = UDim2.new(-0.001, 0, 0.983, 0)
+	MainFrame.Position = UDim2.new(-0.001, 0, 0, 30)
 	MainFrame.Size = UDim2.new(0, 370, 0, 141)
 
 	Instance.new("UICorner", MainFrame)
@@ -153,8 +153,9 @@ function Library:CreateWindow(txt)
 	Container.Name = "Container"
 	Container.Parent = MainFrame
 	Container.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-	Container.Position = UDim2.new(0.208381012, 0, -0.00257862709, 0)
-	Container.Size = UDim2.new(0, 276, 0, 141)
+	Container.Position = UDim2.new(0.208, 0, 0, -1)
+	Container.Size = UDim2.new(0, 276, 0, 0)
+  Container.BackgroundTransparency = 1
 
 	Instance.new("UICorner", Container)
 
@@ -192,8 +193,8 @@ function Library:CreateWindow(txt)
 		Page.Active = true
 		Page.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 		Page.BorderSizePixel = 0
-		Page.Position = UDim2.new(0, 20, 0.05, 0)
-		Page.Size = UDim2.new(0, 260, 0, 128)
+		Page.Position = UDim2.new(0, 20, 0, 8)
+		Page.Size = UDim2.new(0, 260, 0, 130)
 		Page.CanvasSize = UDim2.new(0, 264, 0, PageList.AbsoluteContentSize.Y + 10)
 		Page.ScrollBarThickness = 5
 		Page.ScrollingDirection = Enum.ScrollingDirection.Y
