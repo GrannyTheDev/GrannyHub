@@ -152,7 +152,7 @@ end)
 end
 
 LocalPlayer:Button("Sit", function()
-	game.Players.LocalPlayer.Character.Humanoid.Sit = true
+	game.Players.LocalPlayer.Character.Humanoid.Sit = not game.Players.LocalPlayer.Character.Humanoid.Sit
 end)
 
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
