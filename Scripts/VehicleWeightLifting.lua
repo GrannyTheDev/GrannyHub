@@ -359,14 +359,6 @@ Teleport:Button("Mystical World", function()
     Module:Tween(TweenInfo.new(0.1), CFrame.new(-48672, 2279, 21746))
 end)
 
-local autorejoin = Misc:Toggle("Auto Rejoin", function(v)
-getgenv().Settings.autorejoin = v
-Save()
-if v then
-doAutoRejoin()
-end
-end)
-
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
 getgenv().Settings.speed = v
 Save()
@@ -534,6 +526,14 @@ getgenv().Settings.prompt = v
 Save()
 if v then
 doPrompt()
+end
+end)
+
+local autorejoin = Misc:Toggle("Auto Rejoin", function(v)
+getgenv().Settings.autorejoin = v
+Save()
+if v then
+doAutoRejoin()
 end
 end)
 
