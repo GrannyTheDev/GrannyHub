@@ -23,7 +23,7 @@ local HttpService = game:GetService("HttpService");
 if (writefile) then
 json = HttpService:JSONEncode(getgenv().Settings);
 makefolder("DevilHub");
-makefolder("DevilHub/"..Place.." - "..game.PlaceId"..";
+makefolder("DevilHub/"..Place.." - "..game.PlaceId"..");
 writefile(filename, json);
 end
 end
