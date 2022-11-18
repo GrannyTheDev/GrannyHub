@@ -64,8 +64,8 @@ function Library:CreateWindow(txt)
 	Header.Name = "Header"
 	Header.Parent = GrannyHub
 	Header.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-	Header.Position = UDim2.new(0.368839413, 0, 0.336177468, 0)
-	Header.Size = UDim2.new(0, 349, 0, 34)
+	Header.Position = UDim2.new(0.369, 0, 0.336, 0)
+	Header.Size = UDim2.new(0, 370, 0, 34)
 	Header.Active = true
 
 	Instance.new("UICorner", Header)
@@ -97,8 +97,8 @@ function Library:CreateWindow(txt)
 	MainFrame.Name = "MainFrame"
 	MainFrame.Parent = Header
 	MainFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-	MainFrame.Position = UDim2.new(-0.00078803557, 0, 0.983236432, 0)
-	MainFrame.Size = UDim2.new(0, 349, 0, 141)
+	MainFrame.Position = UDim2.new(-0.001, 0, 0, 30)
+	MainFrame.Size = UDim2.new(0, 370, 0, 141)
 
 	Instance.new("UICorner", MainFrame)
 
@@ -131,6 +131,16 @@ function Library:CreateWindow(txt)
 	Close.MouseButton1Click:Connect(function()
 		GrannyHub:Destroy()
 	end)
+  
+  Close.MouseMoved:Connect(function()
+		TS:Create(Close, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+	end)
+	Close.MouseLeave:Connect(function()
+		TS:Create(Close, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+	end)
+  GrannyHub:GetPropertyChangedSignal("Enabled"):Connect(function()
+    TS:Create(Close, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+  end)
 
 	Min.Name = "Min"
 	Min.Parent = Header
@@ -149,12 +159,23 @@ function Library:CreateWindow(txt)
 		Header.Visible = false
 		Dragui.Visible = true
 	end)
+  
+  Min.MouseMoved:Connect(function()
+		TS:Create(Min, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+	end)
+	Min.MouseLeave:Connect(function()
+		TS:Create(Min, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+	end)
+  GrannyHub:GetPropertyChangedSignal("Enabled"):Connect(function()
+    TS:Create(Min, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+  end)
 
 	Container.Name = "Container"
 	Container.Parent = MainFrame
 	Container.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-	Container.Position = UDim2.new(0.208381012, 0, -0.00257862709, 0)
-	Container.Size = UDim2.new(0, 276, 0, 141)
+	Container.Position = UDim2.new(0.208, 0, 0, -1)
+	Container.Size = UDim2.new(0, 276, 0, 0)
+  Container.BackgroundTransparency = 1
 
 	Instance.new("UICorner", Container)
 
@@ -164,15 +185,15 @@ function Library:CreateWindow(txt)
 	TabList.SortOrder = Enum.SortOrder.LayoutOrder
 	TabList.Padding = UDim.new(0, 5)
 	TabList.Changed:Connect(function()
-		TabFrame.CanvasSize = UDim2.new(0, 0, 0, TabList.AbsoluteContentSize.Y + 10)
+		TabFrame.CanvasSize = UDim2.new(0, 0, 0, TabList.AbsoluteContentSize.Y)
 	end)
 
 	TabFrame.Name = "TabFrame"
 	TabFrame.Parent = MainFrame
 	TabFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 	TabFrame.Position = UDim2.new(0.021, 0, 0.05, 0)
-	TabFrame.Size = UDim2.new(0, 65, 0, 128)
-	TabFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+	TabFrame.Size = UDim2.new(0, 80, 0, 129)
+	TabFrame.CanvasSize = UDim2.new(0, 0, 0, TabList.AbsoluteContentSize.Y)
 	TabFrame.ScrollBarThickness = 5
 	TabFrame.ScrollingDirection = Enum.ScrollingDirection.Y
 	TabFrame.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 255)
@@ -192,9 +213,9 @@ function Library:CreateWindow(txt)
 		Page.Active = true
 		Page.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 		Page.BorderSizePixel = 0
-		Page.Position = UDim2.new(0.022, 0, 0.05, 0)
-		Page.Size = UDim2.new(0, 264, 0, 128)
-		Page.CanvasSize = UDim2.new(0, 0, 0, 0)
+		Page.Position = UDim2.new(0, 20, 0, 8)
+		Page.Size = UDim2.new(0, 260, 0, 130)
+		Page.CanvasSize = UDim2.new(0, 264, 0, PageList.AbsoluteContentSize.Y + 10)
 		Page.ScrollBarThickness = 5
 		Page.ScrollingDirection = Enum.ScrollingDirection.Y
 		Page.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 255)
@@ -206,7 +227,7 @@ function Library:CreateWindow(txt)
 		PageList.SortOrder = Enum.SortOrder.LayoutOrder
 		PageList.Padding = UDim.new(0, 5)
 		PageList.Changed:Connect(function()
-			Page.CanvasSize = UDim2.new(0, 264, 0, PageList.AbsoluteContentSize.Y + 20)
+			Page.CanvasSize = UDim2.new(0, 264, 0, PageList.AbsoluteContentSize.Y + 10)
 		end)
 
 		TabButton.Name = txt
@@ -249,6 +270,16 @@ function Library:CreateWindow(txt)
 		end
 		game:GetService("TweenService"):Create(TabButton, TweenInfo.new(0.2), {TextTransparency = 0.3}):Play()
 
+      TabButton.MouseMoved:Connect(function()
+				TS:Create(TabButton, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+			end)
+			TabButton.MouseLeave:Connect(function()
+				TS:Create(TabButton, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+			end)
+      GrannyHub:GetPropertyChangedSignal("Enabled"):Connect(function()
+          TS:Create(TabButton, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+      end)
+    
 		Instance.new("UICorner", TabButton)
 
 		local Elements = {}
@@ -299,11 +330,14 @@ function Library:CreateWindow(txt)
 			end)
 
 			ButtonElement.MouseMoved:Connect(function()
-				TS:Create(Title, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+				TS:Create(Title, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(250, 0, 0)}):Play()
 			end)
 			ButtonElement.MouseLeave:Connect(function()
-				TS:Create(Title, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+				TS:Create(Title, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
 			end)
+      GrannyHub:GetPropertyChangedSignal("Enabled"):Connect(function()
+          TS:Create(Title, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+      end)
 
 			Instance.new("UICorner", ButtonElement)
 
@@ -318,7 +352,7 @@ function Library:CreateWindow(txt)
 						end
 					end
 				end)
-			end
+      end
 		end
 
 		function Elements:Label(txt)	
@@ -349,11 +383,14 @@ function Library:CreateWindow(txt)
 			Title.TextXAlignment = Enum.TextXAlignment.Left
 
 			LabelElement.MouseMoved:Connect(function()
-				TS:Create(Title, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+				TS:Create(Title, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(250, 0, 0)}):Play()
 			end)
 			LabelElement.MouseLeave:Connect(function()
-				TS:Create(Title, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+				TS:Create(Title, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
 			end)
+      GrannyHub:GetPropertyChangedSignal("Enabled"):Connect(function()
+        TS:Create(Title, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+      end)
 
 			function LabelFunction:UpdateText(txt)
 				Title.Text = txt
@@ -375,6 +412,7 @@ function Library:CreateWindow(txt)
 			ToggleElement.Parent = Page
 			ToggleElement.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 			ToggleElement.BorderSizePixel = 0
+      ToggleElement.Position = UDim2.new(0.0430107526, 0, 0, 0)
 			ToggleElement.Size = UDim2.new(0, 224, 0, 35)
 
 			Click.Name = "Click"
@@ -430,12 +468,16 @@ function Library:CreateWindow(txt)
 
 			Instance.new("UICorner", Toggle).CornerRadius = UDim.new(1, 0)
 			local toggled = false
-			Title.MouseMoved:Connect(function()
-				TS:Create(Title, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+			ToggleElement.MouseMoved:Connect(function()
+				TS:Create(Title, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(250, 0, 0)}):Play()
 			end)
-			Title.MouseLeave:Connect(function()
-				TS:Create(Title, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+			ToggleElement.MouseLeave:Connect(function()
+				TS:Create(Title, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
 			end)
+      GrannyHub:GetPropertyChangedSignal("Enabled"):Connect(function()
+          TS:Create(Title, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+      end)
+      
 			Click.MouseButton1Down:Connect(function()
 				if toggled == false then
 					TS:Create(Background, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(47, 203, 85)}):Play()
@@ -490,8 +532,8 @@ function Library:CreateWindow(txt)
 				BoxElement.Parent = Page
 				BoxElement.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 				BoxElement.BorderSizePixel = 0
-				BoxElement.Position = UDim2.new(0.0909090936, 0, 0, 0)
-				BoxElement.Size = UDim2.new(0, 224, 0, 26)
+        BoxElement.Position = UDim2.new(0.0430107526, 0, 0, 0)
+				BoxElement.Size = UDim2.new(0, 224, 0, 35)
 
 				UICorner.Parent = BoxElement
 
@@ -530,6 +572,16 @@ function Library:CreateWindow(txt)
 						Box.PlaceholderText = txt
 					end
 				end)
+        
+      BoxElement.MouseMoved:Connect(function()
+				TS:Create(Title, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+			end)
+			BoxElement.MouseLeave:Connect(function()
+				TS:Create(Title, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+			end)
+      GrannyHub:GetPropertyChangedSignal("Enabled"):Connect(function()
+          TS:Create(Title, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+      end)
 
 				Instance.new("UICorner", Box)
 
