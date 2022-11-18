@@ -45,6 +45,7 @@ automine = false;
 killzombies = false;
 zone = "";
 nightmode = false;
+autorejoin = false;
 }
 
 function Save()
@@ -122,11 +123,28 @@ end
 end)
 end
 
-function doPrompt()
+function doAutoHatch()
 spawn(function()
-while getgenv().Settings.prompt == true do
-game.CoreGui:WaitForChild("PurchasePrompt").Enabled = false
+while getgenv().Settings.autohatch == true do
+BuyPet("Normal")
 wait(0.1)
+end
+end)
+end
+
+function doAutoRejoin()
+spawn(function()
+if getgenv().Settings.autorejoin == true then
+        game:WaitForChild("CoreGui")
+        game:WaitForChild("Players")
+
+         while true do wait()
+            getgenv().rejoin = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
+            if child.Name == 'ErrorPrompt' and child:FindFirstChild('MessageArea') and child.MessageArea:FindFirstChild("ErrorFrame") then
+            pcall(game:GetService("TeleportService"):Teleport(game.PlaceId))
+    end
+end)
+end
 end
 end)
 end
@@ -339,6 +357,14 @@ end)
 
 Teleport:Button("Mystical World", function()
     Module:Tween(TweenInfo.new(0.1), CFrame.new(-48672, 2279, 21746))
+end)
+
+local autorejoin = Misc:Toggle("Auto Rejoin", function(v)
+getgenv().Settings.autorejoin = v
+Save()
+if v then
+doAutoRejoin()
+end
 end)
 
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
@@ -569,6 +595,9 @@ killzombies:ChangeState(true)
 end
 if getgenv().Settings.nightmode == true then
 nightmode:ChangeState(true)
+end
+if getgenv().Settings.autorejoin == true then
+autorejoin:ChangeState(true)
 end
 zone:ChangeText(getgenv().Settings.zone)
 
