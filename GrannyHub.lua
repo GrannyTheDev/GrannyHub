@@ -40,19 +40,27 @@ local games = {
 	["UltimateLiftingSimulator.lua"] = 2472820296
 }
 
+local obbygames = {
+8712817601
+}
 
 local pages = game:GetService"AssetService":GetGamePlacesAsync()
 while wait() do
 	for j,k in pairs(pages:GetCurrentPage()) do
-		for i,v in next, games do 
+		for i,v in next, games do
+                  for q,e in next, obbygames do
 			if game.PlaceId == v then
 				return loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Scripts/" .. i))()
 			end
 			if game.CreatorId == v then
 				return loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Scripts/" .. i))()
 			end
+                        if game.PlaceId == e then
+                                return loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Scripts/ObbyScript"))()
+                        end
 		end
 	end
+        end
 	if pages.IsFinished then break end
 	pages:AdvanceToNextPageAsync()
 end
