@@ -56,7 +56,7 @@ while wait() do
 				return loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Scripts/" .. i))()
 			end
                         if game.PlaceId == e then
-                                return loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Scripts/ObbyScript"))()
+                                return loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Scripts/ObbyScript.lua"))()
                         end
 		end
 	end
