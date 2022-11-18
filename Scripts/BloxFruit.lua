@@ -101,11 +101,11 @@ if getgenv().Settings.energy == true then
     setreadonly(mt, false)
     mt.__index = newcclosure(function(a, b, c)
         if tostring(a) == "Energy" and tostring(b) == "Value" then
-            return oldindex(a, b, math.huge)
+            return oldindex(a, b, 130)
         end
         return oldindex(a, b, c)
     end)
-    game.Players.LocalPlayer.Character.Energy.Value = math.huge
+    game.Players.LocalPlayer.Character.Energy.Value = 130
 end
 end)
 end
