@@ -95,6 +95,14 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(4147, -3
 end)
 end
 
+if game.PlaceId == 9372570969 then
+LocalPlayer:Button("Get cookie and get key", function()
+fireclickdetector(game.Workspace.LocalObjects.GranScare1.go.ClickDetector)
+wait()
+fireclickdetector(game.Workspace.LocalObjects.key1.ClickDetector)
+end)
+end
+
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
 getgenv().Settings.speed = v
 Save()
