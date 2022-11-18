@@ -8,7 +8,7 @@ local LocalPlayer = Window:Page("LocalPlayer")
 
 local Misc = Window:Page("Misc")
 
-local filename = "DevilHub/"..Place.." - "..game.PlaceId".."/Config.json"
+local filename = "DevilHub/"..Place.." - "..game.PlaceId.."/Config.json"
 
 getgenv().Settings = {
 speed = false;
