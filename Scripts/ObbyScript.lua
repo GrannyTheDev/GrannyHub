@@ -2,7 +2,7 @@ local Library = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHu
 
 local Place = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
 
-local Window = Library:CreateWindow("GrannyHub - ")
+local Window = Library:CreateWindow("GrannyHub - "..Place)
 
 local LocalPlayer = Window:Page("LocalPlayer")
 
