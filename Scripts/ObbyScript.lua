@@ -1,4 +1,4 @@
-0local Library = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHub/Shit.lua"))()
+local Library = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHub/Shit.lua"))()
 
 local Place = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
 
@@ -23,7 +23,7 @@ local HttpService = game:GetService("HttpService");
 if (writefile) then
 json = HttpService:JSONEncode(getgenv().Settings);
 makefolder("DevilHub");
-makefolder("DevilHub/"..Place.." - "..game.PlaceId");
+makefolder("DevilHub/"..Place.." - "..game.PlaceId..");
 writefile(filename, json);
 end
 end
