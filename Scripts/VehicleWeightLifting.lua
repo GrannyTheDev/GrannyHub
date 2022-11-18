@@ -1,25 +1,3 @@
-if get_hidden_gui or gethui then
-	local hiddenUI = get_hidden_gui or gethui
-	for i,v in pairs(hiddenUI():GetChildren()) do
-	     if v:IsA("ScreenGui") and v.Name == "Gui" then
-		 v:Destroy()
-	     end
-	end
-elseif (not is_sirhurt_closure) and (syn and syn.protect_gui) then
-	for i,v in pairs(game.CoreGui:GetChildren()) do
-	     if v:IsA("ScreenGui") and v.Name == "Gui" then
-                 syn.unprotect_gui(v)
-                 v:Destroy()
-	     end
-	end
-else
-	for i,v in pairs(game.CoreGui:GetChildren()) do
-	     if v:IsA("ScreenGui") and v.Name == "Gui" then
-		 v:Destroy()
-	     end
-    end
-end
-
 local Library = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHub/Shit.lua"))()
 
 local Gui = Library:CreateWindow("GrannyHub".." - Vehicle Weight Lifting")
@@ -31,6 +9,8 @@ local Teleport = Gui:Page("Teleport")
 local LocalPlayer = Gui:Page("LocalPlayer")
 
 local Pets = Gui:Page("Pets")
+
+local Stats = Gui:Page("Stats")
 
 local Misc = Gui:Page("Misc")
 
@@ -116,7 +96,7 @@ end
 function doInfYield()
 spawn(function()
 if getgenv().Settings.infyield == true then
-	loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Shit/GrannyCmd.lua"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
 end
 end)
 end
@@ -596,47 +576,7 @@ for i,v in pairs(getgenv().Settings) do
 print(i,v)
 end
 
-local Counter = Instance.new("TextLabel")
-local Dragger = Instance.new("Frame")
-local Gui = Instance.new("ScreenGui")
-
-Gui.Name = "Gui"
-Gui.ResetOnSpawn = false
-
-
-if get_hidden_gui or gethui then
-	local hiddenUI = get_hidden_gui or gethui
-	Gui.Parent = hiddenUI()
-elseif (not is_sirhurt_closure) and (syn and syn.protect_gui) then
-	syn.protect_gui(Gui)
-	Gui.Parent = cloneref(game:GetService("CoreGui"))
-else
-	Gui.Parent = cloneref(game:GetService("CoreGui"))
-end
-
-Dragger.Name = "Dragger"
-Dragger.Parent = Gui
-Dragger.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Dragger.BackgroundTransparency = 1.000
-Dragger.Position = UDim2.new(0, 80, 0, 40)
-Dragger.Size = UDim2.new(0, 300, 0, 300)
-
-Counter.Parent = Dragger
-Counter.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Counter.BackgroundTransparency = 1.000
-Counter.Position = UDim2.new(0, game:GetService("Players").LocalPlayer.PlayerGui.Main.OpenTopMenu.Position.X, 0, game:GetService("Players").LocalPlayer.PlayerGui.Main.OpenTopMenu.Position.Y)
-Counter.Size = UDim2.new(0, 200, 0, 60)
-Counter.Font = Enum.Font.SourceSans
-Counter.Text = ""
-Counter.TextColor3 = Color3.fromRGB(255, 255, 255)
-Counter.TextScaled = false
-Counter.TextSize = 35.000
-Counter.TextWrapped = true
-
-local Module = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHub/Modules/DragModule.lua"))()
-Module:Drag(Counter)
-
-local plr = game.Players.LocalPlayer
-while wait() do
-	Counter.Text = "Prestige: "..plr.leaderstats.Prestige.Value
+local PrestigeCounter = Stats:Label("Prestige: "..game.Players.LocalPlayer.leaderstats.Prestige.Value)
+while wait(0.1) do
+PrestigeCounter:UpdateText("Prestige: "..game.Players.LocalPlayer.leaderstats.Prestige.Value)
 end
