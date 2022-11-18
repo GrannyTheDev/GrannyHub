@@ -98,7 +98,7 @@ end
 if game.PlaceId == 9372570969 then
 LocalPlayer:Button("Get cookie and get key", function()
 fireclickdetector(game.Workspace.LocalObjects.GranScare1.go.ClickDetector)
-wait()
+wait(0.1)
 fireclickdetector(game.Workspace.LocalObjects.key1.ClickDetector)
 end)
 end
