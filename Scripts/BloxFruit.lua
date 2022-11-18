@@ -186,7 +186,7 @@ local NoclipBtn = LocalPlayer:Toggle("Noclip", function(v)
     
                 if v == true then
     Stepped = game:GetService("RunService").Stepped:Connect(function()
-                    for i, v in pairs(Workspace[Plr.Name]:GetChildren()) do
+                    for i, v in pairs(Workspace.Characters[Plr.Name]:GetChildren()) do
                     if v:IsA("BasePart") then
                     v.CanCollide = false
                     end end end)
