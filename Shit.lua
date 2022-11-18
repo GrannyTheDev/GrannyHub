@@ -64,8 +64,8 @@ function Library:CreateWindow(txt)
 	Header.Name = "Header"
 	Header.Parent = GrannyHub
 	Header.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-	Header.Position = UDim2.new(0.368839413, 0, 0.336177468, 0)
-	Header.Size = UDim2.new(0, 349, 0, 34)
+	Header.Position = UDim2.new(0.369, 0, 0.336, 0)
+	Header.Size = UDim2.new(0, 370, 0, 34)
 	Header.Active = true
 
 	Instance.new("UICorner", Header)
@@ -97,8 +97,8 @@ function Library:CreateWindow(txt)
 	MainFrame.Name = "MainFrame"
 	MainFrame.Parent = Header
 	MainFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-	MainFrame.Position = UDim2.new(-0.00078803557, 0, 0.983236432, 0)
-	MainFrame.Size = UDim2.new(0, 349, 0, 141)
+	MainFrame.Position = UDim2.new(-0.001, 0, 0.983, 0)
+	MainFrame.Size = UDim2.new(0, 370, 0, 141)
 
 	Instance.new("UICorner", MainFrame)
 
@@ -164,15 +164,15 @@ function Library:CreateWindow(txt)
 	TabList.SortOrder = Enum.SortOrder.LayoutOrder
 	TabList.Padding = UDim.new(0, 5)
 	TabList.Changed:Connect(function()
-		TabFrame.CanvasSize = UDim2.new(0, 0, 0, TabList.AbsoluteContentSize.Y + 10)
+		TabFrame.CanvasSize = UDim2.new(0, 0, 0, TabList.AbsoluteContentSize.Y)
 	end)
 
 	TabFrame.Name = "TabFrame"
 	TabFrame.Parent = MainFrame
 	TabFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 	TabFrame.Position = UDim2.new(0.021, 0, 0.05, 0)
-	TabFrame.Size = UDim2.new(0, 65, 0, 128)
-	TabFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+	TabFrame.Size = UDim2.new(0, 80, 0, 129)
+	TabFrame.CanvasSize = UDim2.new(0, 0, 0, TabList.AbsoluteContentSize.Y)
 	TabFrame.ScrollBarThickness = 5
 	TabFrame.ScrollingDirection = Enum.ScrollingDirection.Y
 	TabFrame.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 255)
@@ -192,9 +192,9 @@ function Library:CreateWindow(txt)
 		Page.Active = true
 		Page.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
 		Page.BorderSizePixel = 0
-		Page.Position = UDim2.new(0.022, 0, 0.05, 0)
-		Page.Size = UDim2.new(0, 264, 0, 128)
-		Page.CanvasSize = UDim2.new(0, 0, 0, 0)
+		Page.Position = UDim2.new(0, 20, 0.05, 0)
+		Page.Size = UDim2.new(0, 260, 0, 128)
+		Page.CanvasSize = UDim2.new(0, 264, 0, PageList.AbsoluteContentSize.Y + 10)
 		Page.ScrollBarThickness = 5
 		Page.ScrollingDirection = Enum.ScrollingDirection.Y
 		Page.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 255)
@@ -206,7 +206,7 @@ function Library:CreateWindow(txt)
 		PageList.SortOrder = Enum.SortOrder.LayoutOrder
 		PageList.Padding = UDim.new(0, 5)
 		PageList.Changed:Connect(function()
-			Page.CanvasSize = UDim2.new(0, 264, 0, PageList.AbsoluteContentSize.Y + 20)
+			Page.CanvasSize = UDim2.new(0, 264, 0, PageList.AbsoluteContentSize.Y + 10)
 		end)
 
 		TabButton.Name = txt
