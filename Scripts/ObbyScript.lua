@@ -89,6 +89,12 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1097, 3
 end)
 end
 
+if game.PlaceId == 9099326192 then
+LocalPlayer:Button("Teleport to end", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(4147, -327, 681)
+end)
+end
+
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
 getgenv().Settings.speed = v
 Save()
