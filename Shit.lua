@@ -131,6 +131,16 @@ function Library:CreateWindow(txt)
 	Close.MouseButton1Click:Connect(function()
 		GrannyHub:Destroy()
 	end)
+  
+  Close.MouseMoved:Connect(function()
+		TS:Create(Close, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+	end)
+	Close.MouseLeave:Connect(function()
+		TS:Create(Close, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+	end)
+  GrannyHub:GetPropertyChangedSignal("Enabled"):Connect(function()
+    TS:Create(Close, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+  end)
 
 	Min.Name = "Min"
 	Min.Parent = Header
@@ -149,6 +159,16 @@ function Library:CreateWindow(txt)
 		Header.Visible = false
 		Dragui.Visible = true
 	end)
+  
+  Min.MouseMoved:Connect(function()
+		TS:Create(Min, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+	end)
+	Min.MouseLeave:Connect(function()
+		TS:Create(Min, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+	end)
+  GrannyHub:GetPropertyChangedSignal("Enabled"):Connect(function()
+    TS:Create(Min, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+  end)
 
 	Container.Name = "Container"
 	Container.Parent = MainFrame
@@ -250,6 +270,16 @@ function Library:CreateWindow(txt)
 		end
 		game:GetService("TweenService"):Create(TabButton, TweenInfo.new(0.2), {TextTransparency = 0.3}):Play()
 
+      TabButton.MouseMoved:Connect(function()
+				TS:Create(TabButton, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+			end)
+			TabButton.MouseLeave:Connect(function()
+				TS:Create(TabButton, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+			end)
+      GrannyHub:GetPropertyChangedSignal("Enabled"):Connect(function()
+          TS:Create(TabButton, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+      end)
+    
 		Instance.new("UICorner", TabButton)
 
 		local Elements = {}
@@ -300,11 +330,14 @@ function Library:CreateWindow(txt)
 			end)
 
 			ButtonElement.MouseMoved:Connect(function()
-				TS:Create(Title, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+				TS:Create(Title, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(250, 0, 0)}):Play()
 			end)
 			ButtonElement.MouseLeave:Connect(function()
-				TS:Create(Title, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+				TS:Create(Title, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
 			end)
+      GrannyHub:GetPropertyChangedSignal("Enabled"):Connect(function()
+          TS:Create(Title, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+      end)
 
 			Instance.new("UICorner", ButtonElement)
 
@@ -319,7 +352,7 @@ function Library:CreateWindow(txt)
 						end
 					end
 				end)
-			end
+      end
 		end
 
 		function Elements:Label(txt)	
@@ -350,11 +383,14 @@ function Library:CreateWindow(txt)
 			Title.TextXAlignment = Enum.TextXAlignment.Left
 
 			LabelElement.MouseMoved:Connect(function()
-				TS:Create(Title, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+				TS:Create(Title, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(250, 0, 0)}):Play()
 			end)
 			LabelElement.MouseLeave:Connect(function()
-				TS:Create(Title, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+				TS:Create(Title, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
 			end)
+      GrannyHub:GetPropertyChangedSignal("Enabled"):Connect(function()
+        TS:Create(Title, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+      end)
 
 			function LabelFunction:UpdateText(txt)
 				Title.Text = txt
@@ -376,6 +412,7 @@ function Library:CreateWindow(txt)
 			ToggleElement.Parent = Page
 			ToggleElement.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 			ToggleElement.BorderSizePixel = 0
+      ToggleElement.Position = UDim2.new(0.0430107526, 0, 0, 0)
 			ToggleElement.Size = UDim2.new(0, 224, 0, 35)
 
 			Click.Name = "Click"
@@ -431,12 +468,16 @@ function Library:CreateWindow(txt)
 
 			Instance.new("UICorner", Toggle).CornerRadius = UDim.new(1, 0)
 			local toggled = false
-			Title.MouseMoved:Connect(function()
-				TS:Create(Title, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+			ToggleElement.MouseMoved:Connect(function()
+				TS:Create(Title, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(250, 0, 0)}):Play()
 			end)
-			Title.MouseLeave:Connect(function()
-				TS:Create(Title, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+			ToggleElement.MouseLeave:Connect(function()
+				TS:Create(Title, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
 			end)
+      GrannyHub:GetPropertyChangedSignal("Enabled"):Connect(function()
+          TS:Create(Title, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+      end)
+      
 			Click.MouseButton1Down:Connect(function()
 				if toggled == false then
 					TS:Create(Background, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(47, 203, 85)}):Play()
@@ -491,8 +532,8 @@ function Library:CreateWindow(txt)
 				BoxElement.Parent = Page
 				BoxElement.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 				BoxElement.BorderSizePixel = 0
-				BoxElement.Position = UDim2.new(0.0909090936, 0, 0, 0)
-				BoxElement.Size = UDim2.new(0, 224, 0, 26)
+        BoxElement.Position = UDim2.new(0.0430107526, 0, 0, 0)
+				BoxElement.Size = UDim2.new(0, 224, 0, 35)
 
 				UICorner.Parent = BoxElement
 
@@ -531,6 +572,16 @@ function Library:CreateWindow(txt)
 						Box.PlaceholderText = txt
 					end
 				end)
+        
+      BoxElement.MouseMoved:Connect(function()
+				TS:Create(Title, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+			end)
+			BoxElement.MouseLeave:Connect(function()
+				TS:Create(Title, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+			end)
+      GrannyHub:GetPropertyChangedSignal("Enabled"):Connect(function()
+          TS:Create(Title, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+      end)
 
 				Instance.new("UICorner", Box)
 
