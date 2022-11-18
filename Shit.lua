@@ -206,7 +206,7 @@ function Library:CreateWindow(txt)
 		PageList.SortOrder = Enum.SortOrder.LayoutOrder
 		PageList.Padding = UDim.new(0, 5)
 		PageList.Changed:Connect(function()
-			Page.CanvasSize = UDim2.new(0, 264, 0, PageList.AbsoluteContentSize.Y + 10)
+			Page.CanvasSize = UDim2.new(0, 264, 0, PageList.AbsoluteContentSize.Y + 20)
 		end)
 
 		TabButton.Name = txt
