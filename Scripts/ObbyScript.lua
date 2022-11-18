@@ -1,6 +1,6 @@
 local Library = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHub/Shit.lua"))()
 
-local Place = game:GetService("MarketplaceInfo"):GetProductInfo(game.PlaceId).Name
+local Place = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
 
 local Window = Library:CreateWindow("GrannyHub - "..Place)
 
