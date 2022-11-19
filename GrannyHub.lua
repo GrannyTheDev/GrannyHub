@@ -38,7 +38,8 @@ local games = {
 	["BloxFruit.lua"] = 2753915549,
 	["PrisonLife.lua"] = 155615604,
 	["UltimateLiftingSimulator.lua"] = 2472820296,
-        ["ShadovisRpg.lua"] = 9585537847
+        ["ShadovisRpg.lua"] = 9585537847,
+        ["TextingSimulator.lua"] = 2580982329
 }
 
 local obbygames = {
