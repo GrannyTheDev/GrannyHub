@@ -880,10 +880,8 @@ game.Players.LocalPlayer.leaderstats["Burp points"]:GetPropertyChangedSignal("Va
 cp = 0
 
 local plr = game.Players.LocalPlayer
-PrestigeCounter.Text = plr.leaderstats.Prestige.Value..""
 	if cp ~= plr.leaderstats["Burp points"].Value then
 		BpCounter = "+"..plr.leaderstats["Burp points"].Value - cp..""
 		cp = plr.leaderstats["Burp points"].Value
 	end
-end
 end)
