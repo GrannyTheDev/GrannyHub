@@ -595,5 +595,4 @@ function Library:CreateWindow(txt)
 	end
 	return Page
 end
-Library:CreateWindow("hi")
 return Library
