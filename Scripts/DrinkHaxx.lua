@@ -881,7 +881,7 @@ cp = 0
 
 local plr = game.Players.LocalPlayer
 	if cp ~= plr.leaderstats["Burp points"].Value then
-		BpCounter = "+"..plr.leaderstats["Burp points"].Value - cp..""
+		BpCounter:UpdateText("+"..plr.leaderstats["Burp points"].Value - cp.."")
 		cp = plr.leaderstats["Burp points"].Value
 	end
 end)
