@@ -87,7 +87,7 @@ function Library:CreateWindow(txt)
                 GrannyHub:GetPropertyChangedSignal("Enabled"):Connect(function()
                     for i,v in pairs(GrannyHub:GetDescendants()) do
                       if v.Name == "Title" and v:IsA("TextButton") then
-                  TS:Create(Min, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+                  TS:Create(v, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
                 end
                end
               end)
