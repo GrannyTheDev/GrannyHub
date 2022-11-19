@@ -504,7 +504,12 @@ end
 end)
 end
 
-local pets = {"Small Blue", "Small Red", "Purple Green", "Orange Winged", "Blue Winged", "Purple Winged", "Winged Green", "Winged Orange", "Fire", "Flower", "Wizard", "Vampire", "Cool Dude", "Rainbow", "Triplet", "Radioactive", "Volcanic",  "Cyborg"}
+local pets = {"Small Blue", "Small Red", "Blue", "Purple", "Green", "Orange", "Winged Blue", "Winged Purple", "Winged Green", "Winged Orange", "Fire", "Flower", "Wizard", "Vampire", "Cool Dude", "Rainbow", "Triplet", "Radioactive", "Volcanic",  "Cyborg"}
+for i = 1,#pets do
+Pets:Button(pets[i], function()
+BuyPet(pets[i])
+end)
+end
 
 local prestige = AutoFarm:Toggle("Auto Prestige", function(v)
 getgenv().Settings.prestige = v
