@@ -2,6 +2,8 @@ local Library = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHu
 
 local Window = Library:CreateWindow("GrannyHub".." - Texting Simulator")
 
+local AutoFarm = Window:Page("AutoFarm")
+
 local LocalPlayer = Window:Page("LocalPlayer")
 
 local Misc = Window:Page("Misc")
@@ -13,6 +15,7 @@ speed = false;
 jump = false;
 infyield = false;
 antiafk = false;
+text = false;
 }
 
 function Save()
@@ -92,6 +95,23 @@ if getgenv().Settings.antiafk == true then
 end
 end)
 end
+
+function doText()
+spawn(function()
+while getgenv().Settings.text == true do
+game:GetService("ReplicatedStorage").Events.SendTexts:FireServer("Phone")
+wait(0.1)
+end
+end)
+end
+
+local text = AutoFarm:Toggle("Auto Text", function(v)
+getgenv().Settings.text = v
+Save()
+if v then
+doText()
+end
+end)
 
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
 getgenv().Settings.speed = v
@@ -178,6 +198,9 @@ infyield:ChangeState(true)
 end
 if getgenv().Settings.antiafk == true then
 antiafk:ChangeState(true)
+end
+if getgenv().Settings.text == true then
+text:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
