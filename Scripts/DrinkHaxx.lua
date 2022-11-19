@@ -13,6 +13,8 @@ local AutoFarm = DrinkHaxx:Page("AutoFarm")
 
 local Drink = DrinkHaxx:Page("Drink")
 
+local Stats = DrinkHaxx:Page("Stats")
+
 local LocalPlayer = DrinkHaxx:Page("LocalPlayer")
 
 local Teleport = DrinkHaxx:Page("Teleport")
@@ -867,6 +869,14 @@ end
 
 for i,v in pairs(getgenv().Settings) do
 print(i,v)
+end
+
+local PrestigeCounter = Stats:Label("Prestige: "..game.Players.LocalPlayer.leaderstats.Prestige.Value)
+local BpCounter = Stats:Label("Burp Points: "..game.Players.LocalPlayer.leaderstats.Prestige.Value)
+
+while wait(0.1) do
+PrestigeCounter:UpdateText("Prestige: "..game.Players.LocalPlayer.leaderstats.Prestige.Value)
+BpCounter:UpdateText("Burp Points: "..game.Players.LocalPlayer.leaderstats.Prestige.Value)
 end
 
 loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Shit/BPCounter.lua"))()
