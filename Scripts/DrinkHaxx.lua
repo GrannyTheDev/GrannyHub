@@ -504,6 +504,8 @@ end
 end)
 end
 
+local pets = {"Small Blue", "Small Red", "Purple Green", "Orange Winged", "Blue Winged", "Purple Winged", "Winged Green", "Winged Orange", "Fire", "Flower", "Wizard", "Vampire", "Cool Dude", "Rainbow", "Triplet", "Radioactive", "Volcanic",  "Cyborg"}
+
 local prestige = AutoFarm:Toggle("Auto Prestige", function(v)
 getgenv().Settings.prestige = v
 Save()
