@@ -4,6 +4,8 @@ local Window = Library:CreateWindow("GrannyHub".." - Shadovis Rpg")
 
 local LocalPlayer = Window:Page("LocalPlayer")
 
+local Teleport = Window:Page("Teleport")
+
 local Misc = Window:Page("Misc")
 
 local filename = "DevilHub/ShadovisRpg - 9585537847/Config.json"
@@ -92,6 +94,10 @@ if getgenv().Settings.antiafk == true then
 end
 end)
 end
+
+Teleport:Button("Teleport to spawn", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-12, -3, -679)
+end)
 
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
 getgenv().Settings.speed = v
