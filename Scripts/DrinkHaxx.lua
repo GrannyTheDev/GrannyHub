@@ -873,8 +873,9 @@ end
 
 local PrestigeCounter = Stats:Label("Prestige: "..game.Players.LocalPlayer.leaderstats.Prestige.Value)
 local BpCounter = Stats:Label("Burp Points: "..game.Players.LocalPlayer.leaderstats["Burp points"].Value)
-
-while wait(0.1) do
+game.Players.LocalPlayer.leaderstats.Prestige:GetPropertyChangedSignal("Value"):Connect(function()
 PrestigeCounter:UpdateText("Prestige: "..game.Players.LocalPlayer.leaderstats.Prestige.Value)
+end)
+game.Players.LocalPlayer.leaderstats["Burp points"]:GetPropertyChangedSignal("Value"):Connect(function()
 BpCounter:UpdateText("Burp Points: "..game.Players.LocalPlayer.leaderstats["Burp points"].Value)
-end
+end)
