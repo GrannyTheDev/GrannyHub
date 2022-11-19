@@ -15,6 +15,8 @@ local Drink = DrinkHaxx:Page("Drink")
 
 local Stats = DrinkHaxx:Page("Stats")
 
+local Pets = DrinkHaxx:Page("Pets")
+
 local LocalPlayer = DrinkHaxx:Page("LocalPlayer")
 
 local Teleport = DrinkHaxx:Page("Teleport")
@@ -340,6 +342,14 @@ elseif getgenv().Settings.fourthdrink == false then
 	Stepped:Disconnect() 
 end
 end)
+end
+
+function BuyPet(name)
+for i,v in pairs(game.ReplicatedStorage.RemoteEvents:GetChildren()) do
+if v.Name == "PetPurchase" then
+v:InvokeServer(name)
+end
+end
 end
 
 function doFifthDrink()
