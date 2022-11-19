@@ -1,4 +1,4 @@
-if get_hidden_gui or gethui then
+Lif get_hidden_gui or gethui then
 	local hiddenUI = get_hidden_gui or gethui
 	for i,v in pairs(hiddenUI():GetChildren()) do
 		if v:IsA("ScreenGui") and v.Name == "GrannyHub" then
@@ -33,7 +33,6 @@ function Library:CreateWindow(txt)
 	local TabList = Instance.new("UIListLayout")
 	local TabFrame = Instance.new("ScrollingFrame")
 	local Dragui = Instance.new("TextButton")
-	local UICorner = Instance.new("UICorner")
 	local TS = game:GetService("TweenService")
 
 	GrannyHub.Name = "GrannyHub"
@@ -85,10 +84,15 @@ function Library:CreateWindow(txt)
 	Dragui.MouseButton1Click:Connect(function()
 		Header.Visible = true
 		Dragui.Visible = false
+                GrannyHub:GetPropertyChangedSignal("Enabled"):Connect(function()
+                    for i,v in pairs(GrannyHub:GetDescendants()) do
+                      if v.Name == "Title" and v:IsA("TextButton") then
+                  TS:Create(Min, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+                end
+               end
+              end)
 	end)
-
-	UICorner.CornerRadius = UDim.new(1, 0)
-	UICorner.Parent = Dragui
+        Instance.new("UICorner", Dragui).CornerRadius = UDim.new(1, 0)
 
 	local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/DragModule.lua"))()
 	module:Drag(Header)
