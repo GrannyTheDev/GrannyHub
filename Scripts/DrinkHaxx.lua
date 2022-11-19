@@ -880,7 +880,7 @@ local plr = game.Players.LocalPlayer
 while wait() do
 	PrestigeCounter.Text = plr.leaderstats.Prestige.Value..""
 	if cp ~= plr.leaderstats["Burp points"].Value then
-		GainCounter:UpdateText("+"..plr.leaderstats["Burp points"].Value - cp.."")
+		GainCounter:UpdateText("Gain: "..plr.leaderstats["Burp points"].Value - cp.."")
 		cp = plr.leaderstats["Burp points"].Value
 	end
 end
