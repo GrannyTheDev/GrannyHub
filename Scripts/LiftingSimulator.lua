@@ -1,3 +1,14 @@
+local Folder = Instance.new("Folder")
+Folder.Name = "SafePlace"
+Folder.Parent = workspace
+local MainPart = Instance.new("Part")
+MainPart.Name = "MainPart"
+MainPart.Parent = Folder
+MainPart.Anchored = true
+MainPart.Position = Vector3.new(291, 1000, 1657)
+MainPart.Size = Vector3.new(2048, 5, 2048)
+MainPart.CanCollide = true
+
 local Library = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHub/Shit.lua"))()
 
 local Window = Library:CreateWindow("GrannyHub".." - Lifting Simulator")
@@ -276,6 +287,10 @@ Save()
 if v then
 doBuyBody()
 end
+end)
+
+LocalPlayer:Button("Teleport to safeplace", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(291, 1100, 1657)
 end)
 
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
