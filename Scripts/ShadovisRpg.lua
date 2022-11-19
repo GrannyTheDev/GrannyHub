@@ -105,7 +105,7 @@ local args = {
     [2] = "Broken Sword",
     [3] = 0.16524648666381836,
     [4] = "SlashEvent",
-    [5] = v.HumanoidRootPart
+    [5] = v:WaitForChild("HumanoidRootPart")
 }
 
 game:GetService("Players").LocalPlayer.Character.Combat.RemoteEvent:FireServer(unpack(args))
