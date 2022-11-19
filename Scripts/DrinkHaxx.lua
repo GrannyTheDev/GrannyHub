@@ -13,13 +13,13 @@ local AutoFarm = DrinkHaxx:Page("AutoFarm")
 
 local Drink = DrinkHaxx:Page("Drink")
 
-local Stats = DrinkHaxx:Page("Stats")
-
-local Pets = DrinkHaxx:Page("Pets")
-
 local LocalPlayer = DrinkHaxx:Page("LocalPlayer")
 
+local Stats = DrinkHaxx:Page("Stats")
+
 local Teleport = DrinkHaxx:Page("Teleport")
+
+local Pets = DrinkHaxx:Page("Pets")
 
 local Misc = DrinkHaxx:Page("Misc")
 
