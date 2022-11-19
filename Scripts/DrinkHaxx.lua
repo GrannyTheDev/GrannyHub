@@ -878,9 +878,12 @@ PrestigeCounter:UpdateText("Prestige: "..game.Players.LocalPlayer.leaderstats.Pr
 end)
 game.Players.LocalPlayer.leaderstats["Burp points"]:GetPropertyChangedSignal("Value"):Connect(function()
 cp = 0
+
 local plr = game.Players.LocalPlayer
+PrestigeCounter.Text = plr.leaderstats.Prestige.Value..""
 	if cp ~= plr.leaderstats["Burp points"].Value then
-		BpCounter:UpdateText("Gain: "..plr.leaderstats["Burp points"].Value - cp.."")
+		BpCounter = "+"..plr.leaderstats["Burp points"].Value - cp..""
 		cp = plr.leaderstats["Burp points"].Value
 	end
+end
 end)
