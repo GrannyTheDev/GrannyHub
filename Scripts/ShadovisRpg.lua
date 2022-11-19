@@ -2,8 +2,6 @@ local Library = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHu
 
 local Window = Library:CreateWindow("GrannyHub".." - Shadovis Rpg")
 
-local AutoFarm = Window:Page("AutoFarm")
-
 local LocalPlayer = Window:Page("LocalPlayer")
 
 local Misc = Window:Page("Misc")
@@ -15,7 +13,6 @@ speed = false;
 jump = false;
 infyield = false;
 antiafk = false;
-kill = false;
 }
 
 function Save()
@@ -95,35 +92,6 @@ if getgenv().Settings.antiafk == true then
 end
 end)
 end
-
-function doKill()
-spawn(function()
-while getgenv().Settings.kill == true do
-for i,v in pairs(workspace.NPCs:GetDescendants()) do
-if v.Name == "HumanoidRootPart" then
-local args = {
-    [1] = "Input",
-    [2] = "Broken Sword",
-    [3] = 0.16524648666381836,
-    [4] = "SlashEvent",
-    [5] = v
-}
-
-game:GetService("Players").LocalPlayer.Character.Combat.RemoteEvent:FireServer(unpack(args))
-end
-end
-wait(0.1)
-end
-end)
-end
-
-local kill = AutoFarm:Toggle("Auto kill", function(v)
-getgenv().Settings.kill = v
-Save()
-if v then
-doKill()
-end
-end)
 
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
 getgenv().Settings.speed = v
@@ -210,9 +178,6 @@ infyield:ChangeState(true)
 end
 if getgenv().Settings.antiafk == true then
 antiafk:ChangeState(true)
-end
-if getgenv().Settings.kill == true then
-kill:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
