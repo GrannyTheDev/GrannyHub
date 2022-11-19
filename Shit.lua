@@ -84,14 +84,7 @@ function Library:CreateWindow(txt)
 	Dragui.MouseButton1Click:Connect(function()
 		Header.Visible = true
 		Dragui.Visible = false
-                GrannyHub:GetPropertyChangedSignal("Enabled"):Connect(function()
-                    for i,v in pairs(GrannyHub:GetDescendants()) do
-                      if v.Name == "Title" and v:IsA("TextButton") then
-                  TS:Create(v, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
-                end
-               end
-              end)
-	end)
+        end)
         Instance.new("UICorner", Dragui).CornerRadius = UDim.new(1, 0)
 
 	local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/DragModule.lua"))()
