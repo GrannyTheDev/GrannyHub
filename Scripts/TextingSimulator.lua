@@ -16,6 +16,7 @@ jump = false;
 infyield = false;
 antiafk = false;
 text = false;
+sell = false;
 }
 
 function Save()
@@ -105,11 +106,30 @@ end
 end)
 end
 
+function doSell()
+spawn(function()
+while getgenv().Settings.sell == true do
+firetouchinterest(workspace.Scriptables.SellPlatform["Meshes/riong"], game.Players.LocalPlayer.Character.HumanoidRootPart, 1)
+wait()
+firetouchinterest(workspace.Scriptables.SellPlatform["Meshes/riong"], game.Players.LocalPlayer.Character.HumanoidRootPart, 0)
+wait(0.1)
+end
+end)
+end
+
 local text = AutoFarm:Toggle("Auto Text", function(v)
 getgenv().Settings.text = v
 Save()
 if v then
 doText()
+end
+end)
+
+local sell = AutoFarm:Toggle("Auto Sell", function(v)
+getgenv().Settings.sell = v
+Save()
+if v then
+doSell()
 end
 end)
 
@@ -201,6 +221,9 @@ antiafk:ChangeState(true)
 end
 if getgenv().Settings.text == true then
 text:ChangeState(true)
+end
+if getgenv().Settings.sell == true then
+sell:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
