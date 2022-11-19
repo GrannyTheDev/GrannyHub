@@ -99,16 +99,18 @@ end
 function doKill()
 spawn(function()
 while getgenv().Settings.kill == true do
-for i,v in pairs(workspace.NPCs:GetChildren()) do
+for i,v in pairs(workspace.NPCs:GetDescendants()) do
+if v.Name == "HumanoidRootPart" then
 local args = {
     [1] = "Input",
     [2] = "Broken Sword",
     [3] = 0.16524648666381836,
     [4] = "SlashEvent",
-    [5] = v.Head
+    [5] = v
 }
 
 game:GetService("Players").LocalPlayer.Character.Combat.RemoteEvent:FireServer(unpack(args))
+end
 end
 wait(0.1)
 end
