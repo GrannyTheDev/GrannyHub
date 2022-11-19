@@ -1,4 +1,4 @@
-Lif get_hidden_gui or gethui then
+if get_hidden_gui or gethui then
 	local hiddenUI = get_hidden_gui or gethui
 	for i,v in pairs(hiddenUI():GetChildren()) do
 		if v:IsA("ScreenGui") and v.Name == "GrannyHub" then
