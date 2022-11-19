@@ -54,7 +54,8 @@ local obbygames = {
 7378813434,
 2028593804,
 1946695497,
-1451599116
+1451599116,
+1428472551
 }
 
 local pages = game:GetService"AssetService":GetGamePlacesAsync()
