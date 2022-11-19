@@ -638,12 +638,12 @@ doJump()
 end
 end)
 
-local sit = LocalPlayer:Toggle("Sit", function(v)
+LocalPlayer:Button("Sit", function()
 	local plr = game.Players.LocalPlayer
 	local char = plr.Character
 	local hum = char:FindFirstChild("Humanoid")
 	
-	hum.Sit = v
+	hum.Sit = not hum.Sit
 end)
 
 local nightmode = LocalPlayer:Toggle("Night mode", function(v)
@@ -880,7 +880,7 @@ game.Players.LocalPlayer.leaderstats["Burp points"]:GetPropertyChangedSignal("Va
 cp = 0
 local plr = game.Players.LocalPlayer
 	if cp ~= plr.leaderstats["Burp points"].Value then
-		BpCounter:UpdateText("+"..plr.leaderstats["Burp points"].Value - cp.."")
+		BpCounter:UpdateText("Gain: "..plr.leaderstats["Burp points"].Value - cp.."")
 		cp = plr.leaderstats["Burp points"].Value
 	end
 end)
