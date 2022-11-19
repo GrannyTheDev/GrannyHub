@@ -84,6 +84,11 @@ function Library:CreateWindow(txt)
 	Dragui.MouseButton1Click:Connect(function()
 		Header.Visible = true
 		Dragui.Visible = false
+                  for i,v in pairs(GrannyHub:GetDescendants()) do
+                      if v:IsA("TextButton") or v.Name == "Title" or v.Name == "Close" or v.Name == "Min" then
+                  TS:Create(v, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+                end
+               end
         end)
         Instance.new("UICorner", Dragui).CornerRadius = UDim.new(1, 0)
 
