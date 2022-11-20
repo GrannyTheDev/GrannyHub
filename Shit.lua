@@ -22,6 +22,17 @@ end
 
 local Library = {}
 
+function Library:bind(key, callback)
+	callback = callback or function() end
+	game:GetService("UserInputService").InputBegan:Connect(function(current, ok) 
+		if not ok then 
+			if current.KeyCode == key then 
+				pcall(callback)
+			end
+		end
+	end)
+end
+
 function Library:CreateWindow(txt)
 	local GrannyHub = Instance.new("ScreenGui")
 	local Header = Instance.new("Frame")
@@ -201,16 +212,6 @@ function Library:CreateWindow(txt)
 	TabFrame.BorderSizePixel = 0
 
 	Instance.new("UICorner", TabFrame)
-
-        function Library:Keybind(key, callback)
-        callback = callback or function end)
-        game:GetService("UserInputService").InputBegan:Connect(function(current, ok) 
-		if not ok then 
-			if current.KeyCode == key then 
-				pcall(callback)
-			end
-		end
-	end)
 
 	local Page = {}
 
