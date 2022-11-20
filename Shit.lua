@@ -202,6 +202,18 @@ function Library:CreateWindow(txt)
 
 	Instance.new("UICorner", TabFrame)
 
+        local bind = {}
+
+        function bind:Keybind(key, callback)
+        callback = callback or function end)
+        game:GetService("UserInputService").InputBegan:Connect(function(current, ok) 
+		if not ok then 
+			if current.KeyCode == key then 
+				pcall(callback)
+			end
+		end
+	end)
+
 	local Page = {}
 
 	function Page:Page(txt)
