@@ -1,4 +1,3 @@
-
 if game:GetService("CoreGui"):FindFirstChild("ui") then
     game:GetService("CoreGui"):FindFirstChild("ui"):Destroy()
 end
@@ -264,7 +263,7 @@ loadstring(game:HttpGet("https://pastebin.com/raw/KHZ8pYx9"))()
         end
 end)
 
-Misc:Button('Join Discord Server", function()
+Misc:Button("Join Discord Server", function()
 	if clipboard then
 		clipboard('https://discord.com/invite/dYHag43eeU')
 	end
