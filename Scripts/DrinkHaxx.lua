@@ -74,6 +74,7 @@ end
 function doAntiKick()
 spawn(function()
 if getgenv().Settings.antikick == true then
+        if hydrogen then
 	local mt = getrawmetatable(game)
 	local old = mt.__namecall
 	local protect = newcclosure or protect_function
@@ -88,6 +89,11 @@ if getgenv().Settings.antikick == true then
 		return old(self, ...)
 	end)
 	hookfunction(game.Players.LocalPlayer.Kick,protect(function() wait(9e9) end))
+        else
+        for i,v in pairs(getconnections(game.Players.LocalPlayer.PlayerGui.AntiAutoclick.TextButton.MouseButton1Click)) do
+          v.Function()
+        end
+       end
 while wait() do
 game.Players.LocalPlayer.PlayerGui:WaitForChild("AntiAutoclick").Enabled = false
 end
