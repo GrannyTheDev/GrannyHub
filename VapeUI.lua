@@ -107,6 +107,8 @@ function lib:Window(text, preset, closebind)
     Main.Visible = true
     Main.Active = true
 
+    Instance.new("UICorner", Main)
+
     TabHold.Name = "TabHold"
     TabHold.Parent = Main
     TabHold.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
