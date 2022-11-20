@@ -365,7 +365,7 @@ function Library:CreateWindow(txt)
 						end
 					end
 				end)
-      end
+                      end
 		end
 
 		function Elements:Label(txt)	
@@ -611,7 +611,5 @@ function Library:CreateWindow(txt)
 		return Elements
 	end
 	return Page
-end
-return bind
 end
 return Library
