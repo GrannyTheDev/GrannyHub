@@ -11,7 +11,7 @@ function()
     vu:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
 end) -- anti afk
 
-local lib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/Vape.txt")()
+local lib = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/VapeUI.lua"))()
 
 local win = lib:Window("GrannyHub - Shadovis Rpg", Color3.fromRGB(44, 120, 224), Enum.KeyCode.RightControl)
 
