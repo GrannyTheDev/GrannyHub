@@ -612,4 +612,6 @@ function Library:CreateWindow(txt)
 	end
 	return Page
 end
+return bind
+end
 return Library
