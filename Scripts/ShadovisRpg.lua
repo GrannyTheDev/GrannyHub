@@ -1,153 +1,270 @@
-local Library = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHub/Shit.lua"))()
 
-local Window = Library:CreateWindow("GrannyHub".." - Shadovis Rpg")
+if game:GetService("CoreGui"):FindFirstChild("ui") then
+    game:GetService("CoreGui"):FindFirstChild("ui"):Destroy()
+end
 
-local LocalPlayer = Window:Page("LocalPlayer")
+local vu = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(
+function()
+    vu:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+    wait(1)
+    vu:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+end) -- anti afk
 
-local Misc = Window:Page("Misc")
+local lib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/Vape.txt")()
 
-local filename = "DevilHub/ShadovisRpg - 9585537847/Config.json"
+local win = lib:Window("GrannyHub - Shadovis Rpg", Color3.fromRGB(44, 120, 224), Enum.KeyCode.RightControl)
 
-getgenv().Settings = {
-speed = false;
-jump = false;
-infyield = false;
-antiafk = false;
+local mainTab = win:Tab("Main Tab")
+local LocalPlayer = win:Tab("LocalPlayer")
+local Misc = win:Tab("Misc")
+
+getgenv().AutoFarm = nil
+getgenv().selectedNPC = nil
+getgenv().selectedEvent = nil
+getgenv().killAura = nil
+getgenv().infCube = nil
+getgenv().autoReb = nil
+getgenv().infHeal = nil
+getgenv().FarmDistance = 7
+getgenv().FarmMeth = "Below"
+
+local lp = game.Players.LocalPlayer
+local char = lp.Character
+
+setfflag("HumanoidParallelRemoveNoPhysics", "False")
+setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
+
+local function getNPCbyLVL()
+    local t = {}
+
+    for i,v in pairs(game:GetService("Workspace").NPCs:GetChildren()) do
+        if v:IsA("Model") and v:FindFirstChild("HumanoidRootPart") and not table.find(t, v.Name) then
+            table.insert(t, v.Name)
+        end
+    end
+
+    table.sort(t, function(a, s)
+        local a1 = tonumber(string.match(a, "%d+"))
+        local b1 = tonumber(string.match(s, "%d+"))
+
+        return a1 < b1
+    end)
+    
+    return t
+end
+
+mainTab:Dropdown("Select NPC", getNPCbyLVL(), function(t)
+    getgenv().selectedNPC = t
+end)
+
+mainTab:Toggle("Auto Farm", false, function(t)
+    getgenv().AutoFarm = t
+
+    game:GetService('RunService').Stepped:connect(function()
+        if getgenv().AutoFarm then
+            lp.Character:WaitForChild("Humanoid"):ChangeState(11)
+        end
+    end)
+
+    while getgenv().AutoFarm do task.wait()
+        if not char:IsDescendantOf(lp.Character.Parent) or not char:FindFirstChild("HumanoidRootPart") or not char then char = lp.Character wait(0.5) end
+
+        for i, v in pairs(game.Workspace.NPCs:GetChildren()) do
+            if v:IsA("Model") and v.Name:match(getgenv().selectedNPC) and v:FindFirstChild("HumanoidRootPart") then
+                if v:WaitForChild("Humanoid").Health > 0 then
+                    if getgenv().FarmMeth == "Above" then
+                        lp.Character:WaitForChild("HumanoidRootPart").CFrame = CFrame.new(v:FindFirstChild("HumanoidRootPart").Position + Vector3.new(0,tonumber(getgenv().FarmDistance),0), v:FindFirstChild("HumanoidRootPart").Position)
+                    else
+                        lp.Character:WaitForChild("HumanoidRootPart").CFrame = CFrame.new(v:FindFirstChild("HumanoidRootPart").Position + Vector3.new(0,-tonumber(getgenv().FarmDistance),0), v:FindFirstChild("HumanoidRootPart").Position)
+                    end
+                end
+            end
+        end
+    end
+end)
+
+mainTab:Slider("Distance From NPC", 1, 50, 7, function(t)
+    getgenv().FarmDistance = t
+end)
+
+mainTab:Dropdown("Farm Method", {"Above", "Below"}, function(t)
+    getgenv().FarmMeth = t
+end)
+
+function getAttackTool()
+    local tool
+
+    for i,v in pairs(lp.Character:WaitForChild("Equipment"):GetChildren()) do
+        if v:FindFirstChild("DmgPoint") then
+            tool = v
+        end
+    end
+
+    return tool
+end
+
+local events = {
+    ["Slash Event - Swords"] = "SlashEvent",
+    ["Slam Event - Mallets"] = "SlamEvent",
+    ["Joust Hurt - Lance"] = "JoustHurt"
 }
 
-function Save()
-local json;
-local HttpService = game:GetService("HttpService");
-if (writefile) then
-json = HttpService:JSONEncode(getgenv().Settings);
-makefolder("DevilHub");
-makefolder("DevilHub/ShadovisRpg - 9585537847");
-writefile(filename, json);
-end
-end
+mainTab:Dropdown("Attack Event", {"Slash Event - Swords","Slam Event - Mallets","Joust Hurt - Lance"}, function(t)
+    getgenv().selectedEvent = t
+end)
 
-function Load()
-local HttpService = game:GetService("HttpService")
-if (readfile and isfile and isfile(filename)) then
-getgenv().Settings = HttpService:JSONDecode(readfile(filename));
-end
-end
+mainTab:Toggle("Kill Aura", false, function(t)
+    getgenv().killAura = t
 
-function doSpeed()
-spawn(function()
-if getgenv().Settings.speed == true then
-    local gmt = getrawmetatable(game)
-    local oldIndex = gmt.__namecall
-    setreadonly(gmt, false)
-    
-    gmt.__namecall = newcclosure(function(Self, ...)
-    local method = getnamecallmethod()
-    if Self == game.Players.LocalPlayer and tostring(method) == "Kick" then
-       return
-    end
-    return oldIndex(Self, ...)
-    end)
-    
-    local oldnewindex
-    oldnewindex = hookmetamethod(game, "__newindex", function(a, b, c)
-        if tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
-            return oldnewindex(a, b, 100)
+    while getgenv().killAura do task.wait(.1)
+        if not char:IsDescendantOf(lp.Character.Parent) or not char:FindFirstChild("HumanoidRootPart") or not char then char = lp.Character wait(0.5) end
+
+        for i, v in pairs(game.Workspace.NPCs:GetChildren()) do
+            if v:IsA("Model") and v:FindFirstChild("HumanoidRootPart") then
+                if (lp.Character:WaitForChild("HumanoidRootPart").Position - v:WaitForChild("HumanoidRootPart").Position).magnitude <= 100 and v:WaitForChild("Humanoid").Health > 0 then
+                    local args = {
+                        ["Attack"] = {
+                            [1] = "Input",
+                            [2] = tostring(getAttackTool()),
+                            [3] = math.random(),
+                            [4] = tostring(events[getgenv().selectedEvent]),
+                            [5] = v:WaitForChild("HumanoidRootPart")
+                        },
+                        ["InstantSkills"] = {
+                            ["First"] = {
+                                [1] = "Input",
+                                [2] = "Elemental BurstBlade of Winds",
+                                [3] = 7,
+                                [4] = "Spellcraft"
+                            },
+                            ["Second"] = {
+                                [1] = "Input",
+                                [2] = "Blade of Winds",
+                                [3] = 10,
+                                [4] = "Stride"
+                            }
+                        }
+                    }
+                    
+                    lp.Character:WaitForChild("Combat").RemoteEvent:FireServer(unpack(args.Attack))
+
+                    if tostring(getAttackTool()) == "Blade of Winds" then
+                        for i, v in next, (args.InstantSkills) do
+                            lp.Character:WaitForChild("Combat").RemoteEvent:FireServer(unpack(v))
+                        end
+                    end
+                    task.wait(.1)
+                end
+            end
         end
-        return oldnewindex(a, b, c)
-    end)
-         
-    game:GetService("RunService").Stepped:Connect(function()
-        game.Players.LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 100
-    end)
-end
-end)
-end
-
-function doJump()
-spawn(function()
-if getgenv().Settings.jump == true then
-game:GetService("UserInputService").JumpRequest:connect(function()
-game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")		
-end)
-end
-end)
-end
-
-function doInfYield()
-spawn(function()
-if getgenv().Settings.infyield == true then
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
-end
-end)
-end
-
-function doAntiAfk()
-spawn(function()
-if getgenv().Settings.antiafk == true then
-    local VirtualUser = game:GetService("VirtualUser")
-    game:GetService("Players").LocalPlayer.Idled:Connect(function()
-        VirtualUser:CaptureController()
-        VirtualUser:ClickButton2(Vector2.new())
-    end)
-end
-end)
-end
-
-local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
-getgenv().Settings.speed = v
-Save()
-if v then
-doSpeed()
-end
-end)
-
-local jump = LocalPlayer:Toggle("Infinite Jump", function(v)
-getgenv().Settings.jump = v
-Save()
-if v then
-doJump()
-end
-end)
-
-local NoclipBtn = LocalPlayer:Toggle("Noclip", function(v)
-    local Workspace = game:GetService("Workspace")
-    local CoreGui = game:GetService("CoreGui")
-    local Players = game:GetService("Players")
-    local Plr = Players.LocalPlayer
-    
-                if v == true then
-    Stepped = game:GetService("RunService").Stepped:Connect(function()
-                    for i, v in pairs(Workspace[Plr.Name]:GetChildren()) do
-                    if v:IsA("BasePart") then
-                    v.CanCollide = false
-                    end end end)
-                elseif v == false then
-                    Stepped:Disconnect()
     end
+end)
+
+mainTab:Button("Collect all Cubits", function(t)
+    for i,v in pairs(game:GetService("Workspace")["Client Cubits"]:GetChildren()) do
+        if v:IsA("MeshPart") then
+            if v:FindFirstChildWhichIsA("ProximityPrompt") then
+                fireproximityprompt(v:FindFirstChildWhichIsA("ProximityPrompt"), 1)
+            end
+        end
+    end
+end)
+
+mainTab:Toggle("Auto Rebirth", false, function(t)
+    getgenv().autoReb = t
+
+    while getgenv().autoReb do task.wait(.4)
+        local args = {
+            [1] = "Rebirth"
+        }
+        
+        game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+    end
+end)
+
+mainTab:Toggle("Inf Heal [Semi God Mode]", false, function(t)
+    getgenv().infHeal = t
+
+    game:GetService("RunService").Stepped:connect(function()
+        if getgenv().infHeal then
+            if not char:IsDescendantOf(lp.Character.Parent) or not char:FindFirstChild("HumanoidRootPart") or not char then char = lp.Character wait(0.5) end
+
+            for i, v in pairs(game.Workspace.Fountains.Fountain:GetDescendants()) do
+                if v:IsA("TouchTransmitter") and v.Parent then
+                    firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), v.Parent, 0)
+                    firetouchinterest(game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), v.Parent, 1)
+                end
+            end
+        end
     end)
-
-    NoclipBtn:Keybind(Enum.KeyCode.LeftAlt)
- Misc:Button("Rejoin", function()
-     game:GetService("TeleportService"):Teleport(game.PlaceId)
 end)
 
-local infyield = Misc:Toggle("Infinite Yield", function(v)
-getgenv().Settings.infyield = v
-Save()
-if v then
-doInfYield()
-end
+mainTab:Button("Remove Effects", function()
+    while task.wait() do
+        for i,v in pairs(game:GetService("ReplicatedStorage"):GetChildren()) do
+            if v.Name == "Darkfire Ring" then
+                v:Destroy()
+            end
+        end
+        
+        if game:GetService("Workspace"):FindFirstChild("Projectiles") then
+            game:GetService("Workspace"):FindFirstChild("Projectiles"):Destroy()
+        end
+    end    
 end)
 
-local antiafk = Misc:Toggle("Anti Afk", function(v)
-getgenv().Settings.antiafk = v
-Save()
-if v then
-doAntiAfk()
-end
+LocalPlayer:Button("WalkSpeed", function()
+local oldnewindex
+oldnewindex = hookmetamethod(game, "__newindex", function(a, b, c)
+    if tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
+        return oldnewindex(a, b, 1000)
+    end
+    return oldnewindex(a, b, c)
 end)
 
-Misc:Button("Join the discord server", function()
+game:GetService("RunService").RenderStepped:Connect(function()
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 1000
+end)
+end)
+
+LocalPlayer:Button("Infinite Jump", function()
+game:GetService("UserInputService").JumpRequest:Connect(function()
+game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")		
+end)
+end)
+
+LocalPlayer:Toggle("Noclip", function(v)
+	local Workspace = game:GetService("Workspace")
+	local CoreGui = game:GetService("CoreGui")
+	local Players = game:GetService("Players")
+	local Plr = Players.LocalPlayer
+
+	if v == true then
+		Stepped = game:GetService("RunService").Stepped:Connect(function()
+			for i, v in pairs(Workspace[Plr.Name]:GetChildren()) do
+				if v:IsA("BasePart") then
+					v.CanCollide = false
+				end end end)
+	elseif v == false then
+		Stepped:Disconnect()
+	end
+end)
+
+Misc:Button("Rejoin", function()
+    game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, game.JobId)
+end)
+
+Misc:Button("Anti Afk", function()
+loadstring(game:HttpGet("https://pastebin.com/raw/KHZ8pYx9"))()
+         for i,v in pairs(game.CoreGui:GetChildren()) do
+            if v.Name == "ScreenGui" then
+                v.Enabled = false
+            end
+        end
+end)
+
+Misc:Button('Join Discord Server", function()
 	if clipboard then
 		clipboard('https://discord.com/invite/dYHag43eeU')
 	end
@@ -165,21 +282,3 @@ Misc:Button("Join the discord server", function()
 		})
 	})
 end)
-
-Load()
-if getgenv().Settings.speed == true then
-speed:ChangeState(true)
-end
-if getgenv().Settings.jump == true then
-jump:ChangeState(true)
-end
-if getgenv().Settings.infyield == true then
-infyield:ChangeState(true)
-end
-if getgenv().Settings.antiafk == true then
-antiafk:ChangeState(true)
-end
-
-for i,v in pairs(getgenv().Settings) do
-print(i,v)
-end
