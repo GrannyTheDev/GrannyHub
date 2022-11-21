@@ -40,7 +40,8 @@ local games = {
 	["UltimateLiftingSimulator.lua"] = 2472820296,
     ["ShadovisRpg.lua"] = 9585537847,
     ["TextingSimulator.lua"] = 2580982329,
-	["GorillaSimulator.lua"] = 1378712700
+	["GorillaSimulator.lua"] = 1378712700,
+	["ZombieAttack.lua"] = 1240123653
 }
 
 local obbygames = {
