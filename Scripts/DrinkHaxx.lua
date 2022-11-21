@@ -34,7 +34,6 @@ antikick = false;
 prompt = false;
 prestige = false;
 equipdrink = false;
-automine = false;
 collect = false;
 nightmode = false;
 starterdrink = false;
@@ -170,27 +169,6 @@ wait(1)
 AutoEquipDrink()
 debounce = false
 end)
-end
-end)
-end
-
-function doAutoMine()
-spawn(function()
-if getgenv().Settings.automine == true then
-local debounce = false
-local Stepped = game:GetService("RunService").Heartbeat:Connect(function()
-if debounce then
-    return
-end
-debounce = true
-wait(0.1)
-local plr = game.Players.LocalPlayer
-local char = plr.Character
-char.Pickaxe.Mine:FireServer()
-debounce = false
-end)
-elseif getgenv().Settings.automine == false then
-	Stepped:Disconnect() 
 end
 end)
 end
@@ -531,14 +509,6 @@ getgenv().Settings.equipdrink = v
 Save()
 if v then
 doEquipDrink()
-end
-end)
-
-local automine = AutoFarm:Toggle("Auto Mine", function(v)
-getgenv().Settings.automine = v
-Save()
-if v then
-doAutoMine()
 end
 end)
 
