@@ -800,9 +800,6 @@ end
 if getgenv().Settings.equipdrink == true then
 equipdrink:ChangeState(true)
 end
-if getgenv().Settings.automine == true then
-automine:ChangeState(true)
-end
 if getgenv().Settings.collect == true then
 collect:ChangeState(true)
 end
