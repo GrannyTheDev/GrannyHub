@@ -17,6 +17,7 @@ infyield = false;
 antiafk = false;
 eat = false;
 rebirth = false;
+equip = false;
 }
 
 function Save()
@@ -110,6 +111,19 @@ end
 end)
 end
 
+function doEquip()
+spawn(function()
+while getgenv().Settings.equip == true do
+for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+    if v:IsA("Tool") and v.Name == "Banana" then
+        game.Players.LocalPlayer.Character:WaitForChild("Humanoid"):EquipTool(v)
+    end
+end
+wait(0.1)
+end
+end)
+end
+
 function doRebirth()
 spawn(function()
 while getgenv().Settings.rebirth == true do
@@ -124,6 +138,14 @@ getgenv().Settings.eat = v
 Save()
 if v then
 doEat()
+end
+end)
+
+local equip = AutoFarm:Toggle("Auto Equip Banana", function(v)
+getgenv().Settings.equip = v
+Save()
+if v then
+doEquip()
 end
 end)
 
@@ -228,6 +250,9 @@ eat:ChangeState(true)
 end
 if getgenv().Settings.rebirth == true then
 rebirth:ChangeState(true)
+end
+if getgenv().Settings.equip == true then
+equip:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
