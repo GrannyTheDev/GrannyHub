@@ -1,3 +1,25 @@
+if get_hidden_gui or gethui then
+	local hiddenUI = get_hidden_gui or gethui
+	for i,v in pairs(hiddenUI():GetChildren()) do
+		if v:IsA("ScreenGui") and v.Name == "ui" then
+			v:Destroy()
+		end
+	end
+elseif (not is_sirhurt_closure) and (syn and syn.protect_gui) then
+	for i,v in pairs(game.CoreGui:GetChildren()) do
+		if v:IsA("ScreenGui") and v.Name == "ui" then
+			syn.unprotect_gui(v)
+			v:Destroy()
+		end
+	end
+else
+	for i,v in pairs(game.CoreGui:GetChildren()) do
+		if v:IsA("ScreenGui") and v.Name == "ui" then
+			v:Destroy()
+		end
+	end
+end
+
 local lib = {RainbowColorValue = 0, HueSelectionPosition = 0}
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
@@ -9,9 +31,16 @@ local CloseBind = Enum.KeyCode.RightControl
 
 local ui = Instance.new("ScreenGui")
 ui.Name = "ui"
-ui.Parent = game.CoreGui
-ui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
+if get_hidden_gui or gethui then
+	local hiddenUI = get_hidden_gui or gethui
+        ui.Parent = hiddenUI()
+elseif (not is_sirhurt_closure) and (syn and syn.protect_gui) then
+	syn.protect_gui(ui)
+	ui.Parent = cloneref(game:GetService("CoreGui"))
+else
+	ui.Parent = cloneref(game:GetService("CoreGui"))
+end
 coroutine.wrap(
     function()
         while wait() do
