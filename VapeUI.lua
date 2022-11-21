@@ -18,7 +18,7 @@ else
 			v:Destroy()
 		end
 	end
-en
+end
 
 local lib = {RainbowColorValue = 0, HueSelectionPosition = 0}
 local UserInputService = game:GetService("UserInputService")
