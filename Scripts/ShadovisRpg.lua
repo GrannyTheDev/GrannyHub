@@ -263,11 +263,13 @@ loadstring(game:HttpGet("https://pastebin.com/raw/KHZ8pYx9"))()
         end
 end)
 
-Misc:Button("Join Discord Server", function()
+local Request = request or syn.request
+
+Misc:Button("Join the discord server", function()
 	if clipboard then
 		clipboard('https://discord.com/invite/dYHag43eeU')
 	end
-	request({
+	Request({
 		Url = 'http://127.0.0.1:6463/rpc?v=1',
 		Method = 'POST',
 		Headers = {

@@ -1,6 +1,6 @@
 local Library = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHub/Shit.lua"))()
 
-local Window = Library:CreateWindow("GrannyHub".." - Ultra Power Tycoon")
+local Window = Library:CreateWindow("GrannyHub".." - Gorilla Simulator")
 
 local AutoFarm = Window:Page("AutoFarm")
 
@@ -8,16 +8,15 @@ local LocalPlayer = Window:Page("LocalPlayer")
 
 local Misc = Window:Page("Misc")
 
-local filename = "DevilHub/UltraPowerTycoon - 8146731988/Config.json"
+local filename = "DevilHub/GorillaSimulator - 1378712700/Config.json"
 
 getgenv().Settings = {
 speed = false;
 jump = false;
 infyield = false;
 antiafk = false;
-collect = false;
-buybuttons = false;
-prompt = false;
+eat = false;
+rebirth = false;
 }
 
 function Save()
@@ -26,7 +25,7 @@ local HttpService = game:GetService("HttpService");
 if (writefile) then
 json = HttpService:JSONEncode(getgenv().Settings);
 makefolder("DevilHub");
-makefolder("DevilHub/UltraPowerTycoon - 8146731988");
+makefolder("DevilHub/GorillaSimulator - 1378712700");
 writefile(filename, json);
 end
 end
@@ -41,16 +40,29 @@ end
 function doSpeed()
 spawn(function()
 if getgenv().Settings.speed == true then
-local oldnewindex
-oldnewindex = hookmetamethod(game, "__newindex", function(a, b, c)
-    if tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
-        return oldnewindex(a, b, 100)
+    local gmt = getrawmetatable(game)
+    local oldIndex = gmt.__namecall
+    setreadonly(gmt, false)
+    
+    gmt.__namecall = newcclosure(function(Self, ...)
+    local method = getnamecallmethod()
+    if Self == game.Players.LocalPlayer and tostring(method) == "Kick" then
+       return
     end
-    return oldnewindex(a, b, c)
-end)
-game:GetService("RunService").RenderStepped:Connect(function()
-	game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = 100
-end)
+    return oldIndex(Self, ...)
+    end)
+    
+    local oldnewindex
+    oldnewindex = hookmetamethod(game, "__newindex", function(a, b, c)
+        if tostring(a) == "Humanoid" and tostring(b) == "WalkSpeed" then
+            return oldnewindex(a, b, 100)
+        end
+        return oldnewindex(a, b, c)
+    end)
+         
+    game:GetService("RunService").Stepped:Connect(function()
+        game.Players.LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = 100
+    end)
 end
 end)
 end
@@ -65,66 +77,10 @@ end
 end)
 end
 
-function doPrompt()
-spawn(function()
-while getgenv().Settings.prompt == true do
-game.CoreGui:WaitForChild("PurchasePrompt").Enabled = false
-wait(0.1)
-end
-end)
-end
-
-function doBuyButtons()
-spawn(function()
-while getgenv().Settings.buybuttons == true do
-local debounce = false
-game:GetService("RunService").Heartbeat:Connect(function()
-if debounce then
-    return
-end
-debounce = true
-wait(0.1)
-for i,v in pairs(workspace.Tycoons:GetChildren()) do
-    if v:WaitForChild("isim").Value == game.Players.LocalPlayer.Name then
-    for i,k in pairs(v:GetDescendants()) do
-    if k.Name == "Touch" then
-    if k.Parent.Name ~= "ShopModel" then
-        firetouchinterest(k, game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 1)
-        wait()
-        firetouchinterest(k, game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 0)
-    end
-end
-end
-end
-end
-debounce = false
-end)
-wait(2)
-end
-end)
-end
-    
-
-function doCollect()
-spawn(function()
-while getgenv().Settings.collect == true do
-for i,v in pairs(workspace.Tycoons:GetChildren()) do
-if v.isim.Value == game.Players.LocalPlayer.Name then
-firetouchinterest(v.CashRegister.Ching, game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 1)
-wait()
-firetouchinterest(v.CashRegister.Ching, game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 0)
-end
-end
-wait(0.1)
-end
-end)
-end
-    
-
 function doInfYield()
 spawn(function()
 if getgenv().Settings.infyield == true then
-    loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Shit/GrannyCmd.lua"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
 end
 end)
 end
@@ -141,29 +97,41 @@ end
 end)
 end
 
-local buybuttons = AutoFarm:Toggle("Autobuy all buttons", function(v)
-getgenv().Settings.buybuttons = v
-Save()
-if v then
-doBuyButtons()
-end
-end)
-
-local collect = AutoFarm:Toggle("Auto Collect Cash", function(v)
-getgenv().Settings.collect = v
-Save()
-if v then
-doCollect()
-end
-end)
-
-local module = loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Modules/Teleport.lua"))()
-
-local tpbase = LocalPlayer:Button("Teleport to base", function()
-for i,v in pairs(workspace.Tycoons:GetChildren()) do
-    if v.isim.Value == game.Players.LocalPlayer.Name then
-        module:Tween(TweenInfo.new(0.2), v.Camera2.CFrame)
+function doEat()
+spawn(function()
+while getgenv().Settings.eat == true do
+    for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+        if v:IsA("Tool") and v.Name == "Banana" then
+            v:Activate()
+        end
     end
+    wait(0.1)
+end
+end)
+end
+
+function doRebirth()
+spawn(function()
+while getgenv().Settings.rebirth == true do
+    game:GetService("ReplicatedStorage").remoteEvents.rebirthPlayer:InvokeServer()
+wait(0.1)
+end
+end)
+end
+
+local eat = AutoFarm:Toggle("Auto Eat", function(v)
+getgenv().Settings.eat = v
+Save()
+if v then
+doEat()
+end
+end)
+
+local rebirth = AutoFarm:Toggle("Auto Rebirth", function(v)
+getgenv().Settings.rebirth = v
+Save()
+if v then
+doRebirth()
 end
 end)
 
@@ -221,14 +189,6 @@ doAntiAfk()
 end
 end)
 
-local prompt = Misc:Toggle("Disable Prompt", function(v)
-getgenv().Settings.prompt = v
-Save()
-if v then
-doPrompt()
-end
-end)
-
 local Request = request or syn.request
 
 Misc:Button("Join the discord server", function()
@@ -263,14 +223,11 @@ end
 if getgenv().Settings.antiafk == true then
 antiafk:ChangeState(true)
 end
-if getgenv().Settings.collect == true then
-collect:ChangeState(true)
+if getgenv().Settings.eat == true then
+eat:ChangeState(true)
 end
-if getgenv().Settings.prompt == true then
-prompt:ChangeState(true)
-end
-if getgenv().Settings.buybuttons == true then
-buybuttons:ChangeState(true)
+if getgenv().Settings.rebirth == true then
+rebirth:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do

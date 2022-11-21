@@ -201,11 +201,13 @@ doAntiAfk()
 end
 end)
 
+local Request = request or syn.request
+
 Misc:Button("Join the discord server", function()
 	if clipboard then
 		clipboard('https://discord.com/invite/dYHag43eeU')
 	end
-	request({
+	Request({
 		Url = 'http://127.0.0.1:6463/rpc?v=1',
 		Method = 'POST',
 		Headers = {
