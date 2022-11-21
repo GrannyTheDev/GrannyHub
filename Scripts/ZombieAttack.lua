@@ -13,6 +13,7 @@ speed = false;
 jump = false;
 infyield = false;
 antiafk = false;
+autofarm = false;
 }
 
 function Save()
@@ -92,6 +93,75 @@ if getgenv().Settings.antiafk == true then
 end
 end)
 end
+
+function doAutoFarm()
+spawn(function()
+    local humVel = game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity
+    local TorsoVel = game.Players.LocalPlayer.Character.Torso.Velocity
+    local groundDistance = 8
+    local Player = game:GetService("Players").LocalPlayer
+    local function getNearest()
+        local nearest, dist = nil, 99999
+        for _,v in pairs(game.Workspace.BossFolder:GetChildren()) do
+            if(v:FindFirstChild("Head")~=nil)then
+                local m =(Player.Character.Head.Position-v.Head.Position).magnitude
+                if(m<dist)then
+                    dist = m
+                    nearest = v
+                end
+            end
+        end
+        for _,v in pairs(game.Workspace.enemies:GetChildren()) do
+            if(v:FindFirstChild("Head")~=nil)then
+                local m =(Player.Character.Head.Position-v.Head.Position).magnitude
+                if(m<dist)then
+                    dist = m
+                    nearest = v
+                end
+            end
+        end
+        return nearest
+    end
+    getgenv().globalTarget = nil
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if(getgenv().Settings.autofarm==true)then
+            local target = getNearest()
+            if(target~=nil)then
+                game:GetService("Workspace").CurrentCamera.CFrame = CFrame.new(game:GetService("Workspace").CurrentCamera.CFrame.p, target.Head.Position)
+                Player.Character.HumanoidRootPart.CFrame = (target.HumanoidRootPart.CFrame * CFrame.new(0, groundDistance, 9))
+                getgenv().globalTarget = target
+            end
+        end
+    end)
+    spawn(function()
+        while getgenv().Settings.autofarm == true do
+            wait()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0,0,0)
+            game.Players.LocalPlayer.Character.Torso.Velocity = Vector3.new(0,0,0)
+        end
+        while getgenv().Settings.autofarm == false do
+            game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = humVel
+            game.Players.LocalPlayer.Character.Torso.Velocity = TorsoVel
+        end
+    end)
+    while getgenv().Settings.autofarm do
+        wait()
+        if(getgenv().Settings.autofarm==true and getgenv().globalTarget~=nil and getgenv().globalTarget:FindFirstChild("Head") and Player.Character:FindFirstChildOfClass("Tool"))then
+            local target = getgenv().globalTarget
+            game.ReplicatedStorage.Gun:FireServer({["Normal"] = Vector3.new(0, 0, 0), ["Direction"] = target.Head.Position, ["Name"] = Player.Character:FindFirstChildOfClass("Tool").Name, ["Hit"] = target.Head, ["Origin"] = target.Head.Position, ["Pos"] = target.Head.Position,})
+            wait()
+        end
+    end
+end)
+end
+
+local autofarm = LocalPlayer:Toggle("AutoFarm", function(v)
+getgenv().Settings.autofarm = v
+Save()
+if v then
+doAutoFarm()
+end
+end)
 
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
 getgenv().Settings.speed = v
@@ -180,6 +250,9 @@ infyield:ChangeState(true)
 end
 if getgenv().Settings.antiafk == true then
 antiafk:ChangeState(true)
+end
+if getgenv().Settings.autofarm == true then
+autofarm:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
