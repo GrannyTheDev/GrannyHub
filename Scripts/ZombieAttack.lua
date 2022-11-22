@@ -139,8 +139,7 @@ spawn(function()
             game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0,0,0)
             game.Players.LocalPlayer.Character.Torso.Velocity = Vector3.new(0,0,0)
         end
-        while getgenv().Settings.autofarm == false do
-            wait()
+        if getgenv().Settings.autofarm == false then
             game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = humVel
             game.Players.LocalPlayer.Character.Torso.Velocity = TorsoVel
         end
