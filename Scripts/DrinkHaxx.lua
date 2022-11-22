@@ -87,6 +87,7 @@ if getgenv().Settings.antikick == true then
 		return old(self, ...)
 	end)
 	hookfunction(game.Players.LocalPlayer.Kick,protect(function() wait(9e9) end))
+	game:GetService("Players").LocalPlayer.PlayerGui.AntiAutoclick.Enabled = false
 end
 end)
 end
