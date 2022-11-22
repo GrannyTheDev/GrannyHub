@@ -1,18 +1,19 @@
 local Library = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHub/Shit.lua"))()
 
-local Window = Library:CreateWindow("GrannyHub".." - Game not Supported")
+local Window = Library:CreateWindow("GrannyHub".." - Destruction Simulator")
 
 local LocalPlayer = Window:Page("LocalPlayer")
 
 local Misc = Window:Page("Misc")
 
-local filename = "DevilHub/GameNotSupported/Config.json"
+local filename = "DevilHub/DestructionSimulator - 2248408710/Config.json"
 
 getgenv().Settings = {
 speed = false;
 jump = false;
 infyield = false;
 antiafk = false;
+nocooldown = false;
 }
 
 function Save()
@@ -21,7 +22,7 @@ local HttpService = game:GetService("HttpService");
 if (writefile) then
 json = HttpService:JSONEncode(getgenv().Settings);
 makefolder("DevilHub");
-makefolder("DevilHub/GameNotSupported");
+makefolder("DevilHub/DestructionSimulator - 2248408710");
 writefile(filename, json);
 end
 end
@@ -92,6 +93,40 @@ if getgenv().Settings.antiafk == true then
 end
 end)
 end
+
+function doCooldown()
+spawn(function()
+if getgenv().Settings.nocooldown == true then
+    while wait() do
+        for i,v in pairs(debug.getregistry()) do
+            if type(v) == "table" then
+                if v.Cooldown then
+                    v.Cooldown = 0
+                    v.BurstWait = 0
+                    v.Bursts = 1
+                end
+            end
+        end
+    end
+end
+end)
+end
+
+LocalPlayer:Button("Inf Coins", function()
+    game:GetService("ReplicatedStorage").Remotes.generateBoost:FireServer("Coins", 480, 99999999)
+end)
+
+LocalPlayer:Button("Inf Levels", function()
+    game:GetService("ReplicatedStorage").Remotes.generateBoost:FireServer("Levels", 480, 10)
+end)
+
+local nocooldown = LocalPlayer:Toggle("Remove cooldowns", function(v)
+getgenv().Settings.nocooldown = v
+Save()
+if v then
+doCooldown()
+end
+end)
 
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
 getgenv().Settings.speed = v
@@ -180,6 +215,9 @@ infyield:ChangeState(true)
 end
 if getgenv().Settings.antiafk == true then
 antiafk:ChangeState(true)
+end
+if getgenv().Settings.nocooldown == true then
+nocooldown:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do

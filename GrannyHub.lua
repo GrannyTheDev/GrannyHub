@@ -41,7 +41,9 @@ local games = {
     ["ShadovisRpg.lua"] = 9585537847,
     ["TextingSimulator.lua"] = 2580982329,
 	["GorillaSimulator.lua"] = 1378712700,
-	["ZombieAttack.lua"] = 1240123653
+	["ZombieAttack.lua"] = 1240123653,
+	["DestructionSimulator.lua"] = 2248408710,
+	["HideandSeekExtreme.lua"] = 205224386
 }
 
 local obbygames = {
