@@ -1,12 +1,12 @@
 local Library = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHub/Shit.lua"))()
 
-local Window = Library:CreateWindow("GrannyHub".." - Game not Supported")
+local Window = Library:CreateWindow("GrannyHub".." - Hide and Seek Extreme")
 
 local LocalPlayer = Window:Page("LocalPlayer")
 
 local Misc = Window:Page("Misc")
 
-local filename = "DevilHub/GameNotSupported/Config.json"
+local filename = "DevilHub/HideandseekExtreme - 205224386/Config.json"
 
 getgenv().Settings = {
 speed = false;
@@ -22,7 +22,7 @@ local HttpService = game:GetService("HttpService");
 if (writefile) then
 json = HttpService:JSONEncode(getgenv().Settings);
 makefolder("DevilHub");
-makefolder("DevilHub/GameNotSupported");
+makefolder("DevilHub/HideandseekExtreme - 205224386");
 writefile(filename, json);
 end
 end
