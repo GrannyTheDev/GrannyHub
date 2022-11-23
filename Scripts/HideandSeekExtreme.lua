@@ -184,8 +184,7 @@ spawn(function()
             end
             end)
             end
-        end
-    
+
         for i,v in pairs(game.Players:GetChildren()) do
             local char = v.Character or v.CharacterAdded:Wait()
             v.CharacterAdded:Connect(function()
@@ -215,16 +214,18 @@ spawn(function()
                 end
             end)
         end
+    end
     
     while getgenv().Settings.esp == false do wait()
         for i,v in pairs(game.Players:GetChildren()) do
-            if v:IsA("Player") and v:WaitForChild("UpperTorso", 0.1) then
-            if v:WaitForChild("UpperTorso"):FindFirstChild("SeekBox") ~= nil and game.Players.LocalPlayer.Character:FindFirstChild("SeekBeam") ~= nil then
-                v:WaitForChild("UpperTorso"):FindFirstChild("SeekBox"):Destroy()
+            local char = v.Character or v.CharacterAdded:Wait()
+            if v:IsA("Player") and char:WaitForChild("UpperTorso", 0.1) then
+            if char:WaitForChild("UpperTorso"):FindFirstChild("SeekBox") ~= nil and game.Players.LocalPlayer.Character:FindFirstChild("SeekBeam") ~= nil then
+                char:WaitForChild("UpperTorso"):FindFirstChild("SeekBox"):Destroy()
                 game.Players.LocalPlayer.Character:FindFirstChild("SeekBeam"):Destroy()
             end
-            if v:WaitForChild("UpperTorso"):FindFirstChild("HideBox") ~= nil and game.Players.LocalPlayer.Character:FindFirstChild("HideBeam") ~= nil then
-                v:WaitForChild("UpperTorso"):FindFirstChild("HideBox"):Destroy()
+            if char:WaitForChild("UpperTorso"):FindFirstChild("HideBox") ~= nil and game.Players.LocalPlayer.Character:FindFirstChild("HideBeam") ~= nil then
+                char:WaitForChild("UpperTorso"):FindFirstChild("HideBox"):Destroy()
                 game.Players.LocalPlayer.Character:FindFirstChild("HideBeam"):Destroy()
             end
             end
