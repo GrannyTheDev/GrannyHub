@@ -580,7 +580,6 @@ function Library:CreateWindow(txt)
 					else
 						callback(Box.Text)
 						wait(0.18)
-						Box.Text = txt
 						Box.PlaceholderText = txt
 					end
 				end)
