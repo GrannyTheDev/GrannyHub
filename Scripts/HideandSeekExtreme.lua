@@ -102,7 +102,7 @@ spawn(function()
         for i,v in pairs(game.Players:GetChildren()) do
             local char = v.Character or v.CharacterAdded:Wait()
             if v:IsA("Player") and char:WaitForChild("UpperTorso", 0.1) then
-            if char:WaitForChild("Glue", 0.1) ~= nil then
+            if char:WaitForChild("Glue", 0.1) then
                 if char:WaitForChild("UpperTorso"):FindFirstChild("SeekBox") == nil then
                     local box = Instance.new("BoxHandleAdornment", char:WaitForChild("UpperTorso"))
                     box.Name = "SeekBox"
@@ -157,7 +157,7 @@ spawn(function()
             local char = v.Character or v.CharacterAdded:Wait()
             v.CharacterAdded:Connect(function()
             if v:IsA("Player") and char:WaitForChild("UpperTorso", 0.1) then
-                if v:WaitForChild("Glue", 0.1) ~= nil then
+                if v:WaitForChild("Glue", 0.1) then
                     if char:WaitForChild("UpperTorso"):FindFirstChild("SeekBox") == nil then
                         local box = Instance.new("BoxHandleAdornment", char:WaitForChild("UpperTorso"))
                         box.Name = "SeekBox"
