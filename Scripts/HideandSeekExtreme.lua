@@ -97,7 +97,6 @@ end
 function doEsp()
 spawn(function()
     local Players = game:GetService("Players")
-    
     while getgenv().Settings.esp == true do wait(0.1)
         for i,v in pairs(game.Players:GetChildren()) do
             for a,b in pairs(game.Players:GetChildren()) do
@@ -168,10 +167,84 @@ end
         end
     end
     end
+
+    for i,v in pairs(game.Players:GetChildren()) do
+        for a,b in pairs(game.Players:GetChildren()) do
+        if b.Name == game.Players.LocalPlayer.Name then
+        local Achar = b.Character or b.CharacterAdded:Wait()
+        local char = v.Character or v.CharacterAdded:Wait()
+        v.CharacterAdded:Connect(function()
+        if Achar:WaitForChild("UpperTorso", 0.1) then
+        if v:IsA("Player") and char:WaitForChild("UpperTorso", 0.1) then
+        if char:WaitForChild("Glue", 0.1) then
+            if char:WaitForChild("UpperTorso"):FindFirstChild("SeekBox") == nil then
+                local box = Instance.new("BoxHandleAdornment", char:WaitForChild("UpperTorso"))
+                box.Name = "SeekBox"
+                box.Size = char:WaitForChild("UpperTorso").Size
+                box.Adornee = char:WaitForChild("UpperTorso")
+                box.ZIndex = 5
+                box.AlwaysOnTop = true
+                box.Color3 = Color3.fromRGB(255, 0, 25)
+
+                local at0 = Instance.new("Attachment", Achar:WaitForChild("UpperTorso"))
+                local at1 = Instance.new("Attachment", char:WaitForChild("UpperTorso"))
+                local beam = Instance.new("Beam", Achar)
+                beam.Name = "SeekBeam"
+                beam.Color = ColorSequence.new(Color3.fromRGB(255, 0, 25), Color3.fromRGB(255, 0, 25))
+                beam.FaceCamera = true
+                beam.Width0 = 0.2
+                beam.Width1 = 0.2
+                beam.Attachment0 = at0
+                beam.Attachment1 = at1
+            end
+        end
+        end
+    end
+    end)
+    end
+end
+end
+
+    for i,v in pairs(game.Players:GetChildren()) do
+        for a,b in pairs(game.Players:GetChildren()) do
+        if b.Name == game.Players.LocalPlayer.Name then
+        local Achar = b.Character or b.CharacterAdded:Wait()
+        local char = v.Character or v.CharacterAdded:Wait()
+        v.CharacterAdded:Connect(function()
+        if Achar:WaitForChild("UpperTorso", 0.1) then
+        if v:IsA("Player") and char:WaitForChild("UpperTorso", 0.1) then
+            if not char:WaitForChild("Glue", 0.1) then
+            if char:WaitForChild("UpperTorso"):FindFirstChild("HideBox") == nil then
+                local box = Instance.new("BoxHandleAdornment", char:WaitForChild("UpperTorso"))
+                box.Name = "HideBox"
+                box.Size = char:WaitForChild("UpperTorso").Size
+                box.Adornee = char:WaitForChild("UpperTorso")
+                box.ZIndex = 5
+                box.AlwaysOnTop = true
+                box.Color3 = Color3.fromRGB(0, 170, 255)
+
+                local at0 = Instance.new("Attachment", Achar:WaitForChild("UpperTorso"))
+                local at1 = Instance.new("Attachment", char:WaitForChild("UpperTorso"))
+                local beam = Instance.new("Beam", Achar)
+                beam.Name = "HideBeam"
+                beam.Color = ColorSequence.new(Color3.fromRGB(0, 170, 255), Color3.fromRGB(0, 170, 255))
+                beam.FaceCamera = true
+                beam.Width0 = 0.2
+                beam.Width1 = 0.2
+                beam.Attachment0 = at0
+                beam.Attachment1 = at1
+            end
+        end
+        end
+        end
+end)
+end
+end
+end
 end
     
-    while getgenv().Settings.esp == false do wait(0.1)
-        for i,v in pairs(game.Players:GetChildren()) do
+while getgenv().Settings.esp == false do wait(0.1)
+for i,v in pairs(game.Players:GetChildren()) do
             local char = v.Character or v.CharacterAdded:Wait()
             if v:IsA("Player") and char:WaitForChild("UpperTorso", 0.1) then
             if char:WaitForChild("UpperTorso"):FindFirstChild("SeekBox") ~= nil and game.Players.LocalPlayer.Character:FindFirstChild("SeekBeam") ~= nil and char:WaitForChild("UpperTorso"):FindFirstChild("Attachment") ~= nil then
@@ -196,6 +269,14 @@ Save()
 if v then
 doEsp()
 end
+end)
+
+LocalPlayer:Button("Collect all coins", function()
+    for i,v in pairs(game:GetService("Workspace").GameObjects:GetChildren()) do
+        firetouchinterest(v, game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 1)
+        wait()
+        firetouchinterest(v, game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart"), 0)
+    end
 end)
 
 local speed = LocalPlayer:Toggle("WalkSpeed", function(v)
