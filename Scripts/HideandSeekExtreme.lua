@@ -98,7 +98,7 @@ function doEsp()
 spawn(function()
     local Players = game:GetService("Players")
     
-    while getgenv().Settings.esp == true do wait()
+    while getgenv().Settings.esp == true do wait(0.1)
         for i,v in pairs(game.Players:GetChildren()) do
             for a,b in pairs(game.Players:GetChildren()) do
             if b.Name == game.Players.LocalPlayer.Name then
@@ -170,17 +170,19 @@ end
     end
 end
     
-    while getgenv().Settings.esp == false do wait()
+    while getgenv().Settings.esp == false do wait(0.1)
         for i,v in pairs(game.Players:GetChildren()) do
             local char = v.Character or v.CharacterAdded:Wait()
             if v:IsA("Player") and char:WaitForChild("UpperTorso", 0.1) then
-            if char:WaitForChild("UpperTorso"):FindFirstChild("SeekBox") ~= nil and game.Players.LocalPlayer.Character:FindFirstChild("SeekBeam") ~= nil then
+            if char:WaitForChild("UpperTorso"):FindFirstChild("SeekBox") ~= nil and game.Players.LocalPlayer.Character:FindFirstChild("SeekBeam") ~= nil and char:WaitForChild("UpperTorso"):FindFirstChild("Attachment") ~= nil then
                 char:WaitForChild("UpperTorso"):FindFirstChild("SeekBox"):Destroy()
                 game.Players.LocalPlayer.Character:FindFirstChild("SeekBeam"):Destroy()
+                char:WaitForChild("UpperTorso"):FindFirstChild("Attachment"):Destroy()
             end
-            if char:WaitForChild("UpperTorso"):FindFirstChild("HideBox") ~= nil and game.Players.LocalPlayer.Character:FindFirstChild("HideBeam") ~= nil then
+            if char:WaitForChild("UpperTorso"):FindFirstChild("HideBox") ~= nil and game.Players.LocalPlayer.Character:FindFirstChild("HideBeam") ~= nil and char:WaitForChild("UpperTorso"):FindFirstChild("Attachment") ~= nil then
                 char:WaitForChild("UpperTorso"):FindFirstChild("HideBox"):Destroy()
                 game.Players.LocalPlayer.Character:FindFirstChild("HideBeam"):Destroy()
+                char:WaitForChild("UpperTorso"):FindFirstChild("Attachment"):Destroy()
             end
             end
 end
