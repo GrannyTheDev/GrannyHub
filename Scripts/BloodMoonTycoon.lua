@@ -195,13 +195,15 @@ if tostring(a) == "Ammo" and tostring(b) == "Value" then
 end
 return old_index(a, b);
 end
-while wait(1) do
-for i,v in pairs(getgc(true)) do
-if type(v) == 'table' then
-if rawget(v, 'gunType') then
-v.gunType.Semi = false
-v.gunType.Auto = true
-end end end end
+while wait() do
+    for i,v in pairs(debug.getregistry()) do
+        if type(v) == "table" then
+            if v.gunType then
+                v.gunType.Semi = false
+                v.gunType.Auto = true
+            end
+        end
+    end
 end
 end)
 end
