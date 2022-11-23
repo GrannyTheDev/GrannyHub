@@ -130,6 +130,7 @@ spawn(function()
         for i,v in pairs(game.Players:GetChildren()) do
             local char = v.Character or v.CharacterAdded:Wait()
             if v:IsA("Player") and char:WaitForChild("UpperTorso", 0.1) then
+                if not char:WaitForChild("Glue", 0.1) then
                 if char:WaitForChild("UpperTorso"):FindFirstChild("HideBox") == nil then
                     local box = Instance.new("BoxHandleAdornment", char:WaitForChild("UpperTorso"))
                     box.Name = "HideBox"
@@ -151,7 +152,8 @@ spawn(function()
                     beam.Attachment1 = at1
                 end
             end
-        end
+            end
+            end
         
             for i,v in pairs(game.Players:GetChildren()) do
             local char = v.Character or v.CharacterAdded:Wait()
@@ -182,11 +184,13 @@ spawn(function()
             end
             end)
             end
+        end
     
         for i,v in pairs(game.Players:GetChildren()) do
             local char = v.Character or v.CharacterAdded:Wait()
             v.CharacterAdded:Connect(function()
             if v:IsA("Player") and char:WaitForChild("UpperTorso", 0.1) then
+                if not v:WaitForChild("Glue", 0.1) then
                     if v:WaitForChild("UpperTorso"):FindFirstChild("HideBox") == nil then
                         local box = Instance.new("BoxHandleAdornment", v:WaitForChild("UpperTorso"))
                         box.Name = "HideBox"
@@ -207,13 +211,14 @@ spawn(function()
                         beam.Attachment0 = at0
                         beam.Attachment1 = at1
                     end
-            end
+                end
+                end
             end)
         end
-    end
     
     while getgenv().Settings.esp == false do wait()
-        for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+        for i,v in pairs(game.Players:GetChildren()) do
+            if v:IsA("Player") and v:WaitForChild("UpperTorso", 0.1) then
             if v:WaitForChild("UpperTorso"):FindFirstChild("SeekBox") ~= nil and game.Players.LocalPlayer.Character:FindFirstChild("SeekBeam") ~= nil then
                 v:WaitForChild("UpperTorso"):FindFirstChild("SeekBox"):Destroy()
                 game.Players.LocalPlayer.Character:FindFirstChild("SeekBeam"):Destroy()
@@ -222,7 +227,8 @@ spawn(function()
                 v:WaitForChild("UpperTorso"):FindFirstChild("HideBox"):Destroy()
                 game.Players.LocalPlayer.Character:FindFirstChild("HideBeam"):Destroy()
             end
-        end
+            end
+end
     end
 end)
 end
