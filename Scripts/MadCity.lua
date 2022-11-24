@@ -6,8 +6,6 @@ local Library = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHu
 
    local Misc = Gui:Page("Misc")
    
-   local Players = game.Players.LocalPlayer
-
 local filename = "DevilHub/MadCity - 1224212277/Config.json"
 
 getgenv().Settings = {
