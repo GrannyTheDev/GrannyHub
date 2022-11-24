@@ -97,7 +97,8 @@ end
 function doEsp()
 spawn(function()
     local Players = game:GetService("Players")
-    while getgenv().Settings.esp == true do wait(0.1)
+    game:GetService("RunService").RenderStepped:Connect(function()
+    if getgenv().Settings.esp == true then
         for i,v in pairs(game.Players:GetChildren()) do
             for a,b in pairs(game.Players:GetChildren()) do
             if b.Name == game.Players.LocalPlayer.Name then
@@ -242,8 +243,10 @@ end
 end
 end
 end
+end)
     
-while getgenv().Settings.esp == false do wait(0.1)
+game:GetService("RunService").RenderStepped:Connect(function()
+if getgenv().Settings.esp == false then
 for i,v in pairs(game.Players:GetChildren()) do
             local char = v.Character or v.CharacterAdded:Wait()
             if v:IsA("Player") and char:WaitForChild("UpperTorso", 0.1) then
@@ -257,9 +260,10 @@ for i,v in pairs(game.Players:GetChildren()) do
                 game.Players.LocalPlayer.Character:FindFirstChild("HideBeam"):Destroy()
                 char:WaitForChild("UpperTorso"):FindFirstChild("Attachment"):Destroy()
             end
-            end
-end
+        end
     end
+end
+end)
 end)
 end
 
