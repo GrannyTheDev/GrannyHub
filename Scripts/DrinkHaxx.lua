@@ -152,9 +152,9 @@ end
 
 function doEquipDrink()
 spawn(function()
-if getgenv().Settings.equipdrink == true then
 local debounce = false
 game:GetService("RunService").RenderStepped:Connect(function()
+if getgenv().Settings.equipdrink == true then
 if debounce then
     return
 end
@@ -162,8 +162,8 @@ debounce = true
 wait(1)
 AutoEquipDrink()
 debounce = false
-end)
 end
+end)
 end)
 end
 
@@ -249,9 +249,9 @@ end
 
 function doStarterDrink()
 spawn(function()
-if getgenv().Settings.starterdrink == true then
 local debounce = false
 local Stepped = game:GetService("RunService").Heartbeat:Connect(function()
+if getgenv().Settings.starterdrink == true then
 if debounce then
     return
 end
@@ -259,18 +259,16 @@ debounce = true
 wait(2.34)
 game.ReplicatedStorage.RemoteEvents.DrinkEvent:FireServer("Starter Drink")
 debounce = false
-end)
-elseif getgenv().Settings.starterdrink == false then
-	Stepped:Disconnect() 
 end
+end)
 end)
 end
 
 function doSecondDrink()
 spawn(function()
-if getgenv().Settings.seconddrink == true then
 local debounce = false
 local Stepped = game:GetService("RunService").Heartbeat:Connect(function()
+if getgenv().Settings.seconddrink == true then
 if debounce then
     return
 end
@@ -278,18 +276,16 @@ debounce = true
 wait(2.34)
 game.ReplicatedStorage.RemoteEvents.DrinkEvent:FireServer("Second Drink")
 debounce = false
-end)
-elseif getgenv().Settings.seconddrink == false then
-	Stepped:Disconnect() 
 end
+end)
 end)
 end
 
 function doThirdDrink()
 spawn(function()
-if getgenv().Settings.thirddrink == true then
 local debounce = false
 local Stepped = game:GetService("RunService").Heartbeat:Connect(function()
+if getgenv().Settings.thirddrink == true then
 if debounce then
     return
 end
@@ -297,18 +293,16 @@ debounce = true
 wait(2.34)
 game.ReplicatedStorage.RemoteEvents.DrinkEvent:FireServer("Third Drink")
 debounce = false
-end)
-elseif getgenv().Settings.thirddrink == false then
-	Stepped:Disconnect()
 end
+end)
 end)
 end
 
 function doFourthDrink()
 spawn(function()
-if getgenv().Settings.fourthdrink == true then
 local debounce = false
 local Stepped = game:GetService("RunService").Heartbeat:Connect(function()
+if getgenv().Settings.fourthdrink == true then
 if debounce then
     return
 end
@@ -316,10 +310,8 @@ debounce = true
 wait(2.34)
 game.ReplicatedStorage.RemoteEvents.DrinkEvent:FireServer("Fourth Drink")
 debounce = false
-end)
-elseif getgenv().Settings.fourthdrink == false then
-	Stepped:Disconnect() 
 end
+end)
 end)
 end
 
@@ -333,9 +325,9 @@ end
 
 function doFifthDrink()
 spawn(function()
-if getgenv().Settings.fifthdrink == true then
 local debounce = false
 local Stepped = game:GetService("RunService").Heartbeat:Connect(function()
+if getgenv().Settings.fifthdrink == true then
 if debounce then
     return
 end
@@ -343,18 +335,16 @@ debounce = true
 wait(2.34)
 game.ReplicatedStorage.RemoteEvents.DrinkEvent:FireServer("Fifth Drink")
 debounce = false
-end)
-elseif getgenv().Settings.fifthdrink == false then
-	Stepped:Disconnect()
 end
+end)
 end)
 end
 
 function doSixthDrink()
 spawn(function()
-if getgenv().Settings.sixthdrink == true then
 local debounce = false
 local Stepped = game:GetService("RunService").Heartbeat:Connect(function()
+if getgenv().Settings.sixthdrink == true then
 if debounce then
     return
 end
@@ -362,18 +352,16 @@ debounce = true
 wait(2.34)
 game.ReplicatedStorage.RemoteEvents.DrinkEvent:FireServer("Sixth Drink")
 debounce = false
-end)
-elseif getgenv().Settings.sixthdrink == false then
-	Stepped:Disconnect() 
 end
+end)
 end)
 end
 
 function doSeventhDrink()
 spawn(function()
-if getgenv().Settings.seventhdrink == true then
 local debounce = false
 local Stepped = game:GetService("RunService").Heartbeat:Connect(function()
+if getgenv().Settings.seventhdrink == true then
 if debounce then
     return
 end
@@ -381,18 +369,16 @@ debounce = true
 wait(2.34)
 game.ReplicatedStorage.RemoteEvents.DrinkEvent:FireServer("Seventh Drink")
 debounce = false
-end)
-elseif getgenv().Settings.seventhdrink == false then
-	Stepped:Disconnect()
 end
+end)
 end)
 end
 
 function doEighthDrink()
 spawn(function()
-if getgenv().Settings.eighthdrink == true then
 local debounce = false
 local Stepped = game:GetService("RunService").Heartbeat:Connect(function()
+if getgenv().Settings.eighthdrink == true then
 if debounce then
     return
 end
@@ -400,18 +386,16 @@ debounce = true
 wait(2.34)
 game.ReplicatedStorage.RemoteEvents.DrinkEvent:FireServer("Eighth Drink")
 debounce = false
-end)
-elseif getgenv().Settings.eighthdrink == false then
-	Stepped:Disconnect()
 end
+end)
 end)
 end
 
 function doNinthDrink()
 spawn(function()
-if getgenv().Settings.ninthdrink == true then
 local debounce = false
 local Stepped = game:GetService("RunService").Heartbeat:Connect(function()
+if getgenv().Settings.ninthdrink == true then
 if debounce then
     return
 end
@@ -419,18 +403,16 @@ debounce = true
 wait(2.34)
 game.ReplicatedStorage.RemoteEvents.DrinkEvent:FireServer("Ninth Drink")
 debounce = false
-end)
-elseif getgenv().Settings.ninthdrink == false then
-	Stepped:Disconnect()
 end
+end)
 end)
 end
 
 function doAtomicDrink()
 spawn(function()
-if getgenv().Settings.atomicdrink == true then
 local debounce = false
 local Stepped = game:GetService("RunService").Heartbeat:Connect(function()
+if getgenv().Settings.atomicdrink == true then
 if debounce then
     return
 end
@@ -438,18 +420,16 @@ debounce = true
 wait(2.34)
 game.ReplicatedStorage.RemoteEvents.DrinkEvent:FireServer("Atomic Drink")
 debounce = false
-end)
-elseif getgenv().Settings.atomicdrink == false then
-	Stepped:Disconnect()
 end
+end)
 end)
 end
 
 function doOmegaBurpJuice()
 spawn(function()
-if getgenv().Settings.omegaburpjuice == true then
 local debounce = false
 local Stepped = game:GetService("RunService").Heartbeat:Connect(function()
+if getgenv().Settings.omegaburpjuice == true then
 if debounce then
     return
 end
@@ -457,18 +437,16 @@ debounce = true
 wait(2.34)
 game.ReplicatedStorage.RemoteEvents.DrinkEvent:FireServer("Omega Burp Juice")
 debounce = false
-end)
-elseif getgenv().Settings.omegaburpjuice == false then
-	Stepped:Disconnect()
 end
+end)
 end)
 end
 
 function doThunderFizz()
 spawn(function()
-if getgenv().Settings.thunderfizz == true then
 local debounce = false
 local Stepped = game:GetService("RunService").Heartbeat:Connect(function()
+if getgenv().Settings.thunderfizz == true then
 if debounce then
     return
 end
@@ -476,10 +454,8 @@ debounce = true
 wait(2.34)
 game.ReplicatedStorage.RemoteEvents.DrinkEvent:FireServer("Thunder Fizz")
 debounce = false
-end)
-elseif getgenv().Settings.thunderfizz == false then
-	Stepped:Disconnect()
 end
+end)
 end)
 end
 
