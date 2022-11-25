@@ -508,8 +508,8 @@ function doEsp()
                     beam.Name = "Beam"
                     beam.Color = ColorSequence.new(Color3.fromRGB(0, 170, 255), Color3.fromRGB(0, 170, 255))
                     beam.FaceCamera = true
-                    beam.Width0 += game.Players.LocalPlayer.leaderstats["Burp points"].Value/10000
-                    beam.Width1 += game.Players.LocalPlayer.leaderstats["Burp points"].Value/10000
+                    beam.Width0 += game.Players.LocalPlayer.leaderstats["Burp points"].Value/100000
+                    beam.Width1 += game.Players.LocalPlayer.leaderstats["Burp points"].Value/100000
                     beam.Attachment0 = at0
                     beam.Attachment1 = at1
                 end
@@ -540,8 +540,8 @@ function doEsp()
                 beam.Name = "Beam"
                 beam.Color = ColorSequence.new(Color3.fromRGB(255, 0, 25), Color3.fromRGB(255, 0, 25))
                 beam.FaceCamera = true
-                beam.Width0 += game.Players.LocalPlayer.leaderstats["Burp points"].Value/10000
-                beam.Width1 += game.Players.LocalPlayer.leaderstats["Burp points"].Value/10000
+                beam.Width0 += game.Players.LocalPlayer.leaderstats["Burp points"].Value/100000
+                beam.Width1 += game.Players.LocalPlayer.leaderstats["Burp points"].Value/100000
                 beam.Attachment0 = at0
                 beam.Attachment1 = at1
             end
