@@ -102,23 +102,21 @@ spawn(function()
         for i,v in pairs(game.Players:GetChildren()) do
             for a,b in pairs(game.Players:GetChildren()) do
             if b.Name == game.Players.LocalPlayer.Name then
-            local Achar = b.Character or b.CharacterAdded:Wait()
-            local char = v.Character or v.CharacterAdded:Wait()
-            if Achar:WaitForChild("UpperTorso", 0.1) then
-            if v:IsA("Player") and char:WaitForChild("UpperTorso", 0.1) then
-            if char:WaitForChild("Glue", 0.1) then
-                if char:WaitForChild("UpperTorso"):FindFirstChild("SeekBox") == nil then
-                    local box = Instance.new("BoxHandleAdornment", char:WaitForChild("UpperTorso"))
+            if b.Character:WaitForChild("UpperTorso", 0.1) then
+            if v:IsA("Player") and v.Character:WaitForChild("UpperTorso", 0.1) then
+            if v.Character:WaitForChild("Glue", 0.1) then
+                if v.Character:WaitForChild("UpperTorso"):FindFirstChild("SeekBox") == nil then
+                    local box = Instance.new("BoxHandleAdornment", v.Character:WaitForChild("UpperTorso"))
                     box.Name = "SeekBox"
-                    box.Size = char:WaitForChild("UpperTorso").Size
-                    box.Adornee = char:WaitForChild("UpperTorso")
+                    box.Size = v.Character:WaitForChild("UpperTorso").Size
+                    box.Adornee = v.Character:WaitForChild("UpperTorso")
                     box.ZIndex = 5
                     box.AlwaysOnTop = true
                     box.Color3 = Color3.fromRGB(255, 0, 25)
     
-                    local at0 = Instance.new("Attachment", Achar:WaitForChild("UpperTorso"))
-                    local at1 = Instance.new("Attachment", char:WaitForChild("UpperTorso"))
-                    local beam = Instance.new("Beam", Achar)
+                    local at0 = Instance.new("Attachment", b.Character:WaitForChild("UpperTorso"))
+                    local at1 = Instance.new("Attachment", v.Character:WaitForChild("UpperTorso"))
+                    local beam = Instance.new("Beam", b.Character)
                     beam.Name = "SeekBeam"
                     beam.Color = ColorSequence.new(Color3.fromRGB(255, 0, 25), Color3.fromRGB(255, 0, 25))
                     beam.FaceCamera = true
@@ -137,23 +135,21 @@ end
         for i,v in pairs(game.Players:GetChildren()) do
             for a,b in pairs(game.Players:GetChildren()) do
             if b.Name == game.Players.LocalPlayer.Name then
-            local Achar = b.Character or b.CharacterAdded:Wait()
-            local char = v.Character or v.CharacterAdded:Wait()
-            if Achar:WaitForChild("UpperTorso", 0.1) then
-            if v:IsA("Player") and char:WaitForChild("UpperTorso", 0.1) then
-                if not char:WaitForChild("Glue", 0.1) then
-                if char:WaitForChild("UpperTorso"):FindFirstChild("HideBox") == nil then
-                    local box = Instance.new("BoxHandleAdornment", char:WaitForChild("UpperTorso"))
+            if b.Character:WaitForChild("UpperTorso", 0.1) then
+            if v:IsA("Player") and v.Character:WaitForChild("UpperTorso", 0.1) then
+                if not v.Character:WaitForChild("Glue", 0.1) then
+                if v.Character:WaitForChild("UpperTorso"):FindFirstChild("HideBox") == nil then
+                    local box = Instance.new("BoxHandleAdornment", v.Character:WaitForChild("UpperTorso"))
                     box.Name = "HideBox"
-                    box.Size = char:WaitForChild("UpperTorso").Size
-                    box.Adornee = char:WaitForChild("UpperTorso")
+                    box.Size = v.Character:WaitForChild("UpperTorso").Size
+                    box.Adornee = v.Character:WaitForChild("UpperTorso")
                     box.ZIndex = 5
                     box.AlwaysOnTop = true
                     box.Color3 = Color3.fromRGB(0, 170, 255)
     
-                    local at0 = Instance.new("Attachment", Achar:WaitForChild("UpperTorso"))
-                    local at1 = Instance.new("Attachment", char:WaitForChild("UpperTorso"))
-                    local beam = Instance.new("Beam", Achar)
+                    local at0 = Instance.new("Attachment", b.Character:WaitForChild("UpperTorso"))
+                    local at1 = Instance.new("Attachment", v.Character:WaitForChild("UpperTorso"))
+                    local beam = Instance.new("Beam", b.Character)
                     beam.Name = "HideBeam"
                     beam.Color = ColorSequence.new(Color3.fromRGB(0, 170, 255), Color3.fromRGB(0, 170, 255))
                     beam.FaceCamera = true
@@ -172,24 +168,22 @@ end
     for i,v in pairs(game.Players:GetChildren()) do
         for a,b in pairs(game.Players:GetChildren()) do
         if b.Name == game.Players.LocalPlayer.Name then
-        local Achar = b.Character or b.CharacterAdded:Wait()
-        local char = v.Character or v.CharacterAdded:Wait()
         v.CharacterAdded:Connect(function()
-        if Achar:WaitForChild("UpperTorso", 0.1) then
-        if v:IsA("Player") and char:WaitForChild("UpperTorso", 0.1) then
-        if char:WaitForChild("Glue", 0.1) then
-            if char:WaitForChild("UpperTorso"):FindFirstChild("SeekBox") == nil then
-                local box = Instance.new("BoxHandleAdornment", char:WaitForChild("UpperTorso"))
+        if b.Character:WaitForChild("UpperTorso", 0.1) then
+        if v:IsA("Player") and v.Character:WaitForChild("UpperTorso", 0.1) then
+        if v.Character:WaitForChild("Glue", 0.1) then
+            if v.Character:WaitForChild("UpperTorso"):FindFirstChild("SeekBox") == nil then
+                local box = Instance.new("BoxHandleAdornment", v.Character:WaitForChild("UpperTorso"))
                 box.Name = "SeekBox"
-                box.Size = char:WaitForChild("UpperTorso").Size
-                box.Adornee = char:WaitForChild("UpperTorso")
+                box.Size = v.Character:WaitForChild("UpperTorso").Size
+                box.Adornee = v.Character:WaitForChild("UpperTorso")
                 box.ZIndex = 5
                 box.AlwaysOnTop = true
                 box.Color3 = Color3.fromRGB(255, 0, 25)
 
-                local at0 = Instance.new("Attachment", Achar:WaitForChild("UpperTorso"))
-                local at1 = Instance.new("Attachment", char:WaitForChild("UpperTorso"))
-                local beam = Instance.new("Beam", Achar)
+                local at0 = Instance.new("Attachment", b.Character:WaitForChild("UpperTorso"))
+                local at1 = Instance.new("Attachment", v.Character:WaitForChild("UpperTorso"))
+                local beam = Instance.new("Beam", b.Character)
                 beam.Name = "SeekBeam"
                 beam.Color = ColorSequence.new(Color3.fromRGB(255, 0, 25), Color3.fromRGB(255, 0, 25))
                 beam.FaceCamera = true
@@ -209,24 +203,22 @@ end
     for i,v in pairs(game.Players:GetChildren()) do
         for a,b in pairs(game.Players:GetChildren()) do
         if b.Name == game.Players.LocalPlayer.Name then
-        local Achar = b.Character or b.CharacterAdded:Wait()
-        local char = v.Character or v.CharacterAdded:Wait()
         v.CharacterAdded:Connect(function()
-        if Achar:WaitForChild("UpperTorso", 0.1) then
-        if v:IsA("Player") and char:WaitForChild("UpperTorso", 0.1) then
-            if not char:WaitForChild("Glue", 0.1) then
-            if char:WaitForChild("UpperTorso"):FindFirstChild("HideBox") == nil then
-                local box = Instance.new("BoxHandleAdornment", char:WaitForChild("UpperTorso"))
+        if b.Character:WaitForChild("UpperTorso", 0.1) then
+        if v:IsA("Player") and v.Character:WaitForChild("UpperTorso", 0.1) then
+            if not v.Character:WaitForChild("Glue", 0.1) then
+            if v.Character:WaitForChild("UpperTorso"):FindFirstChild("HideBox") == nil then
+                local box = Instance.new("BoxHandleAdornment", v.Character:WaitForChild("UpperTorso"))
                 box.Name = "HideBox"
-                box.Size = char:WaitForChild("UpperTorso").Size
-                box.Adornee = char:WaitForChild("UpperTorso")
+                box.Size = v.Character:WaitForChild("UpperTorso").Size
+                box.Adornee = v.Character:WaitForChild("UpperTorso")
                 box.ZIndex = 5
                 box.AlwaysOnTop = true
                 box.Color3 = Color3.fromRGB(0, 170, 255)
 
-                local at0 = Instance.new("Attachment", Achar:WaitForChild("UpperTorso"))
-                local at1 = Instance.new("Attachment", char:WaitForChild("UpperTorso"))
-                local beam = Instance.new("Beam", Achar)
+                local at0 = Instance.new("Attachment", b.Character:WaitForChild("UpperTorso"))
+                local at1 = Instance.new("Attachment", v.Character:WaitForChild("UpperTorso"))
+                local beam = Instance.new("Beam", b.Character)
                 beam.Name = "HideBeam"
                 beam.Color = ColorSequence.new(Color3.fromRGB(0, 170, 255), Color3.fromRGB(0, 170, 255))
                 beam.FaceCamera = true
