@@ -50,7 +50,6 @@ omegaburpjuice = false;
 thunderfizz = false;
 autorejoin = false;
 zoomlength = false;
-esp = false;
 }
 
 function Save()
@@ -484,106 +483,6 @@ end
 end)
 end
 
-function doEsp()
-    spawn(function()
-        game:GetService("RunService").RenderStepped:Connect(function()
-        if getgenv().Settings.esp == true then
-        for i,v in pairs(game.Players:GetChildren()) do
-            for a,b in pairs(game.Players:GetChildren()) do
-            if b.Name == game.Players.LocalPlayer.Name then
-            if b.Character:FindFirstChild("UpperTorso") then
-            if v:IsA("Player") and v.Character:FindFirstChild("UpperTorso") then
-                if v.Character:FindFirstChild("UpperTorso"):FindFirstChild("Box") == nil then
-                    local box = Instance.new("BoxHandleAdornment", v.Character:FindFirstChild("UpperTorso"))
-                    box.Name = "Box"
-                    box.Size = v.Character:FindFirstChild("UpperTorso").Size
-                    box.Adornee = v.Character:FindFirstChild("UpperTorso")
-                    box.ZIndex = 5
-                    box.AlwaysOnTop = true
-                    box.Color3 = Color3.fromRGB(0, 170, 255)
-    
-                    local at0 = Instance.new("Attachment", b.Character:FindFirstChild("UpperTorso"))
-                    local at1 = Instance.new("Attachment", v.Character:FindFirstChild("UpperTorso"))
-                    local beam = Instance.new("Beam", b.Character)
-                    beam.Name = "Beam"
-                    beam.Color = ColorSequence.new(Color3.fromRGB(0, 170, 255), Color3.fromRGB(0, 170, 255))
-                    beam.FaceCamera = true
-                    beam.Width0 += game.Players.LocalPlayer.leaderstats["Burp points"].Value/100000
-                    beam.Width1 += game.Players.LocalPlayer.leaderstats["Burp points"].Value/100000
-                    beam.Attachment0 = at0
-                    beam.Attachment1 = at1
-                end
-            end
-            end
-            end
-        end
-    end
-
-    for i,v in pairs(game.Players:GetChildren()) do
-        for a,b in pairs(game.Players:GetChildren()) do
-        if b.Name == game.Players.LocalPlayer.Name then
-        v.CharacterAdded:Connect(function()
-        if b.Character:FindFirstChild("UpperTorso") then
-        if v:IsA("Player") and v.Character:FindFirstChild("UpperTorso") then
-            if v.Character:FindFirstChild("UpperTorso"):FindFirstChild("Box") == nil then
-                local box = Instance.new("BoxHandleAdornment", v.Character:FindFirstChild("UpperTorso"))
-                box.Name = "Box"
-                box.Size = v.Character:FindFirstChild("UpperTorso").Size
-                box.Adornee = v.Character:FindFirstChild("UpperTorso")
-                box.ZIndex = 5
-                box.AlwaysOnTop = true
-                box.Color3 = Color3.fromRGB(255, 0, 25)
-
-                local at0 = Instance.new("Attachment", b.Character:FindFirstChild("UpperTorso"))
-                local at1 = Instance.new("Attachment", v.Character:FindFirstChild("UpperTorso"))
-                local beam = Instance.new("Beam", b.Character)
-                beam.Name = "Beam"
-                beam.Color = ColorSequence.new(Color3.fromRGB(255, 0, 25), Color3.fromRGB(255, 0, 25))
-                beam.FaceCamera = true
-                beam.Width0 += game.Players.LocalPlayer.leaderstats["Burp points"].Value/100000
-                beam.Width1 += game.Players.LocalPlayer.leaderstats["Burp points"].Value/100000
-                beam.Attachment0 = at0
-                beam.Attachment1 = at1
-            end
-        end
-        end
-    end)
-    end
-    end
-end
-end
-end)
-        
-    game:GetService("RunService").RenderStepped:Connect(function()
-    if getgenv().Settings.esp == false then
-    for i,v in pairs(game.Players:GetChildren()) do
-                local char = v.Character or v.CharacterAdded:Wait()
-                if v:IsA("Player") and char:FindFirstChild("UpperTorso") then
-                if char:FindFirstChild("UpperTorso"):FindFirstChild("Box") ~= nil and game.Players.LocalPlayer.Character:FindFirstChild("Beam") ~= nil and char:FindFirstChild("UpperTorso"):FindFirstChild("Attachment") ~= nil then
-                    char:FindFirstChild("UpperTorso"):FindFirstChild("Box"):Destroy()
-                    game.Players.LocalPlayer.Character:FindFirstChild("Beam"):Destroy()
-                    char:FindFirstChild("UpperTorso"):FindFirstChild("Attachment"):Destroy()
-                end
-                if char:FindFirstChild("UpperTorso"):FindFirstChild("Box") ~= nil and game.Players.LocalPlayer.Character:FindFirstChild("Beam") ~= nil and char:FindFirstChild("UpperTorso"):FindFirstChild("Attachment") ~= nil then
-                    char:FindFirstChild("UpperTorso"):FindFirstChild("Box"):Destroy()
-                    game.Players.LocalPlayer.Character:FindFirstChild("Beam"):Destroy()
-                    char:FindFirstChild("UpperTorso"):FindFirstChild("Attachment"):Destroy()
-                end
-            end
-        end
-    end
-    end)
-    end)
-    end
-
-local esp = LocalPlayer:Toggle("Esp", function(v)
-getgenv().Settings.esp = v
-Save()
-if v then
-doEsp()
-end
-end)
-
 local pets = {"Small Blue", "Small Red", "Blue", "Purple", "Green", "Orange", "Winged Blue", "Winged Purple", "Winged Green", "Winged Orange", "Fire", "Flower", "Wizard", "Vampire", "Cool Dude", "Rainbow", "Triplet", "Radioactive", "Volcanic",  "Cyborg"}
 for i = 1,#pets do
 Pets:Button(pets[i], function()
@@ -953,9 +852,6 @@ autorejoin:ChangeState(true)
 end
 if getgenv().Settings.zoomlength == true then
 zoomlength:ChangeState(true)
-end
-if getgenv().Settings.esp == true then
-esp:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
