@@ -130,25 +130,25 @@ end)
 end
 
 function doAutoRejoin()
-	spawn(function()
-	if getgenv().Settings.autorejoin == true then
-		game:WaitForChild("CoreGui")
-        game:WaitForChild("Players")
-
-         while true do wait()
-            getgenv().rejoin = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
-            if child.Name == 'ErrorPrompt' and child:FindFirstChild('MessageArea') and child.MessageArea:FindFirstChild("ErrorFrame") then
-            pcall(game:GetService("TeleportService"):Teleport(game.PlaceId))
-    end
+spawn(function()
+local debounce = false
+local Stepped = game:GetService("RunService").Heartbeat:Connect(function()
+if getgenv().Settings.autorejoin == true then
+if debounce then
+    return
+end
+debounce = true
+wait(1)
+getgenv().rejoin = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
+	if child.Name == 'ErrorPrompt' and child:FindFirstChild('MessageArea') and child.MessageArea:FindFirstChild("ErrorFrame") then
+	pcall(game:GetService("TeleportService"):Teleport(game.PlaceId))
+end
+end)
+debounce = false
+end
+end)
 end)
 end
-while game.Players.LocalPlayer.leaderstats.Prestige.Value == 0 do
-loadstring(game:HttpGet("https://pastebin.com/raw/T6gN29gv"))()
-wait(0.5)
-end
-	end
-	end)
-	end
 
 function doEquipDrink()
 spawn(function()
