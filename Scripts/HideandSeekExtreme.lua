@@ -241,16 +241,16 @@ game:GetService("RunService").RenderStepped:Connect(function()
 if getgenv().Settings.esp == false then
 for i,v in pairs(game.Players:GetChildren()) do
             local char = v.Character or v.CharacterAdded:Wait()
-            if v:IsA("Player") and char:WaitForChild("UpperTorso", 0.1) then
-            if char:WaitForChild("UpperTorso"):FindFirstChild("SeekBox") ~= nil and game.Players.LocalPlayer.Character:FindFirstChild("SeekBeam") ~= nil and char:WaitForChild("UpperTorso"):FindFirstChild("Attachment") ~= nil then
-                char:WaitForChild("UpperTorso"):FindFirstChild("SeekBox"):Destroy()
+            if v:IsA("Player") and char:FindFirstChild("UpperTorso", 0.1) then
+            if char:FindFirstChild("UpperTorso"):FindFirstChild("SeekBox") ~= nil and game.Players.LocalPlayer.Character:FindFirstChild("SeekBeam") ~= nil and char:FindFirstChild("UpperTorso"):FindFirstChild("Attachment") ~= nil then
+                char:FindFirstChild("UpperTorso"):FindFirstChild("SeekBox"):Destroy()
                 game.Players.LocalPlayer.Character:FindFirstChild("SeekBeam"):Destroy()
-                char:WaitForChild("UpperTorso"):FindFirstChild("Attachment"):Destroy()
+                char:FindFirstChild("UpperTorso"):FindFirstChild("Attachment"):Destroy()
             end
-            if char:WaitForChild("UpperTorso"):FindFirstChild("HideBox") ~= nil and game.Players.LocalPlayer.Character:FindFirstChild("HideBeam") ~= nil and char:WaitForChild("UpperTorso"):FindFirstChild("Attachment") ~= nil then
-                char:WaitForChild("UpperTorso"):FindFirstChild("HideBox"):Destroy()
+            if char:FindFirstChild("UpperTorso"):FindFirstChild("HideBox") ~= nil and game.Players.LocalPlayer.Character:FindFirstChild("HideBeam") ~= nil and char:FindFirstChild("UpperTorso"):FindFirstChild("Attachment") ~= nil then
+                char:FindFirstChild("UpperTorso"):FindFirstChild("HideBox"):Destroy()
                 game.Players.LocalPlayer.Character:FindFirstChild("HideBeam"):Destroy()
-                char:WaitForChild("UpperTorso"):FindFirstChild("Attachment"):Destroy()
+                char:FindFirstChild("UpperTorso"):FindFirstChild("Attachment"):Destroy()
             end
         end
     end
