@@ -394,6 +394,7 @@ game:GetService("Players").LocalPlayer.PlayerGui["Main_Gui"]["UpgradeMenu_Frame"
 end)
 
 local Request = request or syn.request
+local clipboard = setclipboard or syn.write_clipboard
 
 Misc:Button("Join the discord server", function()
 	if clipboard then

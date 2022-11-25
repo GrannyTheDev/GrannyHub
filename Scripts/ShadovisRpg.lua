@@ -264,6 +264,7 @@ loadstring(game:HttpGet("https://pastebin.com/raw/KHZ8pYx9"))()
 end)
 
 local Request = request or syn.request
+local clipboard = setclipboard or syn.write_clipboard
 
 Misc:Button("Join the discord server", function()
 	if clipboard then

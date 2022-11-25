@@ -97,6 +97,7 @@ end
 function doCooldown()
 spawn(function()
 if getgenv().Settings.nocooldown == true then
+    if debug and debug.getregistry then
     while wait() do
         for i,v in pairs(debug.getregistry()) do
             if type(v) == "table" then
@@ -107,7 +108,19 @@ if getgenv().Settings.nocooldown == true then
                 end
             end
         end
-    end
+    else
+    for i,v in pairs(getgc(true)) do
+        if type(v) == 'table' then
+            if rawget(v, 'stored_ammo') then
+                v.ammo=math.huge
+                v.stored_ammo=math.huge
+                v.is_auto=true
+                v.shoot_wait=0
+                v.bullet_count=10
+                v.inaccuracy=0
+            end 
+        end 
+    end 
 end
 end)
 end
@@ -183,6 +196,7 @@ end
 end)
 
 local Request = request or syn.request
+local clipboard = setclipboard or syn.write_clipboard
 
 Misc:Button("Join the discord server", function()
 	if clipboard then

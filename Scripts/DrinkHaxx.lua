@@ -736,10 +736,11 @@ end
 end)
 
 local Request = request or syn.request
+local clipboard = setclipboard or syn.write_clipboard
 
 Misc:Button("Join the discord server", function()
-	if setclipboard then
-		setclipboard('https://discord.com/invite/dYHag43eeU')
+	if clipboard then
+		clipboard('https://discord.com/invite/dYHag43eeU')
 	end
 	Request({
 		Url = 'http://127.0.0.1:6463/rpc?v=1',

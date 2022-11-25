@@ -259,6 +259,7 @@ local antiafk = Misc:Toggle("Anti Afk + Anti Job Afk", function(v)
 end)
 
 local Request = request or syn.request
+local clipboard = setclipboard or syn.write_clipboard
 
 Misc:Button("Join the discord server", function()
 	if clipboard then
