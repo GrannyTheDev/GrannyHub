@@ -16,6 +16,7 @@ jump = false;
 antiafk = false;
 infyield = false;
 kill = false;
+autorejoin = false;
 }
 
 function Save()
@@ -107,6 +108,27 @@ end
 end)
 end
 
+function doAutoRejoin()
+    spawn(function()
+    local debounce = false
+    local Stepped = game:GetService("RunService").Heartbeat:Connect(function()
+    if getgenv().Settings.autorejoin == true then
+    if debounce then
+        return
+    end
+    debounce = true
+    wait(1)
+    getgenv().rejoin = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
+        if child.Name == 'ErrorPrompt' and child:FindFirstChild('MessageArea') and child.MessageArea:FindFirstChild("ErrorFrame") then
+        pcall(game:GetService("TeleportService"):Teleport(game.PlaceId))
+    end
+    end)
+    debounce = false
+    end
+    end)
+    end)
+    end
+
 local kill = LocalPlayer:Toggle("Auto kill all", function(v)
 getgenv().Settings.kill = v
 Save()
@@ -170,6 +192,14 @@ doAntiAfk()
 end
 end)
 
+local autorejoin = Misc:Toggle("Auto Rejoin", function(v)
+getgenv().Settings.autorejoin = v
+Save()
+if v then
+doAutoRejoin()
+end
+end)
+
 local Request = request or syn.request
 local clipboard = setclipboard or syn.write_clipboard
 
@@ -207,6 +237,9 @@ antiafk:ChangeState(true)
 end
 if getgenv().Settings.kill == true then
 kill:ChangeState(true)
+end
+if getgenv().Settings.autorejoin == true then
+autorejoin:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
