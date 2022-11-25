@@ -85,7 +85,8 @@ end
 
 function doEspMurder()
 spawn(function()
-    while getgenv().Settings.espmurder == true do wait(.1)	
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if getgenv().Settings.espmurder == true then
         local Players = game:GetService("Players")
         
         for i, Plr in pairs(Players:GetPlayers()) do
@@ -147,9 +148,11 @@ spawn(function()
         end)
     end
     end
+end)
     
     
-    while getgenv().Settings.espmurder == false do wait()	
+    game:GetService("RunService").RenderStepped:Connect(function()
+    if getgenv().Settings.espmurder == false then
         local Players = game:GetService("Players")
         
         for i, Plr in pairs(Players:GetPlayers()) do
@@ -166,11 +169,13 @@ spawn(function()
         end	
     end
 end)
+end)
 end
 
 function doEspSherif()
 spawn(function()
-    while getgenv().Settings.espsherif == true do wait(.1)	
+    game:GetService("RunService").RenderStepped:Connect(function()
+        if getgenv().Settings.espsherif == true then
         local Players = game:GetService("Players")
         
         for i, Plr in pairs(Players:GetPlayers()) do
@@ -232,9 +237,11 @@ spawn(function()
         end)
         end
     end
+end)
         
         
-    while getgenv().Settings.espsherif == false do wait()	
+    game:GetService("RunService").RenderStepped:Connect(function()
+    if getgenv().Settings.espsherif == false then
         local Players = game:GetService("Players")
             
         for i, Plr in pairs(Players:GetPlayers()) do
@@ -250,6 +257,7 @@ spawn(function()
             end
         end	
     end
+end)
 end)
 end
 

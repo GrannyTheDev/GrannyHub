@@ -5,7 +5,7 @@ if get_hidden_gui or gethui then
 			v:Destroy()
 		end
 	end
-elseif (not is_sirhurt_closure) and (syn and syn.protect_gui) then
+elseif syn and syn.protect_gui then
 	for i,v in pairs(game.CoreGui:GetChildren()) do
 		if v:IsA("ScreenGui") and v.Name == "ui" then
 			syn.unprotect_gui(v)
@@ -34,8 +34,8 @@ ui.Name = "ui"
 
 if get_hidden_gui or gethui then
 	local hiddenUI = get_hidden_gui or gethui
-        ui.Parent = hiddenUI()
-elseif (not is_sirhurt_closure) and (syn and syn.protect_gui) then
+    ui.Parent = hiddenUI()
+elseif syn and syn.protect_gui then
 	syn.protect_gui(ui)
 	ui.Parent = cloneref(game:GetService("CoreGui"))
 else
