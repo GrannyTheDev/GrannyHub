@@ -99,7 +99,7 @@ spawn(function()
     local Players = game:GetService("Players")
     game:GetService("RunService").RenderStepped:Connect(function()
     if getgenv().Settings.esp == true then
-        game.Players.LocalPlayer.Character:FindFirstChild("UpperTorso").HideBox.Transparency = 1
+        game.Players.LocalPlayer.Character:FindFirstChild("UpperTorso"):FindFirstChild("HideBox").Transparency = 1
         for i,v in pairs(game.Players:GetChildren()) do
             for a,b in pairs(game.Players:GetChildren()) do
             if b.Name == game.Players.LocalPlayer.Name then
