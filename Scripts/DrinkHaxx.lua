@@ -87,8 +87,8 @@ if getgenv().Settings.antikick == true then
 		return old(self, ...)
 	end)
 	hookfunction(game.Players.LocalPlayer.Kick,protect(function() wait(9e9) end))
-	while wait() do
-	game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("AntiAutoclick").Enabled = false
+	game:GetService
+	game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("AntiAutoclick").Enabled = false
 end
 end
 end)
@@ -96,18 +96,18 @@ end
 
 function doPrompt()
 spawn(function()
-if getgenv().Settings.prompt == true then
 local debounce = false
 game:GetService("RunService").Heartbeat:Connect(function()
+if getgenv().Settings.prompt == true then
 if debounce then
     return
 end
 debounce = true
 wait(0.1)
-game.CoreGui:WaitForChild("PurchasePrompt").Enabled = false
+game.CoreGui:FindFirstChild("PurchasePrompt").Enabled = false
 debounce = false
-end)
 end
+end)
 end)
 end
 
@@ -169,16 +169,24 @@ end
 
 function doCollect()
 spawn(function()
-while getgenv().Settings.collect == true do
+local debounce = false
+game:GetService("RunService").RenderStepped:Connect(function()
+if getgenv().Settings.collect == true then
+if debounce then
+    return
+end
+debounce = true
+wait(1)
 local plr = game.Players.LocalPlayer
 local char = plr.Character
 for i,v in pairs(game.Workspace.Diamonds:GetChildren()) do
-    firetouchinterest(v, game.Players.LocalPlayer.Character:WaitForChild("Head"), 1)
+    firetouchinterest(v, game.Players.LocalPlayer.Character:FindFirstChild("Head"), 1)
     wait(0.1)
-    firetouchinterest(v, game.Players.LocalPlayer.Character:WaitForChild("Head"), 0)
+    firetouchinterest(v, game.Players.LocalPlayer.Character:FindFirstChild("Head"), 0)
 end
-wait(0.1)
+debounce = false
 end
+end)
 end)
 end
 
@@ -210,7 +218,7 @@ oldnewindex = hookmetamethod(game, "__newindex", function(a, b, c)
 end)
 
 game:GetService("RunService").RenderStepped:Connect(function()
-game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 1000
+game.Players.LocalPlayer.Character:FindFirstChild("Humanoid").WalkSpeed = 1000
 end)
 end
 end)
@@ -218,11 +226,11 @@ end
 
 function doJump()
 spawn(function()
-if getgenv().Settings.jump == true then
 game:GetService("UserInputService").JumpRequest:connect(function()
-game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")		
-end)
+if getgenv().Settings.jump == true then
+game:GetService("Players").LocalPlayer.Character:FindFirstChild('Humanoid'):ChangeState("Jumping")		
 end
+end)
 end)
 end
 
