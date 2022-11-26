@@ -38,8 +38,8 @@ local games = {
 	["BloxFruit.lua"] = 2753915549,
 	["PrisonLife.lua"] = 155615604,
 	["UltimateLiftingSimulator.lua"] = 2472820296,
-    ["ShadovisRpg.lua"] = 9585537847,
-    ["TextingSimulator.lua"] = 2580982329,
+	["ShadovisRpg.lua"] = 9585537847,
+	["TextingSimulator.lua"] = 2580982329,
 	["GorillaSimulator.lua"] = 1378712700,
 	["ZombieAttack.lua"] = 1240123653,
 	["DestructionSimulator.lua"] = 2248408710,
@@ -48,42 +48,35 @@ local games = {
 }
 
 local obbygames = {
-8712817601,
-5972698540,
-3587619225,
-9099326192,
-9372570969,
-6878620017,
-7027306580,
-3072832953,
-6153766069,
-9295827626,
-7378813434,
-2028593804,
-1946695497,
-1451599116,
-1428472551,
-7952502098,
-6496746583
+	8712817601,
+	5972698540,
+	3587619225,
+	9099326192,
+	9372570969,
+	6878620017,
+	7027306580,
+	3072832953,
+	6153766069,
+	9295827626,
+	7378813434,
+	2028593804,
+	1946695497,
+	1451599116,
+	1428472551,
+	7952502098,
+	6496746583
 }
 
-local pages = game:GetService"AssetService":GetGamePlacesAsync()
-while wait() do
-	for j,k in pairs(pages:GetCurrentPage()) do
-		for i,v in next, games do
-            for q,e in next, obbygames do
-				if game.PlaceId == v then
-					return loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Scripts/" .. i))()
-				end
-				if game.CreatorId == v then
-					return loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Scripts/" .. i))()
-				end
-				if game.PlaceId == e then
-					return loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Scripts/ObbyScript.lua"))()
-				end
-			end
+for i,v in next, games do
+	for q,e in next, obbygames do
+		if game.PlaceId == v then
+			return loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Scripts/" .. i))()
 		end
-		if pages.IsFinished then break end
-		pages:AdvanceToNextPageAsync()
+		if game.CreatorId == v then
+			return loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Scripts/" .. i))()
+		end
+		if game.PlaceId == e then
+			return loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Scripts/ObbyScript.lua"))()
+		end
 	end
 end
