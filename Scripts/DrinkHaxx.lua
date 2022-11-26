@@ -87,9 +87,9 @@ if getgenv().Settings.antikick == true then
 		return old(self, ...)
 	end)
 	hookfunction(game.Players.LocalPlayer.Kick,protect(function() wait(9e9) end))
-	game:GetService
-	game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("AntiAutoclick").Enabled = false
-end
+	game:GetService("RunService").RenderStepped:Connect(function()
+	    game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("AntiAutoclick").Enabled = false
+    end)
 end
 end)
 end
@@ -105,6 +105,17 @@ end
 debounce = true
 wait(0.1)
 game.CoreGui:FindFirstChild("PurchasePrompt").Enabled = false
+debounce = false
+end
+end)
+game:GetService("RunService").Heartbeat:Connect(function()
+if getgenv().Settings.prompt == false then
+    if debounce then
+    return
+end
+debounce = true
+wait(0.1)
+game.CoreGui:FindFirstChild("PurchasePrompt").Enabled = true
 debounce = false
 end
 end)
