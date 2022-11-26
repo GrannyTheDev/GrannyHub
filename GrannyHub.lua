@@ -43,7 +43,8 @@ local games = {
 	["GorillaSimulator.lua"] = 1378712700,
 	["ZombieAttack.lua"] = 1240123653,
 	["DestructionSimulator.lua"] = 2248408710,
-	["HideandSeekExtreme.lua"] = 205224386
+	["HideandSeekExtreme.lua"] = 205224386,
+	["MuscleLegends.lua"] = 3623096087
 }
 
 local obbygames = {
