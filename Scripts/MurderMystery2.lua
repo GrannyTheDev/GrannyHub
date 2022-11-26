@@ -13,8 +13,7 @@ speed = false;
 jump = false;
 infyield = false;
 antiafk = false;
-espmurder = false;
-espsherif = false;
+esp = false;
 }
 
 function Save()
@@ -83,27 +82,55 @@ end
 end)
 end
 
-function doEspMurder()
+function doEsp()
 spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
-        if getgenv().Settings.espmurder == true then
+        if getgenv().Settings.esp == true then
         local Players = game:GetService("Players")
         
         for i, Plr in pairs(Players:GetPlayers()) do
             for i, Bp in pairs(Plr:GetChildren()) do
                 if Bp.Name == "Backpack" then
+                    if Bp:FindFirstChild("Gun") ~= nil then
+                        if Bp.Parent.Character:FindFirstChild("UpperTorso"):FindFirstChild("SherifBox") == nil then
+                            local box = Instance.new("BoxHandleAdornment", Bp.Parent.Character:FindFirstChild("UpperTorso"))
+                            box.Name = "SherifBox"
+                            box.Size = Bp.Parent.Character:FindFirstChild("UpperTorso").Size
+                            box.Adornee = Bp.Parent.Character:FindFirstChild("UpperTorso")
+                            box.ZIndex = 5
+                            box.AlwaysOnTop = true
+                            box.Color3 = Color3.fromRGB(0, 50, 255)
+                                
+                            local at0 = Instance.new("Attachment", game.Players.LocalPlayer.Character:FindFirstChild("UpperTorso"))
+                            local at1 = Instance.new("Attachment", Bp.Parent.Character:FindFirstChild("UpperTorso"))
+                            local beam = Instance.new("Beam", game.Players.LocalPlayer.Character)
+                            beam.Name = "SherifBeam"
+                            beam.Color = ColorSequence.new(Color3.fromRGB(0, 50, 255), Color3.fromRGB(0, 50, 255))
+                            beam.FaceCamera = true
+                            beam.Width0 = 0.2
+                            beam.Width1 = 0.2
+                            beam.Attachment0 = at0
+                            beam.Attachment1 = at1
+                        end
+                    end
+                end
+            end
+        end
+        for i, Plr in pairs(Players:GetPlayers()) do
+            for i, Bp in pairs(Plr:GetChildren()) do
+                if Bp.Name == "Backpack" then
                     if Bp:FindFirstChild("Knife") ~= nil then
-                        if Bp.Parent.Character.UpperTorso:FindFirstChild("MurderBox") == nil then
-                            local box = Instance.new("BoxHandleAdornment", Bp.Parent.Character.UpperTorso)
+                        if Bp.Parent.Character:FindFirstChild("UpperTorso"):FindFirstChild("MurderBox") == nil then
+                            local box = Instance.new("BoxHandleAdornment", Bp.Parent.Character:FindFirstChild("UpperTorso"))
                             box.Name = "MurderBox"
-                            box.Size = Bp.Parent.Character.UpperTorso.Size
-                            box.Adornee = Bp.Parent.Character.UpperTorso
+                            box.Size = Bp.Parent.Character:FindFirstChild("UpperTorso").Size
+                            box.Adornee = Bp.Parent.Character:FindFirstChild("UpperTorso")
                             box.ZIndex = 5
                             box.AlwaysOnTop = true
                             box.Color3 = Color3.fromRGB(255, 0, 25)
                             
-                            local at0 = Instance.new("Attachment", game.Players.LocalPlayer.Character.UpperTorso)
-                            local at1 = Instance.new("Attachment", Bp.Parent.Character.UpperTorso)
+                            local at0 = Instance.new("Attachment", game.Players.LocalPlayer.Character:FindFirstChild("UpperTorso"))
+                            local at1 = Instance.new("Attachment", Bp.Parent.Character:FindFirstChild("UpperTorso"))
                             local beam = Instance.new("Beam", game.Players.LocalPlayer.Character)
                             beam.Name = "MurderBeam"
                             beam.Color = ColorSequence.new(Color3.fromRGB(255, 0, 25), Color3.fromRGB(255, 0, 25))
@@ -122,17 +149,17 @@ spawn(function()
             for i, Bp in pairs(Plr:GetChildren()) do
                 if Bp.Name == "Backpack" then
                     if Bp:FindFirstChild("Knife") ~= nil then
-                        if Bp.Parent.Character.UpperTorso:FindFirstChild("MurderBox") == nil then
-                            local box = Instance.new("BoxHandleAdornment", Bp.Parent.Character.UpperTorso)
+                        if Bp.Parent.Character:FindFirstChild("UpperTorso"):FindFirstChild("MurderBox") == nil then
+                            local box = Instance.new("BoxHandleAdornment", Bp.Parent.Character:FindFirstChild("UpperTorso"))
                             box.Name = "MurderBox"
-                            box.Size = Bp.Parent.Character.UpperTorso.Size
-                            box.Adornee = Bp.Parent.Character.UpperTorso
+                            box.Size = Bp.Parent.Character:FindFirstChild("UpperTorso").Size
+                            box.Adornee = Bp.Parent.Character:FindFirstChild("UpperTorso")
                             box.ZIndex = 5
                             box.AlwaysOnTop = true
                             box.Color3 = Color3.fromRGB(255, 0, 25)
                             
-                            local at0 = Instance.new("Attachment", game.Players.LocalPlayer.Character.UpperTorso)
-                            local at1 = Instance.new("Attachment", Bp.Parent.Character.UpperTorso)
+                            local at0 = Instance.new("Attachment", game.Players.LocalPlayer.Character:FindFirstChild("UpperTorso"))
+                            local at1 = Instance.new("Attachment", Bp.Parent.Character:FindFirstChild("UpperTorso"))
                             local beam = Instance.new("Beam", game.Players.LocalPlayer.Character)
                             beam.Name = "MurderBeam"
                             beam.Color = ColorSequence.new(Color3.fromRGB(255, 0, 25), Color3.fromRGB(255, 0, 25))
@@ -147,81 +174,22 @@ spawn(function()
             end
         end)
     end
-    end
-end)
-    
-    
-    game:GetService("RunService").RenderStepped:Connect(function()
-    if getgenv().Settings.espmurder == false then
-        local Players = game:GetService("Players")
-        
-        for i, Plr in pairs(Players:GetPlayers()) do
-            for i, Bp in pairs(Plr:GetChildren()) do
-                if Bp.Name == "Backpack" then
-                    if Bp:FindFirstChild("Knife") ~= nil then
-                        if Bp.Parent.Character.UpperTorso:FindFirstChild("MurderBox") ~= nil and game.Players.LocalPlayer.Character:FindFirstChild("MurderBeam") ~= nil then
-                            Bp.Parent.Character.UpperTorso:FindFirstChild("MurderBox"):Destroy()
-                            game.Players.LocalPlayer.Character:FindFirstChild("MurderBeam"):Destroy()
-                        end
-                    end
-                end
-            end
-        end	
-    end
-end)
-end)
-end
-
-function doEspSherif()
-spawn(function()
-    game:GetService("RunService").RenderStepped:Connect(function()
-        if getgenv().Settings.espsherif == true then
-        local Players = game:GetService("Players")
-        
-        for i, Plr in pairs(Players:GetPlayers()) do
-            for i, Bp in pairs(Plr:GetChildren()) do
-                if Bp.Name == "Backpack" then
-                    if Bp:FindFirstChild("Gun") ~= nil then
-                        if Bp.Parent.Character.UpperTorso:FindFirstChild("SherifBox") == nil then
-                            local box = Instance.new("BoxHandleAdornment", Bp.Parent.Character.UpperTorso)
-                            box.Name = "SherifBox"
-                            box.Size = Bp.Parent.Character.UpperTorso.Size
-                            box.Adornee = Bp.Parent.Character.UpperTorso
-                            box.ZIndex = 5
-                            box.AlwaysOnTop = true
-                            box.Color3 = Color3.fromRGB(0, 50, 255)
-                                
-                            local at0 = Instance.new("Attachment", game.Players.LocalPlayer.Character.UpperTorso)
-                            local at1 = Instance.new("Attachment", Bp.Parent.Character.UpperTorso)
-                            local beam = Instance.new("Beam", game.Players.LocalPlayer.Character)
-                            beam.Name = "SherifBeam"
-                            beam.Color = ColorSequence.new(Color3.fromRGB(0, 50, 255), Color3.fromRGB(0, 50, 255))
-                            beam.FaceCamera = true
-                            beam.Width0 = 0.2
-                            beam.Width1 = 0.2
-                            beam.Attachment0 = at0
-                            beam.Attachment1 = at1
-                        end
-                    end
-                end
-            end
-        end
         for i, Plr in pairs(Players:GetPlayers()) do
             Plr.CharacterAdded:Connect(function()
             for i, Bp in pairs(Plr:GetChildren()) do
                 if Bp.Name == "Backpack" then
                     if Bp:FindFirstChild("Gun") ~= nil then
-                        if Bp.Parent.Character.UpperTorso:FindFirstChild("SherifBox") == nil then
-                            local box = Instance.new("BoxHandleAdornment", Bp.Parent.Character.UpperTorso)
+                        if Bp.Parent.Character:FindFirstChild("UpperTorso"):FindFirstChild("SherifBox") == nil then
+                            local box = Instance.new("BoxHandleAdornment", Bp.Parent.Character:FindFirstChild("UpperTorso"))
                             box.Name = "SherifBox"
-                            box.Size = Bp.Parent.Character.UpperTorso.Size
-                            box.Adornee = Bp.Parent.Character.UpperTorso
+                            box.Size = Bp.Parent.Character:FindFirstChild("UpperTorso").Size
+                            box.Adornee = Bp.Parent.Character:FindFirstChild("UpperTorso")
                             box.ZIndex = 5
                             box.AlwaysOnTop = true
                             box.Color3 = Color3.fromRGB(0, 50, 255)
                                 
-                            local at0 = Instance.new("Attachment", game.Players.LocalPlayer.Character.UpperTorso)
-                            local at1 = Instance.new("Attachment", Bp.Parent.Character.UpperTorso)
+                            local at0 = Instance.new("Attachment", game.Players.LocalPlayer.Character:FindFirstChild("UpperTorso"))
+                            local at1 = Instance.new("Attachment", Bp.Parent.Character:FindFirstChild("UpperTorso"))
                             local beam = Instance.new("Beam", game.Players.LocalPlayer.Character)
                             beam.Name = "SherifBeam"
                             beam.Color = ColorSequence.new(Color3.fromRGB(0, 50, 255), Color3.fromRGB(0, 50, 255))
@@ -240,22 +208,23 @@ spawn(function()
 end)
         
         
-    game:GetService("RunService").RenderStepped:Connect(function()
-    if getgenv().Settings.espsherif == false then
-        local Players = game:GetService("Players")
-            
-        for i, Plr in pairs(Players:GetPlayers()) do
-            for i, Bp in pairs(Plr:GetChildren()) do
-                if Bp.Name == "Backpack" then
-                    if Bp:FindFirstChild("Gun") ~= nil then
-                        if Bp.Parent.Character.UpperTorso:FindFirstChild("SherifBox") ~= nil and game.Players.LocalPlayer.Character:FindFirstChild("SherifBeam") ~= nil then
-                            Bp.Parent.Character.UpperTorso:FindFirstChild("SherifBox"):Destroy()
-                            game.Players.LocalPlayer.Character:FindFirstChild("SherifBeam"):Destroy()
-                        end
-                    end
+game:GetService("RunService").RenderStepped:Connect(function()
+    if getgenv().Settings.esp == false then
+    for i,v in pairs(game.Players:GetChildren()) do
+                local char = v.Character or v.CharacterAdded:Wait()
+                if v:IsA("Player") and char:FindFirstChild("UpperTorso") then
+                if char:FindFirstChild("UpperTorso"):FindFirstChild("MurderBox") ~= nil and game.Players.LocalPlayer.Character:FindFirstChild("MurderBeam") ~= nil and char:FindFirstChild("UpperTorso"):FindFirstChild("Attachment") ~= nil then
+                    char:FindFirstChild("UpperTorso"):FindFirstChild("MurderBox"):Destroy()
+                    game.Players.LocalPlayer.Character:FindFirstChild("MurderBeam"):Destroy()
+                    char:FindFirstChild("UpperTorso"):FindFirstChild("Attachment"):Destroy()
+                end
+                if char:FindFirstChild("UpperTorso"):FindFirstChild("SherifBox") ~= nil and game.Players.LocalPlayer.Character:FindFirstChild("SherifBeam") ~= nil and char:FindFirstChild("UpperTorso"):FindFirstChild("Attachment") ~= nil then
+                    char:FindFirstChild("UpperTorso"):FindFirstChild("SherifBox"):Destroy()
+                    game.Players.LocalPlayer.Character:FindFirstChild("SherifBeam"):Destroy()
+                    char:FindFirstChild("UpperTorso"):FindFirstChild("Attachment"):Destroy()
                 end
             end
-        end	
+        end
     end
 end)
 end)
@@ -299,19 +268,11 @@ for i, Plr in pairs(game.Players:GetPlayers()) do
 end
 end)
 
-local espmurder = LocalPlayer:Toggle("Esp Murder", function(v)
-getgenv().Settings.espmurder = v
+local esp = LocalPlayer:Toggle("Esp", function(v)
+getgenv().Settings.esp = v
 Save()
 if v then
-doEspMurder()
-end
-end)
-
-local espsherif = LocalPlayer:Toggle("Esp Sherif", function(v)
-getgenv().Settings.espsherif = v
-Save()
-if v then
-doEspSherif()
+doEsp()
 end
 end)
 
@@ -404,11 +365,8 @@ end
 if getgenv().Settings.antiafk == true then
 antiafk:ChangeState(true)
 end
-if getgenv().Settings.espmurder == true then
-espmurder:ChangeState(true)
-end
-if getgenv().Settings.espsherif == true then
-espsherif:ChangeState(true)
+if getgenv().Settings.esp == true then
+esp:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
