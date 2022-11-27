@@ -18,6 +18,7 @@ infyield = false;
 lift = false;
 buyweight = false;
 buystage = false;
+sell = false;
 }
 
 function Save()
@@ -166,11 +167,36 @@ end)
 end)
 end
 
+function doSell()
+spawn(function()
+local debounce = false
+game:GetService("RunService").Heartbeat:Connect(function()
+if getgenv().Settings.sell == true then
+if debounce then
+    return
+end
+debounce = true
+wait(0.1)
+game:GetService("ReplicatedStorage").Sell:FireServer()
+debounce = false
+end
+end)
+end)
+end
+
 local lift = AutoFarm:Toggle("Auto Lift", function(v)
 getgenv().Settings.lift = v
 Save()
 if v then
 doLift()
+end
+end)
+
+local sell = AutoFarm:Toggle("Auto Sell", function(v)
+getgenv().Settings.sell = v
+Save()
+if v then
+doSell()
 end
 end)
 
@@ -263,6 +289,9 @@ antiafk:ChangeState(true)
 end
 if getgenv().Settings.lift == true then
 lift:ChangeState(true)
+end
+if getgenv().Settings.sell == true then
+sell:ChangeState(true)
 end
 if getgenv().Settings.buyweight == true then
 buyweight:ChangeState(true)
