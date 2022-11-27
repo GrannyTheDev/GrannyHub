@@ -414,7 +414,6 @@ function Library:CreateWindow(txt)
 					else
 						size = (btn.AbsoluteSize.Y * 1.5)
 					end
-					end
 				end
 			end)
 			
@@ -492,6 +491,7 @@ function Library:CreateWindow(txt)
 					end
 				end)
 		end
+	end
 
 		function Elements:Label(txt)	
 			local LabelFunction = {}
@@ -736,9 +736,4 @@ function Library:CreateWindow(txt)
 	end
 	return Page
 end
-local window = Library:CreateWindow("hi")
-local page = window:Page("hi")
-page:Dropdown("hiii", {"hi", "lol"}, function(v)
-    print(v)
-end)
 return Library
