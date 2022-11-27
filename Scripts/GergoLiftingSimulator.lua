@@ -177,7 +177,9 @@ if debounce then
 end
 debounce = true
 wait(0.1)
-game:GetService("ReplicatedStorage").Sell:FireServer()
+for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Settingsbutton.Sure.yes.MouseButton1Click)) do
+    v.Function()
+end
 debounce = false
 end
 end)
