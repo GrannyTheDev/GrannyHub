@@ -53,7 +53,7 @@ function Library:CreateWindow(txt)
 		local hiddenUI = get_hidden_gui or gethui
 		GrannyHub.Parent = hiddenUI()
 	elseif syn and syn.protect_gui then
-		syn.protect_gui(GrannyHub)
+		--syn.protect_gui(GrannyHub)
 		GrannyHub.Parent = cloneref(game:GetService("CoreGui"))
 	else
 		GrannyHub.Parent = cloneref(game:GetService("CoreGui"))
@@ -367,6 +367,132 @@ function Library:CreateWindow(txt)
                       end
 		end
 
+		function Elements:Dropdown(txt, list, callback)
+			txt = txt or "txt"
+			list = list or {}
+			callback = callback or function() end   
+
+			local opened = false
+			local DropYSize = 33
+
+			local dropFrame = Instance.new("Frame")
+			local dropOpen = Instance.new("TextButton")
+			local listImg = Instance.new("ImageLabel")
+			local itemTextbox = Instance.new("TextLabel")
+			local UICorner = Instance.new("UICorner")
+			local UIListLayout = Instance.new("UIListLayout")
+			
+			dropFrame.Name = txt
+			dropFrame.Parent = Page
+			dropFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+			dropFrame.BorderSizePixel = 0
+			dropFrame.Position = UDim2.new(0, 0, 1.23571432, 0)
+			dropFrame.Size = UDim2.new(0, 224, 0, 35)
+			dropFrame.ClipsDescendants = true
+			local btn = dropOpen
+			dropOpen.Name = "dropOpen"
+			dropOpen.Parent = dropFrame
+			dropOpen.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+			dropOpen.Size = UDim2.new(0, 224, 0, 35)
+			dropOpen.AutoButtonColor = false
+			dropOpen.Font = Enum.Font.SourceSans
+			dropOpen.Text = ""
+			dropOpen.TextColor3 = Color3.fromRGB(0, 0, 0)
+			dropOpen.TextSize = 14.000
+			dropOpen.ClipsDescendants = true
+			dropOpen.MouseButton1Click:Connect(function()
+				if opened then
+					opened = false
+					dropFrame:TweenSize(UDim2.new(0, 224, 0, 35), "InOut", "Linear", 0.08)
+					wait(0.1)
+					else
+					opened = true
+					dropFrame:TweenSize(UDim2.new(0, 224, 0, UIListLayout.AbsoluteContentSize.Y), "InOut", "Linear", 0.08, true)
+					wait(0.1)
+					if btn.AbsoluteSize.X >= btn.AbsoluteSize.Y then
+						size = (btn.AbsoluteSize.X * 1.5)
+					else
+						size = (btn.AbsoluteSize.Y * 1.5)
+					end
+					end
+				end
+			end)
+			
+			listImg.Name = "listImg"
+			listImg.Parent = dropOpen
+			listImg.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			listImg.BackgroundTransparency = 1.000
+			listImg.BorderColor3 = Color3.fromRGB(27, 42, 53)
+			listImg.Position = UDim2.new(0.0199999996, 0, 0.180000007, 0)
+			listImg.Size = UDim2.new(0, 21, 0, 21)
+			listImg.Image = "rbxassetid://3926305904"
+			listImg.ImageColor3 = Color3.fromRGB(255, 255, 255)
+			listImg.ImageRectOffset = Vector2.new(644, 364)
+			listImg.ImageRectSize = Vector2.new(36, 36)
+
+			itemTextbox.Name = "itemTextbox"
+			itemTextbox.Parent = dropOpen
+			itemTextbox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			itemTextbox.BackgroundTransparency = 1.000
+			itemTextbox.Position = UDim2.new(0.0970000029, 0, 0.273000002, 0)
+			itemTextbox.Size = UDim2.new(0, 138, 0, 14)
+			itemTextbox.Font = Enum.Font.GothamSemibold
+			itemTextbox.Text = txt
+			itemTextbox.RichText = true
+			itemTextbox.TextColor3 = Color3.fromRGB(255, 255, 255)
+			itemTextbox.TextSize = 14.000
+			itemTextbox.TextXAlignment = Enum.TextXAlignment.Left
+
+			UIListLayout.Parent = dropFrame
+            UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+            UIListLayout.Padding = UDim.new(0, 3)
+			
+			local ms = game.Players.LocalPlayer:GetMouse()
+			local uis = game:GetService("UserInputService")	
+			dropFrame.MouseMoved:Connect(function()
+				TS:Create(itemTextbox, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(250, 0, 0)}):Play()
+			end)
+			dropFrame.MouseLeave:Connect(function()
+				TS:Create(itemTextbox, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+			end)
+			GrannyHub:GetPropertyChangedSignal("Enabled"):Connect(function()
+				TS:Create(itemTextbox, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(255, 255, 255)}):Play()
+			end)
+
+			for i,v in next, list do
+				local optionSelect = Instance.new("TextButton")
+				local UICorner_2 = Instance.new("UICorner")
+
+				local sample1 = Sample1
+				DropYSize = DropYSize + 33
+				optionSelect.Name = v
+				optionSelect.Parent = dropFrame
+				optionSelect.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+				optionSelect.Position = UDim2.new(0, 0, 0.235294119, 0)
+				optionSelect.Size = UDim2.new(0, 352, 0, 33)
+				optionSelect.AutoButtonColor = false
+				optionSelect.Font = Enum.Font.GothamSemibold
+				optionSelect.Text = "  "..v
+				optionSelect.TextColor3 = Color3.fromRGB(255, 255, 255)
+				optionSelect.TextSize = 14.000
+				optionSelect.TextXAlignment = Enum.TextXAlignment.Left
+				optionSelect.ClipsDescendants = true
+				optionSelect.MouseButton1Click:Connect(function()
+					if not focusing then
+						opened = false
+						callback(v)
+						itemTextbox.Text = v
+						dropFrame:TweenSize(UDim2.new(0, 352, 0, 33), 'InOut', 'Linear', 0.08)
+						wait(0.1)
+						if optionSelect.AbsoluteSize.X >= optionSelect.AbsoluteSize.Y then
+							size = (optionSelect.AbsoluteSize.X * 1.5)
+						else
+							size = (optionSelect.AbsoluteSize.Y * 1.5)
+						end
+					end
+				end)
+		end
+
 		function Elements:Label(txt)	
 			local LabelFunction = {}
 			local LabelElement = Instance.new("Frame")
@@ -610,4 +736,9 @@ function Library:CreateWindow(txt)
 	end
 	return Page
 end
+local window = Library:CreateWindow("hi")
+local page = window:Page("hi")
+page:Dropdown("hiii", {"hi", "lol"}, function(v)
+    print(v)
+end)
 return Library

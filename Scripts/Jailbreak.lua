@@ -73,7 +73,7 @@ function doJump()
 spawn(function()
 if getgenv().Settings.jump == true then
 game:GetService("UserInputService").JumpRequest:connect(function()
-game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")		
+game:GetService("Players").LocalPlayer.Character:FindFirstChild("Humanoid"):ChangeState("Jumping")		
 end)
 end
 end)
