@@ -109,14 +109,9 @@ if debounce then
 end
 debounce = true
 wait(0.1)
-for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-    if v:IsA("Tool") then
-        v.GetMuscle.GetMuscle:FireServer()
-    end
-end
 for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
     if v:IsA("Tool") then
-        v.GetMuscle.GetMuscle:FireServer()
+        v:Activate()
     end
 end
 debounce = false
