@@ -1,86 +1,96 @@
 <!DOCTYPE html>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <html lang="en">
-    <head>
-        <title>GrannyHub</title>
-    </head>
-        <style>
-            body {
-                background-color: #232323;
-            }
-            input#Script {
-                color: #CCCCCC;
-                position: relative;
-                display:block; margin: 0 auto;
-                height: 25px;
-                width: 600px;
-                border-radius: 50px;
-                background-color: #333333;
-            }
-            h1#Title {
-                color: #CCCCCC;
-                text-align: center;
-            }
-            h1#ScriptInfo {
-                color: #CCCCCC;
-                text-align: center;
-            }
-            h1#DiscordInfo {
-                color: #CCCCCC;
-                text-align: center;
-            }
-            button#InviteLink {
-                color: #CCCCCC;
-                position: relative;
-                display:block;
-                margin: 0 auto;
-                height: 25px;
-                border-radius: 50px;
-                background-color: #333333;
-            }
-            button#CopyScript {
-                color: #CCCCCC;
-                position: relative;
-                display:block; margin: 0 auto;
-                height: 25px;
-                border-radius: 50px;
-                background-color: #333333;
-            }
-            button#CopyDScript {
-                color: #CCCCCC;
-                position: relative;
-                display:block; margin: 0 auto;
-                height: 25px;
-                border-radius: 50px;
-                background-color: #333333;
-            }
-        </style>
-        <script>
-                 function CopyScript(id, script) {
-                 var textToCopy = document.getElementById(id);
-                 textToCopy.value = script;
-                 textToCopy.select();
-                 document.execCommand("copy");
-                 }
-                 function GetGrannyHub() {
-                 return 'loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/GrannyHub.lua"))()'
-                 }
-                 function GetDGrannyHub() {
-                 return '```loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/GrannyHub.lua"))()```'
-                 }
-                 function GetInvite() {
-                 return 'https://discord.gg/esn6q3BbV2'
-                 }
-        </script>
-</html>
+<head>
+  <title>Granny</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
 <body>
-    <h1 id="Title">Welcome to Granny</h1>
-    <h1 id="ScriptInfo">GrannyHub:</h1>
-    <input type="text" readonly="true" value="loadstring(game:HttpGet('https://grannythedev.github.io/GrannyHub/GrannyHub.lua'))()" id="Script">
-    <br>
-    <button id="CopyScript" onclick='CopyScript("Script", GetGrannyHub())'><strong>Copy Script</strong></button>
-    <button id="CopyDScript" onclick='CopyScript("Script", GetDGrannyHub())'><strong>Copy Script for discord</strong></button>
-    <br>
-    <h1 id="DiscordInfo">Join our discord server:</h1>
-    <button id="InviteLink" onclick='window.open(GetInvite())'><strong>Join</strong></button>
+<script>
+    function CopyScript(script) {
+        navigator.clipboard.writeText(script);
+    }
+    function GetGrannyHub() {
+        return 'loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/GrannyHub.lua"))()'
+    }
+    function GetDGrannyHub() {
+        return '```loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/GrannyHub.lua"))()```'
+    }
+    function GetInvite() {
+        return 'https://discord.gg/esn6q3BbV2'
+    }
+</script>
+<style>
+	body {
+		background-color: #232323;
+	}
+	h1 {
+		color: wheat;
+	}
+	.well {
+		background-color: #303030;
+		border: none;
+	}
+	.btn-group-sm>.btn, .btn-sm {
+		padding: 5px;
+		background-color: #353535;
+		border-radius: 50px;
+	}
+	.btn-default {
+		color: wheat;
+		border-color: #ccc;
+	}
+	h3 {
+		color: wheat;
+	}
+	.panel {
+		background-color: #303030;
+	}
+	.panel-body {
+		color: wheat;
+	}
+	.panel-default {
+		border: none;
+	}
+	.panel-default>.panel-heading {
+    color: wheat;
+    background-color: #303030;
+    border-color: none;
+}
+</style>
+
+<div class="container">
+	<h1><img src="Icon.png">Granny</h1>
+</div>
+
+<div class="container">
+  <h3 id="wells" class="page-header">GrannyHub</h3>
+</div>
+
+<div class="container">
+	<div class="panel panel-default">
+	  <div class="panel-heading">Script:</div>
+	  <div class="panel-body">
+        <a class="btn btn-sm btn-default" onclick="CopyScript(GetGrannyHub())">Copy Script</a>
+        <a class="btn btn-sm btn-default" onclick="CopyScript(GetDGrannyHub())">Copy Script for discord</a>
+	  </div>
+	</div>
+</div>
+
+<div class="container">
+    <h3 id="wells" class="page-header">Invite</h3>
+</div>
+      
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">Discord Invite:</div>
+        <div class="panel-body">
+            <a class="btn btn-sm btn-default" onclick="CopyScript(GetInvite())">Copy Invite</a>
+            <a class="btn btn-sm btn-default" onclick="window.open(GetInvite())">Join Discord</a>
+        </div>
+    </div>
+</div>
 </body>
+</html>
