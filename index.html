@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
+    <head>
+        <title>GrannyHub</title>
+    </head>
+        <style>
+            body {
+                background: url("Hotgirl.png");
+            }
+            input#Script {
+                color: #CCCCCC;
+                position: relative;
+                display:block; margin: 0 auto;
+                height: 25px;
+                width: 600px;
+                border-radius: 50px;
+                background-color: #333333;
+            }
+            h1#Title {
+                color: black;
+                text-align: center;
+            }
+            h1#ScriptInfo {
+                color: black;
+                text-align: center;
+            }
+            h1#DiscordInfo {
+                color: black;
+                text-align: center;
+            }
+            button#InviteLink {
+                color: #CCCCCC;
+                position: relative;
+                display:block;
+                margin: 0 auto;
+                height: 25px;
+                border-radius: 50px;
+                background-color: #333333;
+            }
+            button#CopyScript {
+                color: #CCCCCC;
+                position: relative;
+                display:block; margin: 0 auto;
+                height: 25px;
+                border-radius: 50px;
+                background-color: #333333;
+            }
+            button#CopyDScript {
+                color: #CCCCCC;
+                position: relative;
+                display:block; margin: 0 auto;
+                height: 25px;
+                border-radius: 50px;
+                background-color: #333333;
+            }
+        </style>
+        <script>
+                 function CopyScript(id, script) {
+                 var textToCopy = document.getElementById(id);
+                 textToCopy.value = script;
+                 textToCopy.select();
+                 document.execCommand("copy");
+                 }
+                 function GetGrannyHub() {
+                 return 'loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/GrannyHub.lua"))()'
+                 }
+                 function GetDGrannyHub() {
+                 return '```loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/GrannyHub.lua"))()```'
+                 }
+                 function GetInvite() {
+                 return 'https://discord.gg/esn6q3BbV2'
+                 }
+        </script>
+</html>
+<body>
+    <h1 id="Title">Welcome to Granny</h1>
+    <h1 id="ScriptInfo">GrannyHub:</h1>
+    <input type="text" readonly="true" value="loadstring(game:HttpGet('https://grannythedev.github.io/GrannyHub/GrannyHub.lua'))()" id="Script">
+    <br>
+    <button id="CopyScript" onclick='CopyScript("Script", GetGrannyHub())'><strong>Copy Script</strong></button>
+    <button id="CopyDScript" onclick='CopyScript("Script", GetDGrannyHub())'><strong>Copy Script for discord</strong></button>
+    <br>
+    <h1 id="DiscordInfo">Join our discord server:</h1>
+    <button id="InviteLink" onclick='window.open(GetInvite())'><strong>Join</strong></button>
+</body>
