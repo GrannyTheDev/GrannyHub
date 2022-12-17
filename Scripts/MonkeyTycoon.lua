@@ -16,6 +16,7 @@ jump = false;
 antiafk = false;
 infyield = false;
 sell = false;
+UpgradeRate = false;
 }
 
 function Save()
@@ -86,8 +87,14 @@ end
 
 function doSell()
 spawn(function()
-game:GetService("RunService").RenderStepped:Connect(function()
+local debounce = false
+local Stepped = game:GetService("RunService").Heartbeat:Connect(function()
     if getgenv().Settings.sell == true then
+        if debounce then
+            return
+        end
+        debounce = true
+        wait(0.1)
         for i,v in pairs(game.Workspace.Drops:GetChildren()) do
             firetouchinterest(game.Players.LocalPlayer.Character.HARVESTER, v, 1)
             wait()
@@ -100,10 +107,42 @@ game:GetService("RunService").RenderStepped:Connect(function()
                 firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Button, 0)
             end
         end
+        debounce = false
     end
 end)
 end)
 end
+
+function doUpgradeRate()
+spawn(function()
+local debounce = false
+local Stepped = game:GetService("RunService").Heartbeat:Connect(function()
+    if getgenv().Settings.UpgradeRate == true then
+        if debounce then
+            return
+        end
+        debounce = true
+        wait(0.1)
+        for i,v in pairs(game.Workspace.Plots:GetDescendants()) do
+            if v.Name == "BuySpeed" then
+                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Button, 1)
+                wait()
+                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Button, 0)
+            end
+        end
+        debounce = false
+    end
+end)
+end)
+end
+
+local UpgradeRate = AutoFarm:Toggle("Auto Upgrade Money Rate", function(v)
+getgenv().Settings.UpgradeRate = v
+Save()
+if v then
+doUpgradeRate()
+end
+end)
 
 local sell = AutoFarm:Toggle("AutoSell", function(v)
 getgenv().Settings.sell = v
@@ -186,6 +225,9 @@ antiafk:ChangeState(true)
 end
 if getgenv().Settings.sell == true then
 sell:ChangeState(true)
+end
+if getgenv().Settings.UpgradeRate == true then
+UpgradeRate:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
