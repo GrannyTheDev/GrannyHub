@@ -17,6 +17,8 @@ antiafk = false;
 infyield = false;
 sell = false;
 UpgradeRate = false;
+BuyMonkeys = false;
+AutoMerge = false;
 }
 
 function Save()
@@ -122,7 +124,7 @@ local Stepped = game:GetService("RunService").Heartbeat:Connect(function()
             return
         end
         debounce = true
-        wait(0.1)
+        wait(1)
         for i,v in pairs(game.Workspace.Plots:GetDescendants()) do
             if v.Name == "BuySpeed" then
                 firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Button, 1)
@@ -135,6 +137,67 @@ local Stepped = game:GetService("RunService").Heartbeat:Connect(function()
 end)
 end)
 end
+
+function doBuyMonkeys()
+spawn(function()
+local debounce = false
+local Stepped = game:GetService("RunService").Heartbeat:Connect(function()
+    if getgenv().Settings.BuyMonkeys == true then
+        if debounce then
+            return
+        end
+        debounce = true
+        wait(1)
+        for i,v in pairs(game.Workspace.Plots:GetDescendants()) do
+            if v.Name == "BuyDropper5" then
+                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Button, 1)
+                wait()
+                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Button, 0)
+            end
+        end
+        debounce = false
+    end
+end)
+end)
+end
+
+function doAutoMerge()
+spawn(function()
+local debounce = false
+local Stepped = game:GetService("RunService").Heartbeat:Connect(function()
+    if getgenv().Settings.AutoMerge == true then
+        if debounce then
+            return
+        end
+        debounce = true
+        wait(1)
+        for i,v in pairs(game.Workspace.Plots:GetDescendants()) do
+            if v.Name == "MergeButton" then
+                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Button, 1)
+                wait()
+                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Button, 0)
+            end
+        end
+        debounce = false
+    end
+end)
+end)
+end
+local AutoMerge = AutoFarm:Toggle("Auto Merge Monkeys", function(v)
+getgenv().Settings.AutoMerge = v
+Save()
+if v then
+doAutoMerge()
+end
+end)
+
+local BuyMonkeys = AutoFarm:Toggle("AutoBuy Monkeys", function(v)
+getgenv().Settings.BuyMonkeys = v
+Save()
+if v then
+doBuyMonkeys()
+end
+end)
 
 local UpgradeRate = AutoFarm:Toggle("Auto Upgrade Money Rate", function(v)
 getgenv().Settings.UpgradeRate = v
@@ -228,6 +291,12 @@ sell:ChangeState(true)
 end
 if getgenv().Settings.UpgradeRate == true then
 UpgradeRate:ChangeState(true)
+end
+if getgenv().Settings.BuyMonkeys == true then
+BuyMonkeys:ChangeState(true)
+end
+if getgenv().Settings.AutoMerge == true then
+AutoMerge:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
