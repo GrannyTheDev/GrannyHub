@@ -190,10 +190,16 @@ debounce = true
 wait(1)
 local plr = game.Players.LocalPlayer
 local char = plr.Character
+if firetouchinterest then
 for i,v in pairs(game.Workspace.Diamonds:GetChildren()) do
     firetouchinterest(v, game.Players.LocalPlayer.Character:FindFirstChild("Head"), 1)
     wait(0.1)
     firetouchinterest(v, game.Players.LocalPlayer.Character:FindFirstChild("Head"), 0)
+end
+elseif
+for i,v in pairs(game.Workspace.Diamonds:GetChildren()) do
+	v.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+end
 end
 debounce = false
 end
