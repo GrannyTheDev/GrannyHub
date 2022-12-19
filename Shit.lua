@@ -502,6 +502,7 @@ function Library:CreateWindow(txt)
 			LabelElement.Parent = Page
 			LabelElement.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
 			LabelElement.BorderSizePixel = 0
+			LabelElement.BackgroundTransparency = 1.000
 			LabelElement.Position = UDim2.new(0.0430107526, 0, 0, 0)
 			LabelElement.Size = UDim2.new(0, 224, 0, 35)
 
