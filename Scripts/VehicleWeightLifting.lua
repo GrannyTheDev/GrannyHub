@@ -241,22 +241,18 @@ end
 
 function doAutoLift()
 spawn(function()
-if getgenv().Settings.autolift == true then
 local debounce = false
 game:GetService("RunService").Heartbeat:Connect(function()
+if getgenv().Settings.autolift == true then
 if debounce then
     return
 end
 debounce = true
 wait(0.1)
-for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-		if v:IsA("Tool") and v.Parent:WaitForChild("Vehicle", 0.1):WaitForChild("Server", 0.1):WaitForChild("Lift", 0.1) then
-			v:WaitForChild("Server"):WaitForChild("Lift"):FireServer()
-		end
-	end
+game.Players.LocalPlayer.Character.Vehicle.Server.Lift:FireServer()
 debounce = false
-end)
 end
+end)
 end)
 end
 
