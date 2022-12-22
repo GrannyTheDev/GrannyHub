@@ -249,7 +249,11 @@ if debounce then
 end
 debounce = true
 wait(0.1)
-game.Players.LocalPlayer.Character.Vehicle.Server.Lift:FireServer()
+for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+if v:IsA("Tool") and v.Name == "Vehicle" then
+    v:FindFirstChild("Server"):FindFirstChild("Lift"):FireServer()
+end
+end
 debounce = false
 end
 end)
