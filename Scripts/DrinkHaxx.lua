@@ -182,7 +182,7 @@ function doCollect()
 spawn(function()
 local debounce = false
 game:GetService("RunService").RenderStepped:Connect(function()
-if getgenv().Settings.collect == true and firetouchinterest and not hydrogen then
+if getgenv().Settings.collect == true and not hydrogen then
 if debounce then
     return
 end
