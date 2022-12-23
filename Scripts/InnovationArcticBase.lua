@@ -18,6 +18,8 @@ jump = false;
 infyield = false;
 antiafk = false;
 btnspam = false;
+enablecoolingsystem = false;
+disablecoolingsystem = false;
 }
 
 function Save()
@@ -97,6 +99,30 @@ end
 end)
 end
 
+function doEnableCoolingSystem()
+spawn(function()
+while getgenv().Settings.enablecoolingsystem == true do
+fireclickdetector(game:GetService("Workspace").Core.Pump1Buttons["2"].ClickDetector)
+fireclickdetector(game:GetService("Workspace").Core.Pump2Buttons["2"].ClickDetector)
+fireclickdetector(game:GetService("Workspace").Core.FanButtons["4"].ClickDetector)
+fireclickdetector(game:GetService("Workspace").Core.FanButtons["4"].ClickDetector)
+wait(0.1)
+end
+end)
+end
+
+function doDisableCoolingSystem()
+spawn(function()
+while getgenv().Settings.disablecoolingsystem == true do
+fireclickdetector(game:GetService("Workspace").Core.Pump1Buttons["0"].ClickDetector)
+fireclickdetector(game:GetService("Workspace").Core.Pump2Buttons["0"].ClickDetector)
+fireclickdetector(game:GetService("Workspace").Core.FanButtons["0"].ClickDetector)
+fireclickdetector(game:GetService("Workspace").Core.FanButtons["0"].ClickDetector)
+wait(0.1)
+end
+end)
+end
+
 LocalPlayer:Button("Equip Hazmat Suit", function()
 firetouchinterest(game:GetService("Workspace").SuitGiver.Giver, game.Players.LocalPlayer.Character.Head, 1)
 wait()
@@ -133,27 +159,19 @@ LocalPlayer:Button("Open Quarantine Door", function()
     fireclickdetector(game.Workspace.Flibble.KeyPad.Keys["9"].ClickDetector) 
 end)
 
-LocalPlayer:Toggle("Disable all cooling systems", function(v)
-getgenv().meltdown = v
-while true do
-if not getgenv().meltdown then return end
-wait()
-fireclickdetector(game:GetService("Workspace").Core.Pump1Buttons["0"].ClickDetector)
-fireclickdetector(game:GetService("Workspace").Core.Pump2Buttons["0"].ClickDetector)
-fireclickdetector(game:GetService("Workspace").Core.FanButtons["0"].ClickDetector)
-fireclickdetector(game:GetService("Workspace").Core.FanButtons["0"].ClickDetector)
+local disablecoolingsystem = LocalPlayer:Toggle("Disable all cooling systems", function(v)
+getgenv().Settings.disablecoolingsystem = v
+Save()
+if v then
+doDisableCoolingSystem()
 end
 end)
 
-LocalPlayer:Toggle("Enable all cooling systems", function(v)
-getgenv().EnableCooling = v
-while true do
-if not getgenv().EnableCooling then return end
-wait()
-fireclickdetector(game:GetService("Workspace").Core.Pump1Buttons["2"].ClickDetector)
-fireclickdetector(game:GetService("Workspace").Core.Pump2Buttons["2"].ClickDetector)
-fireclickdetector(game:GetService("Workspace").Core.FanButtons["4"].ClickDetector)
-fireclickdetector(game:GetService("Workspace").Core.FanButtons["4"].ClickDetector)
+local enablecoolingsystem = LocalPlayer:Toggle("Enable all cooling systems", function(v)
+getgenv().Settings.enablecoolingsystem = v
+Save()
+if v then
+doEnableCoolingSystem()
 end
 end)
     
@@ -355,13 +373,7 @@ Misc:Button("Join the discord server", function()
 	})
 end)
 
-CoreStats:Label("--------Core Temp--------")
-local CoreTemp = CoreStats:Label("Temp: "..game:GetService("Workspace").Core.Screen1.SurfaceGui.TempReadout.Text)
-CoreStats:Label("--------System Components--------")
-local Pump1 = CoreStats:Label("Pump1 is ")
-local Pump2 = CoreStats:Label("Pump2 is ")
-CoreStats:Label("--------Funds--------")
-local Funds = CoreStats:Label("Funds: "..game.Players.LocalPlayer.leaderstats.Funds.Value)
+local CoreTemp = CoreStats:Label(game:GetService("Workspace").InnovationDataScreen.Screen.SurfaceGui.CoreTemp.Text)
 
 Load()
 if getgenv().Settings.speed == true then
@@ -379,22 +391,17 @@ end
 if getgenv().Settings.btnspam == true then
 btnspam:ChangeState(true)
 end
+if getgenv().Settings.enablecoolingsystem == true then
+enablecoolingsystem:ChangeState(true)
+end
+if getgenv().Settings.disablecoolingsystem == true then
+disablecoolingsystem:ChangeState(true)
+end
 
 for i,v in pairs(getgenv().Settings) do
 print(i,v)
 end
 
-while wait() do
-CoreTemp:UpdateText("Temp: "..game:GetService("Workspace").Core.Screen1.SurfaceGui.TempReadout.Text)
-if game:GetService("Workspace").InnovationDataScreen.Screen.SurfaceGui.Pump1Speed.Text == "Pump 1 RPM: 0 RPM" then
-Pump1:UpdateText("Pump1 is Off")
-else
-Pump1:UpdateText("Pump1 is On")
-end
-if game:GetService("Workspace").InnovationDataScreen.Screen.SurfaceGui.Pump2Speed.Text == "Pump 2 RPM: 0 RPM" then
-Pump2:UpdateText("Pump2 is Off")
-else
-Pump2:UpdateText("Pump2 is On")
-end
-Funds:UpdateText("Funds: "..game.Players.LocalPlayer.leaderstats.Funds.Value)
-end
+game:GetService("Workspace").InnovationDataScreen.Screen.SurfaceGui.CoreTemp:GetPropertyChangedSignal("Text"):Connect(function()
+    CoreTemp:UpdateText(game:GetService("Workspace").InnovationDataScreen.Screen.SurfaceGui.CoreTemp.Text)
+end)
