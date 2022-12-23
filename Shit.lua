@@ -53,7 +53,7 @@ function Library:CreateWindow(txt)
 		local hiddenUI = get_hidden_gui or gethui
 		GrannyHub.Parent = hiddenUI()
 	elseif syn and syn.protect_gui then
-		--syn.protect_gui(GrannyHub)
+		syn.protect_gui(GrannyHub)
 		GrannyHub.Parent = cloneref(game:GetService("CoreGui"))
 	else
 		GrannyHub.Parent = cloneref(game:GetService("CoreGui"))
