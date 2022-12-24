@@ -1,6 +1,8 @@
-for i,v in pairs(game:GetService("Workspace").BorderWalls:GetChildren()) do
+for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
+if v.Name == "BorderWalls" then
 if v.CFrame == CFrame.new(115.923157, 170.17775, -281.131958, 0, 0, -1, 0, 1, 0, 1, 0, 0) then
 v:Destroy()
+end
 end
 end
 local Folder = Instance.new("Folder")
