@@ -20,6 +20,7 @@ punch = false;
 swing =  false;
 equippunch = false;
 equipsword = false;
+autorejoin = false;
 }
 
 function Save()
@@ -160,6 +161,27 @@ end
 end)
 end
 
+function doAutoRejoin()
+spawn(function()
+local debounce = false
+local Stepped = game:GetService("RunService").Heartbeat:Connect(function()
+if getgenv().Settings.autorejoin == true then
+if debounce then
+    return
+end
+debounce = true
+wait(1)
+getgenv().rejoin = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
+	if child.Name == 'ErrorPrompt' and child:FindFirstChild('MessageArea') and child.MessageArea:FindFirstChild("ErrorFrame") then
+	pcall(game:GetService("TeleportService"):Teleport(game.PlaceId))
+end
+end)
+debounce = false
+end
+end)
+end)
+end
+
 local rebirth = AutoFarm:Toggle("Auto Rebirth", function(v)
 getgenv().Settings.rebirth = v
 Save()
@@ -253,6 +275,14 @@ doAntiAfk()
 end
 end)
 
+local autorejoin = Misc:Toggle("AutoRejoin", function(v)
+getgenv().Settings.autorejoin = v
+Save()
+if v then
+doAutoRejoin()
+end
+end)
+
 local Request = request or syn.request
 local clipboard = setclipboard or syn.write_clipboard
 
@@ -302,6 +332,9 @@ equippunch:ChangeState(true)
 end
 if getgenv().Settings.equipsword == true then
 equipsword:ChangeState(true)
+end
+if getgenv().Settings.autorejoin == true then
+autorejoin:ChangeState(true)
 end
 
 for i,v in pairs(getgenv().Settings) do
