@@ -69,14 +69,9 @@ function Library:CreateWindow(txt)
 				end
 			end
 		end
-	en
 
-        getgenv().color = {
-            header = Color3.fromRGB(25, 25, 25);
-            MainFrame = Color3.fromRGB(35, 35, 35);
-            dragui = Color3.fromRGB(35, 35, 35);
-            TitleColor = Color3.fromRGB(255, 255, 255);
-        }
+
+end)
 
 	Header.Name = "Header"
 	Header.Parent = GrannyHub
