@@ -171,11 +171,22 @@ if debounce then
 end
 debounce = true
 wait(1)
-getgenv().rejoin = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
-	if child.Name == 'ErrorPrompt' and child:FindFirstChild('MessageArea') and child.MessageArea:FindFirstChild("ErrorFrame") then
-	pcall(game:GetService("TeleportService"):Teleport(game.PlaceId))
-end
-end)
+local Dir = game.CoreGui:FindFirstChild("RobloxPromptGui"):FindFirstChild("promptOverlay")
+	Dir.DescendantAdded:Connect(function(Err)
+		if Err.Name == "ErrorTitle" then
+			Err:GetPropertyChangedSignal("Text"):Connect(function()
+				if Err.Text:sub(0, 12) == "Disconnected" then
+					if #game.Players:GetPlayers() <= 1 then
+						game.Players.LocalPlayer:Kick("\nRejoining...")
+						wait()
+						game:GetService("TeleportService"):Teleport(game.PlaceId, game.Players.LocalPlayer)
+					else
+						game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, game.Players.LocalPlayer)
+					end
+				end
+			end)
+		end
+	end)
 debounce = false
 end
 end)
