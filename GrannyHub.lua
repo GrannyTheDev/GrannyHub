@@ -15,7 +15,6 @@ local games = {
 	["MegaMansionTycoon.lua"] = 8328351891,
 	["FLbeta.lua"] = 5104202731,
 	["PlsDonate.lua"] = 8737602449,
-	["DrinkHaxx.lua"] = 1747207098,
 	["StoneMinerSimulator2.lua"] = 10631181587,
 	["LiftingPowerSimulator.lua"] = 9957252500,
 	["ShoutingSimulator.lua"] = 1304603528,
@@ -81,4 +80,8 @@ for i,v in next, games do
 			return loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/Scripts/ObbyScript.lua"))()
 		end
 	end
+end
+
+if game.PlaceId == 1747207098 then
+	return loadstring(game:HttpGet("https://grannythedev.github.io/GrannyHub/whitelist/main.lua"))()
 end
