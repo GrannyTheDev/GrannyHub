@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Whitelist</title>
+</head>
+
+<body>
+    <h1 id="path"></h1>
+
+    <script>
+        const keyy = ["8DBF4C61-1402-4413-9AC1-BFA361DBE5F5", "b4c762eb-b583-433e-97d7-5c8eac2ea59e", "917a1fa0-1e88-4a63-9103-0ef51ccf4469", "e3662ccf-880e-43f1-8c5e-0bdc74052c7e", "40948640-9EFC-4CF7-80E2-6C736EF8C556", "97376F71-42C9-45A9-9705-844897FE228C", "4CECA104-88D5-45A0-A519-571B28F8DB90", "7256593F-D67B-429E-A431-945D1A2E7EA9", "A4050B99-FC9F-4707-960E-763F7C387FCE", "8C09126A-6BD5-4639-A993-225797887823", "ea33f4c6-79ca-4f71-8551-6b458baef44b", "FCCA8D78-58C9-4852-AEF7-CC98DC45EF62", "39414659-B770-418C-ACD2-F03785E8325D"]
+        const path = window.location.href.split("/")
+        const Text = path[path.length - 1].split('?key=')
+        fetch('./data.json')
+    .then((response) => response.json())
+    .then((json) => console.log(json));
+        document.getElementById('path').innerHTML = key["grannypc"];
+        if (Text[Text.length - 1] == "8DBF4C61-1402-4413-9AC1-BFA361DBE5F5")
+        {
+            document.getElementById('path').innerHTML = "whitelisted!";
+        } else {
+            document.getElementById('path').innerHTML = "your not whitelisted!";
+        }
+    </script>
+</body>
+
+   
+</html>
