@@ -150,7 +150,6 @@ end
 end
 end)
 wait(2)
-end
 require(game:GetService("ReplicatedFirst").ClientModules.BlurFunctions).TweenOutBlur()
 wait(0.1)
 if getgenv().Settings.buybuttons == true then
