@@ -1,5 +1,5 @@
 local games = {
-        ["DrinkHaxx.lau"] = 1747207098,
+        ["DrinkHaxx.lua"] = 1747207098,
 	["MadCity.lua"] = 1224212277,
 	["Area51Haxx.lua"] = 60100179,
 	["BloodMoonTycoon.lua"] = 961409234,
