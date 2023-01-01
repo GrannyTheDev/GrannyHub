@@ -131,7 +131,7 @@ end
 
 function doBuyButtons()
 spawn(function()
-game:GetService("Players").LocalPlayer.PlayerGui.UI:WaitForChild("Store"):Destroy()
+game:GetService("Players").LocalPlayer.PlayerGui.MainGui:WaitForChild("WindowHolderFrame"):Destroy()
 local debounce = false
 game:GetService("RunService").Heartbeat:Connect(function()
 if getgenv().Settings.buybuttons == true then
