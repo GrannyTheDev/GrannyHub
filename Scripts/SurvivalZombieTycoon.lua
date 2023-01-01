@@ -17,7 +17,6 @@ infyield = false;
 antiafk = false;
 gunmods = false;
 autoclick = false;
-infstamina = false;
 sell = false;
 energy = false;
 rebirth = false;
@@ -111,14 +110,22 @@ end
 
 function doAutoClick()
 spawn(function()
-while getgenv().Settings.autoclick == true do
+local debounce = false
+game:GetService("RunService").Heartbeat:Connect(function()
+if getgenv().Settings.autoclick == true then
+if debounce then
+    return
+end
+debounce = true
+wait(0.1)
 for i,v in pairs(game.Workspace.Tycoons.Spawned:GetChildren()) do
 	if v.Configuration.Owner.Value == game.Players.LocalPlayer then
-		fireclickdetector(v.Objects.Floor1.Begin:WaitForChild("Begin", 0.1):WaitForChild("DropMachine1", 0.1):WaitForChild("ClickPart", 0.1):WaitForChild("ClickDetector", 0.1))
+		fireclickdetector(v.Objects.Floor1.Droppers.MachineUpgrade2.DropMachine3.ClickPart.ClickDetector)
 	end
 end
-wait()
+debounce = false
 end
+end)
 end)
 end
 
@@ -155,24 +162,6 @@ wait(0.1)
 if getgenv().Settings.buybuttons == true then
     game:GetService("Players").LocalPlayer.PlayerGui.MainGui.WindowHolderFrame:WaitForChild("Rebirth"):Destroy()
     game:GetService("Players").LocalPlayer.PlayerGui.MainGui.WindowHolderFrame:WaitForChild("PromptFrame"):Destroy()
-end
-end)
-end
-    
-
-function doInfStamina()
-spawn(function()
-if getgenv().Settings.infstamina == true then
-local mt = getrawmetatable(game);
-setreadonly(mt, false);
-local old_index = mt.__index;
-
-mt.__index = function(a, b)
-if tostring(a) == "Stamina" and tostring(b) == "Value" then
-	return math.huge;
-end
-return old_index(a, b);
-end
 end
 end)
 end
@@ -272,14 +261,6 @@ doJump()
 end
 end)
 
-local infstamina = LocalPlayer:Toggle("Infinite Stamina", function(v)
-getgenv().Settings.infstamina = v
-Save()
-if v then
-doInfStamina()
-end
-end)
-
 local gunmods = LocalPlayer:Toggle("GunMods", function(v)
 getgenv().Settings.gunmods = v
 Save()
@@ -367,9 +348,6 @@ gunmods:ChangeState(true)
 end
 if getgenv().Settings.autoclick == true then
 autoclick:ChangeState(true)
-end
-if getgenv().Settings.infstamina == true then
-infstamina:ChangeState(true)
 end
 if getgenv().Settings.sell == true then
 sell:ChangeState(true)
