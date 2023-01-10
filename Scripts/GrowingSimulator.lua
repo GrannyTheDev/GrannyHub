@@ -1,3 +1,5 @@
+repeat wait() until game:IsLoaded()
+
 local Library = loadstring(game:HttpGet("https://GrannyTheDev.github.io/GrannyHub/Shit.lua"))()
 
    local Gui = Library:CreateWindow("GrannyHub".." - Growing Simulator")
