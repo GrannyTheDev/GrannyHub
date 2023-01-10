@@ -1,0 +1,114 @@
+ <!DOCTYPE html>
+	<html lang="en">
+<head>
+  <title>Granny</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #232323;
+}
+
+h2 {
+	color: white;
+}
+h3 {
+	color: white;
+}
+h6 {
+	color: white;
+}
+	
+button.SendBtn {
+	background-color: #353535;
+	color: white;
+	border-radius: 50px;
+}
+
+input.GameBox {
+	background-color: #353535;
+	color: white;
+	border-radius: 50px;
+}
+
+input.BugBox {
+	background-color: #353535;
+	color: white;
+	border-radius: 50px;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: none;
+  color: white;
+}
+
+.topnav a.active {
+  background-color: none;
+  color: white;
+}
+</style>
+<script>
+var Bug = Base64.decode("aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTA2MjA0OTYxOTEyMDQ4ODU3MC9BV0VBYlk5dGhJRzBGT01VbDRlc2s3dVVvNjNtUFVmSkhjZzdPSDJYLVl5enZiTEVRQTREY0E1TzNMOGZPZmhpWkNRTg==");
+    function send() {
+        user = { 
+            "content": "**Bug Report** \nGame: "+ document.getElementById("GameBox").value + "\nBug: "+ document.getElementById("BugBox").value
+        }
+      let options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 
+                    'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(user)
+        }
+        let fetchRes = fetch(
+        Bug,options);
+    }
+</script>
+</head>
+<body>
+
+<div class="topnav">
+  <a>Granny</a>
+  <a class="active" href="https://granny.w3spaces.com/index.html">Home</a>
+  <a href="https://granny.w3spaces.com/bugreport.html">Report Bug</a>
+  <a href="https://granny.w3spaces.com/giveidea.html">Give Idea</a>
+  <a href="https://discord.gg/esn6q3BbV2">Join</a>
+</div>
+
+<div style="padding-left:16px">
+  <h2>Bug Report</h2>
+  <h3>Example:</h3>
+  <h3>Game: Mad City</h3>
+  <h3>Bug: Gui not showing</h3>
+  <br>
+  <h6>Game:</h6>
+  <input size="30px" id="GameBox" class="GameBox" value=""></input>
+  <h6>Bug:</h6>
+  <input size="30px" id="BugBox" class="BugBox" value=""></input>
+  <br>
+  <br>
+  <button class="SendBtn" onclick="send()">Send</button>
+</div>
+
+</body>
+</html>
