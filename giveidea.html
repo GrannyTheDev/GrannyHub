@@ -80,19 +80,37 @@ input.IdeaBox {
             },
             body: JSON.stringify(user)
         }
-        let fetchRes = fetch(
-Idea, 
-                                        options);
+        let fetchRes = fetch(Idea,options);
     }
+     const buttonFunction = (function setup () { 
+  const coolDown = 6000000
+  let lastClick = Date.now() - coolDown
+
+  function startCoolDown () {
+    lastClick = Date.now()
+  }
+  function checkCoolDown () {
+    const notOver = Date.now() - lastClick < coolDown
+    if (notOver) alert('Spamming is not allowed')
+    return !notOver
+  }
+
+  return function (sendreq) {
+    if (checkCoolDown()) {
+      startCoolDown()
+      send()
+    }
+  }
+})()
 </script>
 </head>
 <body>
 
 <div class="topnav">
   <a>Granny</a>
-  <a class="active" href="https://grannythedev.github.io/GrannyHub">Home</a>
-  <a href="https://grannythedev.github.io/GrannyHub/bugreport.html">Report Bug</a>
-  <a href="https://grannythedev.github.io/GrannyHub/giveidea.html">Give Idea</a>
+  <a class="active" href="https://granny.w3spaces.com/index.html">Home</a>
+  <a href="https://granny.w3spaces.com/bugreport.html">Report Bug</a>
+  <a href="https://granny.w3spaces.com/giveidea.html">Give Idea</a>
   <a href="https://discord.gg/esn6q3BbV2">Join</a>
 </div>
 
@@ -108,7 +126,7 @@ Idea,
   <input size="30px" id="IdeaBox" class="IdeaBox" value=""></input>
   <br>
   <br>
-  <button class="SendBtn" onclick="send()">Send</button>
+  <button class="SendBtn" onclick="buttonFunction('sendreq')">Send</button>
 </div>
 
 </body>
