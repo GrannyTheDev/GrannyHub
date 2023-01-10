@@ -46,7 +46,8 @@ local games = {
 	["HideandSeekExtreme.lua"] = 205224386,
 	["MuscleLegends.lua"] = 3623096087,
 	["GergoLiftingSimulator.lua"] = 11479042514,
-	["MonkeyTycoon.lua"] = 11400511154
+	["MonkeyTycoon.lua"] = 11400511154,
+	["GrowingSimulator.lua"] = 12080891934
 }
 
 local obbygames = {
